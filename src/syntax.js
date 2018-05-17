@@ -1,31 +1,4 @@
-const { compose } = require('yaml-js');
-const { objFromPairs, objMap, flatMap, recMap } = require('./util.js');
-
-function evaluate(node) {
-    const value = (node => {
-        switch (node.id) {
-            case 'mapping': return objFromPairs(node.value.map(
-                ([keyNode, valueNode]) => [keyNode.value, evaluate(valueNode)]
-            ));
-
-            case 'sequence': return node.value.map(evaluate);
-            case 'scalar': return node.value;
-
-            default: throw new TypeError(`Unhandled node ${node.id}.`);
-        }
-    })(node);
-
-    if (value && typeof value === 'object') {
-        Object.defineProperty(value, '__region', {
-            enumerable: false, value: [
-                node.start_mark.pointer,
-                node.end_mark.pointer,
-            ]
-        });
-    }
-
-    return value;
-}
+const { objMap, flatMap, recMap } = require('./util.js');
 
 // const metaProperties = new Set([
 //     'meta_scope',
@@ -50,14 +23,11 @@ function assertNoExtras(obj) {
     }
 }
 
-function parse(syntax) {
-    return evaluate(compose(syntax));
-}
-
 function preprocess(syntax) {
     const newVariables = recMap(
         syntax.variables,
-        (key, value, recurse) => value.replace(/\{\{(\w+)\}\}/g, (all, v) => recurse(v))
+        (key, value, recurse) =>
+            value.replace(/\{\{(\w+)\}\}/g, (all, v) => recurse(v))
     );
 
     const newContexts = recMap(syntax.contexts, (name, context, recurse) => {
@@ -199,6 +169,5 @@ function preprocess(syntax) {
 }
 
 module.exports = {
-    parse,
     preprocess,
 };

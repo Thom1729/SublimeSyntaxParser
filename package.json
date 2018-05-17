@@ -1,0 +1,26 @@
+{
+  "name": "sublimesyntaxparser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "runTests.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node tests/runTests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thom1729/SublimeSyntaxParser.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thom1729/SublimeSyntaxParser/issues"
+  },
+  "homepage": "https://github.com/Thom1729/SublimeSyntaxParser#readme",
+  "dependencies": {
+    "oniguruma": "^7.0.0",
+    "yaml-js": "^0.2.3"
+  }
+}
