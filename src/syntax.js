@@ -23,6 +23,13 @@ function assertNoExtras(obj) {
     }
 }
 
+function splitScopes(scopes) { // TODO
+    const array = scopes.split(/\b(?=\S)/g);
+    const last = array.length - 1;
+    array[last] = array[last] + ' ';
+    return array;
+}
+
 function preprocess(syntax) {
     const newVariables = recMap(
         syntax.variables,
@@ -35,6 +42,8 @@ function preprocess(syntax) {
             name,
             meta_scope: '',
             rules: [],
+
+            meta: [],
         };
 
         let anonIndex = 0;
@@ -50,12 +59,14 @@ function preprocess(syntax) {
                     assertNoExtras(rest);
                     assertMeta();
                     newContext.meta_scope = meta_scope + ' ';
+                    newContext.meta.push(...splitScopes(meta_scope));
                 },
 
                 meta_content_scope: ({ meta_content_scope, ...rest }) => {
                     assertNoExtras(rest);
                     assertMeta();
                     newContext.meta_content_scope = meta_content_scope + ' ';
+                    newContext.meta.push(...splitScopes(meta_content_scope));
                 },
 
                 clear_scopes: ({ clear_scopes, ...rest }) => {
@@ -93,6 +104,7 @@ function preprocess(syntax) {
 
                     push = push || set;
 
+                    // if (scope) newRule.captures[0] = scope + ' ';
                     if (scope) newRule.captures[0] = scope + ' ';
                     if (captures) {
                         for (const [i, scope] of Object.entries(captures)) {

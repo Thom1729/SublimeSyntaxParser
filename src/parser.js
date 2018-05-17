@@ -6,6 +6,8 @@ function* parse(syntax, text) {
 
     const stack = [];
     const scopeStack = [];
+    const clearedStack = [];
+
     let row = 0, col = 0, i=0;
 
     function* advance(point) {
@@ -80,15 +82,34 @@ function* parse(syntax, text) {
                 }
 
                 if (rule.pop) {
-                    scopeStack.pop();
-                    stack.pop();
+                    const ctx = stack.pop();
+                    for (let i=0; i < ctx.meta.length; i++) scopeStack.pop();
+
+                    if (ctx.clearScopes) {
+                        scopeStack.push(... clearedStack.pop());
+                    }
                 }
 
                 if (rule.push) {
                     for (const name of rule.push) {
                         const ctx = contexts[name];
+
+                        if (ctx.clear_scopes) {
+                            let i;
+                            if (ctx.clear_scopes === true) {
+                                i = 0;
+                            } else {
+                                i = -ctx.clear_scopes;
+                            }
+                            // const cleared = scopeStack.splice(i);
+                            // clearedStack.push(
+                            //     cleared
+                            // );
+                            // console.log(i, cleared);
+                        }
+
                         stack.push(ctx);
-                        scopeStack.push(ctx.meta_scope);
+                        scopeStack.push(...ctx.meta);
                     }
                 }
             } else {
