@@ -5,9 +5,10 @@ function* parse(syntax, text) {
     const lineCount = lines.length;
 
     const stack = [];
+    const scopeStack = [];
     let row = 0, col = 0, i=0;
 
-    function* advance(point, scope) {
+    function* advance(point) {
         if (point < col) {
             throw new Error(`Tried to advance backward from ${col} to ${point}.`);
         } else if (point === col) {
@@ -16,7 +17,7 @@ function* parse(syntax, text) {
             const d = point - col;
             yield [
                 [i, i+d],
-                [baseScope, ...stack.map(c => c.meta_scope), scope].filter(s => s).join(' '),
+                scopeStack.join(''),
             ];
             col = point;
             i += d;
@@ -29,9 +30,8 @@ function* parse(syntax, text) {
         while (col < rowLen) {
             if (stack.length === 0) {
                 stack.push(contexts['main']);
+                scopeStack.push(baseScope);
             }
-
-            // console.log('Stack:', stack.map(c => c.name).join(' '));
 
             const top = stack[stack.length - 1];
 
@@ -41,10 +41,44 @@ function* parse(syntax, text) {
 
                 const { start, end } = match.captureIndices.find(cap => cap.index === 0);
                 yield* advance(start);
-                yield* advance(end, rule.captures[0]);
+                scopeStack.push(rule.captures[0]);
+                yield* advance(end);
+                scopeStack.pop();
 
-                if (rule.pop) stack.pop();
-                if (rule.push) stack.push(...rule.push.map(name => contexts[name]))
+                // let captureIndex = 0;
+                // const captureCount = captures.length;
+                // const captureStack = [];
+
+                // while (true) {
+                //     const topCapture = captureStack[captureStack.length - 1];
+
+                //     while (! rule.captures[captureIndex]) captureIndex++;
+                //     const nextPush = rule.captures[captureIndex] ? rule.captures[captureIndex].start : Infinity;
+                //     const nextPop = topCapture ? topCapture.end : Infinity;
+
+                //     if (nextPop === Infinity && nextPush === Infinity) {
+                //         break;
+                //     } else if (nextPop <= nextPush) {
+                //         yield* advance(nextPop, captureStack.map(cap => rule.captures[cap.index]));
+                //         captureStack.pop();
+                //     } else {
+                //         yield* advance(nextPush, captureStack.map(cap => rule.captures[cap.index]));
+                //         captureStack.push(match.captureIndices[captureIndex]);
+                //         captureIndex++;
+                //     }
+                // }
+
+                if (rule.pop) {
+                    scopeStack.pop();
+                    stack.pop();
+                }
+                if (rule.push) {
+                    for (const name of rule.push) {
+                        const ctx = contexts[name];
+                        stack.push(ctx);
+                        scopeStack.push(ctx.meta_scope);
+                    }
+                }
             } else {
                 yield* advance(rowLen);
             }

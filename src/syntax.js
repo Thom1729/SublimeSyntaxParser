@@ -33,6 +33,7 @@ function preprocess(syntax) {
     const newContexts = recMap(syntax.contexts, (name, context, recurse) => {
         const newContext = {
             name,
+            meta_scope: '',
             rules: [],
         };
 
@@ -48,13 +49,13 @@ function preprocess(syntax) {
                 meta_scope: ({ meta_scope, ...rest }) => {
                     assertNoExtras(rest);
                     assertMeta();
-                    newContext.meta_scope = meta_scope;
+                    newContext.meta_scope = meta_scope + ' ';
                 },
 
                 meta_content_scope: ({ meta_content_scope, ...rest }) => {
                     assertNoExtras(rest);
                     assertMeta();
-                    newContext.meta_content_scope = meta_content_scope;
+                    newContext.meta_content_scope = meta_content_scope + ' ';
                 },
 
                 clear_scopes: ({ clear_scopes, ...rest }) => {
@@ -92,10 +93,10 @@ function preprocess(syntax) {
 
                     push = push || set;
 
-                    if (scope) newRule.captures[0] = scope;
+                    if (scope) newRule.captures[0] = scope + ' ';
                     if (captures) {
                         for (const [i, scope] of Object.entries(captures)) {
-                            newRule.captures[i] = scope;
+                            newRule.captures[i] = scope + ' ';
                         }
                     }
 
@@ -137,7 +138,7 @@ function preprocess(syntax) {
                 for (const name of rule.push) {
                     const next = newContexts[name];
                     if (next.meta_scope) {
-                        rule.captures[0] = next.meta_scope + ' ' + rule.captures[0]
+                        rule.captures[0] = next.meta_scope + rule.captures[0]
                     }
                 }
             }
@@ -146,7 +147,7 @@ function preprocess(syntax) {
 
     for (const ctx of Object.values(newContexts)) {
         if (ctx.meta_content_scope) {
-            ctx.meta_scope = (ctx.meta_scope || '') + ' ' + ctx.meta_content_scope;
+            ctx.meta_scope = (ctx.meta_scope || '') + ctx.meta_content_scope;
         }
     }
 
@@ -163,7 +164,7 @@ function preprocess(syntax) {
     });
 
     return {
-        scope: syntax.scope,
+        scope: syntax.scope + ' ',
         contexts: newNewContexts,
     };
 }
