@@ -41,37 +41,49 @@ function* parse(syntax, text) {
 
                 const { start, end } = match.captureIndices.find(cap => cap.index === 0);
                 yield* advance(start);
-                scopeStack.push(rule.captures[0]);
-                yield* advance(end);
-                scopeStack.pop();
 
-                // let captureIndex = 0;
-                // const captureCount = captures.length;
-                // const captureStack = [];
+                let captureIndex = 0;
+                const captureCount = rule.captures.length;
+                const captureEndStack = [];
 
-                // while (true) {
-                //     const topCapture = captureStack[captureStack.length - 1];
+                while (true) {
 
-                //     while (! rule.captures[captureIndex]) captureIndex++;
-                //     const nextPush = rule.captures[captureIndex] ? rule.captures[captureIndex].start : Infinity;
-                //     const nextPop = topCapture ? topCapture.end : Infinity;
+                    let nextPop = Infinity;
+                    if (captureEndStack.length) {
+                        nextPop = captureEndStack[captureEndStack.length - 1];
+                    }
 
-                //     if (nextPop === Infinity && nextPush === Infinity) {
-                //         break;
-                //     } else if (nextPop <= nextPush) {
-                //         yield* advance(nextPop, captureStack.map(cap => rule.captures[cap.index]));
-                //         captureStack.pop();
-                //     } else {
-                //         yield* advance(nextPush, captureStack.map(cap => rule.captures[cap.index]));
-                //         captureStack.push(match.captureIndices[captureIndex]);
-                //         captureIndex++;
-                //     }
-                // }
+                    let nextPush = Infinity;
+                    if (captureIndex < captureCount) {
+                        nextPush = match.captureIndices[captureIndex].start;
+                    }
+
+                    if (nextPop === Infinity && nextPush === Infinity) {
+                        break;
+                    }
+
+                    else if (nextPop <= nextPush) {
+                        yield* advance(nextPop);
+
+                        captureEndStack.pop();
+                        scopeStack.pop()
+                    } else {
+                        yield* advance(nextPush);
+
+                        captureEndStack.push(match.captureIndices[captureIndex].end);
+                        scopeStack.push(rule.captures[captureIndex]);
+
+                        do { captureIndex++; } while (
+                            (captureIndex < captureCount) && (! rule.captures[captureIndex])
+                        );
+                    }
+                }
 
                 if (rule.pop) {
                     scopeStack.pop();
                     stack.pop();
                 }
+
                 if (rule.push) {
                     for (const name of rule.push) {
                         const ctx = contexts[name];
