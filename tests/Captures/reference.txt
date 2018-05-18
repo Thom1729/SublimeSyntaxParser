@@ -1,0 +1,36 @@
+0 * source.test-a 
+1   source.test-a 
+2   source.test-a 
+3   source.test-a 
+4   source.test-a 
+5   source.test-a 
+6 * source.test-a 
+7   source.test-a 
+8   source.test-a 
+9   source.test-a 
+10   source.test-a 
+11   source.test-a 
+12 * source.test-a 
+13   source.test-a 
+14   source.test-a 
+15   source.test-a 
+16   source.test-a 
+17 * source.test-a 
+18 * source.test-a 
+19 * source.test-a region.redish region.bluish 
+20   source.test-a region.redish region.bluish 
+21   source.test-a region.redish region.bluish 
+22 * source.test-a 
+23   source.test-a 
+24 * source.test-a 
+25 * source.test-a 
+26 * source.test-a 
+27   source.test-a 
+28 * source.test-a region.redish 
+29 * source.test-a 
+30 * source.test-a 
+31   source.test-a 
+32 * source.test-a region.redish 
+33 * source.test-a region.bluish 
+34 * source.test-a 
+35 * source.test-a 

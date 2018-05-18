@@ -1,0 +1,40 @@
+%YAML 1.2
+---
+name: Test A
+scope: source.test-a
+file_extensions:
+- test-a
+contexts:
+  main:
+    - match: ^(?=(a)aaaa)(aaa)aa
+      captures:
+        1: region.redish
+        2: region.bluish
+
+    - match: ^(?=bb(bb)b)(b)bbbb
+      captures:
+        1: region.redish
+        2: region.bluish
+
+    - match: ^(?=cc(ccc))cccc
+      captures:
+        1: region.redish
+
+    - match: ^(?=(d)dddd)(ddd)dd
+      captures:
+        1: region.redish
+
+    - match: ^(?=(e)eeee)(eee)ee
+      captures:
+        1: region.redish
+        2: ''
+
+    - match: ^(?=(f)ffff)(fff)ff
+      captures:
+        1: region.redish
+        2: ' '
+
+    - match: ^(?:(x)|(y))+
+      captures:
+        1: region.redish
+        2: region.bluish

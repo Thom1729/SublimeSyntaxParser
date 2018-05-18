@@ -24,6 +24,7 @@ function assertNoExtras(obj) {
 }
 
 function splitScopes(scopes) {
+    if (!scopes) return undefined;
     const ret = [];
     (scopes + ' ').replace(/\s*\S+\s*/g, part => { ret.push(part); });
     return ret;
@@ -31,7 +32,7 @@ function splitScopes(scopes) {
 
 function preprocess(syntax) {
     const newVariables = recMap(
-        syntax.variables,
+        syntax.variables || {},
         (key, value, recurse) =>
             value.replace(/\{\{(\w+)\}\}/g, (all, v) => recurse(v))
     );

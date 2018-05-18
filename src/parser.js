@@ -80,6 +80,10 @@ function* parse(syntax, text) {
         let wasSpace = false;
 
         for (let i = state.col; i < point; i++) {
+            if (line[i] === '\n') {
+                yield* state.advance(i);
+            }
+
             const isSpace = line[i] === ' ';
             if (wasSpace && ! isSpace) {
                 yield* state.advance(i);
@@ -94,6 +98,7 @@ function* parse(syntax, text) {
     while (state.row < lineCount) {
         const line = lines[state.row];
         const rowLen = line.length;
+
         while (state.col < rowLen) {
             if (state.stackIsEmpty()) {
                 state.pushContext(contexts['main']);
@@ -122,21 +127,25 @@ function* parse(syntax, text) {
                     state.pushScopes(ctx.meta_scope);
                 }
 
-                const captureEndStack = [];
+                const captureStack = [];
 
                 for (const capture of match.captureIndices) {
                     if (capture.length === 0) { continue; }
 
+                    const scopes = rule.captures[capture.index];
+                    if (! scopes) { continue; }
+
                     const nextPush = capture.start;
+                    if (nextPush < state.col) { continue; }
                     if (nextPush >= matchEnd) { break; }
 
-                    while (captureEndStack.length) {
-                        const [nextCaptureEnd, scopeCount] = captureEndStack[captureEndStack.length - 1];
-                        const nextPop = Math.min(nextCaptureEnd, matchEnd);
+                    while (captureStack.length) {
+                        const { end, index } = captureStack[captureStack.length - 1];
+                        const nextPop = Math.min(end, matchEnd);
                         if (nextPop <= nextPush) {
-                            yield* advance(nextPop);
-                            captureEndStack.pop();
-                            state.popScopes(scopeCount);
+                            yield* advance(Math.max(nextPop, state.col));
+                            captureStack.pop();
+                            state.popScopes(rule.captures[index].length);
                         } else {
                             break;
                         }
@@ -144,15 +153,20 @@ function* parse(syntax, text) {
 
                     yield* advance(nextPush);
 
-                    const scopes = rule.captures[capture.index] || [];
-                    captureEndStack.push([capture.end, scopes.length]);
+                    captureStack.push(capture);
                     state.pushScopes(scopes);
                 }
 
-                yield* advance(matchEnd);
-                while (captureEndStack.length) {
-                    const count = captureEndStack.pop()[1];
-                    state.popScopes(count);
+                while (captureStack.length) {
+                    const { end, index } = captureStack[captureStack.length - 1];
+                    const nextPop = Math.min(end, matchEnd);
+                    // if (nextPop <= nextPush) {
+                        yield* advance(Math.max(nextPop, state.col));
+                        captureStack.pop();
+                        state.popScopes((rule.captures[index] || []).length);
+                    // } else {
+                        // break;
+                    // }
                 }
 
                 for (const ctx of pushed) {
