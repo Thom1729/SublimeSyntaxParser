@@ -83,10 +83,15 @@ function* parse(syntax, text) {
 
                 if (rule.pop) {
                     const ctx = stack.pop();
-                    for (let i=0; i < ctx.meta.length; i++) scopeStack.pop();
 
-                    if (ctx.clearScopes) {
-                        scopeStack.push(... clearedStack.pop());
+                    if (ctx.meta.length) {
+                        scopeStack.splice(- ctx.meta.length);
+                    }
+
+                    if (ctx.clear_scopes) {
+                        const cleared = clearedStack.pop()
+                        // console.log(cleared);
+                        scopeStack.push(... cleared);
                     }
                 }
 
@@ -101,10 +106,10 @@ function* parse(syntax, text) {
                             } else {
                                 i = -ctx.clear_scopes;
                             }
-                            // const cleared = scopeStack.splice(i);
-                            // clearedStack.push(
-                            //     cleared
-                            // );
+                            const cleared = scopeStack.splice(i);
+                            clearedStack.push(
+                                cleared
+                            );
                             // console.log(i, cleared);
                         }
 

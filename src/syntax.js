@@ -24,10 +24,9 @@ function assertNoExtras(obj) {
 }
 
 function splitScopes(scopes) { // TODO
-    const array = scopes.split(/\b(?=\S)/g);
-    const last = array.length - 1;
-    array[last] = array[last] + ' ';
-    return array;
+    const ret = [];
+    (scopes + ' ').replace(/\s*\S+\s*/g, part => { ret.push(part); });
+    return ret;
 }
 
 function preprocess(syntax) {
