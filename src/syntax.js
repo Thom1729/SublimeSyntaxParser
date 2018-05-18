@@ -23,7 +23,7 @@ function assertNoExtras(obj) {
     }
 }
 
-function splitScopes(scopes) { // TODO
+function splitScopes(scopes) {
     const ret = [];
     (scopes + ' ').replace(/\s*\S+\s*/g, part => { ret.push(part); });
     return ret;

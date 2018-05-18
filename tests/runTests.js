@@ -21,8 +21,8 @@ function runTest(path) {
     path.joinpath('result.txt').withWrite(out => {
         for (const [region, scope] of parse(syntax, text)) {
             for (let i = region[0]; i < region[1]; i++) {
-                // const tokenMarker = (i === region[0] ? '*' : ' ');
-                out.write(`${i} ${scope}\n`);
+                const tokenMarker = (i === region[0] ? '*' : ' ');
+                out.write(`${i} ${tokenMarker} ${scope}\n`);
             }
         }
     });

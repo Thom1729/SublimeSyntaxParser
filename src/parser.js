@@ -11,7 +11,7 @@ class ParserState {
 
     *advance(point) {
         if (point < this.col) {
-            throw new Error(`Tried to advance backward from ${col} to ${point}.`);
+            throw new Error(`Tried to advance backward from ${this.row}:${this.col} to ${this.row}:${point}.`);
         } else if (point === this.col) {
             // pass
         } else {
@@ -74,6 +74,23 @@ function* parse(syntax, text) {
 
     const state = new ParserState();
 
+    function *advance(point) {
+        const line = lines[state.row];
+        let l = state.col;
+        let wasSpace = false;
+
+        for (let i = state.col; i < point; i++) {
+            const isSpace = line[i] === ' ';
+            if (wasSpace && ! isSpace) {
+                yield* state.advance(i);
+            }
+
+            wasSpace = isSpace;
+        }
+
+        yield *state.advance(point);
+    }
+
     while (state.row < lineCount) {
         const line = lines[state.row];
         const rowLen = line.length;
@@ -90,93 +107,75 @@ function* parse(syntax, text) {
             if (match) {
                 const rule = top.rules[match.index];
 
-                const { start, end } = match.captureIndices[0];
-                yield* state.advance(start);
+                const pushed = (rule.push || []).map(name => contexts[name]);
+
+                const { start: matchStart, end: matchEnd } = match.captureIndices[0];
+
+                yield* advance(matchStart);
 
                 if (rule.pop) {
-                    if (top.meta_content_scope.length) {
-                        state.popScopes(top.meta_content_scope.length);
-                    }
+                    state.popScopes(top.meta_content_scope.length);
                 }
 
-                if (rule.push) {
-                    for (const name of rule.push) {
-                        const ctx = contexts[name];
-                        if (ctx.clear_scopes) state.pushClear(ctx.clear_scopes);
-                        state.pushScopes(ctx.meta_scope);
-                    }
+                for (const ctx of pushed) {
+                    if (ctx.clear_scopes) state.pushClear(ctx.clear_scopes);
+                    state.pushScopes(ctx.meta_scope);
                 }
 
-                let captureIndex = 0;
-                const captureCount = rule.captures.length;
                 const captureEndStack = [];
 
-                while (
-                    (captureIndex < captureCount) && (! rule.captures[captureIndex])
-                ) {captureIndex++;}
+                for (const capture of match.captureIndices) {
+                    if (capture.length === 0) { continue; }
 
-                while (true) {
-                    const nextPop = (captureEndStack.length)
-                        ? captureEndStack[captureEndStack.length - 1][0]
-                        : Infinity;
+                    const nextPush = capture.start;
+                    if (nextPush >= matchEnd) { break; }
 
-                    const nextPush = (captureIndex < captureCount)
-                        ? match.captureIndices[captureIndex].start
-                        : Infinity;
-
-                    if (nextPop === Infinity && nextPush === Infinity) {
-                        break;
-                    } else if (nextPop <= nextPush) {
-                        yield* state.advance(nextPop);
-
-                        const count = captureEndStack.pop()[1];
-                        state.popScopes(count);
-                    } else {
-                        yield* state.advance(nextPush);
-
-                        captureEndStack.push([
-                            match.captureIndices[captureIndex].end,
-                            rule.captures[captureIndex].length,
-                        ]);
-                        state.pushScopes(rule.captures[captureIndex]);
-
-                        do { captureIndex++; } while (
-                            (captureIndex < captureCount) && (! rule.captures[captureIndex])
-                        );
+                    while (captureEndStack.length) {
+                        const [nextCaptureEnd, scopeCount] = captureEndStack[captureEndStack.length - 1];
+                        const nextPop = Math.min(nextCaptureEnd, matchEnd);
+                        if (nextPop <= nextPush) {
+                            yield* advance(nextPop);
+                            captureEndStack.pop();
+                            state.popScopes(scopeCount);
+                        } else {
+                            break;
+                        }
                     }
+
+                    yield* advance(nextPush);
+
+                    const scopes = rule.captures[capture.index] || [];
+                    captureEndStack.push([capture.end, scopes.length]);
+                    state.pushScopes(scopes);
                 }
 
-                if (rule.push) {
-                    for (const name of rule.push) {
-                        const ctx = contexts[name];
-                        if (ctx.meta_scope.length) state.popScopes(ctx.meta_scope.length);
-                        if (ctx.clear_scopes) state.popClear();
-                    }
+                yield* advance(matchEnd);
+                while (captureEndStack.length) {
+                    const count = captureEndStack.pop()[1];
+                    state.popScopes(count);
+                }
+
+                for (const ctx of pushed) {
+                    state.popScopes(ctx.meta_scope.length);
+                    if (ctx.clear_scopes) state.popClear();
                 }
 
                 if (rule.pop) {
                     state.popContext();
-
-                    if (top.meta_scope.length) {
-                        state.popScopes(top.meta_scope.length);
-                    }
+                    state.popScopes(top.meta_scope.length);
 
                     if (top.clear_scopes) state.popClear();
                 }
 
-                if (rule.push) {
-                    for (const name of rule.push) {
-                        const ctx = contexts[name];
+                for (const ctx of pushed) {
+                    if (ctx.clear_scopes) state.pushClear(ctx.clear_scopes);
 
-                        if (ctx.clear_scopes) state.pushClear(ctx.clear_scopes);
-
-                        state.pushContext(ctx);
-                        state.pushScopes(ctx.meta_scope);
-                        state.pushScopes(ctx.meta_content_scope);
-                    }
+                    state.pushContext(ctx);
+                    state.pushScopes(ctx.meta_scope);
+                    state.pushScopes(ctx.meta_content_scope);
                 }
             } else {
-                yield* state.advance(rowLen);
+                yield* advance(rowLen);
             }
         }
         state.nextLine();
