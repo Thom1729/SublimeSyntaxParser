@@ -31,8 +31,21 @@ contexts:
 
     - match: ^(?=(f)ffff)(fff)ff
       captures:
-        1: region.redish
+        1: region.greenish
         2: ' '
+
+    - match: g(gg)
+      scope: region.pinkish
+      push:
+        - meta_scope: FOO
+        - match: ''
+          pop: true
+
+    - match: h(h)(h)
+      scope: region.pinkish
+      push:
+        - match: ''
+          pop: true
 
     - match: ^(?:(x)|(y))+
       captures:

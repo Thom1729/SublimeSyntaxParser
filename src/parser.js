@@ -132,20 +132,27 @@ function* parse(syntax, text) {
                 for (const capture of match.captureIndices) {
                     if (capture.length === 0) { continue; }
 
-                    const scopes = rule.captures[capture.index];
-                    if (! scopes) { continue; }
+                    let scopes = rule.captures[capture.index];
+
+                    if (!scopes) {
+                        if (rule.push) { // Why does this matter???
+                            scopes = [];
+                        } else {
+                            continue;
+                        }
+                    }
 
                     const nextPush = capture.start;
                     if (nextPush < state.col) { continue; }
                     if (nextPush >= matchEnd) { break; }
 
                     while (captureStack.length) {
-                        const { end, index } = captureStack[captureStack.length - 1];
+                        const [ {end}, scopes ] = captureStack[captureStack.length - 1];
                         const nextPop = Math.min(end, matchEnd);
                         if (nextPop <= nextPush) {
                             yield* advance(Math.max(nextPop, state.col));
                             captureStack.pop();
-                            state.popScopes(rule.captures[index].length);
+                            state.popScopes(scopes.length);
                         } else {
                             break;
                         }
@@ -153,17 +160,17 @@ function* parse(syntax, text) {
 
                     yield* advance(nextPush);
 
-                    captureStack.push(capture);
+                    captureStack.push([capture, scopes]);
                     state.pushScopes(scopes);
                 }
 
                 while (captureStack.length) {
-                    const { end, index } = captureStack[captureStack.length - 1];
+                    const [ {end}, scopes ] = captureStack[captureStack.length - 1];
                     const nextPop = Math.min(end, matchEnd);
                     // if (nextPop <= nextPush) {
                         yield* advance(Math.max(nextPop, state.col));
                         captureStack.pop();
-                        state.popScopes((rule.captures[index] || []).length);
+                        state.popScopes(scopes.length);
                     // } else {
                         // break;
                     // }

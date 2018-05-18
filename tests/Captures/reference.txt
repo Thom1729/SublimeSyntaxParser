@@ -27,10 +27,55 @@
 26 * source.test-a 
 27   source.test-a 
 28 * source.test-a region.redish 
-29 * source.test-a 
+29   source.test-a region.redish 
 30 * source.test-a 
-31   source.test-a 
-32 * source.test-a region.redish 
-33 * source.test-a region.bluish 
-34 * source.test-a 
-35 * source.test-a 
+31 * source.test-a 
+32 * source.test-a 
+33 * source.test-a 
+34   source.test-a 
+35 * source.test-a region.redish 
+36   source.test-a region.redish 
+37 * source.test-a 
+38 * source.test-a 
+39 * source.test-a 
+40 * source.test-a region.redish 
+41 * source.test-a 
+42   source.test-a 
+43   source.test-a 
+44   source.test-a 
+45 * source.test-a 
+46 * source.test-a 
+47 * source.test-a region.redish 
+48 * source.test-a 
+49   source.test-a 
+50   source.test-a 
+51   source.test-a 
+52 * source.test-a 
+53 * source.test-a 
+54 * source.test-a region.greenish   
+55   source.test-a region.greenish   
+56   source.test-a region.greenish   
+57 * source.test-a 
+58   source.test-a 
+59 * source.test-a 
+60 * source.test-a 
+61 * source.test-a FOO region.pinkish 
+62 * source.test-a FOO region.pinkish 
+63   source.test-a FOO region.pinkish 
+64 * source.test-a 
+65 * source.test-a 
+66 * source.test-a region.pinkish 
+67 * source.test-a region.pinkish 
+68 * source.test-a region.pinkish 
+69 * source.test-a 
+70 * source.test-a 
+71 * source.test-a 
+72   source.test-a 
+73 * source.test-a region.redish 
+74 * source.test-a 
+75 * source.test-a 
+76   source.test-a 
+77 * source.test-a region.redish 
+78 * source.test-a region.bluish 
+79 * source.test-a 
+80 * source.test-a 
