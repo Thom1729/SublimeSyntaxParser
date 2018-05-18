@@ -39,10 +39,9 @@ function preprocess(syntax) {
     const newContexts = recMap(syntax.contexts, (name, context, recurse) => {
         const newContext = {
             name,
-            meta_scope: '',
+            meta_scope: [],
+            meta_content_scope: [],
             rules: [],
-
-            meta: [],
         };
 
         let anonIndex = 0;
@@ -57,15 +56,13 @@ function preprocess(syntax) {
                 meta_scope: ({ meta_scope, ...rest }) => {
                     assertNoExtras(rest);
                     assertMeta();
-                    newContext.meta_scope = meta_scope + ' ';
-                    newContext.meta.push(...splitScopes(meta_scope));
+                    newContext.meta_scope.push(...splitScopes(meta_scope));
                 },
 
                 meta_content_scope: ({ meta_content_scope, ...rest }) => {
                     assertNoExtras(rest);
                     assertMeta();
-                    newContext.meta_content_scope = meta_content_scope + ' ';
-                    newContext.meta.push(...splitScopes(meta_content_scope));
+                    newContext.meta_content_scope.push(...splitScopes(meta_content_scope));
                 },
 
                 clear_scopes: ({ clear_scopes, ...rest }) => {
@@ -103,7 +100,6 @@ function preprocess(syntax) {
 
                     push = push || set;
 
-                    // if (scope) newRule.captures[0] = scope + ' ';
                     if (scope) newRule.captures[0] = scope + ' ';
                     if (captures) {
                         for (const [i, scope] of Object.entries(captures)) {
@@ -142,25 +138,6 @@ function preprocess(syntax) {
 
         return newContext;
     });
-
-    for (const ctx of Object.values(newContexts)) {
-        for (const rule of ctx.rules) {
-            if (rule.push) {
-                for (const name of rule.push) {
-                    const next = newContexts[name];
-                    if (next.meta_scope) {
-                        rule.captures[0] = next.meta_scope + rule.captures[0]
-                    }
-                }
-            }
-        }
-    }
-
-    for (const ctx of Object.values(newContexts)) {
-        if (ctx.meta_content_scope) {
-            ctx.meta_scope = (ctx.meta_scope || '') + ctx.meta_content_scope;
-        }
-    }
 
     const newNewContexts = recMap(newContexts, (name, context, recurse) => {
         return {

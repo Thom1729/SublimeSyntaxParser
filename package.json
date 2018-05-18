@@ -22,5 +22,8 @@
   "dependencies": {
     "oniguruma": "^7.0.0",
     "yaml-js": "^0.2.3"
+  },
+  "devDependencies": {
+    "glob": "^7.1.2"
   }
 }

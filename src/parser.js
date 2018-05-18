@@ -1,14 +1,50 @@
+class ParserState {
+    constructor() {
+        this.stack = [];
+        this.scopeStack = [];
+        this.clearedStack = [];
+    }
+
+    topContext() {
+        return this.stack[this.stack.length - 1];
+    }
+
+    pushContext(ctx) {
+        this.stack.push(ctx);
+    }
+
+    popContext() {
+        this.stack.pop();
+    }
+
+    pushScopes(scopes) {
+        this.scopeStack.push(...scopes);
+    }
+
+    popScopes(n) {
+        return this.scopeStack.splice(-n);
+    }
+
+    pushClear(n) {
+        this.clearedStack.push(this.popScopes(
+            n === true ? 0 : n
+        ));
+    }
+
+    popClear() {
+        this.pushScopes( this.clearedStack.pop() );
+    }
+}
+
 function* parse(syntax, text) {
 
     const { contexts, scope:baseScope } = syntax;
     const lines = text.split(/^/gm);
     const lineCount = lines.length;
 
-    const stack = [];
-    const scopeStack = [];
-    const clearedStack = [];
+    const state = new ParserState();
 
-    let row = 0, col = 0, i=0;
+    let row = 0, col = 0, i = 0;
 
     function* advance(point) {
         if (point < col) {
@@ -19,7 +55,7 @@ function* parse(syntax, text) {
             const d = point - col;
             yield [
                 [i, i+d],
-                scopeStack.join(''),
+                state.scopeStack.join(''),
             ];
             col = point;
             i += d;
@@ -30,26 +66,40 @@ function* parse(syntax, text) {
         const line = lines[row];
         const rowLen = line.length;
         while (col < rowLen) {
-            if (stack.length === 0) {
-                stack.push(contexts['main']);
-                scopeStack.push(baseScope);
+            if (state.stack.length === 0) {
+                state.pushContext(contexts['main']);
+                state.pushScopes([baseScope]); // TODO array-ify base scope
             }
 
-            const top = stack[stack.length - 1];
+            const top = state.topContext();
 
             const match = top.scanner.findNextMatchSync(line, col);
+
             if (match) {
                 const rule = top.rules[match.index];
 
-                const { start, end } = match.captureIndices.find(cap => cap.index === 0);
+                const { start, end } = match.captureIndices[0];
                 yield* advance(start);
+
+                if (rule.pop) {
+                    if (top.meta_content_scope.length) {
+                        state.popScopes(top.meta_content_scope.length);
+                    }
+                }
+
+                if (rule.push) {
+                    for (const name of rule.push) {
+                        const ctx = contexts[name];
+                        if (ctx.clear_scopes) state.pushClear(ctx.clear_scopes);
+                        state.pushScopes(ctx.meta_scope);
+                    }
+                }
 
                 let captureIndex = 0;
                 const captureCount = rule.captures.length;
                 const captureEndStack = [];
 
                 while (true) {
-
                     let nextPop = Infinity;
                     if (captureEndStack.length) {
                         nextPop = captureEndStack[captureEndStack.length - 1];
@@ -68,12 +118,12 @@ function* parse(syntax, text) {
                         yield* advance(nextPop);
 
                         captureEndStack.pop();
-                        scopeStack.pop()
+                        state.popScopes(1);
                     } else {
                         yield* advance(nextPush);
 
                         captureEndStack.push(match.captureIndices[captureIndex].end);
-                        scopeStack.push(rule.captures[captureIndex]);
+                        state.pushScopes([rule.captures[captureIndex]]); // TODO likewise
 
                         do { captureIndex++; } while (
                             (captureIndex < captureCount) && (! rule.captures[captureIndex])
@@ -81,40 +131,33 @@ function* parse(syntax, text) {
                     }
                 }
 
+                if (rule.push) {
+                    for (const name of rule.push) {
+                        const ctx = contexts[name];
+                        if (ctx.meta_scope.length) state.popScopes(ctx.meta_scope.length);
+                        if (ctx.clear_scopes) state.popClear();
+                    }
+                }
+
                 if (rule.pop) {
-                    const ctx = stack.pop();
+                    state.popContext();
 
-                    if (ctx.meta.length) {
-                        scopeStack.splice(- ctx.meta.length);
+                    if (top.meta_scope.length) {
+                        state.popScopes(top.meta_scope.length);
                     }
 
-                    if (ctx.clear_scopes) {
-                        const cleared = clearedStack.pop()
-                        // console.log(cleared);
-                        scopeStack.push(... cleared);
-                    }
+                    if (top.clear_scopes) state.popClear();
                 }
 
                 if (rule.push) {
                     for (const name of rule.push) {
                         const ctx = contexts[name];
 
-                        if (ctx.clear_scopes) {
-                            let i;
-                            if (ctx.clear_scopes === true) {
-                                i = 0;
-                            } else {
-                                i = -ctx.clear_scopes;
-                            }
-                            const cleared = scopeStack.splice(i);
-                            clearedStack.push(
-                                cleared
-                            );
-                            // console.log(i, cleared);
-                        }
+                        if (ctx.clear_scopes) state.pushClear(ctx.clear_scopes);
 
-                        stack.push(ctx);
-                        scopeStack.push(...ctx.meta);
+                        state.pushContext(ctx);
+                        state.pushScopes(ctx.meta_scope);
+                        state.pushScopes(ctx.meta_content_scope);
                     }
                 }
             } else {
