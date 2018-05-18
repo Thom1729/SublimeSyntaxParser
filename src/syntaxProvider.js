@@ -1,4 +1,3 @@
-const { OnigScanner } = require('oniguruma');
 const { Path } = require('../lib/pathlib');
 
 const { loadYaml } = require('./load-yaml');
@@ -14,10 +13,6 @@ class SyntaxProvider {
         const buffer = path.readBinary();
         const data = loadYaml(buffer);
         const syntax = preprocess(data);
-
-        for (const ctx of Object.values(syntax.contexts)) {
-            ctx.scanner = new OnigScanner(ctx.rules.map(r => r.match2));
-        }
 
         return syntax;
     }

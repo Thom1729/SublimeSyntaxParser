@@ -66,13 +66,15 @@ class ParserState {
     }
 }
 
-function* parse(syntax, text) {
+const { ScannerProvider } = require('./scannerProvider');
 
+function* parse(syntax, text) {
     const { contexts, scope:baseScope } = syntax;
     const lines = text.split(/^/gm);
     const lineCount = lines.length;
 
     const state = new ParserState();
+    const scannerProvider = new ScannerProvider();
 
     function *advance(point) {
         const line = lines[state.row];
@@ -101,13 +103,17 @@ function* parse(syntax, text) {
 
         while (state.col < rowLen) {
             if (state.stackIsEmpty()) {
-                state.pushContext(contexts['main']);
+                const ctx = contexts['main'];
+                state.pushContext([
+                    ctx,
+                    scannerProvider.getScanner(ctx.rules.map(r => r.match2)),
+                ]);
                 state.pushScopes(baseScope);
             }
 
-            const top = state.topContext();
+            const [top, scanner] = state.topContext();
 
-            const match = top.scanner.findNextMatchSync(line, state.col);
+            const match = scanner.findNextMatchSync(line, state.col);
 
             if (match) {
                 const rule = top.rules[match.index];
@@ -191,7 +197,12 @@ function* parse(syntax, text) {
                 for (const ctx of pushed) {
                     if (ctx.clear_scopes) state.pushClear(ctx.clear_scopes);
 
-                    state.pushContext(ctx);
+                    // state.pushContext(ctx);
+                    state.pushContext([
+                        ctx,
+                        scannerProvider.getScanner(ctx.rules.map(r => r.match2), match.captureIndices, line),
+                    ]);
+
                     state.pushScopes(ctx.meta_scope);
                     state.pushScopes(ctx.meta_content_scope);
                 }

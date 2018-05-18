@@ -1,0 +1,53 @@
+%YAML 1.2
+---
+name: Test Backrefs
+scope: source.test-backrefs
+file_extensions:
+- test-backrefs
+contexts:
+  main:
+    - match: (a)
+      scope: region.redish
+      push: test_a
+
+    - match: (b)
+      scope: region.redish
+      push: test_b
+
+    - match: (c)
+      scope: region.redish
+      push: test_c
+
+    - match: (d)
+      scope: region.redish
+      push: test_d
+
+    - match: (\\)
+      scope: region.redish
+      push: test_escape
+
+
+  test_a:
+    - match: \1
+      scope: region.bluish
+      pop: true
+
+  test_b:
+    - match: \\1
+      scope: region.bluish
+      pop: true
+
+  test_c:
+    - match: \\\1
+      scope: region.bluish
+      pop: true
+
+  test_d:
+    - match: \1\\1
+      scope: region.bluish
+      pop: true
+
+  test_escape:
+    - match: \1
+      scope: region.bluish
+      pop: true
