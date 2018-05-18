@@ -1,20 +1,49 @@
 class ParserState {
     constructor() {
-        this.stack = [];
+        this.contextStack = [];
         this.scopeStack = [];
         this.clearedStack = [];
+
+        this.i = 0;
+        this.row = 0;
+        this.col = 0;
+    }
+
+    *advance(point) {
+        if (point < this.col) {
+            throw new Error(`Tried to advance backward from ${col} to ${point}.`);
+        } else if (point === this.col) {
+            // pass
+        } else {
+            const d = point - this.col;
+            yield [
+                [this.i, this.i+d],
+                this.scopeStack.join(''),
+            ];
+            this.col = point;
+            this.i += d;
+        }
+    }
+
+    nextLine() {
+        this.row++;
+        this.col = 0;
+    }
+
+    stackIsEmpty() {
+        return this.contextStack.length === 0;
     }
 
     topContext() {
-        return this.stack[this.stack.length - 1];
+        return this.contextStack[this.contextStack.length - 1];
     }
 
     pushContext(ctx) {
-        this.stack.push(ctx);
+        this.contextStack.push(ctx);
     }
 
     popContext() {
-        this.stack.pop();
+        this.contextStack.pop();
     }
 
     pushScopes(scopes) {
@@ -22,12 +51,13 @@ class ParserState {
     }
 
     popScopes(n) {
+        if (n === 0) return;
         return this.scopeStack.splice(-n);
     }
 
     pushClear(n) {
-        this.clearedStack.push(this.popScopes(
-            n === true ? 0 : n
+        this.clearedStack.push(this.scopeStack.splice(
+            n === true ? 0 : -n
         ));
     }
 
@@ -44,42 +74,24 @@ function* parse(syntax, text) {
 
     const state = new ParserState();
 
-    let row = 0, col = 0, i = 0;
-
-    function* advance(point) {
-        if (point < col) {
-            throw new Error(`Tried to advance backward from ${col} to ${point}.`);
-        } else if (point === col) {
-            // pass
-        } else {
-            const d = point - col;
-            yield [
-                [i, i+d],
-                state.scopeStack.join(''),
-            ];
-            col = point;
-            i += d;
-        }
-    }
-
-    while (row < lineCount) {
-        const line = lines[row];
+    while (state.row < lineCount) {
+        const line = lines[state.row];
         const rowLen = line.length;
-        while (col < rowLen) {
-            if (state.stack.length === 0) {
+        while (state.col < rowLen) {
+            if (state.stackIsEmpty()) {
                 state.pushContext(contexts['main']);
                 state.pushScopes(baseScope);
             }
 
             const top = state.topContext();
 
-            const match = top.scanner.findNextMatchSync(line, col);
+            const match = top.scanner.findNextMatchSync(line, state.col);
 
             if (match) {
                 const rule = top.rules[match.index];
 
                 const { start, end } = match.captureIndices[0];
-                yield* advance(start);
+                yield* state.advance(start);
 
                 if (rule.pop) {
                     if (top.meta_content_scope.length) {
@@ -104,27 +116,23 @@ function* parse(syntax, text) {
                 ) {captureIndex++;}
 
                 while (true) {
-                    let nextPop = Infinity;
-                    if (captureEndStack.length) {
-                        nextPop = captureEndStack[captureEndStack.length - 1][0];
-                    }
+                    const nextPop = (captureEndStack.length)
+                        ? captureEndStack[captureEndStack.length - 1][0]
+                        : Infinity;
 
-                    let nextPush = Infinity;
-                    if (captureIndex < captureCount) {
-                        nextPush = match.captureIndices[captureIndex].start;
-                    }
+                    const nextPush = (captureIndex < captureCount)
+                        ? match.captureIndices[captureIndex].start
+                        : Infinity;
 
                     if (nextPop === Infinity && nextPush === Infinity) {
                         break;
-                    }
-
-                    else if (nextPop <= nextPush) {
-                        yield* advance(nextPop);
+                    } else if (nextPop <= nextPush) {
+                        yield* state.advance(nextPop);
 
                         const count = captureEndStack.pop()[1];
                         state.popScopes(count);
                     } else {
-                        yield* advance(nextPush);
+                        yield* state.advance(nextPush);
 
                         captureEndStack.push([
                             match.captureIndices[captureIndex].end,
@@ -168,11 +176,10 @@ function* parse(syntax, text) {
                     }
                 }
             } else {
-                yield* advance(rowLen);
+                yield* state.advance(rowLen);
             }
         }
-        row++;
-        col = 0;
+        state.nextLine();
     }
 }
 
