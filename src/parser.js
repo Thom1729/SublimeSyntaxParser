@@ -68,7 +68,7 @@ function* parse(syntax, text) {
         while (col < rowLen) {
             if (state.stack.length === 0) {
                 state.pushContext(contexts['main']);
-                state.pushScopes([baseScope]); // TODO array-ify base scope
+                state.pushScopes(baseScope);
             }
 
             const top = state.topContext();
@@ -99,10 +99,14 @@ function* parse(syntax, text) {
                 const captureCount = rule.captures.length;
                 const captureEndStack = [];
 
+                while (
+                    (captureIndex < captureCount) && (! rule.captures[captureIndex])
+                ) {captureIndex++;}
+
                 while (true) {
                     let nextPop = Infinity;
                     if (captureEndStack.length) {
-                        nextPop = captureEndStack[captureEndStack.length - 1];
+                        nextPop = captureEndStack[captureEndStack.length - 1][0];
                     }
 
                     let nextPush = Infinity;
@@ -117,13 +121,16 @@ function* parse(syntax, text) {
                     else if (nextPop <= nextPush) {
                         yield* advance(nextPop);
 
-                        captureEndStack.pop();
-                        state.popScopes(1);
+                        const count = captureEndStack.pop()[1];
+                        state.popScopes(count);
                     } else {
                         yield* advance(nextPush);
 
-                        captureEndStack.push(match.captureIndices[captureIndex].end);
-                        state.pushScopes([rule.captures[captureIndex]]); // TODO likewise
+                        captureEndStack.push([
+                            match.captureIndices[captureIndex].end,
+                            rule.captures[captureIndex].length,
+                        ]);
+                        state.pushScopes(rule.captures[captureIndex]);
 
                         do { captureIndex++; } while (
                             (captureIndex < captureCount) && (! rule.captures[captureIndex])

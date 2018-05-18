@@ -100,10 +100,10 @@ function preprocess(syntax) {
 
                     push = push || set;
 
-                    if (scope) newRule.captures[0] = scope + ' ';
+                    if (scope) newRule.captures[0] = splitScopes(scope); // TODO
                     if (captures) {
                         for (const [i, scope] of Object.entries(captures)) {
-                            newRule.captures[i] = scope + ' ';
+                            newRule.captures[i] = splitScopes(scope);
                         }
                     }
 
@@ -152,7 +152,7 @@ function preprocess(syntax) {
     });
 
     return {
-        scope: syntax.scope + ' ',
+        scope: splitScopes(syntax.scope),
         contexts: newNewContexts,
     };
 }
