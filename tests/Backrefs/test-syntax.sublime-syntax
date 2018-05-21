@@ -8,46 +8,73 @@ contexts:
   main:
     - match: (a)
       scope: region.redish
-      push: test_a
+      push: 
+        - match: \1
+          scope: region.bluish
+          pop: true
 
     - match: (b)
       scope: region.redish
-      push: test_b
+      push:
+        - match: \\1
+          scope: region.bluish
+          pop: true
 
     - match: (c)
       scope: region.redish
-      push: test_c
+      push:
+        - match: \\\1
+          scope: region.bluish
+          pop: true
 
     - match: (d)
       scope: region.redish
-      push: test_d
+      push:
+        - match: \1\\1
+          scope: region.bluish
+          pop: true
+
+    - match: (e)\1
+      scope: region.redish
+
+    - match: (f)
+      scope: region.redish
+      push:
+        - match: (x)\1
+          scope: region.bluish
+          pop: true
+
+    - match: (g)
+      scope: region.redish
+      push:
+        - match: (x)(y)\2
+          scope: region.bluish
+          pop: true
+
+    - match: (h)(?=(x))
+      scope: region.redish
+      push:
+        - match: (x)(y)\2
+          scope: region.bluish
+          pop: true
+
+    - match: i
+      scope: region.redish
+      push:
+        - match: \1
+          scope: region.bluish
+          pop: true
+
+    - match: j
+      scope: region.redish
+      push:
+        - match: (x)\1
+          scope: region.bluish
+          pop: true
 
     - match: (\\)
       scope: region.redish
-      push: test_escape
-
-
-  test_a:
-    - match: \1
-      scope: region.bluish
-      pop: true
-
-  test_b:
-    - match: \\1
-      scope: region.bluish
-      pop: true
-
-  test_c:
-    - match: \\\1
-      scope: region.bluish
-      pop: true
-
-  test_d:
-    - match: \1\\1
-      scope: region.bluish
-      pop: true
-
-  test_escape:
-    - match: \1
-      scope: region.bluish
-      pop: true
+      push:
+        - match: \1
+          scope: region.bluish
+          pop: true

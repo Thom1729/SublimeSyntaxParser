@@ -26,7 +26,7 @@ function assertNoExtras(obj) {
 function splitScopes(scopes) {
     if (!scopes) return undefined;
     const ret = [];
-    (scopes + ' ').replace(/\s*\S+\s*/g, part => { ret.push(part); });
+    (scopes + ' ').replace(/\S+\s*|\s+/g, part => { ret.push(part); });
     return ret;
 }
 

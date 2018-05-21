@@ -17,7 +17,7 @@ function regexpEscape(text) {
 
 function compileBackrefs(pattern, captures, line) {
     const ref = {};
-    for (const capture of captures) {
+    for (const capture of (captures||[])) {
         ref[capture.index] = line.substr(capture.start, capture.end);
     }
 
@@ -25,7 +25,7 @@ function compileBackrefs(pattern, captures, line) {
         /\\(.)/g,
         (all, c) => (
             ('1' <= c && c <= '9')
-                ? regexpEscape(ref[c])
+                ? regexpEscape(ref[c] || '')
                 : all
         )
     );

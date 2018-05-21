@@ -52,9 +52,9 @@
 51   source.test-a 
 52 * source.test-a 
 53 * source.test-a 
-54 * source.test-a region.greenish 
-55   source.test-a region.greenish 
-56   source.test-a region.greenish 
+54 * source.test-a region.greenish   
+55   source.test-a region.greenish   
+56   source.test-a region.greenish   
 57 * source.test-a 
 58   source.test-a 
 59 * source.test-a 

@@ -1,5 +1,7 @@
 const fs = require('fs');
 const { Path } = require('../lib/pathlib');
+// const Diff = require('diff');
+const { flatMap } = require('../src/util');
 
 const testsDir = new Path('tests');
 
@@ -16,14 +18,31 @@ function runTest(path) {
     const syntaxProvider = new SyntaxProvider(path);
 
     const syntax = syntaxProvider.load('test-syntax.sublime-syntax');
-    const text = path.glob('test-file.*')[0].readText();
 
-    path.joinpath('result.txt').withWrite(out => {
-        for (const [region, scope] of parse(syntax, text)) {
+    path.joinpath('processed.json').writeText(JSON.stringify(syntax, null, 4));
+
+    const text = path.glob('test-file.*')[0].readText();
+    const tokens = Array.from(parse(syntax, text));
+
+    const result = Array.from(flatMap(
+        tokens,
+        function* ([region, scope]) {
             for (let i = region[0]; i < region[1]; i++) {
                 const tokenMarker = (i === region[0] ? '*' : ' ');
-                out.write(`${i} ${tokenMarker} ${scope}\n`);
+                yield (`${i} ${tokenMarker} ${scope}`);
             }
         }
-    });
+    ));
+
+    path.joinpath('result.txt').writeText(result.map(l => l+'\n').join(''));
+
+    const reference = path.joinpath('reference.txt').readText().split('\n').slice(0, -1);
+
+    for (let line=0; line < reference.length; line++) {
+        if (reference[line] !== result[line]) {
+            console.log(path.toString());
+            console.log(reference[line] + '$');
+            console.log(result[line] + '$');
+        }
+    }
 }
