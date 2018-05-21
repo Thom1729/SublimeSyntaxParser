@@ -1,5 +1,9 @@
 class ParserState {
-    constructor() {
+    constructor(syntax, lines) {
+        this.syntax = syntax;
+        this.lines = lines;
+        this.scannerProvider = new ScannerProvider();
+
         this.contextStack = [];
         this.scopeStack = [];
         this.clearedStack = [];
@@ -9,20 +13,151 @@ class ParserState {
         this.col = 0;
     }
 
+    get line() { return this.lines[this.row]; }
+
     *advance(point) {
         if (point < this.col) {
             throw new Error(`Tried to advance backward from ${this.row}:${this.col} to ${this.row}:${point}.`);
         } else if (point === this.col) {
             // pass
         } else {
-            const d = point - this.col;
-            yield [
-                [this.i, this.i+d],
-                this.scopeStack.join(''),
-            ];
-            this.col = point;
-            this.i += d;
+            const line = this.lines[this.row];
+
+            let wasSpace = false;
+            for (let i = this.col; i < point; i++) {
+                if (line[i] === '\n') {
+                    yield this._advance(i);
+                }
+
+                const isSpace = line[i] === ' ';
+                if (wasSpace && ! isSpace) {
+                    yield this._advance(i);
+                }
+
+                wasSpace = isSpace;
+            }
+
+            yield this._advance(point);
         }
+    }
+
+    _advance(point) {
+        const d = point - this.col;
+        this.col = point;
+        this.i += d;
+        return [
+            [this.i-d, this.i],
+            this.scopeStack.join(''),
+        ];
+    }
+
+    *parseNextToken() {
+        if (this.stackIsEmpty()) {
+            this.pushContext(this.syntax.contexts['main']);
+            this.pushScopes(this.syntax.scope);
+        }
+
+        const [top, scanner] = this.topContext();
+
+        const match = scanner.findNextMatchSync(this.line, this.col);
+
+        if (match) {
+            const rule = top.rules[match.index];
+
+            const pushed = (rule.push || []).map(name => this.syntax.contexts[name]);
+
+            const { start: matchStart, end: matchEnd } = match.captureIndices[0];
+
+            yield* this.advance(matchStart);
+
+            if (rule.pop) {
+                this.popScopes(top.meta_content_scope.length);
+            }
+
+            for (const ctx of pushed) {
+                if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
+                this.pushScopes(ctx.meta_scope);
+            }
+
+            const captureStack = [];
+
+            for (const capture of match.captureIndices) {
+                if (capture.length === 0) { continue; }
+
+                let scopes = rule.captures[capture.index];
+
+                if (!scopes) {
+                    if (rule.push) { // Why does this matter???
+                        scopes = [];
+                    } else {
+                        continue;
+                    }
+                }
+
+                const nextPush = capture.start;
+                if (nextPush < this.col) { continue; }
+                if (nextPush >= matchEnd) { break; }
+
+                while (captureStack.length) {
+                    const [ {end}, scopes ] = captureStack[captureStack.length - 1];
+                    const nextPop = Math.min(end, matchEnd);
+                    if (nextPop <= nextPush) {
+                        yield* this.advance(Math.max(nextPop, this.col));
+                        captureStack.pop();
+                        this.popScopes(scopes.length);
+                    } else {
+                        break;
+                    }
+                }
+
+                yield* this.advance(nextPush);
+
+                captureStack.push([capture, scopes]);
+                this.pushScopes(scopes);
+            }
+
+            while (captureStack.length) {
+                const [ {end}, scopes ] = captureStack[captureStack.length - 1];
+                const nextPop = Math.min(end, matchEnd);
+                // if (nextPop <= nextPush) {
+                    yield* this.advance(Math.max(nextPop, this.col));
+                    captureStack.pop();
+                    this.popScopes(scopes.length);
+                // } else {
+                    // break;
+                // }
+            }
+
+            for (const ctx of pushed) {
+                this.popScopes(ctx.meta_scope.length);
+                if (ctx.clear_scopes) this.popClear();
+            }
+
+            if (rule.pop) {
+                this.popContext();
+                this.popScopes(top.meta_scope.length);
+
+                if (top.clear_scopes) this.popClear();
+            }
+
+            for (const ctx of pushed) {
+                if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
+
+                this.pushContext(ctx, match.captureIndices);
+                this.pushScopes(ctx.meta_scope);
+                this.pushScopes(ctx.meta_content_scope);
+            }
+        } else {
+            yield* this.advance(this.line.length);
+        }
+    }
+
+    *parseLine() {
+        const rowLen = this.line.length;
+        while (this.col < rowLen) {
+            yield* this.parseNextToken();
+        }
+        this.nextLine();
     }
 
     nextLine() {
@@ -38,8 +173,10 @@ class ParserState {
         return this.contextStack[this.contextStack.length - 1];
     }
 
-    pushContext(ctx) {
-        this.contextStack.push(ctx);
+    pushContext(ctx, captures) {
+        this.contextStack.push([
+            ctx, this.scannerProvider.getScanner(ctx.patterns, captures, this.line),
+        ]);
     }
 
     popContext() {
@@ -69,147 +206,13 @@ class ParserState {
 const { ScannerProvider } = require('./scannerProvider');
 
 function* parse(syntax, text) {
-    const { contexts, scope:baseScope } = syntax;
     const lines = text.split(/^/gm);
     const lineCount = lines.length;
 
-    const state = new ParserState();
-    const scannerProvider = new ScannerProvider();
-
-    function *advance(point) {
-        const line = lines[state.row];
-        let l = state.col;
-        let wasSpace = false;
-
-        for (let i = state.col; i < point; i++) {
-            if (line[i] === '\n') {
-                yield* state.advance(i);
-            }
-
-            const isSpace = line[i] === ' ';
-            if (wasSpace && ! isSpace) {
-                yield* state.advance(i);
-            }
-
-            wasSpace = isSpace;
-        }
-
-        yield *state.advance(point);
-    }
+    const state = new ParserState(syntax, text.split(/^/gm));
 
     while (state.row < lineCount) {
-        const line = lines[state.row];
-        const rowLen = line.length;
-
-        while (state.col < rowLen) {
-            if (state.stackIsEmpty()) {
-                const ctx = contexts['main'];
-                state.pushContext([
-                    ctx,
-                    scannerProvider.getScanner(ctx.patterns),
-                ]);
-                state.pushScopes(baseScope);
-            }
-
-            const [top, scanner] = state.topContext();
-
-            const match = scanner.findNextMatchSync(line, state.col);
-
-            if (match) {
-                const rule = top.rules[match.index];
-
-                const pushed = (rule.push || []).map(name => contexts[name]);
-
-                const { start: matchStart, end: matchEnd } = match.captureIndices[0];
-
-                yield* advance(matchStart);
-
-                if (rule.pop) {
-                    state.popScopes(top.meta_content_scope.length);
-                }
-
-                for (const ctx of pushed) {
-                    if (ctx.clear_scopes) state.pushClear(ctx.clear_scopes);
-                    state.pushScopes(ctx.meta_scope);
-                }
-
-                const captureStack = [];
-
-                for (const capture of match.captureIndices) {
-                    if (capture.length === 0) { continue; }
-
-                    let scopes = rule.captures[capture.index];
-
-                    if (!scopes) {
-                        if (rule.push) { // Why does this matter???
-                            scopes = [];
-                        } else {
-                            continue;
-                        }
-                    }
-
-                    const nextPush = capture.start;
-                    if (nextPush < state.col) { continue; }
-                    if (nextPush >= matchEnd) { break; }
-
-                    while (captureStack.length) {
-                        const [ {end}, scopes ] = captureStack[captureStack.length - 1];
-                        const nextPop = Math.min(end, matchEnd);
-                        if (nextPop <= nextPush) {
-                            yield* advance(Math.max(nextPop, state.col));
-                            captureStack.pop();
-                            state.popScopes(scopes.length);
-                        } else {
-                            break;
-                        }
-                    }
-
-                    yield* advance(nextPush);
-
-                    captureStack.push([capture, scopes]);
-                    state.pushScopes(scopes);
-                }
-
-                while (captureStack.length) {
-                    const [ {end}, scopes ] = captureStack[captureStack.length - 1];
-                    const nextPop = Math.min(end, matchEnd);
-                    // if (nextPop <= nextPush) {
-                        yield* advance(Math.max(nextPop, state.col));
-                        captureStack.pop();
-                        state.popScopes(scopes.length);
-                    // } else {
-                        // break;
-                    // }
-                }
-
-                for (const ctx of pushed) {
-                    state.popScopes(ctx.meta_scope.length);
-                    if (ctx.clear_scopes) state.popClear();
-                }
-
-                if (rule.pop) {
-                    state.popContext();
-                    state.popScopes(top.meta_scope.length);
-
-                    if (top.clear_scopes) state.popClear();
-                }
-
-                for (const ctx of pushed) {
-                    if (ctx.clear_scopes) state.pushClear(ctx.clear_scopes);
-
-                    state.pushContext([
-                        ctx,
-                        scannerProvider.getScanner(ctx.patterns, match.captureIndices, line),
-                    ]);
-
-                    state.pushScopes(ctx.meta_scope);
-                    state.pushScopes(ctx.meta_content_scope);
-                }
-            } else {
-                yield* advance(rowLen);
-            }
-        }
-        state.nextLine();
+        yield* state.parseLine();
     }
 }
 
