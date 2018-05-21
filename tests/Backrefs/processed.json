@@ -1,0 +1,346 @@
+{
+    "scope": [
+        "source.test-backrefs "
+    ],
+    "contexts": {
+        "main:0": {
+            "name": "main:0",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "\\1",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": "true"
+                }
+            ],
+            "patterns": [
+                "\\1"
+            ]
+        },
+        "main:1": {
+            "name": "main:1",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "\\\\1",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": "true"
+                }
+            ],
+            "patterns": [
+                "\\\\1"
+            ]
+        },
+        "main:2": {
+            "name": "main:2",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "\\\\\\1",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": "true"
+                }
+            ],
+            "patterns": [
+                "\\\\\\1"
+            ]
+        },
+        "main:3": {
+            "name": "main:3",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "\\1\\\\1",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": "true"
+                }
+            ],
+            "patterns": [
+                "\\1\\\\1"
+            ]
+        },
+        "main:4": {
+            "name": "main:4",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "(x)\\1",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": "true"
+                }
+            ],
+            "patterns": [
+                "(x)\\1"
+            ]
+        },
+        "main:5": {
+            "name": "main:5",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "(x)(y)\\2",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": "true"
+                }
+            ],
+            "patterns": [
+                "(x)(y)\\2"
+            ]
+        },
+        "main:6": {
+            "name": "main:6",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "(x)(y)\\2",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": "true"
+                }
+            ],
+            "patterns": [
+                "(x)(y)\\2"
+            ]
+        },
+        "main:7": {
+            "name": "main:7",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "\\1",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": "true"
+                }
+            ],
+            "patterns": [
+                "\\1"
+            ]
+        },
+        "main:8": {
+            "name": "main:8",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "(x)\\1",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": "true"
+                }
+            ],
+            "patterns": [
+                "(x)\\1"
+            ]
+        },
+        "main:9": {
+            "name": "main:9",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "\\1",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": "true"
+                }
+            ],
+            "patterns": [
+                "\\1"
+            ]
+        },
+        "main": {
+            "name": "main",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "(a)",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "pop": false,
+                    "push": [
+                        "main:0"
+                    ]
+                },
+                {
+                    "match": "(b)",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "pop": false,
+                    "push": [
+                        "main:1"
+                    ]
+                },
+                {
+                    "match": "(c)",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "pop": false,
+                    "push": [
+                        "main:2"
+                    ]
+                },
+                {
+                    "match": "(d)",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "pop": false,
+                    "push": [
+                        "main:3"
+                    ]
+                },
+                {
+                    "match": "(e)\\1",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "pop": false
+                },
+                {
+                    "match": "(f)",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "pop": false,
+                    "push": [
+                        "main:4"
+                    ]
+                },
+                {
+                    "match": "(g)",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "pop": false,
+                    "push": [
+                        "main:5"
+                    ]
+                },
+                {
+                    "match": "(h)(?=(x))",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "pop": false,
+                    "push": [
+                        "main:6"
+                    ]
+                },
+                {
+                    "match": "i",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "pop": false,
+                    "push": [
+                        "main:7"
+                    ]
+                },
+                {
+                    "match": "j",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "pop": false,
+                    "push": [
+                        "main:8"
+                    ]
+                },
+                {
+                    "match": "(\\\\)",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "pop": false,
+                    "push": [
+                        "main:9"
+                    ]
+                }
+            ],
+            "patterns": [
+                "(a)",
+                "(b)",
+                "(c)",
+                "(d)",
+                "(e)\\1",
+                "(f)",
+                "(g)",
+                "(h)(?=(x))",
+                "i",
+                "j",
+                "(\\\\)"
+            ]
+        }
+    }
+}

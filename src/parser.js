@@ -55,6 +55,7 @@ class ParserState {
         if (this.stackIsEmpty()) {
             this.pushContext(this.syntax.contexts['main']);
             this.pushScopes(this.syntax.scope);
+            return;
         }
 
         const [top, scanner] = this.topContext();
@@ -216,5 +217,5 @@ function* parse(syntax, text) {
     }
 }
 
-module.exports = { parse };
+module.exports = { ParserState, parse };
 

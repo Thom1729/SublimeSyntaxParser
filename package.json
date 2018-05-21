@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Thom1729/SublimeSyntaxParser#readme",
   "dependencies": {
+    "blessed": "^0.1.81",
     "oniguruma": "^7.0.0",
     "yaml-js": "^0.2.3"
   },
