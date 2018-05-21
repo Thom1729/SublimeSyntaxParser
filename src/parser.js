@@ -106,7 +106,7 @@ function* parse(syntax, text) {
                 const ctx = contexts['main'];
                 state.pushContext([
                     ctx,
-                    scannerProvider.getScanner(ctx.rules.map(r => r.match2)),
+                    scannerProvider.getScanner(ctx.patterns),
                 ]);
                 state.pushScopes(baseScope);
             }
@@ -197,10 +197,9 @@ function* parse(syntax, text) {
                 for (const ctx of pushed) {
                     if (ctx.clear_scopes) state.pushClear(ctx.clear_scopes);
 
-                    // state.pushContext(ctx);
                     state.pushContext([
                         ctx,
-                        scannerProvider.getScanner(ctx.rules.map(r => r.match2), match.captureIndices, line),
+                        scannerProvider.getScanner(ctx.patterns, match.captureIndices, line),
                     ]);
 
                     state.pushScopes(ctx.meta_scope);

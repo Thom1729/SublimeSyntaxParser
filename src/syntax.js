@@ -93,8 +93,8 @@ function preprocess(syntax) {
                     }
 
                     const newRule = {
-                        match,
-                        match2: match.replace(/\{\{(\w+)\}\}/g, (all, v) => newVariables[v]),
+                        // match,
+                        match: match.replace(/\{\{(\w+)\}\}/g, (all, v) => newVariables[v]),
                         captures: [],
                         pop: pop || Boolean(set) || false
                     };
@@ -141,14 +141,17 @@ function preprocess(syntax) {
     });
 
     const newNewContexts = recMap(newContexts, (name, context, recurse) => {
+        const rules = Array.from(flatMap(context.rules,
+            rule =>
+                !rule.include ? [rule] :
+                rule.include.slice(0, 6) === 'scope:' ? [] :
+                recurse(rule.include).rules
+        ));
+
         return {
             ...context,
-            rules: Array.from(flatMap(context.rules,
-                rule =>
-                    !rule.include ? [rule] :
-                    rule.include.slice(0, 6) === 'scope:' ? [] :
-                    recurse(rule.include).rules
-            )),
+            rules,
+            patterns: rules.map(r => r.match),
         };
     });
 

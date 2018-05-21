@@ -48,7 +48,6 @@ class ScannerProvider {
             }
 
             if (this.hasBackrefCache[key]) {
-                // console.log(patterns.map(p => compileBackrefs(p, captures, line)));
                 return new OnigScanner(patterns.map(p => compileBackrefs(p, captures, line)))
             } else {
                 this.scannerCache[key] = new OnigScanner(patterns);
