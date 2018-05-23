@@ -6,6 +6,9 @@ file_extensions:
 - test-stack
 contexts:
   main:
+    - match: ^y
+      scope: region.greenish
+      pop: true
     - match: ''
       push: test
   

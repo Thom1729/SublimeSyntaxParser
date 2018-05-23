@@ -5,7 +5,7 @@ class ParserState {
         this.scannerProvider = new ScannerProvider();
 
         this.contextStack = [];
-        this.scopeStack = [];
+        this.scopeStack = [ syntax.scope ];
         this.clearedStack = [];
 
         this.i = 0;
@@ -51,17 +51,17 @@ class ParserState {
         ];
     }
 
-    *parseCapture(rule, groups) {
+    *parseCapture(captureScopes, groups, tokenizeIfNoScope) {
         const matchEnd = groups[0].end;
         const captureStack = [];
 
         for (const capture of groups) {
             if (capture.length === 0) { continue; }
 
-            let scopes = rule.captures[capture.index];
+            let scopes = captureScopes[capture.index];
 
             if (!scopes) {
-                if (rule.push || rule.pop || rule.set) { // Why does this matter???
+                if (tokenizeIfNoScope) { // Why does this matter???
                     scopes = [];
                 } else {
                     continue;
@@ -106,7 +106,6 @@ class ParserState {
     *parseNextToken() {
         if (this.stackIsEmpty()) {
             this.pushContext(this.syntax.contexts['main']);
-            this.pushScopes(this.syntax.scope);
             return;
         }
 
@@ -137,7 +136,7 @@ class ParserState {
                 this.pushScopes(ctx.meta_scope);
             }
 
-            yield* this.parseCapture(rule, match.captureIndices);
+            yield* this.parseCapture(rule.captures, match.captureIndices, Boolean(rule.push || rule.pop || rule.set));
 
             for (let i=pushed.length-1; i>=0; i--) {
                 this.popScopes(pushed[i].meta_scope.length);
