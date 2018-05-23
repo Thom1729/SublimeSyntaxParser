@@ -205,7 +205,6 @@
                             "region.redish "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "main:0"
                     ]
@@ -217,7 +216,6 @@
                             "region.redish "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "main:1"
                     ]
@@ -229,7 +227,6 @@
                             "region.redish "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "main:2"
                     ]
@@ -241,7 +238,6 @@
                             "region.redish "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "main:3"
                     ]
@@ -252,8 +248,7 @@
                         [
                             "region.redish "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(f)",
@@ -262,7 +257,6 @@
                             "region.redish "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "main:4"
                     ]
@@ -274,7 +268,6 @@
                             "region.redish "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "main:5"
                     ]
@@ -286,7 +279,6 @@
                             "region.redish "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "main:6"
                     ]
@@ -298,7 +290,6 @@
                             "region.redish "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "main:7"
                     ]
@@ -310,7 +301,6 @@
                             "region.redish "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "main:8"
                     ]
@@ -322,7 +312,6 @@
                             "region.redish "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "main:9"
                     ]

@@ -1,0 +1,103 @@
+%YAML 1.2
+---
+name: Test Stack
+scope: source.test-stack
+file_extensions:
+- test-stack
+contexts:
+  main:
+    - match: ''
+      push: test
+  
+  test:
+    - meta_scope: TEST
+    - meta_content_scope: TEST_CONTENT
+    - match: ^a
+      scope: region.redish
+      push: meta-z
+    - match: ^b
+      scope: region.redish
+      set: meta-z
+    - match: ^c
+      scope: region.redish
+      push:
+        - meta-z
+        - meta-z
+        - meta-z
+    - match: ^d
+      scope: region.redish
+      set:
+        - meta-z
+        - meta-z
+        - meta-z
+    - match: ^e
+      scope: region.redish
+      push:
+        - meta-z
+        - clear
+    - match: ^f
+      scope: region.redish
+      set:
+        - meta-z
+        - clear
+    - match: ^g
+      scope: region.redish
+      push:
+        - meta-z
+        - clear
+        - meta-z
+        - clear
+        - meta-z
+    - match: ^h
+      scope: region.redish
+      set:
+        - meta-z
+        - clear
+        - meta-z
+        - clear
+        - meta-z
+    - match: ^i
+      scope: region.redish
+      push:
+        - clear-meta
+        - clear-meta
+        - meta-z
+    - match: ^j
+      scope: region.redish
+      set:
+        - clear-meta
+        - clear-meta
+        - meta-z
+    - match: ^k
+      scope: region.redish
+      push:
+        - clear-all
+        - meta-z
+    - match: ^l
+      scope: region.redish
+      set:
+        - clear-all
+        - meta-z
+
+  meta-z:
+    - meta_scope: META
+    - meta_content_scope: META_CONTENT
+    - match: z
+      scope: region.bluish
+      pop: true
+
+  clear:
+    - clear_scopes: 1
+    - match: ''
+      pop: true
+
+  clear-meta:
+    - clear_scopes: 1
+    - meta_scope: META1 META2
+    - match: ''
+      pop: true
+
+  clear-all:
+    - clear_scopes: true
+    - match: ''
+      pop: true

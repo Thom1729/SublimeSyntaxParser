@@ -15,7 +15,6 @@
                             "punctuation.definition.comment.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "comments:0"
                     ]
@@ -27,7 +26,6 @@
                             "punctuation.definition.comment.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "comments:1"
                     ]
@@ -39,7 +37,6 @@
                             "punctuation.definition.comment.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "comments:2"
                     ]
@@ -65,8 +62,7 @@
                         [
                             "punctuation.definition.comment.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [
@@ -90,7 +86,6 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "statement"
                     ]
@@ -113,7 +108,6 @@
                             "punctuation.definition.comment.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "comments:0"
                     ]
@@ -125,7 +119,6 @@
                             "punctuation.definition.comment.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "comments:1"
                     ]
@@ -137,7 +130,6 @@
                             "punctuation.definition.comment.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "comments:2"
                     ]
@@ -151,8 +143,7 @@
                         [
                             "punctuation.definition.comment.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\)|\\}|\\]",
@@ -166,7 +157,6 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "statement"
                     ]
@@ -193,7 +183,6 @@
                             "punctuation.definition.comment.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "comments:0"
                     ]
@@ -205,7 +194,6 @@
                             "punctuation.definition.comment.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "comments:1"
                     ]
@@ -217,7 +205,6 @@
                             "punctuation.definition.comment.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "comments:2"
                     ]
@@ -332,8 +319,7 @@
                         [
                             "punctuation.separator.comma.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [
@@ -350,8 +336,7 @@
                 {
                     "match": "(?=\\.)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression-statement-end",
                         "import-meta-expression-dot"
                     ]
@@ -359,8 +344,7 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "import-meta",
                         "expect-semicolon",
                         "import-string-or-items"
@@ -384,8 +368,7 @@
                             "keyword.control.import-export.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "import-export:0"
                     ]
                 },
@@ -396,8 +379,7 @@
                             "keyword.control.import-export.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "export-meta",
                         "export-extended"
                     ]
@@ -472,8 +454,7 @@
                             "keyword.control.import-export.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "import-export-alias:0"
                     ]
                 },
@@ -500,8 +481,7 @@
                             "keyword.control.import-export.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string"
                     ]
                 },
@@ -528,8 +508,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string:0"
                     ]
                 },
@@ -540,8 +519,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string:1"
                     ]
                 }
@@ -563,8 +541,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string:0"
                     ]
                 },
@@ -575,16 +552,14 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string:1"
                     ]
                 },
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "import-export-from",
                         "import-list",
                         "import-export-alias",
@@ -610,7 +585,6 @@
                             "punctuation.separator.comma.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "import-export-alias",
                         "import-item"
@@ -639,8 +613,7 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "import-brace"
                     ]
                 },
@@ -688,8 +661,7 @@
                         [
                             "punctuation.separator.comma.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\}",
@@ -707,7 +679,6 @@
                             "variable.other.readwrite.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "import-export-alias"
                     ]
@@ -719,7 +690,6 @@
                             "constant.other.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "import-export-alias"
                     ]
@@ -763,16 +733,14 @@
                 {
                     "match": "(?=class(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "class"
                     ]
                 },
                 {
                     "match": "(?=\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration"
                     ]
                 }
@@ -790,24 +758,21 @@
                 {
                     "match": "(?=class(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "class"
                     ]
                 },
                 {
                     "match": "(?=\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration"
                     ]
                 },
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression-statement"
                     ]
                 }
@@ -830,8 +795,7 @@
                             "storage.type.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expect-semicolon",
                         "variable-binding-list-top",
                         "variable-binding-top"
@@ -854,8 +818,7 @@
                             "storage.type.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expect-semicolon",
                         "variable-binding-list-top",
                         "variable-binding-top"
@@ -864,16 +827,14 @@
                 {
                     "match": "(?=class(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "class"
                     ]
                 },
                 {
                     "match": "(?=\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration"
                     ]
                 },
@@ -884,16 +845,14 @@
                             "keyword.control.import-export.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "export-extended:0"
                     ]
                 },
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expect-semicolon",
                         "import-export-from",
                         "export-list",
@@ -922,7 +881,6 @@
                             "punctuation.separator.comma.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "import-export-alias",
                         "export-item"
@@ -951,8 +909,7 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "export-brace"
                     ]
                 },
@@ -1000,8 +957,7 @@
                         [
                             "punctuation.separator.comma.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\}",
@@ -1019,7 +975,6 @@
                             "variable.other.readwrite.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "import-export-alias"
                     ]
@@ -1031,7 +986,6 @@
                             "constant.other.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "import-export-alias"
                     ]
@@ -1062,8 +1016,7 @@
                             "keyword.control.switch.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "switch-meta",
                         "switch-block",
                         "parenthesized-expression"
@@ -1076,8 +1029,7 @@
                             "keyword.control.loop.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "do-while-meta",
                         "do-while-condition",
                         "block-scope"
@@ -1090,8 +1042,7 @@
                             "keyword.control.loop.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "for-meta",
                         "block-scope",
                         "for-condition",
@@ -1105,8 +1056,7 @@
                             "keyword.control.loop.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "while-meta",
                         "block-scope",
                         "parenthesized-expression"
@@ -1119,8 +1069,7 @@
                             "keyword.control.with.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "with-meta",
                         "block-scope",
                         "parenthesized-expression"
@@ -1133,8 +1082,7 @@
                             "keyword.control.conditional.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "conditional-meta",
                         "block-scope",
                         "parenthesized-expression"
@@ -1147,8 +1095,7 @@
                             "keyword.control.conditional.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "conditional-meta",
                         "block-scope"
                     ]
@@ -1160,8 +1107,7 @@
                             "keyword.control.trycatch.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "try-meta",
                         "block-scope"
                     ]
@@ -1173,8 +1119,7 @@
                             "keyword.control.trycatch.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "finally-meta",
                         "block-scope"
                     ]
@@ -1186,8 +1131,7 @@
                             "keyword.control.trycatch.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "catch-meta",
                         "block-scope",
                         "parenthesized-expression"
@@ -1219,7 +1163,6 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "block:0"
                     ]
@@ -1244,8 +1187,7 @@
                         [
                             "punctuation.separator.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [
@@ -1264,7 +1206,6 @@
                             "punctuation.definition.annotation.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "decorator-meta",
                         "decorator-expression-end",
@@ -1297,8 +1238,7 @@
                             "keyword.control.import-export.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "import-export:0"
                     ]
                 },
@@ -1309,8 +1249,7 @@
                             "keyword.control.import-export.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "export-meta",
                         "export-extended"
                     ]
@@ -1322,8 +1261,7 @@
                             "keyword.control.switch.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "switch-meta",
                         "switch-block",
                         "parenthesized-expression"
@@ -1336,8 +1274,7 @@
                             "keyword.control.loop.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "do-while-meta",
                         "do-while-condition",
                         "block-scope"
@@ -1350,8 +1287,7 @@
                             "keyword.control.loop.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "for-meta",
                         "block-scope",
                         "for-condition",
@@ -1365,8 +1301,7 @@
                             "keyword.control.loop.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "while-meta",
                         "block-scope",
                         "parenthesized-expression"
@@ -1379,8 +1314,7 @@
                             "keyword.control.with.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "with-meta",
                         "block-scope",
                         "parenthesized-expression"
@@ -1393,8 +1327,7 @@
                             "keyword.control.conditional.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "conditional-meta",
                         "block-scope",
                         "parenthesized-expression"
@@ -1407,8 +1340,7 @@
                             "keyword.control.conditional.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "conditional-meta",
                         "block-scope"
                     ]
@@ -1420,8 +1352,7 @@
                             "keyword.control.trycatch.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "try-meta",
                         "block-scope"
                     ]
@@ -1433,8 +1364,7 @@
                             "keyword.control.trycatch.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "finally-meta",
                         "block-scope"
                     ]
@@ -1446,8 +1376,7 @@
                             "keyword.control.trycatch.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "catch-meta",
                         "block-scope",
                         "parenthesized-expression"
@@ -1460,7 +1389,6 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "block:0"
                     ]
@@ -1475,8 +1403,7 @@
                         [
                             "punctuation.separator.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?:const|let|var)(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -1485,8 +1412,7 @@
                             "storage.type.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expect-semicolon",
                         "variable-binding-list-top",
                         "variable-binding-top"
@@ -1499,8 +1425,7 @@
                             "keyword.control.trycatch.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "restricted-production"
                     ]
                 },
@@ -1511,8 +1436,7 @@
                             "keyword.control.loop.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expect-semicolon"
                     ]
                 },
@@ -1523,8 +1447,7 @@
                             "keyword.control.flow.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "restricted-production"
                     ]
                 },
@@ -1535,24 +1458,21 @@
                             "keyword.other.debugger.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expect-semicolon"
                     ]
                 },
                 {
                     "match": "(?=class(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "class"
                     ]
                 },
                 {
                     "match": "(?=\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration"
                     ]
                 },
@@ -1563,7 +1483,6 @@
                             "punctuation.definition.annotation.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "decorator-meta",
                         "decorator-expression-end",
@@ -1573,8 +1492,7 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression-statement"
                     ]
                 }
@@ -1659,7 +1577,6 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "statement"
                     ]
@@ -1679,8 +1596,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "variable-binding-name:0"
                     ]
                 }
@@ -1701,8 +1617,7 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "variable-binding-array-destructuring:0"
                     ]
                 }
@@ -1723,8 +1638,7 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "variable-binding-object-destructuring:0"
                     ]
                 }
@@ -1741,8 +1655,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "variable-binding-name:0"
                     ]
                 },
@@ -1753,8 +1666,7 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "variable-binding-array-destructuring:0"
                     ]
                 },
@@ -1765,8 +1677,7 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "variable-binding-object-destructuring:0"
                     ]
                 },
@@ -2020,8 +1931,7 @@
                         [
                             "variable.other.readwrite.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [
@@ -2234,8 +2144,7 @@
                         [
                             "variable.other.readwrite.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [
@@ -2467,8 +2376,7 @@
                         [
                             "variable.other.readwrite.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [
@@ -2506,7 +2414,6 @@
                             "keyword.operator.spread.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "variable-binding-pattern"
                     ]
@@ -2527,13 +2434,11 @@
                         [
                             "punctuation.separator.comma.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=(?:[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\[|\\{))",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "initializer",
                         "variable-binding-pattern"
@@ -2574,7 +2479,6 @@
                             "keyword.operator.spread.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "variable-binding-pattern"
                     ]
@@ -2585,13 +2489,11 @@
                         [
                             "punctuation.separator.comma.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=(?:[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\[|\\{))",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "initializer",
                         "variable-binding-pattern"
@@ -2634,7 +2536,6 @@
                             "keyword.operator.spread.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "variable-binding-pattern"
                     ]
@@ -2642,7 +2543,6 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "initializer",
                         "variable-binding-object-alias",
@@ -2656,8 +2556,7 @@
                         [
                             "punctuation.separator.comma.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [
@@ -2679,8 +2578,7 @@
                             "punctuation.separator.key-value.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "variable-binding-pattern"
                     ]
                 },
@@ -2708,8 +2606,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "variable-binding-name:0"
                     ]
                 },
@@ -2733,8 +2630,7 @@
                 {
                     "match": "(?x) (?! \\+\\+ | -- ) (?=\n  != |\n  [ -+*/% ><= &|^ \\[( ;,.:? ]\n)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "variable-binding-top"
                     ]
                 },
@@ -2757,8 +2653,7 @@
                 {
                     "match": "(?x)(?=\n  ([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]) \\s* \\. \\s*)*\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  \\s* = \\s*\n  (?:\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)\n)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-identifiers"
                     ]
@@ -2776,8 +2671,7 @@
                 {
                     "match": "(?x)(?=\n  ([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]) \\s* \\. \\s*)*\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  \\s* = \\s*\n  (?:\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)\n)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-identifiers"
                     ]
@@ -2785,8 +2679,7 @@
                 {
                     "match": "(?=(?:[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\[|\\{))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "initializer",
                         "variable-binding-pattern"
                     ]
@@ -2794,8 +2687,7 @@
                 {
                     "match": "\\n",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "variable-binding-top:0"
                     ]
                 },
@@ -2824,7 +2716,6 @@
                             "punctuation.separator.comma.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "variable-binding-top"
                     ]
@@ -2852,8 +2743,7 @@
                             "meta.binding.name.js ",
                             "variable.parameter.function.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [
@@ -2872,8 +2762,7 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-parameter-binding-array-destructuring:0"
                     ]
                 }
@@ -2894,8 +2783,7 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-parameter-binding-object-destructuring:0"
                     ]
                 }
@@ -2916,8 +2804,7 @@
                             "meta.binding.name.js ",
                             "variable.parameter.function.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\[",
@@ -2926,8 +2813,7 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-parameter-binding-array-destructuring:0"
                     ]
                 },
@@ -2938,8 +2824,7 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-parameter-binding-object-destructuring:0"
                     ]
                 },
@@ -2968,7 +2853,6 @@
                             "keyword.operator.spread.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "function-parameter-binding-pattern"
                     ]
@@ -2989,8 +2873,7 @@
                         [
                             "punctuation.separator.parameter.function.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\.\\.\\.",
@@ -2999,7 +2882,6 @@
                             "keyword.operator.spread.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "function-parameter-binding-pattern"
                     ]
@@ -3007,7 +2889,6 @@
                 {
                     "match": "(?=(?:[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\[|\\{))",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "initializer",
                         "function-parameter-binding-pattern"
@@ -3048,8 +2929,7 @@
                         [
                             "punctuation.separator.parameter.function.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\.\\.\\.",
@@ -3058,7 +2938,6 @@
                             "keyword.operator.spread.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "function-parameter-binding-pattern"
                     ]
@@ -3066,7 +2945,6 @@
                 {
                     "match": "(?=(?:[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\[|\\{))",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "initializer",
                         "function-parameter-binding-pattern"
@@ -3099,8 +2977,7 @@
                         [
                             "punctuation.separator.parameter.function.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\}",
@@ -3118,7 +2995,6 @@
                             "keyword.operator.spread.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "function-parameter-binding-pattern"
                     ]
@@ -3126,7 +3002,6 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "initializer",
                         "function-parameter-binding-object-alias",
@@ -3154,8 +3029,7 @@
                             "punctuation.separator.key-value.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-parameter-binding-pattern"
                     ]
                 },
@@ -3187,8 +3061,7 @@
                             "meta.binding.name.js ",
                             "variable.parameter.function.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=\\S)",
@@ -3214,8 +3087,7 @@
                             "keyword.operator.assignment.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression-no-comma"
                     ]
                 },
@@ -3238,8 +3110,7 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression-end-no-comma",
                         "expression-begin"
                     ]
@@ -3259,8 +3130,7 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression-end-no-comma",
                         "expression-begin"
                     ]
@@ -3284,8 +3154,7 @@
                             "keyword.operator.assignment.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer:0"
                     ]
                 },
@@ -3308,8 +3177,7 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expect-semicolon",
                         "expression-statement-end",
                         "expression-begin"
@@ -3328,8 +3196,7 @@
                 {
                     "match": "(?x) (?! \\+\\+ | -- ) (?=\n  != |\n  [ -+*/% ><= &|^ \\[( ;,.:? ]\n)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression-statement-end"
                     ]
                 },
@@ -3355,8 +3222,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+\\+",
@@ -3364,8 +3230,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [
@@ -3385,7 +3250,6 @@
                             "keyword.operator.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3397,7 +3261,6 @@
                             "keyword.operator.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3409,7 +3272,6 @@
                             "keyword.operator.logical.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3421,7 +3283,6 @@
                             "keyword.operator.assignment.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3433,7 +3294,6 @@
                             "keyword.operator.assignment.augmented.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3445,7 +3305,6 @@
                             "keyword.operator.bitwise.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3457,7 +3316,6 @@
                             "keyword.operator.relational.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3469,7 +3327,6 @@
                             "keyword.operator.comparison.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3481,7 +3338,6 @@
                             "keyword.operator.arithmetic.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3493,7 +3349,6 @@
                             "punctuation.separator.comma.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3524,8 +3379,7 @@
                             "keyword.operator.ternary.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "ternary-operator-expect-colon",
                         "expression-no-comma"
                     ]
@@ -3562,7 +3416,6 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "property-access:0"
                     ]
@@ -3574,7 +3427,6 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "object-property"
                     ]
@@ -3597,8 +3449,7 @@
                             "punctuation.definition.string.template.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string-template:0"
                     ]
                 }
@@ -3619,7 +3470,6 @@
                             "storage.type.function.arrow.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "arrow-function-expect-body"
                     ]
@@ -3646,7 +3496,6 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "property-access:0"
                     ]
@@ -3658,7 +3507,6 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "object-property"
                     ]
@@ -3670,15 +3518,13 @@
                             "punctuation.definition.string.template.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string-template:0"
                     ]
                 },
                 {
                     "match": "(?=\\()",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "function-call-arguments"
                     ]
@@ -3690,7 +3536,6 @@
                             "storage.type.function.arrow.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "arrow-function-expect-body"
                     ]
@@ -3722,8 +3567,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+\\+",
@@ -3731,8 +3575,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "instanceof(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -3741,7 +3584,6 @@
                             "keyword.operator.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3753,7 +3595,6 @@
                             "keyword.operator.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3765,7 +3606,6 @@
                             "keyword.operator.logical.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3777,7 +3617,6 @@
                             "keyword.operator.assignment.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3789,7 +3628,6 @@
                             "keyword.operator.assignment.augmented.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3801,7 +3639,6 @@
                             "keyword.operator.bitwise.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3813,7 +3650,6 @@
                             "keyword.operator.relational.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3825,7 +3661,6 @@
                             "keyword.operator.comparison.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3837,7 +3672,6 @@
                             "keyword.operator.arithmetic.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3849,7 +3683,6 @@
                             "punctuation.separator.comma.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -3861,8 +3694,7 @@
                             "keyword.operator.ternary.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "ternary-operator-expect-colon",
                         "expression-no-comma"
                     ]
@@ -3879,7 +3711,6 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "property-access:0"
                     ]
@@ -3891,7 +3722,6 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "object-property"
                     ]
@@ -3903,15 +3733,13 @@
                             "punctuation.definition.string.template.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string-template:0"
                     ]
                 },
                 {
                     "match": "(?=\\()",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "function-call-arguments"
                     ]
@@ -3923,7 +3751,6 @@
                             "storage.type.function.arrow.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "arrow-function-expect-body"
                     ]
@@ -3965,8 +3792,7 @@
                 {
                     "match": "\\n",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression-statement-end:0"
                     ]
                 },
@@ -3976,8 +3802,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+\\+",
@@ -3985,8 +3810,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "instanceof(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -3995,7 +3819,6 @@
                             "keyword.operator.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -4007,7 +3830,6 @@
                             "keyword.operator.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -4019,7 +3841,6 @@
                             "keyword.operator.logical.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -4031,7 +3852,6 @@
                             "keyword.operator.assignment.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -4043,7 +3863,6 @@
                             "keyword.operator.assignment.augmented.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -4055,7 +3874,6 @@
                             "keyword.operator.bitwise.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -4067,7 +3885,6 @@
                             "keyword.operator.relational.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -4079,7 +3896,6 @@
                             "keyword.operator.comparison.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -4091,7 +3907,6 @@
                             "keyword.operator.arithmetic.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -4103,7 +3918,6 @@
                             "punctuation.separator.comma.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -4115,8 +3929,7 @@
                             "keyword.operator.ternary.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "ternary-operator-expect-colon",
                         "expression-no-comma"
                     ]
@@ -4133,7 +3946,6 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "property-access:0"
                     ]
@@ -4145,7 +3957,6 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "object-property"
                     ]
@@ -4157,15 +3968,13 @@
                             "punctuation.definition.string.template.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string-template:0"
                     ]
                 },
                 {
                     "match": "(?=\\()",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "function-call-arguments"
                     ]
@@ -4177,7 +3986,6 @@
                             "storage.type.function.arrow.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "arrow-function-expect-body"
                     ]
@@ -4225,8 +4033,7 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression-statement"
                     ]
                 }
@@ -4451,8 +4258,7 @@
                             "punctuation.section.group.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "for-condition-end",
                         "for-condition-contents"
                     ]
@@ -4501,16 +4307,14 @@
                             "keyword.operator.word.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression"
                     ]
                 },
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "statements-in-parens",
                         "variable-binding-list",
                         "initializer"
@@ -4534,8 +4338,7 @@
                             "storage.type.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "for-condition-contents:0",
                         "variable-binding-pattern"
                     ]
@@ -4543,8 +4346,7 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "statements-in-parens"
                     ]
                 }
@@ -4576,7 +4378,6 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "statement"
                     ]
@@ -4600,7 +4401,6 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "block:0"
                     ]
@@ -4645,8 +4445,7 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "switch-block-contents"
                     ]
                 },
@@ -4684,7 +4483,6 @@
                             "keyword.control.switch.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expect-case-colon",
                         "expression"
@@ -4697,7 +4495,6 @@
                             "keyword.control.switch.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expect-case-colon"
                     ]
@@ -4714,7 +4511,6 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "statement"
                     ]
@@ -4740,8 +4536,7 @@
                             "keyword.control.loop.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "parenthesized-expression"
                     ]
                 },
@@ -4800,8 +4595,7 @@
                 {
                     "match": "(?x)(?=\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  \\s* = \\s*\n  (?:\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)\n)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-final-identifier"
                     ]
@@ -4809,8 +4603,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "object-property:0"
                     ]
                 },
@@ -4927,8 +4720,7 @@
                 {
                     "match": "(?x)(?=\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  \\s* = \\s*\n  (?:\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)\n)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-final-identifier"
                     ]
@@ -4936,8 +4728,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "object-property:0"
                     ]
                 },
@@ -5050,7 +4841,6 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "decorator-expression-end:0"
                     ]
@@ -5067,7 +4857,6 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "property-access:0"
                     ]
@@ -5079,7 +4868,6 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "object-property"
                     ]
@@ -5091,15 +4879,13 @@
                             "punctuation.definition.string.template.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string-template:0"
                     ]
                 },
                 {
                     "match": "(?=\\()",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "function-call-arguments"
                     ]
@@ -5111,7 +4897,6 @@
                             "storage.type.function.arrow.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "arrow-function-expect-body"
                     ]
@@ -5154,8 +4939,7 @@
                             "support.constant.prototype.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer"
                     ]
                 },
@@ -5176,8 +4960,7 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-single-identifier"
                     ]
@@ -5219,8 +5002,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "regexp"
                     ]
                 }
@@ -5241,8 +5023,7 @@
                             "variable.function.tagged-template.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "tagged-template:0"
                     ]
                 }
@@ -5263,8 +5044,7 @@
                             "keyword.operator.word.new.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "new-target"
                     ]
                 },
@@ -5275,8 +5055,7 @@
                             "keyword.operator.word.new.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "constructor:0"
                     ]
                 }
@@ -5297,8 +5076,7 @@
                         [
                             "keyword.operator.bitwise.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "!(?!=)",
@@ -5306,8 +5084,7 @@
                         [
                             "keyword.operator.logical.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "--",
@@ -5315,8 +5092,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+\\+",
@@ -5324,8 +5100,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\.\\.\\.",
@@ -5333,8 +5108,7 @@
                         [
                             "keyword.operator.spread.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+|\\-",
@@ -5342,8 +5116,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "new(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -5351,8 +5124,7 @@
                         [
                             "keyword.operator.word.new.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?:delete|typeof|void)(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -5360,8 +5132,7 @@
                         [
                             "keyword.operator.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [
@@ -5387,8 +5158,7 @@
                             "keyword.control.flow.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "yield-expression:0"
                     ]
                 }
@@ -5408,8 +5178,7 @@
                         [
                             "keyword.control.flow.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [
@@ -5428,8 +5197,7 @@
                             "variable.language.import.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "import-meta-expression-dot"
                     ]
                 }
@@ -5450,8 +5218,7 @@
                             "storage.type.class.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "class-meta",
                         "class-body",
                         "class-extends",
@@ -5530,16 +5297,14 @@
                 {
                     "match": "(?=\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration"
                     ]
                 },
                 {
                     "match": "(?=\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "arrow-function-declaration"
                     ]
                 }
@@ -5561,8 +5326,7 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "object-literal-contents"
                     ]
                 }
@@ -5583,8 +5347,7 @@
                             "punctuation.section.group.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "parenthesized-expression:0"
                     ]
                 }
@@ -5605,8 +5368,7 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "array-literal:0"
                     ]
                 }
@@ -5774,8 +5536,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-meta",
                         "function-call-arguments",
                         "call-expression-function-name"
@@ -5784,8 +5545,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\.\\s*[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-call:0"
                     ]
                 }
@@ -5821,8 +5581,7 @@
                             "support.constant.prototype.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer"
                     ]
                 },
@@ -5843,8 +5602,7 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-single-identifier"
                     ]
@@ -5874,8 +5632,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "regexp"
                     ]
                 },
@@ -5886,8 +5643,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string:0"
                     ]
                 },
@@ -5898,8 +5654,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string:1"
                     ]
                 },
@@ -5910,8 +5665,7 @@
                             "variable.function.tagged-template.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "tagged-template:0"
                     ]
                 },
@@ -5922,8 +5676,7 @@
                             "punctuation.definition.string.template.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string-template:0"
                     ]
                 },
@@ -5934,8 +5687,7 @@
                             "keyword.operator.word.new.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "new-target"
                     ]
                 },
@@ -5946,8 +5698,7 @@
                             "keyword.operator.word.new.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "constructor:0"
                     ]
                 },
@@ -5957,8 +5708,7 @@
                         [
                             "keyword.operator.bitwise.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "!(?!=)",
@@ -5966,8 +5716,7 @@
                         [
                             "keyword.operator.logical.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "--",
@@ -5975,8 +5724,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+\\+",
@@ -5984,8 +5732,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\.\\.\\.",
@@ -5993,8 +5740,7 @@
                         [
                             "keyword.operator.spread.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+|\\-",
@@ -6002,8 +5748,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "new(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -6011,8 +5756,7 @@
                         [
                             "keyword.operator.word.new.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?:delete|typeof|void)(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -6020,8 +5764,7 @@
                         [
                             "keyword.operator.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "yield(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -6030,8 +5773,7 @@
                             "keyword.control.flow.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "yield-expression:0"
                     ]
                 },
@@ -6041,8 +5783,7 @@
                         [
                             "keyword.control.flow.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "import(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -6051,8 +5792,7 @@
                             "variable.language.import.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "import-meta-expression-dot"
                     ]
                 },
@@ -6063,8 +5803,7 @@
                             "storage.type.class.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "class-meta",
                         "class-body",
                         "class-extends",
@@ -6119,8 +5858,7 @@
                 {
                     "match": "(?x)(?=\n  ([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]) \\s* \\. \\s*)*\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  \\s* = \\s*\n  (?:\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)\n)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-identifiers"
                     ]
@@ -6128,16 +5866,14 @@
                 {
                     "match": "(?=\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration"
                     ]
                 },
                 {
                     "match": "(?=\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "arrow-function-declaration"
                     ]
                 },
@@ -6148,8 +5884,7 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "object-literal-contents"
                     ]
                 },
@@ -6160,8 +5895,7 @@
                             "punctuation.section.group.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "parenthesized-expression:0"
                     ]
                 },
@@ -6172,8 +5906,7 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "array-literal:0"
                     ]
                 },
@@ -6310,8 +6043,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-meta",
                         "function-call-arguments",
                         "call-expression-function-name"
@@ -6320,8 +6052,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\.\\s*[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-call:0"
                     ]
                 },
@@ -6524,8 +6255,7 @@
                         [
                             "variable.other.readwrite.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=\\S)",
@@ -6640,8 +6370,7 @@
                             "support.constant.prototype.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer"
                     ]
                 },
@@ -6662,8 +6391,7 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-single-identifier"
                     ]
@@ -6693,8 +6421,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "regexp"
                     ]
                 },
@@ -6705,8 +6432,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string:0"
                     ]
                 },
@@ -6717,8 +6443,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string:1"
                     ]
                 },
@@ -6729,8 +6454,7 @@
                             "variable.function.tagged-template.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "tagged-template:0"
                     ]
                 },
@@ -6741,8 +6465,7 @@
                             "punctuation.definition.string.template.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string-template:0"
                     ]
                 },
@@ -6753,8 +6476,7 @@
                             "keyword.operator.word.new.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "new-target"
                     ]
                 },
@@ -6765,8 +6487,7 @@
                             "keyword.operator.word.new.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "constructor:0"
                     ]
                 },
@@ -6776,8 +6497,7 @@
                         [
                             "keyword.operator.bitwise.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "!(?!=)",
@@ -6785,8 +6505,7 @@
                         [
                             "keyword.operator.logical.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "--",
@@ -6794,8 +6513,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+\\+",
@@ -6803,8 +6521,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\.\\.\\.",
@@ -6812,8 +6529,7 @@
                         [
                             "keyword.operator.spread.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+|\\-",
@@ -6821,8 +6537,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "new(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -6830,8 +6545,7 @@
                         [
                             "keyword.operator.word.new.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?:delete|typeof|void)(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -6839,8 +6553,7 @@
                         [
                             "keyword.operator.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "yield(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -6849,8 +6562,7 @@
                             "keyword.control.flow.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "yield-expression:0"
                     ]
                 },
@@ -6860,8 +6572,7 @@
                         [
                             "keyword.control.flow.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "import(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -6870,8 +6581,7 @@
                             "variable.language.import.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "import-meta-expression-dot"
                     ]
                 },
@@ -6882,8 +6592,7 @@
                             "storage.type.class.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "class-meta",
                         "class-body",
                         "class-extends",
@@ -6938,8 +6647,7 @@
                 {
                     "match": "(?x)(?=\n  ([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]) \\s* \\. \\s*)*\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  \\s* = \\s*\n  (?:\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)\n)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-identifiers"
                     ]
@@ -6947,16 +6655,14 @@
                 {
                     "match": "(?=\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration"
                     ]
                 },
                 {
                     "match": "(?=\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "arrow-function-declaration"
                     ]
                 },
@@ -6967,8 +6673,7 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "object-literal-contents"
                     ]
                 },
@@ -6979,8 +6684,7 @@
                             "punctuation.section.group.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "parenthesized-expression:0"
                     ]
                 },
@@ -6991,8 +6695,7 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "array-literal:0"
                     ]
                 },
@@ -7129,8 +6832,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-meta",
                         "function-call-arguments",
                         "call-expression-function-name"
@@ -7139,8 +6841,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\.\\s*[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-call:0"
                     ]
                 },
@@ -7343,8 +7044,7 @@
                         [
                             "variable.other.readwrite.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=\\S)",
@@ -7433,8 +7133,7 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression-end",
                         "expression-begin"
                     ]
@@ -7460,13 +7159,11 @@
                         [
                             "punctuation.separator.comma.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "expression-no-comma"
                     ]
@@ -7494,8 +7191,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+\\+",
@@ -7503,8 +7199,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "instanceof(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -7513,7 +7208,6 @@
                             "keyword.operator.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -7525,7 +7219,6 @@
                             "keyword.operator.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -7537,7 +7230,6 @@
                             "keyword.operator.logical.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -7549,7 +7241,6 @@
                             "keyword.operator.assignment.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -7561,7 +7252,6 @@
                             "keyword.operator.assignment.augmented.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -7573,7 +7263,6 @@
                             "keyword.operator.bitwise.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -7585,7 +7274,6 @@
                             "keyword.operator.relational.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -7597,7 +7285,6 @@
                             "keyword.operator.comparison.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -7609,7 +7296,6 @@
                             "keyword.operator.arithmetic.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -7621,7 +7307,6 @@
                             "punctuation.separator.comma.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-begin"
                     ]
@@ -7633,8 +7318,7 @@
                             "keyword.operator.ternary.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "ternary-operator-expect-colon",
                         "expression-no-comma"
                     ]
@@ -7651,7 +7335,6 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "property-access:0"
                     ]
@@ -7663,7 +7346,6 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "object-property"
                     ]
@@ -7675,15 +7357,13 @@
                             "punctuation.definition.string.template.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string-template:0"
                     ]
                 },
                 {
                     "match": "(?=\\()",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "function-call-arguments"
                     ]
@@ -7695,7 +7375,6 @@
                             "storage.type.function.arrow.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "arrow-function-expect-body"
                     ]
@@ -7741,8 +7420,7 @@
                         [
                             "constant.character.escape.newline.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\\\(x[\\da-fA-F][\\da-fA-F]|u[\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F]|.)",
@@ -7750,8 +7428,7 @@
                         [
                             "constant.character.escape.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [
@@ -7785,8 +7462,7 @@
                         [
                             "constant.character.escape.newline.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\\\(x[\\da-fA-F][\\da-fA-F]|u[\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F]|.)",
@@ -7794,8 +7470,7 @@
                         [
                             "constant.character.escape.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "meta_include_prototype": "false",
@@ -7831,8 +7506,7 @@
                         [
                             "constant.character.escape.newline.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\\\(x[\\da-fA-F][\\da-fA-F]|u[\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F]|.)",
@@ -7840,8 +7514,7 @@
                         [
                             "constant.character.escape.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "meta_include_prototype": "false",
@@ -7863,8 +7536,7 @@
                             "punctuation.definition.string.template.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string-template:0"
                     ]
                 },
@@ -7900,7 +7572,6 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "expression"
                     ]
@@ -7935,7 +7606,6 @@
                             "punctuation.definition.template-expression.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "literal-string-template:0:0"
                     ]
@@ -7946,8 +7616,7 @@
                         [
                             "constant.character.escape.newline.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\\\(x[\\da-fA-F][\\da-fA-F]|u[\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F]|.)",
@@ -7955,8 +7624,7 @@
                         [
                             "constant.character.escape.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "meta_include_prototype": "false",
@@ -7980,13 +7648,11 @@
                         [
                             "keyword.other.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "[A-Za-z0-9]",
-                    "captures": [],
-                    "pop": false
+                    "captures": []
                 },
                 {
                     "match": "",
@@ -8031,15 +7697,13 @@
                             "punctuation.definition.string.end.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "regexp:0"
                     ]
                 },
                 {
                     "match": "(?=.|\\n)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "regexp:1"
                     ]
@@ -8062,16 +7726,14 @@
                 {
                     "match": "(?=\\s*\\.)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "new-target"
                     ]
                 },
                 {
                     "match": "(?=\\s*\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "constructor-meta",
                         "constructor-body-expect-arguments",
                         "constructor-body-expect-class-end",
@@ -8114,8 +7776,7 @@
                             "punctuation.section.group.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-call-arguments:0"
                     ]
                 }
@@ -8136,8 +7797,7 @@
                             "punctuation.section.group.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-call-arguments:0"
                     ]
                 },
@@ -8164,7 +7824,6 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "property-access:0"
                     ]
@@ -8176,7 +7835,6 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "object-property"
                     ]
@@ -8286,8 +7944,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "constructor-body-expect-class-begin:0"
                     ]
                 },
@@ -8312,8 +7969,7 @@
                             "support.constant.prototype.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer"
                     ]
                 },
@@ -8334,8 +7990,7 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-single-identifier"
                     ]
@@ -8365,8 +8020,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "regexp"
                     ]
                 },
@@ -8377,8 +8031,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string:0"
                     ]
                 },
@@ -8389,8 +8042,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string:1"
                     ]
                 },
@@ -8401,8 +8053,7 @@
                             "variable.function.tagged-template.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "tagged-template:0"
                     ]
                 },
@@ -8413,8 +8064,7 @@
                             "punctuation.definition.string.template.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string-template:0"
                     ]
                 },
@@ -8425,8 +8075,7 @@
                             "keyword.operator.word.new.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "new-target"
                     ]
                 },
@@ -8437,8 +8086,7 @@
                             "keyword.operator.word.new.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "constructor:0"
                     ]
                 },
@@ -8448,8 +8096,7 @@
                         [
                             "keyword.operator.bitwise.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "!(?!=)",
@@ -8457,8 +8104,7 @@
                         [
                             "keyword.operator.logical.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "--",
@@ -8466,8 +8112,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+\\+",
@@ -8475,8 +8120,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\.\\.\\.",
@@ -8484,8 +8128,7 @@
                         [
                             "keyword.operator.spread.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+|\\-",
@@ -8493,8 +8136,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "new(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -8502,8 +8144,7 @@
                         [
                             "keyword.operator.word.new.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?:delete|typeof|void)(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -8511,8 +8152,7 @@
                         [
                             "keyword.operator.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "yield(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -8521,8 +8161,7 @@
                             "keyword.control.flow.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "yield-expression:0"
                     ]
                 },
@@ -8532,8 +8171,7 @@
                         [
                             "keyword.control.flow.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "import(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -8542,8 +8180,7 @@
                             "variable.language.import.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "import-meta-expression-dot"
                     ]
                 },
@@ -8554,8 +8191,7 @@
                             "storage.type.class.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "class-meta",
                         "class-body",
                         "class-extends",
@@ -8610,8 +8246,7 @@
                 {
                     "match": "(?x)(?=\n  ([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]) \\s* \\. \\s*)*\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  \\s* = \\s*\n  (?:\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)\n)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-identifiers"
                     ]
@@ -8619,16 +8254,14 @@
                 {
                     "match": "(?=\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration"
                     ]
                 },
                 {
                     "match": "(?=\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "arrow-function-declaration"
                     ]
                 },
@@ -8639,8 +8272,7 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "object-literal-contents"
                     ]
                 },
@@ -8651,8 +8283,7 @@
                             "punctuation.section.group.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "parenthesized-expression:0"
                     ]
                 },
@@ -8663,8 +8294,7 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "array-literal:0"
                     ]
                 },
@@ -8801,8 +8431,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-meta",
                         "function-call-arguments",
                         "call-expression-function-name"
@@ -8811,8 +8440,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\.\\s*[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-call:0"
                     ]
                 },
@@ -9015,8 +8643,7 @@
                         [
                             "variable.other.readwrite.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=\\S)",
@@ -9138,8 +8765,7 @@
                             "punctuation.accessor.dot.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "new-target:0"
                     ]
                 },
@@ -9166,8 +8792,7 @@
                             "keyword.operator.ternary.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression-no-comma"
                     ]
                 },
@@ -9199,16 +8824,14 @@
                             "keyword.generator.asterisk.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression-begin"
                     ]
                 },
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "expression-begin"
                     ]
                 }
@@ -9248,8 +8871,7 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "class-body-contents"
                     ]
                 },
@@ -9286,8 +8908,7 @@
                         [
                             "punctuation.terminator.statement.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "@",
@@ -9296,7 +8917,6 @@
                             "punctuation.definition.annotation.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "decorator-meta",
                         "decorator-expression-end",
@@ -9310,7 +8930,6 @@
                             "entity.name.function.constructor.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "function-declaration-expect-body",
                         "function-declaration-meta",
@@ -9324,7 +8943,6 @@
                             "storage.modifier.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "class-field"
                     ]
@@ -9332,7 +8950,6 @@
                 {
                     "match": "(?=(?x)(?:\n  (?x)(?:\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  | '(?:[^\\\\']|\\\\.)*'\n  | \"(?:[^\\\\\"]|\\\\.)*\"\n  | \\[ .* \\]\n)\n  | \\#[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n))",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "class-field"
                     ]
@@ -9359,8 +8976,7 @@
                             "storage.modifier.extends.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "inherited-class-expression-end",
                         "inherited-class-expression-begin"
                     ]
@@ -9412,8 +9028,7 @@
                 {
                     "match": "(?x)(?=\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  \\s* = \\s*\n  (?:\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)\n)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-final-identifier"
                     ]
@@ -9421,8 +9036,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "object-property:0"
                     ]
                 },
@@ -9535,7 +9149,6 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "inherited-class-expression-end:0"
                     ]
@@ -9552,7 +9165,6 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "property-access:0"
                     ]
@@ -9564,7 +9176,6 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "object-property"
                     ]
@@ -9576,15 +9187,13 @@
                             "punctuation.definition.string.template.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string-template:0"
                     ]
                 },
                 {
                     "match": "(?=\\()",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "function-call-arguments"
                     ]
@@ -9596,7 +9205,6 @@
                             "storage.type.function.arrow.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "arrow-function-expect-body"
                     ]
@@ -9653,8 +9261,7 @@
                             "support.constant.prototype.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer"
                     ]
                 },
@@ -9675,8 +9282,7 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-single-identifier"
                     ]
@@ -9706,8 +9312,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "regexp"
                     ]
                 },
@@ -9718,8 +9323,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string:0"
                     ]
                 },
@@ -9730,8 +9334,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string:1"
                     ]
                 },
@@ -9742,8 +9345,7 @@
                             "variable.function.tagged-template.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "tagged-template:0"
                     ]
                 },
@@ -9754,8 +9356,7 @@
                             "punctuation.definition.string.template.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-string-template:0"
                     ]
                 },
@@ -9766,8 +9367,7 @@
                             "keyword.operator.word.new.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "new-target"
                     ]
                 },
@@ -9778,8 +9378,7 @@
                             "keyword.operator.word.new.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "constructor:0"
                     ]
                 },
@@ -9789,8 +9388,7 @@
                         [
                             "keyword.operator.bitwise.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "!(?!=)",
@@ -9798,8 +9396,7 @@
                         [
                             "keyword.operator.logical.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "--",
@@ -9807,8 +9404,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+\\+",
@@ -9816,8 +9412,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\.\\.\\.",
@@ -9825,8 +9420,7 @@
                         [
                             "keyword.operator.spread.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\+|\\-",
@@ -9834,8 +9428,7 @@
                         [
                             "keyword.operator.arithmetic.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "new(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -9843,8 +9436,7 @@
                         [
                             "keyword.operator.word.new.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?:delete|typeof|void)(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -9852,8 +9444,7 @@
                         [
                             "keyword.operator.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "yield(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -9862,8 +9453,7 @@
                             "keyword.control.flow.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "yield-expression:0"
                     ]
                 },
@@ -9873,8 +9463,7 @@
                         [
                             "keyword.control.flow.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "import(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -9883,8 +9472,7 @@
                             "variable.language.import.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "import-meta-expression-dot"
                     ]
                 },
@@ -9895,8 +9483,7 @@
                             "storage.type.class.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "class-meta",
                         "class-body",
                         "class-extends",
@@ -9951,8 +9538,7 @@
                 {
                     "match": "(?x)(?=\n  ([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]) \\s* \\. \\s*)*\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  \\s* = \\s*\n  (?:\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)\n)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-identifiers"
                     ]
@@ -9960,16 +9546,14 @@
                 {
                     "match": "(?=\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration"
                     ]
                 },
                 {
                     "match": "(?=\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "arrow-function-declaration"
                     ]
                 },
@@ -9980,8 +9564,7 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "object-literal-contents"
                     ]
                 },
@@ -9992,8 +9575,7 @@
                             "punctuation.section.group.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "parenthesized-expression:0"
                     ]
                 },
@@ -10004,8 +9586,7 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "array-literal:0"
                     ]
                 },
@@ -10142,8 +9723,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-meta",
                         "function-call-arguments",
                         "call-expression-function-name"
@@ -10152,8 +9732,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\.\\s*[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "literal-call:0"
                     ]
                 },
@@ -10356,8 +9935,7 @@
                         [
                             "variable.other.readwrite.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=\\S)",
@@ -10471,16 +10049,14 @@
                 {
                     "match": "(?x)(?=\n  (?: get|set|async )(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  | \\*\n  | (?x)(?:\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  | '(?:[^\\\\']|\\\\.)*'\n  | \"(?:[^\\\\\"]|\\\\.)*\"\n  | \\[ .* \\]\n) \\s* \\(\n)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "method-declaration"
                     ]
                 },
                 {
                     "match": "(?=(?x)(?:\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  | '(?:[^\\\\']|\\\\.)*'\n  | \"(?:[^\\\\\"]|\\\\.)*\"\n  | \\[ .* \\]\n))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "field-initializer-or-method-declaration",
                         "field-name"
                     ]
@@ -10488,8 +10064,7 @@
                 {
                     "match": "(?=#[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]))",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "class-field-rest",
                         "initializer",
                         "field-name"
@@ -10520,7 +10095,6 @@
                             "punctuation.separator.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "initializer",
                         "field-name"
@@ -10545,8 +10119,7 @@
                 {
                     "match": "(?=\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration-expect-body",
                         "function-declaration-meta",
                         "function-declaration-expect-parameters"
@@ -10555,8 +10128,7 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "class-field-rest",
                         "initializer"
                     ]
@@ -10638,7 +10210,6 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\.)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "expect-dot-accessor",
                         "function-declaration-identifiers-expect-class"
@@ -10898,8 +10469,7 @@
                 {
                     "match": "",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration-expect-body",
                         "function-declaration-meta",
                         "function-declaration-expect-parameters",
@@ -10922,8 +10492,7 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-block"
                     ]
                 }
@@ -10962,8 +10531,7 @@
                             "punctuation.section.group.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration-parameters:0"
                     ]
                 }
@@ -10984,8 +10552,7 @@
                             "punctuation.section.group.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration-parameters:0"
                     ]
                 },
@@ -11108,8 +10675,7 @@
                 {
                     "match": "",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "arrow-function-expect-body",
                         "function-declaration-meta",
                         "arrow-function-expect-arrow",
@@ -11130,16 +10696,14 @@
                 {
                     "match": "(?=\\{)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-block"
                     ]
                 },
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "block-meta",
                         "expression-no-comma"
                     ]
@@ -11196,8 +10760,7 @@
                             "punctuation.section.group.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration-parameters:0"
                     ]
                 },
@@ -11235,7 +10798,6 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "statement"
                     ]
@@ -11270,7 +10832,6 @@
                             "punctuation.section.block.begin.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "function-block:0"
                     ]
@@ -11307,8 +10868,7 @@
                         [
                             "punctuation.separator.parameter.function.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\.\\.\\.",
@@ -11317,7 +10877,6 @@
                             "keyword.operator.spread.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "function-parameter-binding-pattern"
                     ]
@@ -11325,7 +10884,6 @@
                 {
                     "match": "(?=(?:[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\[|\\{))",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "initializer",
                         "function-parameter-binding-pattern"
@@ -11510,8 +11068,7 @@
                             "meta.object-literal.key.dollar.only.js ",
                             "punctuation.dollar.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(\\$)[_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -11522,8 +11079,7 @@
                         [
                             "punctuation.dollar.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -11531,8 +11087,7 @@
                         [
                             "meta.object-literal.key.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [
@@ -11564,7 +11119,6 @@
                             "keyword.operator.spread.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-no-comma"
                     ]
@@ -11572,7 +11126,6 @@
                 {
                     "match": "(?x)(?=\n  (?x)(?:\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  | '(?:[^\\\\']|\\\\.)*'\n  | \"(?:[^\\\\\"]|\\\\.)*\"\n  | \\[ .* \\]\n)\\s*:\n  (?: (?:\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>) )\n)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "either-function-declaration",
                         "function-declaration-meta",
@@ -11584,7 +11137,6 @@
                 {
                     "match": "(?x)(?=\n  (?: get|set|async )(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  | \\*\n  | (?x)(?:\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  | '(?:[^\\\\']|\\\\.)*'\n  | \"(?:[^\\\\\"]|\\\\.)*\"\n  | \\[ .* \\]\n) \\s* \\(\n)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "method-declaration"
                     ]
@@ -11595,13 +11147,11 @@
                         [
                             "variable.other.readwrite.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=\\[)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "computed-property-name"
                     ]
@@ -11609,7 +11159,6 @@
                 {
                     "match": "(?=\"|')",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "object-literal-meta-key",
                         "literal-string"
@@ -11622,8 +11171,7 @@
                             "meta.object-literal.key.dollar.only.js ",
                             "punctuation.dollar.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(\\$)[_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -11634,8 +11182,7 @@
                         [
                             "punctuation.dollar.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -11643,13 +11190,11 @@
                         [
                             "meta.object-literal.key.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=[-+]?(?:\\.[0-9]|0[bxo]|\\d))",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "object-literal-contents:0"
                     ]
@@ -11660,8 +11205,7 @@
                         [
                             "punctuation.separator.comma.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": ":",
@@ -11670,7 +11214,6 @@
                             "punctuation.separator.key-value.js "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "expression-no-comma"
                     ]
@@ -11709,7 +11252,6 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "expression"
                     ]
@@ -11732,8 +11274,7 @@
                             "punctuation.section.brackets.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "computed-property-name:0"
                     ]
                 },
@@ -11776,8 +11317,7 @@
                         [
                             "punctuation.separator.key-value.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=\\S)",
@@ -11818,8 +11358,7 @@
                         [
                             "constant.character.escape.newline.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\\\(x[\\da-fA-F][\\da-fA-F]|u[\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F]|.)",
@@ -11827,8 +11366,7 @@
                         [
                             "constant.character.escape.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "meta_include_prototype": "false",
@@ -11866,8 +11404,7 @@
                         [
                             "constant.character.escape.newline.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\\\(x[\\da-fA-F][\\da-fA-F]|u[\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F]|.)",
@@ -11875,8 +11412,7 @@
                         [
                             "constant.character.escape.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "meta_include_prototype": "false",
@@ -11920,8 +11456,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "method-name:0"
                     ]
                 },
@@ -11932,15 +11467,13 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "method-name:1"
                     ]
                 },
                 {
                     "match": "(?=\\[)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "computed-property-name"
                     ]
@@ -11988,8 +11521,7 @@
                         [
                             "constant.character.escape.newline.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\\\(x[\\da-fA-F][\\da-fA-F]|u[\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F]|.)",
@@ -11997,8 +11529,7 @@
                         [
                             "constant.character.escape.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "meta_include_prototype": "false",
@@ -12036,8 +11567,7 @@
                         [
                             "constant.character.escape.newline.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\\\(x[\\da-fA-F][\\da-fA-F]|u[\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F]|.)",
@@ -12045,8 +11575,7 @@
                         [
                             "constant.character.escape.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "meta_include_prototype": "false",
@@ -12090,8 +11619,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "field-name:0"
                     ]
                 },
@@ -12102,8 +11630,7 @@
                             "punctuation.definition.string.begin.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "field-name:1"
                     ]
                 },
@@ -12117,13 +11644,11 @@
                         [
                             "variable.other.readwrite.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=\\[)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "computed-property-name"
                     ]
@@ -12152,8 +11677,7 @@
                 {
                     "match": "",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-declaration-expect-body",
                         "function-declaration-meta",
                         "function-declaration-expect-parameters",
@@ -12178,8 +11702,7 @@
                         [
                             "keyword.generator.asterisk.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?:get|set)(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])(?!\\s*\\()",
@@ -12187,8 +11710,7 @@
                         [
                             "storage.type.accessor.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=\\S)",
@@ -12221,7 +11743,6 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "expression"
                     ]
@@ -12259,13 +11780,11 @@
                         [
                             "punctuation.separator.comma.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "expression-no-comma"
                     ]
@@ -12305,13 +11824,11 @@
                         [
                             "punctuation.separator.comma.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "expression-no-comma"
                     ]
@@ -12343,7 +11860,6 @@
                 {
                     "match": "(?=\\S)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "expression"
                     ]
@@ -12438,8 +11954,7 @@
                             "variable.other.object.dollar.only.js ",
                             "punctuation.dollar.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(\\$)[_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -12450,8 +11965,7 @@
                         [
                             "punctuation.dollar.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])",
@@ -12459,8 +11973,7 @@
                         [
                             "variable.other.object.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "\\.",
@@ -12499,8 +12012,7 @@
                             "support.function.mutator.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-method-meta",
                         "function-call-arguments"
                     ]
@@ -12512,8 +12024,7 @@
                             "support.function.dom.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-method-meta",
                         "function-call-arguments"
                     ]
@@ -12525,8 +12036,7 @@
                             "variable.function.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-method-meta",
                         "function-call-arguments"
                     ]
@@ -12557,8 +12067,7 @@
                             "support.function.console.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-method-meta",
                         "function-call-arguments"
                     ]
@@ -12577,8 +12086,7 @@
                             "support.function.process.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-method-meta",
                         "function-call-arguments"
                     ]
@@ -12586,7 +12094,6 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\.)",
                     "captures": [],
-                    "pop": false,
                     "push": [
                         "literal-call:0:0"
                     ]
@@ -12597,8 +12104,7 @@
                         [
                             "punctuation.accessor.js "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "(?:shift|sort|splice|unshift|pop|push|reverse|copyWithin|fill)(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])(?=\\()",
@@ -12607,8 +12113,7 @@
                             "support.function.mutator.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-method-meta",
                         "function-call-arguments"
                     ]
@@ -12620,8 +12125,7 @@
                             "support.function.dom.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-method-meta",
                         "function-call-arguments"
                     ]
@@ -12633,8 +12137,7 @@
                             "variable.function.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-method-meta",
                         "function-call-arguments"
                     ]
@@ -12749,8 +12252,7 @@
                             "support.function.mutator.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-method-meta",
                         "function-call-arguments"
                     ]
@@ -12762,8 +12264,7 @@
                             "support.function.dom.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-method-meta",
                         "function-call-arguments"
                     ]
@@ -12775,8 +12276,7 @@
                             "variable.function.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "call-expression-method-meta",
                         "function-call-arguments"
                     ]
@@ -12811,8 +12311,7 @@
                 {
                     "match": "(?x)(?=\n  [_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\n  \\s* = \\s*\n  (?:\\s*(async\\s+)?function(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\s*(async\\s*)?([_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])|\\(([^()]|\\([^()]*\\))*\\))\\s*=>)\n)",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "function-initializer",
                         "function-declaration-final-identifier"
                     ]
@@ -12820,8 +12319,7 @@
                 {
                     "match": "(?=[_$\\p{L}\\p{Nl}][_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*(?![_$\\p{L}\\p{Nl}\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}])\\s*\\()",
                     "captures": [],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "object-property:0"
                     ]
                 },
@@ -12934,8 +12432,7 @@
                             "punctuation.accessor.js "
                         ]
                     ],
-                    "pop": true,
-                    "push": [
+                    "set": [
                         "import-meta-expression-dot:0"
                     ]
                 },

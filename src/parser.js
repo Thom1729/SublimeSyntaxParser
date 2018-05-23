@@ -51,6 +51,58 @@ class ParserState {
         ];
     }
 
+    *parseCapture(rule, groups) {
+        const matchEnd = groups[0].end;
+        const captureStack = [];
+
+        for (const capture of groups) {
+            if (capture.length === 0) { continue; }
+
+            let scopes = rule.captures[capture.index];
+
+            if (!scopes) {
+                if (rule.push || rule.pop || rule.set) { // Why does this matter???
+                    scopes = [];
+                } else {
+                    continue;
+                }
+            }
+
+            const nextPush = capture.start;
+            if (nextPush < this.col) { continue; }
+            if (nextPush >= matchEnd) { break; }
+
+            while (captureStack.length) {
+                const [ {end}, scopes ] = captureStack[captureStack.length - 1];
+                const nextPop = Math.min(end, matchEnd);
+                if (nextPop <= nextPush) {
+                    yield* this.advance(Math.max(nextPop, this.col));
+                    captureStack.pop();
+                    this.popScopes(scopes.length);
+                } else {
+                    break;
+                }
+            }
+
+            yield* this.advance(nextPush);
+
+            captureStack.push([capture, scopes]);
+            this.pushScopes(scopes);
+        }
+
+        while (captureStack.length) {
+            const [ {end}, scopes ] = captureStack[captureStack.length - 1];
+            const nextPop = Math.min(end, matchEnd);
+            // if (nextPop <= nextPush) {
+                yield* this.advance(Math.max(nextPop, this.col));
+                captureStack.pop();
+                this.popScopes(scopes.length);
+            // } else {
+                // break;
+            // }
+        }
+    }
+
     *parseNextToken() {
         if (this.stackIsEmpty()) {
             this.pushContext(this.syntax.contexts['main']);
@@ -65,9 +117,9 @@ class ParserState {
         if (match) {
             const rule = top.rules[match.index];
 
-            const pushed = (rule.push || []).map(name => this.syntax.contexts[name]);
+            const pushed = (rule.push || rule.set || []).map(name => this.syntax.contexts[name]);
 
-            const { start: matchStart, end: matchEnd } = match.captureIndices[0];
+            const matchStart = match.captureIndices[0].start;
 
             yield* this.advance(matchStart);
 
@@ -75,78 +127,40 @@ class ParserState {
                 this.popScopes(top.meta_content_scope.length);
             }
 
+            if (rule.push) {
+                for (const ctx of pushed) {
+                    if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
+                }
+            }
+
             for (const ctx of pushed) {
-                if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
                 this.pushScopes(ctx.meta_scope);
             }
 
-            const captureStack = [];
+            yield* this.parseCapture(rule, match.captureIndices);
 
-            for (const capture of match.captureIndices) {
-                if (capture.length === 0) { continue; }
+            for (let i=pushed.length-1; i>=0; i--) {
+                this.popScopes(pushed[i].meta_scope.length);
+            }
 
-                let scopes = rule.captures[capture.index];
-
-                if (!scopes) {
-                    if (rule.push || rule.pop) { // Why does this matter???
-                        scopes = [];
-                    } else {
-                        continue;
-                    }
+            if (rule.push) {
+                for (let i=pushed.length-1; i>=0; i--) {
+                    if (pushed[i].clear_scopes) this.popClear();
                 }
-
-                const nextPush = capture.start;
-                if (nextPush < this.col) { continue; }
-                if (nextPush >= matchEnd) { break; }
-
-                while (captureStack.length) {
-                    const [ {end}, scopes ] = captureStack[captureStack.length - 1];
-                    const nextPop = Math.min(end, matchEnd);
-                    if (nextPop <= nextPush) {
-                        yield* this.advance(Math.max(nextPop, this.col));
-                        captureStack.pop();
-                        this.popScopes(scopes.length);
-                    } else {
-                        break;
-                    }
-                }
-
-                yield* this.advance(nextPush);
-
-                captureStack.push([capture, scopes]);
-                this.pushScopes(scopes);
             }
 
-            while (captureStack.length) {
-                const [ {end}, scopes ] = captureStack[captureStack.length - 1];
-                const nextPop = Math.min(end, matchEnd);
-                // if (nextPop <= nextPush) {
-                    yield* this.advance(Math.max(nextPop, this.col));
-                    captureStack.pop();
-                    this.popScopes(scopes.length);
-                // } else {
-                    // break;
-                // }
+            if (rule.set) {
+                this.popScopes(top.meta_content_scope.length);
             }
 
-            for (const ctx of pushed) {
-                this.popScopes(ctx.meta_scope.length);
-                if (ctx.clear_scopes) this.popClear();
-            }
-
-            if (rule.pop) {
+            if (rule.pop || rule.set) {
                 this.popContext();
-                this.popScopes(top.meta_scope.length);
-
-                if (top.clear_scopes) this.popClear();
             }
 
             for (const ctx of pushed) {
                 if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
 
                 this.pushContext(ctx, match.captureIndices);
-                this.pushScopes(ctx.meta_scope);
-                this.pushScopes(ctx.meta_content_scope);
             }
         } else {
             yield* this.advance(this.line.length);
@@ -178,10 +192,14 @@ class ParserState {
         this.contextStack.push([
             ctx, this.scannerProvider.getScanner(ctx.patterns, captures, this.line),
         ]);
+        this.pushScopes(ctx.meta_scope);
+        this.pushScopes(ctx.meta_content_scope);
     }
 
     popContext() {
-        this.contextStack.pop();
+        const [top, _] = this.contextStack.pop();
+        this.popScopes(top.meta_scope.length);
+        if (top.clear_scopes) this.popClear();
     }
 
     pushScopes(scopes) {

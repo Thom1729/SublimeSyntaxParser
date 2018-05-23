@@ -1,0 +1,275 @@
+{
+    "scope": [
+        "source.test-stack "
+    ],
+    "contexts": {
+        "main": {
+            "name": "main",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "",
+                    "captures": [],
+                    "push": [
+                        "test"
+                    ]
+                }
+            ],
+            "patterns": [
+                ""
+            ]
+        },
+        "test": {
+            "name": "test",
+            "meta_scope": [
+                "TEST "
+            ],
+            "meta_content_scope": [
+                "TEST_CONTENT "
+            ],
+            "rules": [
+                {
+                    "match": "^a",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "meta-z"
+                    ]
+                },
+                {
+                    "match": "^b",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "set": [
+                        "meta-z"
+                    ]
+                },
+                {
+                    "match": "^c",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "meta-z",
+                        "meta-z",
+                        "meta-z"
+                    ]
+                },
+                {
+                    "match": "^d",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "set": [
+                        "meta-z",
+                        "meta-z",
+                        "meta-z"
+                    ]
+                },
+                {
+                    "match": "^e",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "meta-z",
+                        "clear"
+                    ]
+                },
+                {
+                    "match": "^f",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "set": [
+                        "meta-z",
+                        "clear"
+                    ]
+                },
+                {
+                    "match": "^g",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "meta-z",
+                        "clear",
+                        "meta-z",
+                        "clear",
+                        "meta-z"
+                    ]
+                },
+                {
+                    "match": "^h",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "set": [
+                        "meta-z",
+                        "clear",
+                        "meta-z",
+                        "clear",
+                        "meta-z"
+                    ]
+                },
+                {
+                    "match": "^i",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "clear-meta",
+                        "clear-meta",
+                        "meta-z"
+                    ]
+                },
+                {
+                    "match": "^j",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "set": [
+                        "clear-meta",
+                        "clear-meta",
+                        "meta-z"
+                    ]
+                },
+                {
+                    "match": "^k",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "clear-all",
+                        "meta-z"
+                    ]
+                },
+                {
+                    "match": "^l",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "set": [
+                        "clear-all",
+                        "meta-z"
+                    ]
+                }
+            ],
+            "patterns": [
+                "^a",
+                "^b",
+                "^c",
+                "^d",
+                "^e",
+                "^f",
+                "^g",
+                "^h",
+                "^i",
+                "^j",
+                "^k",
+                "^l"
+            ]
+        },
+        "meta-z": {
+            "name": "meta-z",
+            "meta_scope": [
+                "META "
+            ],
+            "meta_content_scope": [
+                "META_CONTENT "
+            ],
+            "rules": [
+                {
+                    "match": "z",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": "true"
+                }
+            ],
+            "patterns": [
+                "z"
+            ]
+        },
+        "clear": {
+            "name": "clear",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "",
+                    "captures": [],
+                    "pop": "true"
+                }
+            ],
+            "clear_scopes": "1",
+            "patterns": [
+                ""
+            ]
+        },
+        "clear-meta": {
+            "name": "clear-meta",
+            "meta_scope": [
+                "META1 ",
+                "META2 "
+            ],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "",
+                    "captures": [],
+                    "pop": "true"
+                }
+            ],
+            "clear_scopes": "1",
+            "patterns": [
+                ""
+            ]
+        },
+        "clear-all": {
+            "name": "clear-all",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "",
+                    "captures": [],
+                    "pop": "true"
+                }
+            ],
+            "clear_scopes": "true",
+            "patterns": [
+                ""
+            ]
+        }
+    }
+}

@@ -50,8 +50,7 @@
                         [
                             "region.bluish "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "^(?=bb(bb)b)(b)bbbb",
@@ -63,8 +62,7 @@
                         [
                             "region.bluish "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "^(?=cc(ccc))cccc",
@@ -73,8 +71,7 @@
                         [
                             "region.redish "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "^(?=(d)dddd)(ddd)dd",
@@ -83,8 +80,7 @@
                         [
                             "region.redish "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "^(?=(e)eeee)(eee)ee",
@@ -94,8 +90,7 @@
                             "region.redish "
                         ],
                         null
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "^(?=(f)ffff)(fff)ff",
@@ -107,8 +102,7 @@
                         [
                             "  "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 },
                 {
                     "match": "g(gg)",
@@ -117,7 +111,6 @@
                             "region.pinkish "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "main:0"
                     ]
@@ -129,7 +122,6 @@
                             "region.pinkish "
                         ]
                     ],
-                    "pop": false,
                     "push": [
                         "main:1"
                     ]
@@ -144,8 +136,7 @@
                         [
                             "region.bluish "
                         ]
-                    ],
-                    "pop": false
+                    ]
                 }
             ],
             "patterns": [

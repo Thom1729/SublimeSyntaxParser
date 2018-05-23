@@ -38,6 +38,31 @@ function preprocess(syntax) {
     );
 
     const newContexts = recMap(syntax.contexts, (name, context, recurse) => {
+
+        function normalizeContextList(list) {
+            if (
+                typeof list === 'string' ||
+                (
+                    Array.isArray(list) &&
+                    typeof list[0] !== 'string' &&
+                    ! Array.isArray(list[0])
+                )
+            ) {
+                list = [ list ];
+            }
+
+            return list.map(nextRule => {
+                if (Array.isArray(nextRule)) {
+                    const name = `${newContext.name}:${anonIndex}`;
+                    anonIndex++;
+                    recurse(name, nextRule);
+                    return name;
+                } else {
+                    return nextRule;
+                }
+            });
+        }
+
         const newContext = {
             name,
             meta_scope: [],
@@ -96,10 +121,10 @@ function preprocess(syntax) {
                         // match,
                         match: match.replace(/\{\{(\w+)\}\}/g, (all, v) => newVariables[v]),
                         captures: [],
-                        pop: pop || Boolean(set) || false
+                        pop: pop,
                     };
 
-                    push = push || set;
+                    // push = push || set;
 
                     if (scope) newRule.captures[0] = splitScopes(scope); // TODO
                     if (captures) {
@@ -109,27 +134,11 @@ function preprocess(syntax) {
                     }
 
                     if (push) {
-                        if (
-                            typeof push === 'string' ||
-                            (
-                                Array.isArray(push) &&
-                                typeof push[0] !== 'string' &&
-                                ! Array.isArray(push[0])
-                            )
-                        ) {
-                            push = [ push ];
-                        }
+                        newRule.push = normalizeContextList(push);
+                    }
 
-                        newRule.push = push.map(nextRule => {
-                            if (Array.isArray(nextRule)) {
-                                const name = `${newContext.name}:${anonIndex}`;
-                                anonIndex++;
-                                recurse(name, nextRule);
-                                return name;
-                            } else {
-                                return nextRule;
-                            }
-                        });
+                    if (set) {
+                        newRule.set = normalizeContextList(set);
                     }
 
                     newContext.rules.push(newRule);
