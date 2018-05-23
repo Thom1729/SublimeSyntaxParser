@@ -88,7 +88,7 @@ class ParserState {
                 let scopes = rule.captures[capture.index];
 
                 if (!scopes) {
-                    if (rule.push) { // Why does this matter???
+                    if (rule.push || rule.pop) { // Why does this matter???
                         scopes = [];
                     } else {
                         continue;

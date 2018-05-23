@@ -18,7 +18,7 @@ function regexpEscape(text) {
 function compileBackrefs(pattern, captures, line) {
     const ref = {};
     for (const capture of (captures||[])) {
-        ref[capture.index] = line.substr(capture.start, capture.end);
+        ref[capture.index] = line.slice(capture.start, capture.end);
     }
 
     return pattern.replace(
