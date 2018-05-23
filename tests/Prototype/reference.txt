@@ -1,0 +1,69 @@
+0 * source.test-prototype A region.redish 
+1 * source.test-prototype A region.bluish 
+2 * source.test-prototype 
+3 * source.test-prototype A region.redish 
+4 * source.test-prototype A 
+5 * source.test-prototype A region.bluish 
+6 * source.test-prototype 
+7 * source.test-prototype 
+8 * source.test-prototype 
+9 * source.test-prototype B region.redish 
+10 * source.test-prototype B region.bluish 
+11 * source.test-prototype 
+12 * source.test-prototype B region.redish 
+13 * source.test-prototype B 
+14 * source.test-prototype B region.bluish 
+15 * source.test-prototype 
+16 * source.test-prototype 
+17 * source.test-prototype 
+18 * source.test-prototype A region.redish 
+19 * source.test-prototype A 
+20 * source.test-prototype A region.bluish 
+21 * source.test-prototype 
+22 * source.test-prototype 
+23 * source.test-prototype B region.redish 
+24 * source.test-prototype B 
+25 * source.test-prototype B region.bluish 
+26 * source.test-prototype 
+27 * source.test-prototype 
+28 * source.test-prototype 
+29 * source.test-prototype B region.redish 
+30 * source.test-prototype B region.bluish 
+31 * source.test-prototype 
+32 * source.test-prototype B region.redish 
+33 * source.test-prototype B 
+34 * source.test-prototype B region.bluish 
+35 * source.test-prototype 
+36 * source.test-prototype 
+37 * source.test-prototype 
+38 * source.test-prototype D region.redish 
+39 * source.test-prototype D region.bluish 
+40 * source.test-prototype 
+41 * source.test-prototype D region.redish 
+42 * source.test-prototype D A region.redish 
+43 * source.test-prototype D A region.bluish 
+44 * source.test-prototype D region.bluish 
+45 * source.test-prototype 
+46 * source.test-prototype D region.redish 
+47 * source.test-prototype D A region.redish 
+48 * source.test-prototype D A 
+49 * source.test-prototype D A region.bluish 
+50 * source.test-prototype D region.bluish 
+51 * source.test-prototype 
+52 * source.test-prototype 
+53 * source.test-prototype 
+54 * source.test-prototype region.redish 
+55 * source.test-prototype 
+56   source.test-prototype 
+57 * source.test-prototype region.bluish 
+58 * source.test-prototype 
+59 * source.test-prototype 
+60 * source.test-prototype region.redish 
+61 * source.test-prototype region.greenish 
+62 * source.test-prototype A region.redish 
+63 * source.test-prototype A 
+64 * source.test-prototype A region.bluish 
+65 * source.test-prototype region.bluish 
+66 * source.test-prototype region.bluish 
+67 * source.test-prototype 
+68 * source.test-prototype 

@@ -1,0 +1,271 @@
+{
+    "scope": [
+        "source.test-prototype "
+    ],
+    "contexts": {
+        "prototype:0": {
+            "name": "prototype:0",
+            "meta_scope": [
+                "A "
+            ],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "z",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": true
+                }
+            ],
+            "patterns": [
+                "z"
+            ]
+        },
+        "prototype": {
+            "name": "prototype",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "a",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "prototype:0"
+                    ]
+                },
+                {
+                    "match": "b",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "test-b"
+                    ]
+                }
+            ],
+            "patterns": [
+                "a",
+                "b"
+            ]
+        },
+        "main:0:0": {
+            "name": "main:0:0",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "a",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "prototype:0"
+                    ]
+                },
+                {
+                    "match": "b",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "test-b"
+                    ]
+                },
+                {
+                    "match": "z",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": true
+                }
+            ],
+            "patterns": [
+                "a",
+                "b",
+                "z"
+            ]
+        },
+        "main:0": {
+            "name": "main:0",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "e",
+                    "captures": [
+                        [
+                            "region.greenish "
+                        ]
+                    ],
+                    "push": [
+                        "main:0:0"
+                    ]
+                },
+                {
+                    "match": "z",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": true
+                }
+            ],
+            "meta_include_prototype": false,
+            "patterns": [
+                "e",
+                "z"
+            ]
+        },
+        "main": {
+            "name": "main",
+            "meta_scope": [],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "a",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "prototype:0"
+                    ]
+                },
+                {
+                    "match": "b",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "test-b"
+                    ]
+                },
+                {
+                    "match": "c",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "test-b"
+                    ]
+                },
+                {
+                    "match": "d",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "test-d"
+                    ]
+                },
+                {
+                    "match": "e",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "main:0"
+                    ]
+                }
+            ],
+            "patterns": [
+                "a",
+                "b",
+                "c",
+                "d",
+                "e"
+            ]
+        },
+        "test-b": {
+            "name": "test-b",
+            "meta_scope": [
+                "B "
+            ],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "z",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": true
+                }
+            ],
+            "patterns": [
+                "z"
+            ]
+        },
+        "test-d": {
+            "name": "test-d",
+            "meta_scope": [
+                "D "
+            ],
+            "meta_content_scope": [],
+            "rules": [
+                {
+                    "match": "a",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "prototype:0"
+                    ]
+                },
+                {
+                    "match": "b",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": [
+                        "test-b"
+                    ]
+                },
+                {
+                    "match": "z",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": true
+                }
+            ],
+            "patterns": [
+                "a",
+                "b",
+                "z"
+            ]
+        }
+    }
+}

@@ -15,7 +15,7 @@
                             "region.greenish "
                         ]
                     ],
-                    "pop": "true"
+                    "pop": true
                 },
                 {
                     "match": "",
@@ -223,7 +223,7 @@
                             "region.bluish "
                         ]
                     ],
-                    "pop": "true"
+                    "pop": true
                 }
             ],
             "patterns": [
@@ -238,7 +238,7 @@
                 {
                     "match": "",
                     "captures": [],
-                    "pop": "true"
+                    "pop": true
                 }
             ],
             "clear_scopes": "1",
@@ -257,7 +257,7 @@
                 {
                     "match": "",
                     "captures": [],
-                    "pop": "true"
+                    "pop": true
                 }
             ],
             "clear_scopes": "1",
@@ -273,10 +273,10 @@
                 {
                     "match": "",
                     "captures": [],
-                    "pop": "true"
+                    "pop": true
                 }
             ],
-            "clear_scopes": "true",
+            "clear_scopes": true,
             "patterns": [
                 ""
             ]

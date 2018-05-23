@@ -13,7 +13,7 @@
                 {
                     "match": "",
                     "captures": [],
-                    "pop": "true"
+                    "pop": true
                 }
             ],
             "patterns": [
@@ -28,7 +28,7 @@
                 {
                     "match": "",
                     "captures": [],
-                    "pop": "true"
+                    "pop": true
                 }
             ],
             "patterns": [

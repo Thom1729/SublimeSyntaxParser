@@ -118,13 +118,10 @@ function preprocess(syntax) {
                     }
 
                     const newRule = {
-                        // match,
                         match: match.replace(/\{\{(\w+)\}\}/g, (all, v) => newVariables[v]),
                         captures: [],
                         pop: pop,
                     };
-
-                    // push = push || set;
 
                     if (scope) newRule.captures[0] = splitScopes(scope); // TODO
                     if (captures) {
@@ -163,6 +160,40 @@ function preprocess(syntax) {
             patterns: rules.map(r => r.match),
         };
     });
+
+    if (newNewContexts['prototype']) {
+        const prototypeTainted = new Set();
+
+        function taint(name) {
+            if (prototypeTainted.has(name)) {
+                return;
+            } else {
+                prototypeTainted.add(name);
+                for (const rule of newNewContexts[name].rules) {
+                    for (const name of (rule.push || rule.set || [])) {
+                        // console.log(name);
+                        taint(name);
+                    }
+                }
+            }
+        }
+
+        taint('prototype');
+
+        for (const context of Object.values(newNewContexts)) {
+            if (context.meta_include_prototype !== false && !prototypeTainted.has(context.name)) {
+                context.rules = [
+                    ...newNewContexts['prototype'].rules,
+                    ...context.rules,
+                ];
+
+                context.patterns = [
+                    ...newNewContexts['prototype'].patterns,
+                    ...context.patterns,
+                ];
+            }
+        }
+    }
 
     return {
         scope: splitScopes(syntax.scope),

@@ -1,0 +1,53 @@
+%YAML 1.2
+---
+name: Test Prototype
+scope: source.test-prototype
+file_extensions:
+- test-prototype
+contexts:
+  prototype:
+    - match: a
+      scope: region.redish
+      push:
+        - meta_scope: A
+        - match: z
+          scope: region.bluish
+          pop: true
+    - match: b
+      scope: region.redish
+      push: test-b
+
+  main:
+    - match: c
+      scope: region.redish
+      push: test-b
+    - match: d
+      scope: region.redish
+      push: test-d
+    - match: e
+      scope: region.redish
+      push:
+        - meta_include_prototype: false
+
+        - match: e
+          scope: region.greenish
+          push:
+            - match: z
+              scope: region.bluish
+              pop: true
+
+        - match: z
+          scope: region.bluish
+          pop: true
+  
+  test-b:
+    - meta_scope: B
+    - match: z
+      scope: region.bluish
+      pop: true
+  
+  test-d:
+    - meta_scope: D
+    - match: z
+      scope: region.bluish
+      pop: true
