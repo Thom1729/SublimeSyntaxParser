@@ -23,6 +23,21 @@ function assertNoExtras(obj) {
     }
 }
 
+function normalizeContextList(list) {
+    if (
+        typeof list === 'string' ||
+        (
+            Array.isArray(list) &&
+            typeof list[0] !== 'string' &&
+            ! Array.isArray(list[0])
+        )
+    ) {
+        list = [ list ];
+    }
+
+    return list;
+}
+
 function preprocess(syntax) {
     const newVariables = recMap(
         syntax.variables || {},
@@ -40,30 +55,22 @@ function preprocess(syntax) {
         return ret;
     }
 
+    const contextInterner = new Interner();
+
     const newContexts = recMap(syntax.contexts, (name, context, recurse) => {
 
-        function normalizeContextList(list) {
-            if (
-                typeof list === 'string' ||
-                (
-                    Array.isArray(list) &&
-                    typeof list[0] !== 'string' &&
-                    ! Array.isArray(list[0])
-                )
-            ) {
-                list = [ list ];
-            }
-
-            return list.map(nextRule => {
-                if (Array.isArray(nextRule)) {
-                    const name = `${newContext.name}:${anonIndex}`;
-                    anonIndex++;
-                    recurse(name, nextRule);
-                    return name;
-                } else {
-                    return nextRule;
-                }
-            });
+        function getNamedContexts(list) {
+            return normalizeContextList(list)
+                .map(nextRule => {
+                    if (Array.isArray(nextRule)) {
+                        const name = `${newContext.name}:${anonIndex}`;
+                        anonIndex++;
+                        return recurse(name, nextRule).name;
+                    } else {
+                        return nextRule;
+                    }
+                })
+                .map(name => contextInterner.get(name));
         }
 
         const newContext = {
@@ -121,7 +128,6 @@ function preprocess(syntax) {
                     const newRule = {
                         match: patternInterner.get(match.replace(/\{\{(\w+)\}\}/g, (all, v) => newVariables[v])),
                         captures: [],
-                        pop: pop,
                     };
 
                     if (captures) {
@@ -138,13 +144,9 @@ function preprocess(syntax) {
                         }
                     }
 
-                    if (push) {
-                        newRule.push = normalizeContextList(push);
-                    }
-
-                    if (set) {
-                        newRule.set = normalizeContextList(set);
-                    }
+                    if (push) newRule.push = getNamedContexts(push);
+                    if (set) newRule.set = getNamedContexts(set);
+                    if (pop) newRule.pop = pop;
 
                     newContext.rules.push(newRule);
                 }
@@ -177,7 +179,7 @@ function preprocess(syntax) {
             } else {
                 prototypeTainted.add(name);
                 for (const rule of newNewContexts[name].rules) {
-                    for (const name of (rule.push || rule.set || [])) {
+                    for (const name of (rule.push || rule.set || []).map(i => contextInterner.values[i])) {
                         taint(name);
                     }
                 }
@@ -197,10 +199,13 @@ function preprocess(syntax) {
     }
 
     return {
+        mainContext: contextInterner.get('main'),
         scope: splitScopes(syntax.scope),
         scopes: scopeInterner.values,
         patterns: patternInterner.values,
-        contexts: newNewContexts,
+        // contexts: newNewContexts,
+        // names: contextInterner.values,
+        contexts: contextInterner.values.map(name => newNewContexts[name] || null),
     };
 }
 

@@ -11,16 +11,19 @@ class SyntaxProvider {
 
     unpack(syntax) {
         const scopeNames = (arr) => arr && arr.map(i => syntax.scopes[i]);
+        // const contexts = (arr) => arr && arr.map(i => syntax.contexts);
 
         return {
             ...syntax,
             scope: scopeNames(syntax.scope),
-            contexts: objMap(syntax.contexts, ctx => ({
+            contexts: syntax.contexts.map(ctx => ({
                 ...ctx,
                 meta_scope: scopeNames(ctx.meta_scope) || [],
                 meta_content_scope: scopeNames(ctx.meta_content_scope) || [],
                 rules: ctx.rules.map(rule => ({
                     ...rule,
+                    // push: contexts(rule.push),
+                    // 'set': contexts(rule.set),
                     captures: objMap(
                         rule.captures,
                         scopeNames

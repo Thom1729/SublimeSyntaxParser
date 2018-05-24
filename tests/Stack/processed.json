@@ -1,4 +1,5 @@
 {
+    "mainContext": 5,
     "scope": [
         9
     ],
@@ -31,29 +32,8 @@
         "^l",
         "z"
     ],
-    "contexts": {
-        "main": {
-            "name": "main",
-            "rules": [
-                {
-                    "match": 0,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "pop": true
-                },
-                {
-                    "match": 1,
-                    "captures": [],
-                    "push": [
-                        "test"
-                    ]
-                }
-            ]
-        },
-        "test": {
+    "contexts": [
+        {
             "name": "test",
             "rules": [
                 {
@@ -64,7 +44,7 @@
                         ]
                     ],
                     "push": [
-                        "meta-z"
+                        1
                     ]
                 },
                 {
@@ -75,7 +55,7 @@
                         ]
                     ],
                     "set": [
-                        "meta-z"
+                        1
                     ]
                 },
                 {
@@ -86,9 +66,9 @@
                         ]
                     ],
                     "push": [
-                        "meta-z",
-                        "meta-z",
-                        "meta-z"
+                        1,
+                        1,
+                        1
                     ]
                 },
                 {
@@ -99,9 +79,9 @@
                         ]
                     ],
                     "set": [
-                        "meta-z",
-                        "meta-z",
-                        "meta-z"
+                        1,
+                        1,
+                        1
                     ]
                 },
                 {
@@ -112,8 +92,8 @@
                         ]
                     ],
                     "push": [
-                        "meta-z",
-                        "clear"
+                        1,
+                        2
                     ]
                 },
                 {
@@ -124,8 +104,8 @@
                         ]
                     ],
                     "set": [
-                        "meta-z",
-                        "clear"
+                        1,
+                        2
                     ]
                 },
                 {
@@ -136,11 +116,11 @@
                         ]
                     ],
                     "push": [
-                        "meta-z",
-                        "clear",
-                        "meta-z",
-                        "clear",
-                        "meta-z"
+                        1,
+                        2,
+                        1,
+                        2,
+                        1
                     ]
                 },
                 {
@@ -151,11 +131,11 @@
                         ]
                     ],
                     "set": [
-                        "meta-z",
-                        "clear",
-                        "meta-z",
-                        "clear",
-                        "meta-z"
+                        1,
+                        2,
+                        1,
+                        2,
+                        1
                     ]
                 },
                 {
@@ -166,9 +146,9 @@
                         ]
                     ],
                     "push": [
-                        "clear-meta",
-                        "clear-meta",
-                        "meta-z"
+                        3,
+                        3,
+                        1
                     ]
                 },
                 {
@@ -179,9 +159,9 @@
                         ]
                     ],
                     "set": [
-                        "clear-meta",
-                        "clear-meta",
-                        "meta-z"
+                        3,
+                        3,
+                        1
                     ]
                 },
                 {
@@ -192,8 +172,8 @@
                         ]
                     ],
                     "push": [
-                        "clear-all",
-                        "meta-z"
+                        4,
+                        1
                     ]
                 },
                 {
@@ -204,8 +184,8 @@
                         ]
                     ],
                     "set": [
-                        "clear-all",
-                        "meta-z"
+                        4,
+                        1
                     ]
                 }
             ],
@@ -216,7 +196,7 @@
                 2
             ]
         },
-        "meta-z": {
+        {
             "name": "meta-z",
             "rules": [
                 {
@@ -236,7 +216,7 @@
                 5
             ]
         },
-        "clear": {
+        {
             "name": "clear",
             "rules": [
                 {
@@ -247,7 +227,7 @@
             ],
             "clear_scopes": "1"
         },
-        "clear-meta": {
+        {
             "name": "clear-meta",
             "rules": [
                 {
@@ -262,7 +242,7 @@
                 8
             ]
         },
-        "clear-all": {
+        {
             "name": "clear-all",
             "rules": [
                 {
@@ -272,6 +252,27 @@
                 }
             ],
             "clear_scopes": true
+        },
+        {
+            "name": "main",
+            "rules": [
+                {
+                    "match": 0,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "pop": true
+                },
+                {
+                    "match": 1,
+                    "captures": [],
+                    "push": [
+                        0
+                    ]
+                }
+            ]
         }
-    }
+    ]
 }
