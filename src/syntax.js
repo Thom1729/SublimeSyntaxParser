@@ -161,38 +161,7 @@ function preprocess(syntax) {
 function process(syntax) {
     syntax = preprocess(syntax);
 
-    const scopeInterner = new Interner();
-    const patternInterner = new Interner();
-    const contextInterner = new Interner();
-
-    function internScopes(scopes) {
-        return scopes && scopes.map(s => scopeInterner.get(s));
-    }
-
-    function internContexts(contexts) {
-        return contexts && contexts.map(s => contextInterner.get(s));
-    }
-
-    const newContexts = objMap(syntax.contexts, ctx => ({
-        ...ctx,
-        meta_scope: internScopes(ctx.meta_scope),
-        meta_content_scope: internScopes(ctx.meta_content_scope),
-        rules: ctx.rules.map(rule => {
-            if (rule.hasOwnProperty('match')) {
-                return {
-                    ...rule,
-                    push: internContexts(rule.push),
-                    'set': internContexts(rule.set),
-                    match: patternInterner.get(rule.match),
-                    captures: rule.captures.map(internScopes),
-                };
-            } else {
-                return rule;
-            }
-        }),
-    }));
-
-    const newNewContexts = recMap(newContexts, (name, context, recurse) => {
+    const newContexts = recMap(syntax.contexts, (name, context, recurse) => {
         const rules = Array.from(flatMap(context.rules,
             rule =>
                 !rule.include ? [rule] :
@@ -206,7 +175,7 @@ function process(syntax) {
         };
     });
 
-    if (newNewContexts['prototype']) {
+    if (newContexts['prototype']) {
         const prototypeTainted = new Set();
 
         function taint(name) {
@@ -214,8 +183,8 @@ function process(syntax) {
                 return;
             } else {
                 prototypeTainted.add(name);
-                for (const rule of newNewContexts[name].rules) {
-                    for (const name of (rule.push || rule.set || []).map(i => contextInterner.values[i])) {
+                for (const rule of newContexts[name].rules) {
+                    for (const name of (rule.push || rule.set || [])) {
                         taint(name);
                     }
                 }
@@ -224,15 +193,47 @@ function process(syntax) {
 
         taint('prototype');
 
-        for (const context of Object.values(newNewContexts)) {
+        for (const context of Object.values(newContexts)) {
             if (context.meta_include_prototype !== false && !prototypeTainted.has(context.name)) {
                 context.rules = [
-                    ...newNewContexts['prototype'].rules,
+                    ...newContexts['prototype'].rules,
                     ...context.rules,
                 ];
             }
         }
     }
+
+    return pack({
+        ...syntax,
+        contexts: newContexts,
+    });
+}
+
+function pack(syntax) {
+    const scopeInterner = new Interner();
+    const patternInterner = new Interner();
+    const contextInterner = new Interner();
+
+    function internScopes(scopes) {
+        return scopes && scopes.map(s => scopeInterner.get(s));
+    }
+
+    function internContexts(contexts) {
+        return contexts && contexts.map(s => contextInterner.get(s));
+    }
+
+    const newNewContexts = objMap(syntax.contexts, ctx => ({
+        ...ctx,
+        meta_scope: internScopes(ctx.meta_scope),
+        meta_content_scope: internScopes(ctx.meta_content_scope),
+        rules: ctx.rules.map(rule => ({
+            ...rule,
+            push: internContexts(rule.push),
+            'set': internContexts(rule.set),
+            match: patternInterner.get(rule.match),
+            captures: rule.captures.map(internScopes),
+        })),
+    }));
 
     return {
         mainContext: contextInterner.get('main'),
