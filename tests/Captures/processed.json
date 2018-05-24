@@ -1,114 +1,124 @@
 {
     "scope": [
+        6
+    ],
+    "scopes": [
+        "region.redish ",
+        "region.bluish ",
+        "region.greenish ",
+        "  ",
+        "region.pinkish ",
+        "FOO ",
         "source.test-a "
+    ],
+    "patterns": [
+        "^(?=(a)aaaa)(aaa)aa",
+        "^(?=bb(bb)b)(b)bbbb",
+        "^(?=cc(ccc))cccc",
+        "^(?=(d)dddd)(ddd)dd",
+        "^(?=(e)eeee)(eee)ee",
+        "^(?=(f)ffff)(fff)ff",
+        "g(gg)",
+        "",
+        "h(h)(h)",
+        "^(?:(x)|(y))+"
     ],
     "contexts": {
         "main:0": {
             "name": "main:0",
-            "meta_scope": [
-                "FOO "
-            ],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "",
+                    "match": 7,
                     "captures": [],
                     "pop": true
                 }
             ],
-            "patterns": [
-                ""
+            "meta_scope": [
+                5
             ]
         },
         "main:1": {
             "name": "main:1",
-            "meta_scope": [],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "",
+                    "match": 7,
                     "captures": [],
                     "pop": true
                 }
-            ],
-            "patterns": [
-                ""
             ]
         },
         "main": {
             "name": "main",
-            "meta_scope": [],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "^(?=(a)aaaa)(aaa)aa",
+                    "match": 0,
                     "captures": [
                         null,
                         [
-                            "region.redish "
+                            0
                         ],
                         [
-                            "region.bluish "
+                            1
                         ]
                     ]
                 },
                 {
-                    "match": "^(?=bb(bb)b)(b)bbbb",
+                    "match": 1,
                     "captures": [
                         null,
                         [
-                            "region.redish "
+                            0
                         ],
                         [
-                            "region.bluish "
+                            1
                         ]
                     ]
                 },
                 {
-                    "match": "^(?=cc(ccc))cccc",
+                    "match": 2,
                     "captures": [
                         null,
                         [
-                            "region.redish "
+                            0
                         ]
                     ]
                 },
                 {
-                    "match": "^(?=(d)dddd)(ddd)dd",
+                    "match": 3,
                     "captures": [
                         null,
                         [
-                            "region.redish "
+                            0
                         ]
                     ]
                 },
                 {
-                    "match": "^(?=(e)eeee)(eee)ee",
+                    "match": 4,
                     "captures": [
                         null,
                         [
-                            "region.redish "
+                            0
                         ],
                         null
                     ]
                 },
                 {
-                    "match": "^(?=(f)ffff)(fff)ff",
+                    "match": 5,
                     "captures": [
                         null,
                         [
-                            "region.greenish "
+                            2
                         ],
                         [
-                            "  "
+                            3
                         ]
                     ]
                 },
                 {
-                    "match": "g(gg)",
+                    "match": 6,
                     "captures": [
                         [
-                            "region.pinkish "
+                            4
                         ]
                     ],
                     "push": [
@@ -116,10 +126,10 @@
                     ]
                 },
                 {
-                    "match": "h(h)(h)",
+                    "match": 8,
                     "captures": [
                         [
-                            "region.pinkish "
+                            4
                         ]
                     ],
                     "push": [
@@ -127,28 +137,17 @@
                     ]
                 },
                 {
-                    "match": "^(?:(x)|(y))+",
+                    "match": 9,
                     "captures": [
                         null,
                         [
-                            "region.redish "
+                            0
                         ],
                         [
-                            "region.bluish "
+                            1
                         ]
                     ]
                 }
-            ],
-            "patterns": [
-                "^(?=(a)aaaa)(aaa)aa",
-                "^(?=bb(bb)b)(b)bbbb",
-                "^(?=cc(ccc))cccc",
-                "^(?=(d)dddd)(ddd)dd",
-                "^(?=(e)eeee)(eee)ee",
-                "^(?=(f)ffff)(fff)ff",
-                "g(gg)",
-                "h(h)(h)",
-                "^(?:(x)|(y))+"
             ]
         }
     }

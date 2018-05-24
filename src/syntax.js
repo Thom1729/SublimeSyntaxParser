@@ -1,4 +1,4 @@
-const { objMap, flatMap, recMap } = require('./util.js');
+const { objMap, flatMap, recMap, Interner } = require('./util.js');
 
 // const metaProperties = new Set([
 //     'meta_scope',
@@ -23,19 +23,22 @@ function assertNoExtras(obj) {
     }
 }
 
-function splitScopes(scopes) {
-    if (!scopes) return undefined;
-    const ret = [];
-    (scopes + ' ').replace(/\S+\s*|\s+/g, part => { ret.push(part); });
-    return ret;
-}
-
 function preprocess(syntax) {
     const newVariables = recMap(
         syntax.variables || {},
         (key, value, recurse) =>
             value.replace(/\{\{(\w+)\}\}/g, (all, v) => recurse(v))
     );
+
+    const scopeInterner = new Interner();
+    const patternInterner = new Interner();
+
+    function splitScopes(scopes) {
+        if (!scopes) return undefined;
+        const ret = [];
+        (scopes + ' ').replace(/\S+\s*|\s+/g, part => { ret.push(scopeInterner.get(part)); });
+        return ret;
+    }
 
     const newContexts = recMap(syntax.contexts, (name, context, recurse) => {
 
@@ -65,8 +68,6 @@ function preprocess(syntax) {
 
         const newContext = {
             name,
-            meta_scope: [],
-            meta_content_scope: [],
             rules: [],
         };
 
@@ -82,13 +83,13 @@ function preprocess(syntax) {
                 meta_scope: ({ meta_scope, ...rest }) => {
                     assertNoExtras(rest);
                     assertMeta();
-                    newContext.meta_scope.push(...splitScopes(meta_scope));
+                    newContext.meta_scope = splitScopes(meta_scope);
                 },
 
                 meta_content_scope: ({ meta_content_scope, ...rest }) => {
                     assertNoExtras(rest);
                     assertMeta();
-                    newContext.meta_content_scope.push(...splitScopes(meta_content_scope));
+                    newContext.meta_content_scope = splitScopes(meta_content_scope);
                 },
 
                 clear_scopes: ({ clear_scopes, ...rest }) => {
@@ -118,7 +119,7 @@ function preprocess(syntax) {
                     }
 
                     const newRule = {
-                        match: match.replace(/\{\{(\w+)\}\}/g, (all, v) => newVariables[v]),
+                        match: patternInterner.get(match.replace(/\{\{(\w+)\}\}/g, (all, v) => newVariables[v])),
                         captures: [],
                         pop: pop,
                     };
@@ -157,7 +158,6 @@ function preprocess(syntax) {
         return {
             ...context,
             rules,
-            patterns: rules.map(r => r.match),
         };
     });
 
@@ -171,7 +171,6 @@ function preprocess(syntax) {
                 prototypeTainted.add(name);
                 for (const rule of newNewContexts[name].rules) {
                     for (const name of (rule.push || rule.set || [])) {
-                        // console.log(name);
                         taint(name);
                     }
                 }
@@ -186,17 +185,14 @@ function preprocess(syntax) {
                     ...newNewContexts['prototype'].rules,
                     ...context.rules,
                 ];
-
-                context.patterns = [
-                    ...newNewContexts['prototype'].patterns,
-                    ...context.patterns,
-                ];
             }
         }
     }
 
     return {
         scope: splitScopes(syntax.scope),
+        scopes: scopeInterner.values,
+        patterns: patternInterner.values,
         contexts: newNewContexts,
     };
 }

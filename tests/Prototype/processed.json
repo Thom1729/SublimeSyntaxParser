@@ -1,39 +1,50 @@
 {
     "scope": [
+        6
+    ],
+    "scopes": [
+        "region.redish ",
+        "A ",
+        "region.bluish ",
+        "region.greenish ",
+        "B ",
+        "D ",
         "source.test-prototype "
+    ],
+    "patterns": [
+        "a",
+        "z",
+        "b",
+        "c",
+        "d",
+        "e"
     ],
     "contexts": {
         "prototype:0": {
             "name": "prototype:0",
-            "meta_scope": [
-                "A "
-            ],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "z",
+                    "match": 1,
                     "captures": [
                         [
-                            "region.bluish "
+                            2
                         ]
                     ],
                     "pop": true
                 }
             ],
-            "patterns": [
-                "z"
+            "meta_scope": [
+                1
             ]
         },
         "prototype": {
             "name": "prototype",
-            "meta_scope": [],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "a",
+                    "match": 0,
                     "captures": [
                         [
-                            "region.redish "
+                            0
                         ]
                     ],
                     "push": [
@@ -41,32 +52,26 @@
                     ]
                 },
                 {
-                    "match": "b",
+                    "match": 2,
                     "captures": [
                         [
-                            "region.redish "
+                            0
                         ]
                     ],
                     "push": [
                         "test-b"
                     ]
                 }
-            ],
-            "patterns": [
-                "a",
-                "b"
             ]
         },
         "main:0:0": {
             "name": "main:0:0",
-            "meta_scope": [],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "a",
+                    "match": 0,
                     "captures": [
                         [
-                            "region.redish "
+                            0
                         ]
                     ],
                     "push": [
@@ -74,10 +79,10 @@
                     ]
                 },
                 {
-                    "match": "b",
+                    "match": 2,
                     "captures": [
                         [
-                            "region.redish "
+                            0
                         ]
                     ],
                     "push": [
@@ -85,31 +90,24 @@
                     ]
                 },
                 {
-                    "match": "z",
+                    "match": 1,
                     "captures": [
                         [
-                            "region.bluish "
+                            2
                         ]
                     ],
                     "pop": true
                 }
-            ],
-            "patterns": [
-                "a",
-                "b",
-                "z"
             ]
         },
         "main:0": {
             "name": "main:0",
-            "meta_scope": [],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "e",
+                    "match": 5,
                     "captures": [
                         [
-                            "region.greenish "
+                            3
                         ]
                     ],
                     "push": [
@@ -117,31 +115,25 @@
                     ]
                 },
                 {
-                    "match": "z",
+                    "match": 1,
                     "captures": [
                         [
-                            "region.bluish "
+                            2
                         ]
                     ],
                     "pop": true
                 }
             ],
-            "meta_include_prototype": false,
-            "patterns": [
-                "e",
-                "z"
-            ]
+            "meta_include_prototype": false
         },
         "main": {
             "name": "main",
-            "meta_scope": [],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "a",
+                    "match": 0,
                     "captures": [
                         [
-                            "region.redish "
+                            0
                         ]
                     ],
                     "push": [
@@ -149,10 +141,10 @@
                     ]
                 },
                 {
-                    "match": "b",
+                    "match": 2,
                     "captures": [
                         [
-                            "region.redish "
+                            0
                         ]
                     ],
                     "push": [
@@ -160,10 +152,10 @@
                     ]
                 },
                 {
-                    "match": "c",
+                    "match": 3,
                     "captures": [
                         [
-                            "region.redish "
+                            0
                         ]
                     ],
                     "push": [
@@ -171,10 +163,10 @@
                     ]
                 },
                 {
-                    "match": "d",
+                    "match": 4,
                     "captures": [
                         [
-                            "region.redish "
+                            0
                         ]
                     ],
                     "push": [
@@ -182,58 +174,43 @@
                     ]
                 },
                 {
-                    "match": "e",
+                    "match": 5,
                     "captures": [
                         [
-                            "region.redish "
+                            0
                         ]
                     ],
                     "push": [
                         "main:0"
                     ]
                 }
-            ],
-            "patterns": [
-                "a",
-                "b",
-                "c",
-                "d",
-                "e"
             ]
         },
         "test-b": {
             "name": "test-b",
-            "meta_scope": [
-                "B "
-            ],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "z",
+                    "match": 1,
                     "captures": [
                         [
-                            "region.bluish "
+                            2
                         ]
                     ],
                     "pop": true
                 }
             ],
-            "patterns": [
-                "z"
+            "meta_scope": [
+                4
             ]
         },
         "test-d": {
             "name": "test-d",
-            "meta_scope": [
-                "D "
-            ],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "a",
+                    "match": 0,
                     "captures": [
                         [
-                            "region.redish "
+                            0
                         ]
                     ],
                     "push": [
@@ -241,10 +218,10 @@
                     ]
                 },
                 {
-                    "match": "b",
+                    "match": 2,
                     "captures": [
                         [
-                            "region.redish "
+                            0
                         ]
                     ],
                     "push": [
@@ -252,19 +229,17 @@
                     ]
                 },
                 {
-                    "match": "z",
+                    "match": 1,
                     "captures": [
                         [
-                            "region.bluish "
+                            2
                         ]
                     ],
                     "pop": true
                 }
             ],
-            "patterns": [
-                "a",
-                "b",
-                "z"
+            "meta_scope": [
+                5
             ]
         }
     }

@@ -44,9 +44,28 @@ function recMap(obj, callback) {
     return ret;
 }
 
+class Interner {
+    constructor() {
+        this.values = [];
+        this.lookup = new Map();
+    }
+
+    get(value) {
+        if (this.lookup.has(value)) {
+            return this.lookup.get(value);
+        } else {
+            const i = this.values.length;
+            this.values.push(value);
+            this.lookup.set(value, i);
+            return i;
+        }
+    }
+}
+
 module.exports = {
     objFromPairs,
     objMap,
     flatMap,
     recMap,
+    Interner,
 };

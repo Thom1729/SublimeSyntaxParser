@@ -1,6 +1,5 @@
 const fs = require('fs');
 const { Path } = require('../lib/pathlib');
-// const Diff = require('diff');
 const { flatMap } = require('../src/util');
 
 const testsDir = new Path('tests');
@@ -17,12 +16,16 @@ function runTest(path) {
 
     const syntaxProvider = new SyntaxProvider(path);
 
-    const syntax = syntaxProvider.load('test-syntax.sublime-syntax');
+    const syntax = syntaxProvider.getPacked('test-syntax.sublime-syntax');
 
     path.joinpath('processed.json').writeText(JSON.stringify(syntax, null, 4));
+    path.joinpath('processed-min.json').writeText(JSON.stringify(syntax));
 
     const text = path.glob('test-file.*')[0].readText();
-    const tokens = Array.from(parse(syntax, text));
+
+    const unpacked = syntaxProvider.unpack(syntax);
+    path.joinpath('unpacked.json').writeText(JSON.stringify(unpacked, null, 4));
+    const tokens = Array.from(parse(unpacked, text));
 
     const result = Array.from(flatMap(
         tokens,

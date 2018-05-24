@@ -1,49 +1,66 @@
 {
     "scope": [
+        9
+    ],
+    "scopes": [
+        "region.greenish ",
+        "TEST ",
+        "TEST_CONTENT ",
+        "region.redish ",
+        "META ",
+        "META_CONTENT ",
+        "region.bluish ",
+        "META1 ",
+        "META2 ",
         "source.test-stack "
+    ],
+    "patterns": [
+        "^y",
+        "",
+        "^a",
+        "^b",
+        "^c",
+        "^d",
+        "^e",
+        "^f",
+        "^g",
+        "^h",
+        "^i",
+        "^j",
+        "^k",
+        "^l",
+        "z"
     ],
     "contexts": {
         "main": {
             "name": "main",
-            "meta_scope": [],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "^y",
+                    "match": 0,
                     "captures": [
                         [
-                            "region.greenish "
+                            0
                         ]
                     ],
                     "pop": true
                 },
                 {
-                    "match": "",
+                    "match": 1,
                     "captures": [],
                     "push": [
                         "test"
                     ]
                 }
-            ],
-            "patterns": [
-                "^y",
-                ""
             ]
         },
         "test": {
             "name": "test",
-            "meta_scope": [
-                "TEST "
-            ],
-            "meta_content_scope": [
-                "TEST_CONTENT "
-            ],
             "rules": [
                 {
-                    "match": "^a",
+                    "match": 2,
                     "captures": [
                         [
-                            "region.redish "
+                            3
                         ]
                     ],
                     "push": [
@@ -51,10 +68,10 @@
                     ]
                 },
                 {
-                    "match": "^b",
+                    "match": 3,
                     "captures": [
                         [
-                            "region.redish "
+                            3
                         ]
                     ],
                     "set": [
@@ -62,10 +79,10 @@
                     ]
                 },
                 {
-                    "match": "^c",
+                    "match": 4,
                     "captures": [
                         [
-                            "region.redish "
+                            3
                         ]
                     ],
                     "push": [
@@ -75,10 +92,10 @@
                     ]
                 },
                 {
-                    "match": "^d",
+                    "match": 5,
                     "captures": [
                         [
-                            "region.redish "
+                            3
                         ]
                     ],
                     "set": [
@@ -88,10 +105,10 @@
                     ]
                 },
                 {
-                    "match": "^e",
+                    "match": 6,
                     "captures": [
                         [
-                            "region.redish "
+                            3
                         ]
                     ],
                     "push": [
@@ -100,10 +117,10 @@
                     ]
                 },
                 {
-                    "match": "^f",
+                    "match": 7,
                     "captures": [
                         [
-                            "region.redish "
+                            3
                         ]
                     ],
                     "set": [
@@ -112,10 +129,10 @@
                     ]
                 },
                 {
-                    "match": "^g",
+                    "match": 8,
                     "captures": [
                         [
-                            "region.redish "
+                            3
                         ]
                     ],
                     "push": [
@@ -127,10 +144,10 @@
                     ]
                 },
                 {
-                    "match": "^h",
+                    "match": 9,
                     "captures": [
                         [
-                            "region.redish "
+                            3
                         ]
                     ],
                     "set": [
@@ -142,10 +159,10 @@
                     ]
                 },
                 {
-                    "match": "^i",
+                    "match": 10,
                     "captures": [
                         [
-                            "region.redish "
+                            3
                         ]
                     ],
                     "push": [
@@ -155,10 +172,10 @@
                     ]
                 },
                 {
-                    "match": "^j",
+                    "match": 11,
                     "captures": [
                         [
-                            "region.redish "
+                            3
                         ]
                     ],
                     "set": [
@@ -168,10 +185,10 @@
                     ]
                 },
                 {
-                    "match": "^k",
+                    "match": 12,
                     "captures": [
                         [
-                            "region.redish "
+                            3
                         ]
                     ],
                     "push": [
@@ -180,10 +197,10 @@
                     ]
                 },
                 {
-                    "match": "^l",
+                    "match": 13,
                     "captures": [
                         [
-                            "region.redish "
+                            3
                         ]
                     ],
                     "set": [
@@ -192,94 +209,69 @@
                     ]
                 }
             ],
-            "patterns": [
-                "^a",
-                "^b",
-                "^c",
-                "^d",
-                "^e",
-                "^f",
-                "^g",
-                "^h",
-                "^i",
-                "^j",
-                "^k",
-                "^l"
+            "meta_scope": [
+                1
+            ],
+            "meta_content_scope": [
+                2
             ]
         },
         "meta-z": {
             "name": "meta-z",
-            "meta_scope": [
-                "META "
-            ],
-            "meta_content_scope": [
-                "META_CONTENT "
-            ],
             "rules": [
                 {
-                    "match": "z",
+                    "match": 14,
                     "captures": [
                         [
-                            "region.bluish "
+                            6
                         ]
                     ],
                     "pop": true
                 }
             ],
-            "patterns": [
-                "z"
+            "meta_scope": [
+                4
+            ],
+            "meta_content_scope": [
+                5
             ]
         },
         "clear": {
             "name": "clear",
-            "meta_scope": [],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "",
+                    "match": 1,
                     "captures": [],
                     "pop": true
                 }
             ],
-            "clear_scopes": "1",
-            "patterns": [
-                ""
-            ]
+            "clear_scopes": "1"
         },
         "clear-meta": {
             "name": "clear-meta",
-            "meta_scope": [
-                "META1 ",
-                "META2 "
-            ],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "",
+                    "match": 1,
                     "captures": [],
                     "pop": true
                 }
             ],
             "clear_scopes": "1",
-            "patterns": [
-                ""
+            "meta_scope": [
+                7,
+                8
             ]
         },
         "clear-all": {
             "name": "clear-all",
-            "meta_scope": [],
-            "meta_content_scope": [],
             "rules": [
                 {
-                    "match": "",
+                    "match": 1,
                     "captures": [],
                     "pop": true
                 }
             ],
-            "clear_scopes": true,
-            "patterns": [
-                ""
-            ]
+            "clear_scopes": true
         }
     }
 }
