@@ -1,9 +1,9 @@
 %YAML 1.2
 ---
-name: Test A
-scope: source.test-a
+name: Test Captures
+scope: source.test-captures
 file_extensions:
-- test-a
+- test-captures
 contexts:
   main:
     - match: ^(?=(a)aaaa)(aaa)aa
@@ -46,6 +46,11 @@ contexts:
       push:
         - match: ''
           pop: true
+
+    - match: j
+      scope: region.redish
+      captures:
+        0: region.bluish
 
     - match: ^(?:(x)|(y))+
       captures:

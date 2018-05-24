@@ -1,81 +1,85 @@
-0 * source.test-a 
-1   source.test-a 
-2   source.test-a 
-3   source.test-a 
-4   source.test-a 
-5   source.test-a 
-6 * source.test-a 
-7   source.test-a 
-8   source.test-a 
-9   source.test-a 
-10   source.test-a 
-11   source.test-a 
-12 * source.test-a 
-13   source.test-a 
-14   source.test-a 
-15   source.test-a 
-16   source.test-a 
-17 * source.test-a 
-18 * source.test-a 
-19 * source.test-a region.redish region.bluish 
-20   source.test-a region.redish region.bluish 
-21   source.test-a region.redish region.bluish 
-22 * source.test-a 
-23   source.test-a 
-24 * source.test-a 
-25 * source.test-a 
-26 * source.test-a 
-27   source.test-a 
-28 * source.test-a region.redish 
-29   source.test-a region.redish 
-30 * source.test-a 
-31 * source.test-a 
-32 * source.test-a 
-33 * source.test-a 
-34   source.test-a 
-35 * source.test-a region.redish 
-36   source.test-a region.redish 
-37 * source.test-a 
-38 * source.test-a 
-39 * source.test-a 
-40 * source.test-a region.redish 
-41 * source.test-a 
-42   source.test-a 
-43   source.test-a 
-44   source.test-a 
-45 * source.test-a 
-46 * source.test-a 
-47 * source.test-a region.redish 
-48 * source.test-a 
-49   source.test-a 
-50   source.test-a 
-51   source.test-a 
-52 * source.test-a 
-53 * source.test-a 
-54 * source.test-a region.greenish   
-55   source.test-a region.greenish   
-56   source.test-a region.greenish   
-57 * source.test-a 
-58   source.test-a 
-59 * source.test-a 
-60 * source.test-a 
-61 * source.test-a FOO region.pinkish 
-62 * source.test-a FOO region.pinkish 
-63   source.test-a FOO region.pinkish 
-64 * source.test-a 
-65 * source.test-a 
-66 * source.test-a region.pinkish 
-67 * source.test-a region.pinkish 
-68 * source.test-a region.pinkish 
-69 * source.test-a 
-70 * source.test-a 
-71 * source.test-a 
-72   source.test-a 
-73 * source.test-a region.redish 
-74 * source.test-a 
-75 * source.test-a 
-76   source.test-a 
-77 * source.test-a region.redish 
-78 * source.test-a region.bluish 
-79 * source.test-a 
-80 * source.test-a 
+0 * source.test-captures 
+1   source.test-captures 
+2   source.test-captures 
+3   source.test-captures 
+4   source.test-captures 
+5   source.test-captures 
+6 * source.test-captures 
+7   source.test-captures 
+8   source.test-captures 
+9   source.test-captures 
+10   source.test-captures 
+11   source.test-captures 
+12 * source.test-captures 
+13   source.test-captures 
+14   source.test-captures 
+15   source.test-captures 
+16   source.test-captures 
+17 * source.test-captures 
+18 * source.test-captures 
+19 * source.test-captures region.redish region.bluish 
+20   source.test-captures region.redish region.bluish 
+21   source.test-captures region.redish region.bluish 
+22 * source.test-captures 
+23   source.test-captures 
+24 * source.test-captures 
+25 * source.test-captures 
+26 * source.test-captures 
+27   source.test-captures 
+28 * source.test-captures region.redish 
+29   source.test-captures region.redish 
+30 * source.test-captures 
+31 * source.test-captures 
+32 * source.test-captures 
+33 * source.test-captures 
+34   source.test-captures 
+35 * source.test-captures region.redish 
+36   source.test-captures region.redish 
+37 * source.test-captures 
+38 * source.test-captures 
+39 * source.test-captures 
+40 * source.test-captures region.redish 
+41 * source.test-captures 
+42   source.test-captures 
+43   source.test-captures 
+44   source.test-captures 
+45 * source.test-captures 
+46 * source.test-captures 
+47 * source.test-captures region.redish 
+48 * source.test-captures 
+49   source.test-captures 
+50   source.test-captures 
+51   source.test-captures 
+52 * source.test-captures 
+53 * source.test-captures 
+54 * source.test-captures region.greenish   
+55   source.test-captures region.greenish   
+56   source.test-captures region.greenish   
+57 * source.test-captures 
+58   source.test-captures 
+59 * source.test-captures 
+60 * source.test-captures 
+61 * source.test-captures FOO region.pinkish 
+62 * source.test-captures FOO region.pinkish 
+63   source.test-captures FOO region.pinkish 
+64 * source.test-captures 
+65 * source.test-captures 
+66 * source.test-captures region.pinkish 
+67 * source.test-captures region.pinkish 
+68 * source.test-captures region.pinkish 
+69 * source.test-captures 
+70 * source.test-captures 
+71 * source.test-captures region.redish region.bluish 
+72 * source.test-captures region.redish region.bluish 
+73 * source.test-captures 
+74 * source.test-captures 
+75 * source.test-captures 
+76   source.test-captures 
+77 * source.test-captures region.redish 
+78 * source.test-captures 
+79 * source.test-captures 
+80   source.test-captures 
+81 * source.test-captures region.redish 
+82 * source.test-captures region.bluish 
+83 * source.test-captures 
+84 * source.test-captures 

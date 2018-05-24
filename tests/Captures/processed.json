@@ -9,7 +9,7 @@
         "  ",
         "region.pinkish ",
         "FOO ",
-        "source.test-a "
+        "source.test-captures "
     ],
     "patterns": [
         "^(?=(a)aaaa)(aaa)aa",
@@ -21,6 +21,7 @@
         "g(gg)",
         "",
         "h(h)(h)",
+        "j",
         "^(?:(x)|(y))+"
     ],
     "contexts": {
@@ -138,6 +139,15 @@
                 },
                 {
                     "match": 9,
+                    "captures": [
+                        [
+                            0,
+                            1
+                        ]
+                    ]
+                },
+                {
+                    "match": 10,
                     "captures": [
                         null,
                         [

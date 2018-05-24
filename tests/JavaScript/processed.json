@@ -106,9 +106,9 @@
         "constant.language.null.js ",
         "constant.language.undefined.js ",
         "constant.language.nan.js ",
-        "meta.prototype.declaration.js ",
         "support.class.js ",
         "support.constant.prototype.js ",
+        "meta.prototype.declaration.js ",
         "meta.prototype.access.js ",
         "support.class.dollar.only.js ",
         "support.class.dollar.js ",
@@ -134,12 +134,12 @@
         "meta.brackets.js ",
         "constant.numeric.octal.js ",
         "invalid.deprecated.numeric.octal.js ",
-        "constant.numeric.hexadecimal.js ",
         "punctuation.definition.numeric.hexadecimal.js ",
         "storage.type.numeric.bigint.js ",
+        "constant.numeric.hexadecimal.js ",
         "punctuation.definition.numeric.octal.js ",
-        "constant.numeric.binary.js ",
         "punctuation.definition.numeric.binary.js ",
+        "constant.numeric.binary.js ",
         "constant.numeric.decimal.js ",
         "constant.language.infinity.js ",
         "invalid.illegal.numeric.hexadecimal.js ",
@@ -3558,7 +3558,7 @@
                     "match": 153,
                     "captures": [
                         [
-                            104
+                            103
                         ]
                     ],
                     "pop": true
@@ -3797,7 +3797,7 @@
                     "match": 153,
                     "captures": [
                         [
-                            104
+                            103
                         ]
                     ],
                     "pop": true
@@ -8050,16 +8050,16 @@
                     "match": 113,
                     "captures": [
                         [
-                            103
+                            105
                         ],
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ]
                     ],
                     "set": [
@@ -8071,13 +8071,13 @@
                     "captures": [
                         null,
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ],
                         [
                             54
@@ -8095,13 +8095,13 @@
                             106
                         ],
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ]
                     ],
                     "pop": true
@@ -8896,13 +8896,13 @@
                     "match": 134,
                     "captures": [
                         [
+                            133
+                        ],
+                        [
                             131
                         ],
                         [
                             132
-                        ],
-                        [
-                            133
                         ]
                     ],
                     "pop": true
@@ -8917,7 +8917,7 @@
                             134
                         ],
                         [
-                            133
+                            132
                         ]
                     ],
                     "pop": true
@@ -8926,13 +8926,13 @@
                     "match": 136,
                     "captures": [
                         [
-                            135
-                        ],
-                        [
                             136
                         ],
                         [
-                            133
+                            135
+                        ],
+                        [
+                            132
                         ]
                     ],
                     "pop": true
@@ -8944,7 +8944,7 @@
                             137
                         ],
                         [
-                            133
+                            132
                         ]
                     ],
                     "pop": true
@@ -9113,16 +9113,16 @@
                     "match": 113,
                     "captures": [
                         [
-                            103
+                            105
                         ],
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ]
                     ],
                     "set": [
@@ -9134,13 +9134,13 @@
                     "captures": [
                         null,
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ],
                         [
                             54
@@ -9158,13 +9158,13 @@
                             106
                         ],
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ]
                     ],
                     "pop": true
@@ -9468,13 +9468,13 @@
                     "match": 134,
                     "captures": [
                         [
+                            133
+                        ],
+                        [
                             131
                         ],
                         [
                             132
-                        ],
-                        [
-                            133
                         ]
                     ],
                     "pop": true
@@ -9489,7 +9489,7 @@
                             134
                         ],
                         [
-                            133
+                            132
                         ]
                     ],
                     "pop": true
@@ -9498,13 +9498,13 @@
                     "match": 136,
                     "captures": [
                         [
-                            135
-                        ],
-                        [
                             136
                         ],
                         [
-                            133
+                            135
+                        ],
+                        [
+                            132
                         ]
                     ],
                     "pop": true
@@ -9516,7 +9516,7 @@
                             137
                         ],
                         [
-                            133
+                            132
                         ]
                     ],
                     "pop": true
@@ -9757,7 +9757,7 @@
                     "match": 153,
                     "captures": [
                         [
-                            104
+                            103
                         ]
                     ],
                     "pop": true
@@ -9862,16 +9862,16 @@
                     "match": 113,
                     "captures": [
                         [
-                            103
+                            105
                         ],
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ]
                     ],
                     "set": [
@@ -9883,13 +9883,13 @@
                     "captures": [
                         null,
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ],
                         [
                             54
@@ -9907,13 +9907,13 @@
                             106
                         ],
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ]
                     ],
                     "pop": true
@@ -10217,13 +10217,13 @@
                     "match": 134,
                     "captures": [
                         [
+                            133
+                        ],
+                        [
                             131
                         ],
                         [
                             132
-                        ],
-                        [
-                            133
                         ]
                     ],
                     "pop": true
@@ -10238,7 +10238,7 @@
                             134
                         ],
                         [
-                            133
+                            132
                         ]
                     ],
                     "pop": true
@@ -10247,13 +10247,13 @@
                     "match": 136,
                     "captures": [
                         [
-                            135
-                        ],
-                        [
                             136
                         ],
                         [
-                            133
+                            135
+                        ],
+                        [
+                            132
                         ]
                     ],
                     "pop": true
@@ -10265,7 +10265,7 @@
                             137
                         ],
                         [
-                            133
+                            132
                         ]
                     ],
                     "pop": true
@@ -10506,7 +10506,7 @@
                     "match": 153,
                     "captures": [
                         [
-                            104
+                            103
                         ]
                     ],
                     "pop": true
@@ -11693,16 +11693,16 @@
                     "match": 113,
                     "captures": [
                         [
-                            103
+                            105
                         ],
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ]
                     ],
                     "set": [
@@ -11714,13 +11714,13 @@
                     "captures": [
                         null,
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ],
                         [
                             54
@@ -11738,13 +11738,13 @@
                             106
                         ],
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ]
                     ],
                     "pop": true
@@ -12048,13 +12048,13 @@
                     "match": 134,
                     "captures": [
                         [
+                            133
+                        ],
+                        [
                             131
                         ],
                         [
                             132
-                        ],
-                        [
-                            133
                         ]
                     ],
                     "pop": true
@@ -12069,7 +12069,7 @@
                             134
                         ],
                         [
-                            133
+                            132
                         ]
                     ],
                     "pop": true
@@ -12078,13 +12078,13 @@
                     "match": 136,
                     "captures": [
                         [
-                            135
-                        ],
-                        [
                             136
                         ],
                         [
-                            133
+                            135
+                        ],
+                        [
+                            132
                         ]
                     ],
                     "pop": true
@@ -12096,7 +12096,7 @@
                             137
                         ],
                         [
-                            133
+                            132
                         ]
                     ],
                     "pop": true
@@ -12337,7 +12337,7 @@
                     "match": 153,
                     "captures": [
                         [
-                            104
+                            103
                         ]
                     ],
                     "pop": true
@@ -13220,16 +13220,16 @@
                     "match": 113,
                     "captures": [
                         [
-                            103
+                            105
                         ],
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ]
                     ],
                     "set": [
@@ -13241,13 +13241,13 @@
                     "captures": [
                         null,
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ],
                         [
                             54
@@ -13265,13 +13265,13 @@
                             106
                         ],
                         [
-                            104
+                            103
                         ],
                         [
                             54
                         ],
                         [
-                            105
+                            104
                         ]
                     ],
                     "pop": true
@@ -13575,13 +13575,13 @@
                     "match": 134,
                     "captures": [
                         [
+                            133
+                        ],
+                        [
                             131
                         ],
                         [
                             132
-                        ],
-                        [
-                            133
                         ]
                     ],
                     "pop": true
@@ -13596,7 +13596,7 @@
                             134
                         ],
                         [
-                            133
+                            132
                         ]
                     ],
                     "pop": true
@@ -13605,13 +13605,13 @@
                     "match": 136,
                     "captures": [
                         [
-                            135
-                        ],
-                        [
                             136
                         ],
                         [
-                            133
+                            135
+                        ],
+                        [
+                            132
                         ]
                     ],
                     "pop": true
@@ -13623,7 +13623,7 @@
                             137
                         ],
                         [
-                            133
+                            132
                         ]
                     ],
                     "pop": true
@@ -13864,7 +13864,7 @@
                     "match": 153,
                     "captures": [
                         [
-                            104
+                            103
                         ]
                     ],
                     "pop": true
@@ -14418,7 +14418,7 @@
                     "match": 118,
                     "captures": [
                         [
-                            105
+                            104
                         ]
                     ],
                     "pop": true
@@ -14485,7 +14485,7 @@
                     "match": 14,
                     "captures": [
                         [
-                            104
+                            103
                         ]
                     ],
                     "pop": true
@@ -15476,13 +15476,13 @@
                     "match": 134,
                     "captures": [
                         [
+                            133
+                        ],
+                        [
                             131
                         ],
                         [
                             132
-                        ],
-                        [
-                            133
                         ]
                     ],
                     "pop": true
@@ -15497,7 +15497,7 @@
                             134
                         ],
                         [
-                            133
+                            132
                         ]
                     ],
                     "pop": true
@@ -15506,13 +15506,13 @@
                     "match": 136,
                     "captures": [
                         [
-                            135
-                        ],
-                        [
                             136
                         ],
                         [
-                            133
+                            135
+                        ],
+                        [
+                            132
                         ]
                     ],
                     "pop": true
@@ -15524,7 +15524,7 @@
                             137
                         ],
                         [
-                            133
+                            132
                         ]
                     ],
                     "pop": true

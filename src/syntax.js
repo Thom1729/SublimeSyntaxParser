@@ -124,10 +124,17 @@ function preprocess(syntax) {
                         pop: pop,
                     };
 
-                    if (scope) newRule.captures[0] = splitScopes(scope); // TODO
                     if (captures) {
                         for (const [i, scope] of Object.entries(captures)) {
                             newRule.captures[i] = splitScopes(scope);
+                        }
+                    }
+
+                    if (scope) {
+                        if (newRule.captures[0]) {
+                            newRule.captures[0].unshift(...splitScopes(scope));
+                        } else {
+                            newRule.captures[0] = splitScopes(scope);
                         }
                     }
 
