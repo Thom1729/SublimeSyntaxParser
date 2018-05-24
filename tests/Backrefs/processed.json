@@ -4,24 +4,24 @@
         2
     ],
     "scopes": [
-        "region.redish ",
         "region.bluish ",
+        "region.redish ",
         "source.test-backrefs "
     ],
     "patterns": [
-        "(a)",
         "\\1",
-        "(b)",
         "\\\\1",
-        "(c)",
         "\\\\\\1",
-        "(d)",
         "\\1\\\\1",
+        "(x)\\1",
+        "(x)(y)\\2",
+        "(a)",
+        "(b)",
+        "(c)",
+        "(d)",
         "(e)\\1",
         "(f)",
-        "(x)\\1",
         "(g)",
-        "(x)(y)\\2",
         "(h)(?=(x))",
         "i",
         "j",
@@ -32,10 +32,10 @@
             "name": "main:0",
             "rules": [
                 {
-                    "match": 1,
+                    "match": 0,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "pop": true
@@ -46,10 +46,10 @@
             "name": "main:1",
             "rules": [
                 {
-                    "match": 3,
+                    "match": 1,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "pop": true
@@ -60,10 +60,10 @@
             "name": "main:2",
             "rules": [
                 {
-                    "match": 5,
+                    "match": 2,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "pop": true
@@ -74,10 +74,10 @@
             "name": "main:3",
             "rules": [
                 {
-                    "match": 7,
+                    "match": 3,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "pop": true
@@ -88,10 +88,10 @@
             "name": "main:4",
             "rules": [
                 {
-                    "match": 10,
+                    "match": 4,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "pop": true
@@ -102,10 +102,10 @@
             "name": "main:5",
             "rules": [
                 {
-                    "match": 12,
+                    "match": 5,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "pop": true
@@ -116,10 +116,10 @@
             "name": "main:6",
             "rules": [
                 {
-                    "match": 12,
+                    "match": 5,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "pop": true
@@ -130,10 +130,10 @@
             "name": "main:7",
             "rules": [
                 {
-                    "match": 1,
+                    "match": 0,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "pop": true
@@ -144,10 +144,10 @@
             "name": "main:8",
             "rules": [
                 {
-                    "match": 10,
+                    "match": 4,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "pop": true
@@ -158,10 +158,10 @@
             "name": "main:9",
             "rules": [
                 {
-                    "match": 1,
+                    "match": 0,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "pop": true
@@ -172,10 +172,10 @@
             "name": "main",
             "rules": [
                 {
-                    "match": 0,
+                    "match": 6,
                     "captures": [
                         [
-                            0
+                            1
                         ]
                     ],
                     "push": [
@@ -183,10 +183,10 @@
                     ]
                 },
                 {
-                    "match": 2,
+                    "match": 7,
                     "captures": [
                         [
-                            0
+                            1
                         ]
                     ],
                     "push": [
@@ -194,10 +194,10 @@
                     ]
                 },
                 {
-                    "match": 4,
+                    "match": 8,
                     "captures": [
                         [
-                            0
+                            1
                         ]
                     ],
                     "push": [
@@ -205,10 +205,10 @@
                     ]
                 },
                 {
-                    "match": 6,
+                    "match": 9,
                     "captures": [
                         [
-                            0
+                            1
                         ]
                     ],
                     "push": [
@@ -216,18 +216,18 @@
                     ]
                 },
                 {
-                    "match": 8,
+                    "match": 10,
                     "captures": [
                         [
-                            0
+                            1
                         ]
                     ]
                 },
                 {
-                    "match": 9,
+                    "match": 11,
                     "captures": [
                         [
-                            0
+                            1
                         ]
                     ],
                     "push": [
@@ -235,10 +235,10 @@
                     ]
                 },
                 {
-                    "match": 11,
+                    "match": 12,
                     "captures": [
                         [
-                            0
+                            1
                         ]
                     ],
                     "push": [
@@ -249,7 +249,7 @@
                     "match": 13,
                     "captures": [
                         [
-                            0
+                            1
                         ]
                     ],
                     "push": [
@@ -260,7 +260,7 @@
                     "match": 14,
                     "captures": [
                         [
-                            0
+                            1
                         ]
                     ],
                     "push": [
@@ -271,7 +271,7 @@
                     "match": 15,
                     "captures": [
                         [
-                            0
+                            1
                         ]
                     ],
                     "push": [
@@ -282,7 +282,7 @@
                     "match": 16,
                     "captures": [
                         [
-                            0
+                            1
                         ]
                     ],
                     "push": [

@@ -25,6 +25,7 @@ function runTest(path) {
 
     const unpacked = syntaxProvider.unpack(syntax);
     path.joinpath('unpacked.json').writeText(JSON.stringify(unpacked, null, 4));
+    path.joinpath('unpacked-min.json').writeText(JSON.stringify(unpacked));
     const tokens = Array.from(parse(unpacked, text));
 
     const result = Array.from(flatMap(

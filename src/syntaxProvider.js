@@ -1,7 +1,7 @@
 const { Path } = require('../lib/pathlib');
 
 const { loadYaml } = require('./load-yaml');
-const { preprocess } = require('./syntax');
+const { process } = require('./syntax');
 const { objMap } = require('./util');
 
 class SyntaxProvider {
@@ -24,10 +24,7 @@ class SyntaxProvider {
                     ...rule,
                     // push: contexts(rule.push),
                     // 'set': contexts(rule.set),
-                    captures: objMap(
-                        rule.captures,
-                        scopeNames
-                    ),
+                    captures: rule.captures.map(scopeNames),
                 })),
                 patterns: ctx.rules.map(r => syntax.patterns[r.match]),
             })),
@@ -38,7 +35,7 @@ class SyntaxProvider {
         const path = this.path.joinpath(relpath);
         const buffer = path.readBinary();
         const data = loadYaml(buffer);
-        const syntax = preprocess(data);
+        const syntax = process(data);
 
         return syntax;
     }
@@ -47,7 +44,7 @@ class SyntaxProvider {
         const path = this.path.joinpath(relpath);
         const buffer = path.readBinary();
         const data = loadYaml(buffer);
-        const syntax = preprocess(data);
+        const syntax = process(data);
 
         return this.unpack(syntax);
     }

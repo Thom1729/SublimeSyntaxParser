@@ -38,24 +38,19 @@ function normalizeContextList(list) {
     return list;
 }
 
+function splitScopes(scopes) {
+    if (!scopes) return undefined;
+    const ret = [];
+    (scopes + ' ').replace(/\S+\s*|\s+/g, part => { ret.push(part); });
+    return ret;
+}
+
 function preprocess(syntax) {
-    const newVariables = recMap(
+    const variables = recMap(
         syntax.variables || {},
         (key, value, recurse) =>
             value.replace(/\{\{(\w+)\}\}/g, (all, v) => recurse(v))
     );
-
-    const scopeInterner = new Interner();
-    const patternInterner = new Interner();
-
-    function splitScopes(scopes) {
-        if (!scopes) return undefined;
-        const ret = [];
-        (scopes + ' ').replace(/\S+\s*|\s+/g, part => { ret.push(scopeInterner.get(part)); });
-        return ret;
-    }
-
-    const contextInterner = new Interner();
 
     const newContexts = recMap(syntax.contexts, (name, context, recurse) => {
 
@@ -69,8 +64,7 @@ function preprocess(syntax) {
                     } else {
                         return nextRule;
                     }
-                })
-                .map(name => contextInterner.get(name));
+                });
         }
 
         const newContext = {
@@ -126,7 +120,7 @@ function preprocess(syntax) {
                     }
 
                     const newRule = {
-                        match: patternInterner.get(match.replace(/\{\{(\w+)\}\}/g, (all, v) => newVariables[v])),
+                        match: match.replace(/\{\{(\w+)\}\}/g, (all, v) => variables[v]),
                         captures: [],
                     };
 
@@ -155,6 +149,48 @@ function preprocess(syntax) {
 
         return newContext;
     });
+
+    return {
+        name: syntax.name,
+        scope: splitScopes(syntax.scope),
+        hidden: Boolean(syntax.hidden),
+        contexts: newContexts,
+    };
+}
+
+function process(syntax) {
+    syntax = preprocess(syntax);
+
+    const scopeInterner = new Interner();
+    const patternInterner = new Interner();
+    const contextInterner = new Interner();
+
+    function internScopes(scopes) {
+        return scopes && scopes.map(s => scopeInterner.get(s));
+    }
+
+    function internContexts(contexts) {
+        return contexts && contexts.map(s => contextInterner.get(s));
+    }
+
+    const newContexts = objMap(syntax.contexts, ctx => ({
+        ...ctx,
+        meta_scope: internScopes(ctx.meta_scope),
+        meta_content_scope: internScopes(ctx.meta_content_scope),
+        rules: ctx.rules.map(rule => {
+            if (rule.hasOwnProperty('match')) {
+                return {
+                    ...rule,
+                    push: internContexts(rule.push),
+                    'set': internContexts(rule.set),
+                    match: patternInterner.get(rule.match),
+                    captures: rule.captures.map(internScopes),
+                };
+            } else {
+                return rule;
+            }
+        }),
+    }));
 
     const newNewContexts = recMap(newContexts, (name, context, recurse) => {
         const rules = Array.from(flatMap(context.rules,
@@ -200,15 +236,14 @@ function preprocess(syntax) {
 
     return {
         mainContext: contextInterner.get('main'),
-        scope: splitScopes(syntax.scope),
+        scope: internScopes(syntax.scope),
         scopes: scopeInterner.values,
         patterns: patternInterner.values,
-        // contexts: newNewContexts,
-        // names: contextInterner.values,
         contexts: contextInterner.values.map(name => newNewContexts[name] || null),
     };
 }
 
 module.exports = {
     preprocess,
+    process,
 };
