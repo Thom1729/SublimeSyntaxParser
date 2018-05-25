@@ -159,15 +159,23 @@ function preprocess(syntax) {
 }
 
 function process(syntax) {
-    syntax = preprocess(syntax);
 
     const newContexts = recMap(syntax.contexts, (name, context, recurse) => {
-        const rules = Array.from(flatMap(context.rules,
-            rule =>
-                !rule.include ? [rule] :
-                rule.include.slice(0, 6) === 'scope:' ? [] :
-                recurse(rule.include).rules
-        ));
+
+        const rules = Array.from(function*(){
+            for (const rule of context.rules) {
+
+                if (rule.include) {
+                    if (rule.include.slice(0, 6) === 'scope:') {
+                        // TODO
+                    } else {
+                        yield* recurse(rule.include).rules;
+                    }
+                } else {
+                    yield rule;
+                }
+            }
+        }());
 
         return {
             ...context,
