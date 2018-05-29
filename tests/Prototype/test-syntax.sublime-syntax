@@ -16,6 +16,7 @@ contexts:
     - match: b
       scope: region.redish
       push: test-b
+    - include: test-m
 
   main:
     - match: c
@@ -39,6 +40,10 @@ contexts:
         - match: z
           scope: region.bluish
           pop: true
+
+    - match: l
+      scope: region.redish
+      push: test-m
   
   test-b:
     - meta_scope: B
@@ -49,5 +54,12 @@ contexts:
   test-d:
     - meta_scope: D
     - match: z
+      scope: region.bluish
+      pop: true
+
+      
+  test-m:
+    - meta_scope: M
+    - match: m
       scope: region.bluish
       pop: true

@@ -3,29 +3,26 @@ const { objMap, Interner } = require('./util.js');
 function process(name, getSyntax) {
     const syntax = getSyntax(name);
 
-    const contextInterner = new Interner();
-    for (const name of Object.keys(syntax.contexts)) contextInterner.get(name);
-
+    const nameLookup = new Map();
     const queue = [];
     const results = [];
 
-    function doStuff(i) {
-        if (results[i]) return results[i];
-        const { context, suppressPrototype } = queue[i];
+    function enqueueContext(context) {
+        queue.push({ context });
+        return queue.length - 1;
+    }
 
-        function getNamedContext(nextRule) {
-            if (typeof nextRule === 'object') {
-                queue.push({
-                    context: nextRule,
-                    suppressPrototype: suppressPrototype || nextRule.name === 'prototype',
-                });
-                return queue.length - 1;
-
-                return enqueue(nextRule);
-            } else {
-                return contextInterner.get(nextRule);
-            }
+    function enqueueNamedContext(name) {
+        if (! nameLookup.has(name)) {
+            nameLookup.set(name, enqueueContext(syntax.contexts[name]));
         }
+        return nameLookup.get(name);
+    }
+
+    function resolveContext(i) {
+        if (results[i]) return;
+
+        const { context } = queue[i];
 
         results[i] = {
             ...context,
@@ -34,14 +31,16 @@ function process(name, getSyntax) {
                     if (rule.hasOwnProperty('match')) {
                         yield {
                             ...rule,
-                            next: rule.next.map(getNamedContext),
+                            next: rule.next.map(
+                                c => (typeof c === 'object') ? enqueueContext(c) : enqueueNamedContext(c)
+                            ),
                         };
                     } else if (rule.hasOwnProperty('include')) {
                         if (rule.include.slice(0, 6) === 'scope:') {
                             // TODO
                         } else {
-                            const j = contextInterner.get(rule.include);
-                            doStuff(j);
+                            const j = enqueueNamedContext(rule.include);
+                            resolveContext(j);
                             yield* results[j].rules;
                         }
                     } else {
@@ -52,41 +51,33 @@ function process(name, getSyntax) {
         };
     }
 
-    queue.push(...contextInterner.values.map(name => ({ context: syntax.contexts[name] })));
-
-    for (i=0; i < queue.length; i++) doStuff(i);
+    let i = 0;
+    let protoIndex = 0;
 
     if (syntax.contexts.hasOwnProperty('prototype')) {
-        const protoRules = results[contextInterner.get('prototype')].rules;
+        enqueueNamedContext('prototype');
+        for (; i < queue.length; i++) resolveContext(i);
+        protoIndex = i;
+    }
 
-        const prototypeTainted = new Set();
+    for (const name of Object.keys(syntax.contexts)) {
+        enqueueNamedContext(name);
+        for (; i < queue.length; i++) resolveContext(i);
+    }
 
-        function taint(i) {
-            if (!prototypeTainted.has(i)) {
-                prototypeTainted.add(i);
-                for (const rule of results[i].rules) {
-                    for (const i of (rule.next || [])) {
-                        taint(i);
-                    }
-                }
-            }
-        }
-
-        taint(contextInterner.get('prototype'));
+    if (syntax.contexts.hasOwnProperty('prototype')) {
+        const protoRules = results[nameLookup.get('prototype')].rules;
 
         results.forEach((context, i) => {
-            if (context.meta_include_prototype !== false && !prototypeTainted.has(i)) {
-                context.rules = [
-                    ...protoRules,
-                    ...context.rules,
-                ];
+            if (context.meta_include_prototype !== false && i >= protoIndex) {
+                context.rules = [...protoRules, ...context.rules];
             }
         });
     }
     return {
         ...syntax,
         contexts: results,
-        mainContext: contextInterner.get('main'),
+        mainContext: nameLookup.get('main'),
     };
 }
 

@@ -67,3 +67,15 @@
 66 * source.test-prototype region.bluish 
 67 * source.test-prototype 
 68 * source.test-prototype 
+69 * source.test-prototype 
+70 * source.test-prototype region.bluish 
+71 * source.test-prototype region.bluish 
+72 * source.test-prototype region.bluish 
+73 * source.test-prototype 
+74 * source.test-prototype M region.redish 
+75 * source.test-prototype M region.bluish 
+76 * source.test-prototype 
+77 * source.test-prototype M region.redish 
+78 * source.test-prototype M 
+79 * source.test-prototype M region.bluish 
+80 * source.test-prototype 
