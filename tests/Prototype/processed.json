@@ -31,7 +31,8 @@
                             0
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         4
                     ]
                 },
@@ -42,7 +43,8 @@
                             0
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         2
                     ]
                 }
@@ -58,7 +60,8 @@
                             0
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         4
                     ]
                 },
@@ -69,7 +72,8 @@
                             0
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         2
                     ]
                 },
@@ -80,7 +84,8 @@
                             0
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         2
                     ]
                 },
@@ -91,7 +96,8 @@
                             0
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         3
                     ]
                 },
@@ -102,7 +108,8 @@
                             0
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         5
                     ]
                 }
@@ -118,7 +125,8 @@
                             2
                         ]
                     ],
-                    "pop": true
+                    "pop": true,
+                    "next": []
                 }
             ],
             "meta_scope": [
@@ -135,7 +143,8 @@
                             0
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         4
                     ]
                 },
@@ -146,7 +155,8 @@
                             0
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         2
                     ]
                 },
@@ -157,7 +167,8 @@
                             2
                         ]
                     ],
-                    "pop": true
+                    "pop": true,
+                    "next": []
                 }
             ],
             "meta_scope": [
@@ -174,7 +185,8 @@
                             2
                         ]
                     ],
-                    "pop": true
+                    "pop": true,
+                    "next": []
                 }
             ],
             "meta_scope": [
@@ -191,7 +203,8 @@
                             5
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         6
                     ]
                 },
@@ -202,7 +215,8 @@
                             2
                         ]
                     ],
-                    "pop": true
+                    "pop": true,
+                    "next": []
                 }
             ],
             "meta_include_prototype": false
@@ -217,7 +231,8 @@
                             0
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         4
                     ]
                 },
@@ -228,7 +243,8 @@
                             0
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         2
                     ]
                 },
@@ -239,7 +255,8 @@
                             2
                         ]
                     ],
-                    "pop": true
+                    "pop": true,
+                    "next": []
                 }
             ]
         }

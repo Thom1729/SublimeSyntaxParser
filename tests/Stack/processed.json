@@ -43,12 +43,14 @@
                             0
                         ]
                     ],
-                    "pop": true
+                    "pop": true,
+                    "next": []
                 },
                 {
                     "match": 1,
                     "captures": [],
-                    "push": [
+                    "push": true,
+                    "next": [
                         1
                     ]
                 }
@@ -64,7 +66,8 @@
                             3
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         2
                     ]
                 },
@@ -75,7 +78,8 @@
                             3
                         ]
                     ],
-                    "set": [
+                    "set": true,
+                    "next": [
                         2
                     ]
                 },
@@ -86,7 +90,8 @@
                             3
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         2,
                         2,
                         2
@@ -99,7 +104,8 @@
                             3
                         ]
                     ],
-                    "set": [
+                    "set": true,
+                    "next": [
                         2,
                         2,
                         2
@@ -112,7 +118,8 @@
                             3
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         2,
                         3
                     ]
@@ -124,7 +131,8 @@
                             3
                         ]
                     ],
-                    "set": [
+                    "set": true,
+                    "next": [
                         2,
                         3
                     ]
@@ -136,7 +144,8 @@
                             3
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         2,
                         3,
                         2,
@@ -151,7 +160,8 @@
                             3
                         ]
                     ],
-                    "set": [
+                    "set": true,
+                    "next": [
                         2,
                         3,
                         2,
@@ -166,7 +176,8 @@
                             3
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         4,
                         4,
                         2
@@ -179,7 +190,8 @@
                             3
                         ]
                     ],
-                    "set": [
+                    "set": true,
+                    "next": [
                         4,
                         4,
                         2
@@ -192,7 +204,8 @@
                             3
                         ]
                     ],
-                    "push": [
+                    "push": true,
+                    "next": [
                         5,
                         2
                     ]
@@ -204,7 +217,8 @@
                             3
                         ]
                     ],
-                    "set": [
+                    "set": true,
+                    "next": [
                         5,
                         2
                     ]
@@ -227,7 +241,8 @@
                             6
                         ]
                     ],
-                    "pop": true
+                    "pop": true,
+                    "next": []
                 }
             ],
             "meta_scope": [
@@ -243,7 +258,8 @@
                 {
                     "match": 1,
                     "captures": [],
-                    "pop": true
+                    "pop": true,
+                    "next": []
                 }
             ],
             "clear_scopes": "1"
@@ -254,7 +270,8 @@
                 {
                     "match": 1,
                     "captures": [],
-                    "pop": true
+                    "pop": true,
+                    "next": []
                 }
             ],
             "clear_scopes": "1",
@@ -269,7 +286,8 @@
                 {
                     "match": 1,
                     "captures": [],
-                    "pop": true
+                    "pop": true,
+                    "next": []
                 }
             ],
             "clear_scopes": true

@@ -3,7 +3,6 @@ const { Path } = require('../lib/pathlib');
 const { loadYaml } = require('./load-yaml');
 const { preprocess } = require('./preprocess');
 const { process, pack } = require('./syntax');
-const { objMap } = require('./util');
 
 class SyntaxProvider {
     constructor(path, scopes) {
@@ -13,7 +12,6 @@ class SyntaxProvider {
 
     unpack(syntax) {
         const scopeNames = (arr) => arr && arr.map(i => syntax.scopes[i]);
-        // const contexts = (arr) => arr && arr.map(i => syntax.contexts);
 
         return {
             ...syntax,
@@ -24,8 +22,6 @@ class SyntaxProvider {
                 meta_content_scope: scopeNames(ctx.meta_content_scope) || [],
                 rules: ctx.rules.map(rule => ({
                     ...rule,
-                    // push: contexts(rule.push),
-                    // 'set': contexts(rule.set),
                     captures: rule.captures.map(scopeNames),
                 })),
                 patterns: ctx.rules.map(r => syntax.patterns[r.match]),

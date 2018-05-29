@@ -116,8 +116,7 @@ class ParserState {
         if (match) {
             const rule = top.rules[match.index];
 
-            const pushed = (rule.push || rule.set || []).map(i => this.syntax.contexts[i]);
-            // const pushed = (rule.push || rule.set || []);
+            const pushed = rule.next.map(i => this.syntax.contexts[i]);
 
             const matchStart = match.captureIndices[0].start;
 

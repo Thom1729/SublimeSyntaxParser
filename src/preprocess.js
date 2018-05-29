@@ -1,11 +1,4 @@
-const { objMap, recMap2 } = require('./util.js');
-
-// const metaProperties = new Set([
-//     'meta_scope',
-//     'meta_content_scope',
-//     'meta_include_prototype',
-//     'clear_scopes',
-// ]);
+const { objMap, recMap } = require('./util.js');
 
 function caseObjectShape(obj, cases) {
     for (const [ required, callback ] of Object.entries(cases)) {
@@ -28,6 +21,7 @@ function normalizeContextList(list) {
         typeof list === 'string' ||
         (
             Array.isArray(list) &&
+            list.length > 0 &&
             typeof list[0] !== 'string' &&
             ! Array.isArray(list[0])
         )
@@ -46,7 +40,7 @@ function splitScopes(scopes) {
 }
 
 function preprocess(syntax, loader) {
-    const variables = recMap2(
+    const variables = recMap(
         syntax.variables || {},
         (key, value, recurse) =>
             value.replace(/\{\{(\w+)\}\}/g, (all, v) => variables(v))
@@ -124,13 +118,13 @@ function preprocess(syntax, loader) {
                         }
                     }
 
-                    function bar(c, j) {
-                        return typeof c === 'object' ? simplifyContext(c, `${name}:${i},${j}`) : c;
-                    }
-
-                    if (push) newRule.push = normalizeContextList(push).map(bar);
-                    if (set) newRule.set = normalizeContextList(set).map(bar);
+                    if (push) newRule.push = true;
+                    if (set) newRule.set = true;
                     if (pop) newRule.pop = pop;
+
+                    newRule.next = normalizeContextList(push || set || []).map( (c, j) =>
+                        typeof c === 'object' ? simplifyContext(c, `${name}:${i},${j}`) : c
+                    );
 
                     newContext.rules.push(newRule);
                 }

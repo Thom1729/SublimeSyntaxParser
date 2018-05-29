@@ -1,4 +1,4 @@
-const { objMap, recMap, Interner } = require('./util.js');
+const { objMap, Interner } = require('./util.js');
 
 function process(name, getSyntax) {
     const syntax = getSyntax(name);
@@ -9,27 +9,22 @@ function process(name, getSyntax) {
     const queue = [];
     const results = [];
 
-    const noPrototype = new Set();
-
     function doStuff(i) {
         if (results[i]) return results[i];
         const { context, suppressPrototype } = queue[i];
 
-        function getNamedContexts(list) {
-            return list && list
-                .map(nextRule => {
-                    if (typeof nextRule === 'object') {
-                        queue.push({
-                            context: nextRule,
-                            suppressPrototype: suppressPrototype || nextRule.name === 'prototype',
-                        });
-                        return queue.length - 1;
-
-                        return enqueue(nextRule);
-                    } else {
-                        return contextInterner.get(nextRule);
-                    }
+        function getNamedContext(nextRule) {
+            if (typeof nextRule === 'object') {
+                queue.push({
+                    context: nextRule,
+                    suppressPrototype: suppressPrototype || nextRule.name === 'prototype',
                 });
+                return queue.length - 1;
+
+                return enqueue(nextRule);
+            } else {
+                return contextInterner.get(nextRule);
+            }
         }
 
         results[i] = {
@@ -39,8 +34,7 @@ function process(name, getSyntax) {
                     if (rule.hasOwnProperty('match')) {
                         yield {
                             ...rule,
-                            push: getNamedContexts(rule.push),
-                            'set': getNamedContexts(rule.set),
+                            next: rule.next.map(getNamedContext),
                         };
                     } else if (rule.hasOwnProperty('include')) {
                         if (rule.include.slice(0, 6) === 'scope:') {
@@ -58,17 +52,9 @@ function process(name, getSyntax) {
         };
     }
 
-    function handleNamedContext(name) {
-        const i = contextInterner.get(name);
-
-        return i;
-    }
-
     queue.push(...contextInterner.values.map(name => ({ context: syntax.contexts[name] })));
 
-    for (let i=0; i < queue.length; i++) {
-        doStuff(i);
-    }
+    for (i=0; i < queue.length; i++) doStuff(i);
 
     if (syntax.contexts.hasOwnProperty('prototype')) {
         const protoRules = results[contextInterner.get('prototype')].rules;
@@ -76,12 +62,10 @@ function process(name, getSyntax) {
         const prototypeTainted = new Set();
 
         function taint(i) {
-            if (prototypeTainted.has(i)) {
-                return;
-            } else {
+            if (!prototypeTainted.has(i)) {
                 prototypeTainted.add(i);
                 for (const rule of results[i].rules) {
-                    for (const i of (rule.push || rule.set || [])) {
+                    for (const i of (rule.next || [])) {
                         taint(i);
                     }
                 }
