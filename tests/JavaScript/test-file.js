@@ -1,26 +1,6 @@
-function objFromPairs(pairs) {
-    const ret = {};
-    for (const [k, v] of pairs) {
-        ret[k] = v;
-    }
-    return ret;
-}
+/foo/;
 
-function objMap(obj, valueSelector, keySelector) {
-    if (!keySelector) keySelector = (v,k) => k;
-
-    const ret = {};
-    for (const [k, v] of Object.entries(obj)) {
-        ret[keySelector(v, k)] = valueSelector(v, k);
-    }
-    return ret;
-}
-
-function* flatMap(iterable, callback) {
-    for (const item of iterable) {
-        yield* callback(item);
-    }
-}
+// Hello? //
 
 function recMap(obj, callback) {
     const ret = {};

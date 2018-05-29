@@ -1,28 +1,36 @@
-const { objMap, Interner } = require('./util.js');
+const { Interner } = require('./util.js');
+
+class Environment {
+    constructor(queue, syntax) {
+        this.queue = queue;
+        this.syntax = syntax;
+        this.nameLookup = new Map();
+    }
+
+    enqueueContext(context) {
+        this.queue.push({ context, environment: this });
+        return this.queue.length - 1;
+    }
+
+    enqueueNamedContext(name) {
+        if (! this.nameLookup.has(name)) {
+            this.nameLookup.set(name, this.enqueueContext(this.syntax.contexts[name]));
+        }
+        return this.nameLookup.get(name);
+    }
+}
 
 function process(name, getSyntax) {
     const syntax = getSyntax(name);
 
-    const nameLookup = new Map();
     const queue = [];
     const results = [];
-
-    function enqueueContext(context) {
-        queue.push({ context });
-        return queue.length - 1;
-    }
-
-    function enqueueNamedContext(name) {
-        if (! nameLookup.has(name)) {
-            nameLookup.set(name, enqueueContext(syntax.contexts[name]));
-        }
-        return nameLookup.get(name);
-    }
+    let i = 0;
 
     function resolveContext(i) {
         if (results[i]) return;
 
-        const { context } = queue[i];
+        const { context, environment } = queue[i];
 
         results[i] = {
             ...context,
@@ -32,17 +40,26 @@ function process(name, getSyntax) {
                         yield {
                             ...rule,
                             next: rule.next.map(
-                                c => (typeof c === 'object') ? enqueueContext(c) : enqueueNamedContext(c)
+                                c => (typeof c === 'object')
+                                    ? environment.enqueueContext(c)
+                                    : environment.enqueueNamedContext(c)
                             ),
                         };
                     } else if (rule.hasOwnProperty('include')) {
+                        let includeEnvironment,
+                            contextName;
+
                         if (rule.include.slice(0, 6) === 'scope:') {
-                            // TODO
+                            const included = rule.include.slice(6);
+                            includeEnvironment = new Environment(queue, getSyntax(included));
+                            contextName = 'main';
                         } else {
-                            const j = enqueueNamedContext(rule.include);
-                            resolveContext(j);
-                            yield* results[j].rules;
+                            includeEnvironment = environment;
+                            contextName = rule.include;
                         }
+                        const j = includeEnvironment.enqueueNamedContext(contextName);
+                        resolveContext(j);
+                        yield* results[j].rules;
                     } else {
                         throw new TypeError(rule.toString());
                     }
@@ -51,22 +68,23 @@ function process(name, getSyntax) {
         };
     }
 
-    let i = 0;
     let protoIndex = 0;
 
+    const baseEnvironment = new Environment(queue, syntax);
+
     if (syntax.contexts.hasOwnProperty('prototype')) {
-        enqueueNamedContext('prototype');
+        baseEnvironment.enqueueNamedContext('prototype');
         for (; i < queue.length; i++) resolveContext(i);
         protoIndex = i;
     }
 
     for (const name of Object.keys(syntax.contexts)) {
-        enqueueNamedContext(name);
+        baseEnvironment.enqueueNamedContext(name);
         for (; i < queue.length; i++) resolveContext(i);
     }
 
     if (syntax.contexts.hasOwnProperty('prototype')) {
-        const protoRules = results[nameLookup.get('prototype')].rules;
+        const protoRules = results[baseEnvironment.nameLookup.get('prototype')].rules;
 
         results.forEach((context, i) => {
             if (context.meta_include_prototype !== false && i >= protoIndex) {
@@ -77,7 +95,7 @@ function process(name, getSyntax) {
     return {
         ...syntax,
         contexts: results,
-        mainContext: nameLookup.get('main'),
+        mainContext: baseEnvironment.nameLookup.get('main'),
     };
 }
 
