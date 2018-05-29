@@ -1,7 +1,8 @@
 const { Path } = require('../lib/pathlib');
 
 const { loadYaml } = require('./load-yaml');
-const { preprocess, process } = require('./syntax');
+const { preprocess } = require('./preprocess');
+const { process, pack } = require('./syntax');
 const { objMap } = require('./util');
 
 class SyntaxProvider {
@@ -32,28 +33,23 @@ class SyntaxProvider {
         };
     }
 
-    loadUnlinked(relpath) {
+    loadRaw(relpath) {
         if (this.scopes.hasOwnProperty(relpath)) relpath = this.scopes[relpath];
 
         const path = this.path.joinpath(relpath);
         const buffer = path.readBinary();
         const data = loadYaml(buffer);
 
-        return preprocess(data);
+        return data;
+    }
+
+    loadPreprocessed(relpath) {
+        return preprocess(this.loadRaw(relpath), this);
     }
 
     getPacked(relpath) {
-        return process(this.loadUnlinked(relpath), this.loadUnlinked.bind(this));
+        return pack(process(relpath, this.loadPreprocessed.bind(this)));
     }
-
-    // load(relpath) {
-    //     const path = this.path.joinpath(relpath);
-    //     const buffer = path.readBinary();
-    //     const data = loadYaml(buffer);
-    //     const syntax = process(preprocess(data));
-
-    //     return this.unpack(syntax);
-    // }
 }
 
 module.exports = { SyntaxProvider };

@@ -1,20 +1,14 @@
 {
-    "mainContext": 10,
+    "mainContext": 0,
     "scope": [
         2
     ],
     "scopes": [
-        "region.bluish ",
         "region.redish ",
+        "region.bluish ",
         "source.test-backrefs "
     ],
     "patterns": [
-        "\\1",
-        "\\\\1",
-        "\\\\\\1",
-        "\\1\\\\1",
-        "(x)\\1",
-        "(x)(y)\\2",
         "(a)",
         "(b)",
         "(c)",
@@ -25,168 +19,23 @@
         "(h)(?=(x))",
         "i",
         "j",
-        "(\\\\)"
+        "(\\\\)",
+        "\\1",
+        "\\\\1",
+        "\\\\\\1",
+        "\\1\\\\1",
+        "(x)\\1",
+        "(x)(y)\\2"
     ],
     "contexts": [
-        {
-            "name": "main:0",
-            "rules": [
-                {
-                    "match": 0,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "pop": true
-                }
-            ]
-        },
-        {
-            "name": "main:1",
-            "rules": [
-                {
-                    "match": 1,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "pop": true
-                }
-            ]
-        },
-        {
-            "name": "main:2",
-            "rules": [
-                {
-                    "match": 2,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "pop": true
-                }
-            ]
-        },
-        {
-            "name": "main:3",
-            "rules": [
-                {
-                    "match": 3,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "pop": true
-                }
-            ]
-        },
-        {
-            "name": "main:4",
-            "rules": [
-                {
-                    "match": 4,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "pop": true
-                }
-            ]
-        },
-        {
-            "name": "main:5",
-            "rules": [
-                {
-                    "match": 5,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "pop": true
-                }
-            ]
-        },
-        {
-            "name": "main:6",
-            "rules": [
-                {
-                    "match": 5,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "pop": true
-                }
-            ]
-        },
-        {
-            "name": "main:7",
-            "rules": [
-                {
-                    "match": 0,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "pop": true
-                }
-            ]
-        },
-        {
-            "name": "main:8",
-            "rules": [
-                {
-                    "match": 4,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "pop": true
-                }
-            ]
-        },
-        {
-            "name": "main:9",
-            "rules": [
-                {
-                    "match": 0,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "pop": true
-                }
-            ]
-        },
         {
             "name": "main",
             "rules": [
                 {
-                    "match": 6,
+                    "match": 0,
                     "captures": [
                         [
-                            1
-                        ]
-                    ],
-                    "push": [
-                        0
-                    ]
-                },
-                {
-                    "match": 7,
-                    "captures": [
-                        [
-                            1
+                            0
                         ]
                     ],
                     "push": [
@@ -194,10 +43,10 @@
                     ]
                 },
                 {
-                    "match": 8,
+                    "match": 1,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "push": [
@@ -205,10 +54,10 @@
                     ]
                 },
                 {
-                    "match": 9,
+                    "match": 2,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "push": [
@@ -216,18 +65,10 @@
                     ]
                 },
                 {
-                    "match": 10,
+                    "match": 3,
                     "captures": [
                         [
-                            1
-                        ]
-                    ]
-                },
-                {
-                    "match": 11,
-                    "captures": [
-                        [
-                            1
+                            0
                         ]
                     ],
                     "push": [
@@ -235,10 +76,18 @@
                     ]
                 },
                 {
-                    "match": 12,
+                    "match": 4,
                     "captures": [
                         [
-                            1
+                            0
+                        ]
+                    ]
+                },
+                {
+                    "match": 5,
+                    "captures": [
+                        [
+                            0
                         ]
                     ],
                     "push": [
@@ -246,10 +95,10 @@
                     ]
                 },
                 {
-                    "match": 13,
+                    "match": 6,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "push": [
@@ -257,10 +106,10 @@
                     ]
                 },
                 {
-                    "match": 14,
+                    "match": 7,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "push": [
@@ -268,10 +117,10 @@
                     ]
                 },
                 {
-                    "match": 15,
+                    "match": 8,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
                     "push": [
@@ -279,15 +128,166 @@
                     ]
                 },
                 {
+                    "match": 9,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "push": [
+                        9
+                    ]
+                },
+                {
+                    "match": 10,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "push": [
+                        10
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "main:0,0",
+            "rules": [
+                {
+                    "match": 11,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ],
+                    "pop": true
+                }
+            ]
+        },
+        {
+            "name": "main:1,0",
+            "rules": [
+                {
+                    "match": 12,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ],
+                    "pop": true
+                }
+            ]
+        },
+        {
+            "name": "main:2,0",
+            "rules": [
+                {
+                    "match": 13,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ],
+                    "pop": true
+                }
+            ]
+        },
+        {
+            "name": "main:3,0",
+            "rules": [
+                {
+                    "match": 14,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ],
+                    "pop": true
+                }
+            ]
+        },
+        {
+            "name": "main:5,0",
+            "rules": [
+                {
+                    "match": 15,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ],
+                    "pop": true
+                }
+            ]
+        },
+        {
+            "name": "main:6,0",
+            "rules": [
+                {
                     "match": 16,
                     "captures": [
                         [
                             1
                         ]
                     ],
-                    "push": [
-                        9
-                    ]
+                    "pop": true
+                }
+            ]
+        },
+        {
+            "name": "main:7,0",
+            "rules": [
+                {
+                    "match": 16,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ],
+                    "pop": true
+                }
+            ]
+        },
+        {
+            "name": "main:8,0",
+            "rules": [
+                {
+                    "match": 11,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ],
+                    "pop": true
+                }
+            ]
+        },
+        {
+            "name": "main:9,0",
+            "rules": [
+                {
+                    "match": 15,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ],
+                    "pop": true
+                }
+            ]
+        },
+        {
+            "name": "main:10,0",
+            "rules": [
+                {
+                    "match": 11,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ],
+                    "pop": true
                 }
             ]
         }

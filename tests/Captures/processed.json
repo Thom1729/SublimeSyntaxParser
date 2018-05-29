@@ -1,19 +1,18 @@
 {
-    "mainContext": 2,
+    "mainContext": 0,
     "scope": [
         6
     ],
     "scopes": [
-        "FOO ",
         "region.redish ",
         "region.bluish ",
         "region.greenish ",
         "  ",
         "region.pinkish ",
+        "FOO ",
         "source.test-captures "
     ],
     "patterns": [
-        "",
         "^(?=(a)aaaa)(aaa)aa",
         "^(?=bb(bb)b)(b)bbbb",
         "^(?=cc(ccc))cccc",
@@ -23,44 +22,34 @@
         "g(gg)",
         "h(h)(h)",
         "j",
-        "^(?:(x)|(y))+"
+        "^(?:(x)|(y))+",
+        ""
     ],
     "contexts": [
         {
-            "name": "main:0",
-            "rules": [
-                {
-                    "match": 0,
-                    "captures": [],
-                    "pop": true
-                }
-            ],
-            "meta_scope": [
-                0
-            ]
-        },
-        {
-            "name": "main:1",
-            "rules": [
-                {
-                    "match": 0,
-                    "captures": [],
-                    "pop": true
-                }
-            ]
-        },
-        {
             "name": "main",
             "rules": [
+                {
+                    "match": 0,
+                    "captures": [
+                        null,
+                        [
+                            0
+                        ],
+                        [
+                            1
+                        ]
+                    ]
+                },
                 {
                     "match": 1,
                     "captures": [
                         null,
                         [
-                            1
+                            0
                         ],
                         [
-                            2
+                            1
                         ]
                     ]
                 },
@@ -69,10 +58,7 @@
                     "captures": [
                         null,
                         [
-                            1
-                        ],
-                        [
-                            2
+                            0
                         ]
                     ]
                 },
@@ -81,7 +67,7 @@
                     "captures": [
                         null,
                         [
-                            1
+                            0
                         ]
                     ]
                 },
@@ -90,8 +76,9 @@
                     "captures": [
                         null,
                         [
-                            1
-                        ]
+                            0
+                        ],
+                        null
                     ]
                 },
                 {
@@ -99,39 +86,18 @@
                     "captures": [
                         null,
                         [
-                            1
+                            2
                         ],
-                        null
+                        [
+                            3
+                        ]
                     ]
                 },
                 {
                     "match": 6,
                     "captures": [
-                        null,
-                        [
-                            3
-                        ],
                         [
                             4
-                        ]
-                    ]
-                },
-                {
-                    "match": 7,
-                    "captures": [
-                        [
-                            5
-                        ]
-                    ],
-                    "push": [
-                        0
-                    ]
-                },
-                {
-                    "match": 8,
-                    "captures": [
-                        [
-                            5
                         ]
                     ],
                     "push": [
@@ -139,25 +105,59 @@
                     ]
                 },
                 {
-                    "match": 9,
+                    "match": 7,
                     "captures": [
                         [
-                            1,
-                            2
+                            4
+                        ]
+                    ],
+                    "push": [
+                        2
+                    ]
+                },
+                {
+                    "match": 8,
+                    "captures": [
+                        [
+                            0,
+                            1
                         ]
                     ]
                 },
                 {
-                    "match": 10,
+                    "match": 9,
                     "captures": [
                         null,
                         [
-                            1
+                            0
                         ],
                         [
-                            2
+                            1
                         ]
                     ]
+                }
+            ]
+        },
+        {
+            "name": "main:6,0",
+            "rules": [
+                {
+                    "match": 10,
+                    "captures": [],
+                    "pop": true
+                }
+            ],
+            "meta_scope": [
+                5
+            ]
+        },
+        {
+            "name": "main:7,0",
+            "rules": [
+                {
+                    "match": 10,
+                    "captures": [],
+                    "pop": true
                 }
             ]
         }

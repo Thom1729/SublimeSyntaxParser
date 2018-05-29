@@ -1,51 +1,177 @@
 {
-    "mainContext": 5,
+    "mainContext": 1,
     "scope": [
         6
     ],
     "scopes": [
-        "A ",
-        "region.bluish ",
         "region.redish ",
-        "region.greenish ",
         "B ",
+        "region.bluish ",
         "D ",
+        "A ",
+        "region.greenish ",
         "source.test-prototype "
     ],
     "patterns": [
-        "z",
         "a",
         "b",
-        "e",
         "c",
-        "d"
+        "d",
+        "e",
+        "z"
     ],
     "contexts": [
         {
-            "name": "prototype:0",
+            "name": "prototype",
             "rules": [
                 {
                     "match": 0,
                     "captures": [
                         [
-                            1
+                            0
                         ]
                     ],
-                    "pop": true
+                    "push": [
+                        4
+                    ]
+                },
+                {
+                    "match": 1,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "push": [
+                        2
+                    ]
                 }
-            ],
-            "meta_scope": [
-                0
+            ]
+        },
+        {
+            "name": "main",
+            "rules": [
+                {
+                    "match": 0,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "push": [
+                        4
+                    ]
+                },
+                {
+                    "match": 1,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "push": [
+                        2
+                    ]
+                },
+                {
+                    "match": 2,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "push": [
+                        2
+                    ]
+                },
+                {
+                    "match": 3,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "push": [
+                        3
+                    ]
+                },
+                {
+                    "match": 4,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "push": [
+                        5
+                    ]
+                }
             ]
         },
         {
             "name": "test-b",
             "rules": [
                 {
+                    "match": 5,
+                    "captures": [
+                        [
+                            2
+                        ]
+                    ],
+                    "pop": true
+                }
+            ],
+            "meta_scope": [
+                1
+            ]
+        },
+        {
+            "name": "test-d",
+            "rules": [
+                {
                     "match": 0,
                     "captures": [
                         [
-                            1
+                            0
+                        ]
+                    ],
+                    "push": [
+                        4
+                    ]
+                },
+                {
+                    "match": 1,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "push": [
+                        2
+                    ]
+                },
+                {
+                    "match": 5,
+                    "captures": [
+                        [
+                            2
+                        ]
+                    ],
+                    "pop": true
+                }
+            ],
+            "meta_scope": [
+                3
+            ]
+        },
+        {
+            "name": "prototype:0,0",
+            "rules": [
+                {
+                    "match": 5,
+                    "captures": [
+                        [
+                            2
                         ]
                     ],
                     "pop": true
@@ -56,140 +182,17 @@
             ]
         },
         {
-            "name": "main:0:0",
+            "name": "main:2,0",
             "rules": [
-                {
-                    "match": 1,
-                    "captures": [
-                        [
-                            2
-                        ]
-                    ],
-                    "push": [
-                        0
-                    ]
-                },
-                {
-                    "match": 2,
-                    "captures": [
-                        [
-                            2
-                        ]
-                    ],
-                    "push": [
-                        1
-                    ]
-                },
-                {
-                    "match": 0,
-                    "captures": [
-                        [
-                            1
-                        ]
-                    ],
-                    "pop": true
-                }
-            ]
-        },
-        {
-            "name": "test-d",
-            "rules": [
-                {
-                    "match": 1,
-                    "captures": [
-                        [
-                            2
-                        ]
-                    ],
-                    "push": [
-                        0
-                    ]
-                },
-                {
-                    "match": 2,
-                    "captures": [
-                        [
-                            2
-                        ]
-                    ],
-                    "push": [
-                        1
-                    ]
-                },
-                {
-                    "match": 0,
-                    "captures": [
-                        [
-                            1
-                        ]
-                    ],
-                    "pop": true
-                }
-            ],
-            "meta_scope": [
-                5
-            ]
-        },
-        {
-            "name": "main:0",
-            "rules": [
-                {
-                    "match": 3,
-                    "captures": [
-                        [
-                            3
-                        ]
-                    ],
-                    "push": [
-                        2
-                    ]
-                },
-                {
-                    "match": 0,
-                    "captures": [
-                        [
-                            1
-                        ]
-                    ],
-                    "pop": true
-                }
-            ],
-            "meta_include_prototype": false
-        },
-        {
-            "name": "main",
-            "rules": [
-                {
-                    "match": 1,
-                    "captures": [
-                        [
-                            2
-                        ]
-                    ],
-                    "push": [
-                        0
-                    ]
-                },
-                {
-                    "match": 2,
-                    "captures": [
-                        [
-                            2
-                        ]
-                    ],
-                    "push": [
-                        1
-                    ]
-                },
                 {
                     "match": 4,
                     "captures": [
                         [
-                            2
+                            5
                         ]
                     ],
                     "push": [
-                        1
+                        6
                     ]
                 },
                 {
@@ -199,20 +202,44 @@
                             2
                         ]
                     ],
-                    "push": [
-                        3
-                    ]
-                },
+                    "pop": true
+                }
+            ],
+            "meta_include_prototype": false
+        },
+        {
+            "name": "main:2,0:1,0",
+            "rules": [
                 {
-                    "match": 3,
+                    "match": 0,
                     "captures": [
                         [
-                            2
+                            0
                         ]
                     ],
                     "push": [
                         4
                     ]
+                },
+                {
+                    "match": 1,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "push": [
+                        2
+                    ]
+                },
+                {
+                    "match": 5,
+                    "captures": [
+                        [
+                            2
+                        ]
+                    ],
+                    "pop": true
                 }
             ]
         }

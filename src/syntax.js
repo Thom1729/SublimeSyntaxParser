@@ -1,258 +1,140 @@
-const { objMap, flatMap, recMap, Interner } = require('./util.js');
+const { objMap, recMap, Interner } = require('./util.js');
 
-// const metaProperties = new Set([
-//     'meta_scope',
-//     'meta_content_scope',
-//     'meta_include_prototype',
-//     'clear_scopes',
-// ]);
+function process(name, getSyntax) {
+    const syntax = getSyntax(name);
 
-function caseObjectShape(obj, cases) {
-    for (const [ required, callback ] of Object.entries(cases)) {
-        if (obj.hasOwnProperty(required)) {
-            return callback(obj);
-        }
-    }
-    assertNoExtras(obj);
-}
+    const contextInterner = new Interner();
+    for (const name of Object.keys(syntax.contexts)) contextInterner.get(name);
 
-function assertNoExtras(obj) {
-    const extras = Object.keys(obj);
-    if (extras.length) {
-        throw new TypeError(`Unexpected keys ${extras.join(', ')}`);
-    }
-}
+    const queue = [];
+    const results = [];
 
-function normalizeContextList(list) {
-    if (
-        typeof list === 'string' ||
-        (
-            Array.isArray(list) &&
-            typeof list[0] !== 'string' &&
-            ! Array.isArray(list[0])
-        )
-    ) {
-        list = [ list ];
-    }
+    const noPrototype = new Set();
 
-    return list;
-}
-
-function splitScopes(scopes) {
-    if (!scopes) return undefined;
-    const ret = [];
-    (scopes + ' ').replace(/\S+\s*|\s+/g, part => { ret.push(part); });
-    return ret;
-}
-
-function preprocess(syntax) {
-    const variables = recMap(
-        syntax.variables || {},
-        (key, value, recurse) =>
-            value.replace(/\{\{(\w+)\}\}/g, (all, v) => recurse(v))
-    );
-
-    const newContexts = recMap(syntax.contexts, (name, context, recurse) => {
+    function doStuff(i) {
+        if (results[i]) return results[i];
+        const { context, suppressPrototype } = queue[i];
 
         function getNamedContexts(list) {
-            return normalizeContextList(list)
+            return list && list
                 .map(nextRule => {
-                    if (Array.isArray(nextRule)) {
-                        const name = `${newContext.name}:${anonIndex}`;
-                        anonIndex++;
-                        return recurse(name, nextRule).name;
+                    if (typeof nextRule === 'object') {
+                        queue.push({
+                            context: nextRule,
+                            suppressPrototype: suppressPrototype || nextRule.name === 'prototype',
+                        });
+                        return queue.length - 1;
+
+                        return enqueue(nextRule);
                     } else {
-                        return nextRule;
+                        return contextInterner.get(nextRule);
                     }
                 });
         }
 
-        const newContext = {
-            name,
-            rules: [],
-        };
-
-        let anonIndex = 0;
-        let meta = true;
-
-        function assertMeta() {
-            if (!meta) throw new TypeError('Out of meta region.');
-        }
-
-        for (const originalRule of context) {
-            caseObjectShape(originalRule, {
-                meta_scope: ({ meta_scope, ...rest }) => {
-                    assertNoExtras(rest);
-                    assertMeta();
-                    newContext.meta_scope = splitScopes(meta_scope);
-                },
-
-                meta_content_scope: ({ meta_content_scope, ...rest }) => {
-                    assertNoExtras(rest);
-                    assertMeta();
-                    newContext.meta_content_scope = splitScopes(meta_content_scope);
-                },
-
-                clear_scopes: ({ clear_scopes, ...rest }) => {
-                    assertNoExtras(rest);
-                    assertMeta();
-                    newContext.clear_scopes = clear_scopes;
-                },
-
-                meta_include_prototype: ({ meta_include_prototype, ...rest }) => {
-                    assertNoExtras(rest);
-                    assertMeta();
-                    newContext.meta_include_prototype = meta_include_prototype;
-                },
-
-                include: ({ include, ...rest }) => {
-                    meta = false
-                    assertNoExtras(rest);
-                    newContext.rules.push({ include });
-                },
-
-                match: ({ match, captures, scope, pop, push, set, ...rest }) => {
-                    meta = false
-                    assertNoExtras(rest);
-
-                    if (set && (push || pop)) {
-                        throw TypeError('Set is exclusive with Push and Pop.');
-                    }
-
-                    const newRule = {
-                        match: match.replace(/\{\{(\w+)\}\}/g, (all, v) => variables[v]),
-                        captures: [],
-                    };
-
-                    if (captures) {
-                        for (const [i, scope] of Object.entries(captures)) {
-                            newRule.captures[i] = splitScopes(scope);
-                        }
-                    }
-
-                    if (scope) {
-                        if (newRule.captures[0]) {
-                            newRule.captures[0].unshift(...splitScopes(scope));
-                        } else {
-                            newRule.captures[0] = splitScopes(scope);
-                        }
-                    }
-
-                    if (push) newRule.push = getNamedContexts(push);
-                    if (set) newRule.set = getNamedContexts(set);
-                    if (pop) newRule.pop = pop;
-
-                    newContext.rules.push(newRule);
-                }
-            });
-        }
-
-        return newContext;
-    });
-
-    return {
-        name: syntax.name,
-        scope: splitScopes(syntax.scope),
-        hidden: Boolean(syntax.hidden),
-        contexts: newContexts,
-    };
-}
-
-function process(syntax) {
-
-    const newContexts = recMap(syntax.contexts, (name, context, recurse) => {
-
-        const rules = Array.from(function*(){
-            for (const rule of context.rules) {
-
-                if (rule.include) {
-                    if (rule.include.slice(0, 6) === 'scope:') {
-                        // TODO
-                    } else {
-                        yield* recurse(rule.include).rules;
-                    }
-                } else {
-                    yield rule;
-                }
-            }
-        }());
-
-        return {
+        results[i] = {
             ...context,
-            rules,
+            rules: Array.from(function*(){
+                for (const rule of context.rules) {
+                    if (rule.hasOwnProperty('match')) {
+                        yield {
+                            ...rule,
+                            push: getNamedContexts(rule.push),
+                            'set': getNamedContexts(rule.set),
+                        };
+                    } else if (rule.hasOwnProperty('include')) {
+                        if (rule.include.slice(0, 6) === 'scope:') {
+                            // TODO
+                        } else {
+                            const j = contextInterner.get(rule.include);
+                            doStuff(j);
+                            yield* results[j].rules;
+                        }
+                    } else {
+                        throw new TypeError(rule.toString());
+                    }
+                }
+            }()),
         };
-    });
+    }
 
-    if (newContexts['prototype']) {
+    function handleNamedContext(name) {
+        const i = contextInterner.get(name);
+
+        return i;
+    }
+
+    queue.push(...contextInterner.values.map(name => ({ context: syntax.contexts[name] })));
+
+    for (let i=0; i < queue.length; i++) {
+        doStuff(i);
+    }
+
+    if (syntax.contexts.hasOwnProperty('prototype')) {
+        const protoRules = results[contextInterner.get('prototype')].rules;
+
         const prototypeTainted = new Set();
 
-        function taint(name) {
-            if (prototypeTainted.has(name)) {
+        function taint(i) {
+            if (prototypeTainted.has(i)) {
                 return;
             } else {
-                prototypeTainted.add(name);
-                for (const rule of newContexts[name].rules) {
-                    for (const name of (rule.push || rule.set || [])) {
-                        taint(name);
+                prototypeTainted.add(i);
+                for (const rule of results[i].rules) {
+                    for (const i of (rule.push || rule.set || [])) {
+                        taint(i);
                     }
                 }
             }
         }
 
-        taint('prototype');
+        taint(contextInterner.get('prototype'));
 
-        for (const context of Object.values(newContexts)) {
-            if (context.meta_include_prototype !== false && !prototypeTainted.has(context.name)) {
+        results.forEach((context, i) => {
+            if (context.meta_include_prototype !== false && !prototypeTainted.has(i)) {
                 context.rules = [
-                    ...newContexts['prototype'].rules,
+                    ...protoRules,
                     ...context.rules,
                 ];
             }
-        }
+        });
     }
-
-    return pack({
+    return {
         ...syntax,
-        contexts: newContexts,
-    });
+        contexts: results,
+        mainContext: contextInterner.get('main'),
+    };
 }
 
 function pack(syntax) {
     const scopeInterner = new Interner();
     const patternInterner = new Interner();
-    const contextInterner = new Interner();
 
     function internScopes(scopes) {
         return scopes && scopes.map(s => scopeInterner.get(s));
     }
 
-    function internContexts(contexts) {
-        return contexts && contexts.map(s => contextInterner.get(s));
-    }
-
-    const newNewContexts = objMap(syntax.contexts, ctx => ({
+    const newNewContexts = syntax.contexts.map(ctx => ({
         ...ctx,
         meta_scope: internScopes(ctx.meta_scope),
         meta_content_scope: internScopes(ctx.meta_content_scope),
         rules: ctx.rules.map(rule => ({
             ...rule,
-            push: internContexts(rule.push),
-            'set': internContexts(rule.set),
             match: patternInterner.get(rule.match),
             captures: rule.captures.map(internScopes),
         })),
     }));
 
     return {
-        mainContext: contextInterner.get('main'),
+        mainContext: syntax.mainContext,
         scope: internScopes(syntax.scope),
         scopes: scopeInterner.values,
         patterns: patternInterner.values,
-        contexts: contextInterner.values.map(name => newNewContexts[name] || null),
+        contexts: newNewContexts,
     };
 }
 
 module.exports = {
-    preprocess,
     process,
+    pack,
 };

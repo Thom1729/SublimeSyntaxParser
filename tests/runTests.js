@@ -15,7 +15,7 @@ function runTest(path) {
     const { parse } = require('../src/parser.js');
 
     const syntaxProvider = new SyntaxProvider(path, {
-        'source.regexp.js': path.joinpath('Regular Expressions (JavaScript).sublime-syntax'),
+        'source.regexp.js': 'Regular Expressions (JavaScript).sublime-syntax',
     });
 
     const syntax = syntaxProvider.getPacked('test-syntax.sublime-syntax');
