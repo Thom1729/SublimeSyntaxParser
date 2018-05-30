@@ -7,8 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "node tests/runTests.js; gzip -f tests/*/*-min.json",
-    "diff": "diff tests/JavaScript/reference.txt tests/JavaScript/result.txt"
+    "test": "node tests/runTests.js"
   },
   "repository": {
     "type": "git",

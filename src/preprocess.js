@@ -138,7 +138,8 @@ function preprocess(syntax) {
     const simplified = objMap(syntax.contexts, simplifyContext);
 
     return {
-        name: syntax.name,
+        ...syntax,
+        // name: syntax.name,
         scope: splitScopes(syntax.scope),
         hidden: Boolean(syntax.hidden),
         contexts: simplified,

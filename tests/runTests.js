@@ -1,31 +1,52 @@
-const fs = require('fs');
 const { Path } = require('../lib/pathlib');
 const { flatMap } = require('../src/util');
 
 const testsDir = new Path('tests');
 
-for (const path of testsDir.iterdir()) {
-    if (path.isDir()) {
-        runTest(path);
-    }
+async function runTests() {
+    const tests = Array.from(testsDir.iterdir()).filter(path => path.isDir());
+
+    await Promise.all(tests.map(runTest));
 }
 
-function runTest(path) {
+runTests();
+
+function zipString(str) {
+    const zlib = require('zlib');
+    return new Promise((resolve, reject) => {
+        zlib.gzip(str, (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+}
+
+async function runTest(path) {
     const { SyntaxProvider } = require('../src/syntaxProvider.js');
     const { parse } = require('../src/parser.js');
 
     const syntaxProvider = new SyntaxProvider(path);
 
-    const syntax = syntaxProvider.getPacked('test-syntax.sublime-syntax');
+    const testFile = (await path.glob('test-file.*'))[0];
 
-    path.joinpath('processed.json').writeText(JSON.stringify(syntax, null, 4));
-    path.joinpath('processed-min.json').writeText(JSON.stringify(syntax));
+    const syntax = syntaxProvider.getPacked(
+        syntaxProvider.getSyntaxForExtension(testFile.extension).raw
+    );
 
-    const text = path.glob('test-file.*')[0].readText();
+    await path.joinpath('processed.json').writeText(JSON.stringify(syntax, null, 4));
+
+    const zipped = await zipString(JSON.stringify(syntax));
+    await path.joinpath('processed-min.json.gz').writeBinary(zipped);
+
+    const text = await testFile.readText();
 
     const unpacked = syntaxProvider.unpack(syntax);
-    path.joinpath('unpacked.json').writeText(JSON.stringify(unpacked, null, 4));
-    path.joinpath('unpacked-min.json').writeText(JSON.stringify(unpacked));
+
+    await path.joinpath('unpacked.json').writeText(JSON.stringify(unpacked, null, 4));
+
     const tokens = Array.from(parse(unpacked, text));
 
     const result = Array.from(flatMap(
@@ -38,9 +59,9 @@ function runTest(path) {
         }
     ));
 
-    path.joinpath('result.txt').writeText(result.map(l => l+'\n').join(''));
+    await path.joinpath('result.txt').writeText(result.map(l => l+'\n').join(''));
 
-    const reference = path.joinpath('reference.txt').readText().split('\n').slice(0, -1);
+    const reference = (await path.joinpath('reference.txt').readText()).split('\n').slice(0, -1);
 
     for (let line=0; line < reference.length; line++) {
         if (reference[line] !== result[line]) {

@@ -8,15 +8,23 @@ class SyntaxProvider {
     constructor(path) {
         this.path = new Path(path);
 
-        this.syntaxes = this.path.glob('**/*.sublime-syntax').map(path => ({
+        this.syntaxes = this.path.globSync('**/*.sublime-syntax').map(path => ({
             path,
             raw: this.loadSublimeSyntax(path),
         }));
 
         this.scopes = {};
+        this.extensions = {};
+
         for (const record of this.syntaxes) {
             const scope = record.raw.scope.join('').trim();
             this.scopes[scope] = record;
+
+            if (record.raw.file_extensions) {
+                for (const extension of record.raw.file_extensions) {
+                    this.extensions[extension] = record;
+                }
+            }
         }
     }
 
@@ -40,7 +48,7 @@ class SyntaxProvider {
     }
 
     loadSublimeSyntax(path) {
-        const buffer = path.readBinary();
+        const buffer = path.readBinarySync();
         const data = loadYaml(buffer);
 
         return preprocess(data);
@@ -48,18 +56,24 @@ class SyntaxProvider {
 
     loadPreprocessed(relpath) {
         const path = this.path.joinpath(relpath);
-        const buffer = path.readBinary();
+        const buffer = path.readBinarySync();
         const data = loadYaml(buffer);
 
         return preprocess(data);
     }
 
-    loadRawByScope(scope) {
-        return this.scopes[scope.trim()].raw;
+    getSyntaxForScope(scope) {
+        return this.scopes[scope.trim()];
     }
 
-    getPacked(relpath) {
-        return pack(process(relpath, this));
+    getSyntaxForExtension(extension) {
+        extension = extension.trim();
+        if (extension[0] === '.') extension = extension.slice(1);
+        return this.extensions[extension];
+    }
+
+    getPacked(syntax) {
+        return pack(process(syntax, this));
     }
 }
 

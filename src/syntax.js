@@ -22,9 +22,7 @@ class Environment {
 
 INCLUDE_SCOPE_EXPRESSION = /scope:([^#]*)(?:#(.*))?/;
 
-function process(name, provider) {
-    const syntax = provider.loadPreprocessed(name);
-
+function process(syntax, provider) {
     const queue = [];
     const results = [];
     let i = 0;
@@ -54,7 +52,7 @@ function process(name, provider) {
                         if (INCLUDE_SCOPE_EXPRESSION.test(rule.include)) {
                             const match = INCLUDE_SCOPE_EXPRESSION.exec(rule.include);
                             const included = match[1];
-                            includeEnvironment = new Environment(queue, provider.loadRawByScope(included));
+                            includeEnvironment = new Environment(queue, provider.getSyntaxForScope(included).raw);
                             contextName = match[2] || 'main';
                         } else {
                             includeEnvironment = environment;
