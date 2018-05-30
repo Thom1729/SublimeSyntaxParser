@@ -9,6 +9,15 @@ contexts:
     - match: b
       scope: region.redish
 
+    - match: d
+      scope: region.redish
+      push:
+        - include: scope:source.test-includes#test-d
+        - match: d
+          scope: region.greenish
+          pop: true
+
   test-c:
     - match: c
       scope: region.redish
+      pop: true

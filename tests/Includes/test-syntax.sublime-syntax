@@ -7,11 +7,16 @@ file_extensions:
 contexts:
   main:
     - match: a
-      scope: region.greenish
+      scope: region.bluish
 
     - include: scope:source.test-includes-b
 
     - match: c
-      scope: region.greenish
+      scope: region.bluish
       push:
         - include: scope:source.test-includes-b#test-c
+
+  test-d:
+    - match: d
+      scope: region.bluish
+      pop: true

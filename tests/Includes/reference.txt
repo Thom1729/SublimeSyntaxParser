@@ -1,0 +1,10 @@
+0 * source.test-includes region.bluish 
+1 * source.test-includes 
+2 * source.test-includes region.redish 
+3 * source.test-includes 
+4 * source.test-includes region.bluish 
+5 * source.test-includes region.redish 
+6 * source.test-includes 
+7 * source.test-includes region.redish 
+8 * source.test-includes region.bluish 
+9 * source.test-includes 

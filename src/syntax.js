@@ -20,6 +20,8 @@ class Environment {
     }
 }
 
+INCLUDE_SCOPE_EXPRESSION = /scope:([^#]*)(?:#(.*))?/;
+
 function process(name, getSyntax) {
     const syntax = getSyntax(name);
 
@@ -49,10 +51,11 @@ function process(name, getSyntax) {
                         let includeEnvironment,
                             contextName;
 
-                        if (rule.include.slice(0, 6) === 'scope:') {
-                            const included = rule.include.slice(6);
+                        if (INCLUDE_SCOPE_EXPRESSION.test(rule.include)) {
+                            const match = INCLUDE_SCOPE_EXPRESSION.exec(rule.include);
+                            const included = match[1];
                             includeEnvironment = new Environment(queue, getSyntax(included));
-                            contextName = 'main';
+                            contextName = match[2] || 'main';
                         } else {
                             includeEnvironment = environment;
                             contextName = rule.include;
