@@ -39,7 +39,7 @@ function splitScopes(scopes) {
     return ret;
 }
 
-function preprocess(syntax, loader) {
+function preprocess(syntax) {
     const variables = recMap(
         syntax.variables || {},
         (key, value, recurse) =>

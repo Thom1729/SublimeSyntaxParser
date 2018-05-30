@@ -5,9 +5,19 @@ const { preprocess } = require('./preprocess');
 const { process, pack } = require('./syntax');
 
 class SyntaxProvider {
-    constructor(path, scopes) {
+    constructor(path) {
         this.path = new Path(path);
-        this.scopes = scopes;
+
+        this.syntaxes = this.path.glob('**/*.sublime-syntax').map(path => ({
+            path,
+            raw: this.loadSublimeSyntax(path),
+        }));
+
+        this.scopes = {};
+        for (const record of this.syntaxes) {
+            const scope = record.raw.scope.join('').trim();
+            this.scopes[scope] = record;
+        }
     }
 
     unpack(syntax) {
@@ -29,22 +39,27 @@ class SyntaxProvider {
         };
     }
 
-    loadRaw(relpath) {
-        if (this.scopes.hasOwnProperty(relpath)) relpath = this.scopes[relpath];
+    loadSublimeSyntax(path) {
+        const buffer = path.readBinary();
+        const data = loadYaml(buffer);
 
+        return preprocess(data);
+    }
+
+    loadPreprocessed(relpath) {
         const path = this.path.joinpath(relpath);
         const buffer = path.readBinary();
         const data = loadYaml(buffer);
 
-        return data;
+        return preprocess(data);
     }
 
-    loadPreprocessed(relpath) {
-        return preprocess(this.loadRaw(relpath), this);
+    loadRawByScope(scope) {
+        return this.scopes[scope.trim()].raw;
     }
 
     getPacked(relpath) {
-        return pack(process(relpath, this.loadPreprocessed.bind(this)));
+        return pack(process(relpath, this));
     }
 }
 
