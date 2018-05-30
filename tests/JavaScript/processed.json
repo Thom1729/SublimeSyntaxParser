@@ -1,7 +1,7 @@
 {
     "mainContext": 5,
     "scope": [
-        207
+        208
     ],
     "scopes": [
         "punctuation.definition.comment.begin.js ",
@@ -204,6 +204,7 @@
         "punctuation.definition.template-expression.end.js ",
         "variable.other.object.dollar.only.js ",
         "variable.other.object.dollar.js ",
+        "source.regexp.js ",
         "meta.group.assertion.regexp ",
         "punctuation.definition.group.end.regexp ",
         "meta.group.regexp ",
@@ -27059,6 +27060,9 @@
                         224
                     ]
                 }
+            ],
+            "meta_content_scope": [
+                200
             ]
         },
         {
@@ -27215,7 +27219,7 @@
                     "match": 68,
                     "captures": [
                         [
-                            201
+                            202
                         ]
                     ],
                     "pop": true,
@@ -27426,7 +27430,7 @@
                 }
             ],
             "meta_scope": [
-                200
+                201
             ]
         },
         {
@@ -27471,7 +27475,7 @@
                     "match": 68,
                     "captures": [
                         [
-                            201
+                            202
                         ]
                     ],
                     "pop": true,
@@ -27682,7 +27686,7 @@
                 }
             ],
             "meta_scope": [
-                202
+                203
             ]
         },
         {
@@ -27764,7 +27768,7 @@
                     "match": 158,
                     "captures": [
                         [
-                            204
+                            205
                         ]
                     ],
                     "pop": true,
@@ -27774,7 +27778,7 @@
                     "match": 187,
                     "captures": [
                         [
-                            205
+                            206
                         ],
                         [
                             182
@@ -27783,7 +27787,7 @@
                             188
                         ],
                         [
-                            206
+                            207
                         ],
                         [
                             182
@@ -27839,7 +27843,7 @@
                 }
             ],
             "meta_scope": [
-                203
+                204
             ]
         }
     ]

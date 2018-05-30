@@ -10,6 +10,8 @@ contexts:
       scope: region.greenish
     - match: \b\B
       push: test-e
+    - match: \b\B
+      push: test-g
 
   main:
     - match: b
@@ -27,6 +29,14 @@ contexts:
       scope: region.bluish
       push: test-e
 
+    - match: m
+      scope: region.yellowish
+      push: main
+
+    - match: x
+      scope: region.redish
+      pop: true
+
   test-c:
     - match: c
       scope: region.redish
@@ -34,5 +44,20 @@ contexts:
 
   test-e:
     - match: e
+      scope: region.redish
+      pop: true
+
+  test-f:
+    - match: f
+      scope: region.redish
+      pop: true
+
+  test-g:
+    - match: g
+      scope: region.redish
+      pop: true
+
+  test-j:
+    - match: j
       scope: region.redish
       pop: true

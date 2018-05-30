@@ -5,11 +5,12 @@ const { ParserState } = require('./parser');
 const [ _, __, syntaxPath, filePath ] = process.argv;
 
 const path = new Path(syntaxPath);
+const file = new Path(filePath);
 
-const provider = new SyntaxProvider(path.dirname());
-const syntax = provider.load(path.basename());
+const provider = new SyntaxProvider(path.dirname);
+const syntax = provider.getSyntaxForExtension(file.extension);
 
-const text = new Path(filePath).readText();
+const text = file.readTextSync();
 
 const parser = new ParserState(syntax, text.split(/^/gm));
 

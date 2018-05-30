@@ -3,13 +3,16 @@ const { flatMap } = require('../src/util');
 
 const testsDir = new Path('tests');
 
-async function runTests() {
-    const tests = Array.from(testsDir.iterdir()).filter(path => path.isDir());
+async function runTests(args) {
+    let tests;
+    if (args.length) {
+        tests = args.map(name => testsDir.joinpath(name));
+    } else {
+        tests = Array.from(testsDir.iterdir()).filter(path => path.isDir());
+    }
 
     await Promise.all(tests.map(runTest));
 }
-
-runTests();
 
 function zipString(str) {
     const zlib = require('zlib');
@@ -71,3 +74,7 @@ async function runTest(path) {
         }
     }
 }
+
+const [foo, bar, ...args] = process.argv;
+
+runTests(args);

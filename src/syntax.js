@@ -5,6 +5,7 @@ class Environment {
         this.queue = queue;
         this.syntax = syntax;
         this.nameLookup = new Map();
+        this.protoRules = [];
     }
 
     enqueueContext(context) {
@@ -20,15 +21,32 @@ class Environment {
     }
 }
 
-INCLUDE_SCOPE_EXPRESSION = /scope:([^#]*)(?:#(.*))?/;
+const INCLUDE_SCOPE_EXPRESSION = /scope:([^#]*)(?:#(.*))?/;
 
 function process(syntax, provider) {
     const queue = [];
     const results = [];
 
+    const environmentCache = new Map();
+    function getForeignEnvironment(syntax) {
+        if (!environmentCache.has(syntax)) {
+            const modifiedSyntax = {
+                ...syntax,
+                contexts: {
+                    ...syntax.contexts,
+                    main: {
+                        ...syntax.contexts.main,
+                        meta_content_scope: [ ...(syntax.scope), ...(syntax.contexts.main.meta_content_scope || []) ],
+                    },
+                },
+            };
+            environmentCache.set(syntax, createEnvironment(modifiedSyntax));
+        }
+        return environmentCache.get(syntax);
+    }
+
     function createEnvironment(syntax) {
         const environment = new Environment(queue, syntax);
-        environment.protoRules = [];
         if (syntax.contexts.hasOwnProperty('prototype')) {
             const protoIndex = environment.enqueueNamedContext('prototype');
             for (let i = protoIndex; i < queue.length; i++) {
@@ -44,10 +62,21 @@ function process(syntax, provider) {
 
         const { context, environment } = queue[i];
 
-        const protoRules = (
-            context.meta_include_prototype !== false &&
-            (environment.syntax === syntax || context.name !== 'main')
-        ) ? environment.protoRules : [];
+        function enqueue(contextRef) {
+            if (typeof contextRef === 'object') {
+                return environment.enqueueContext(contextRef);
+            } else if (INCLUDE_SCOPE_EXPRESSION.test(contextRef)) {
+                const match = INCLUDE_SCOPE_EXPRESSION.exec(contextRef);
+                
+                const includeEnvironment = getForeignEnvironment(provider.getSyntaxForScope(match[1]).raw);
+
+                return includeEnvironment.enqueueNamedContext(match[2] || 'main');
+            } else {
+                return environment.enqueueNamedContext(contextRef);
+            }
+        }
+
+        const protoRules = (context.meta_include_prototype !== false) ? environment.protoRules : [];
 
         results[i] = {
             protoRules,
@@ -57,28 +86,10 @@ function process(syntax, provider) {
                     if (rule.hasOwnProperty('match')) {
                         yield {
                             ...rule,
-                            next: rule.next.map(
-                                c => (typeof c === 'object')
-                                    ? environment.enqueueContext(c)
-                                    : environment.enqueueNamedContext(c)
-                            ),
+                            next: rule.next.map(enqueue),
                         };
                     } else if (rule.hasOwnProperty('include')) {
-                        let includeEnvironment,
-                            contextName;
-
-                        if (INCLUDE_SCOPE_EXPRESSION.test(rule.include)) {
-                            const match = INCLUDE_SCOPE_EXPRESSION.exec(rule.include);
-                            const included = provider.getSyntaxForScope(match[1]).raw;
-                            
-                            includeEnvironment = createEnvironment(included);
-
-                            contextName = match[2] || 'main';
-                        } else {
-                            includeEnvironment = environment;
-                            contextName = rule.include;
-                        }
-                        const j = includeEnvironment.enqueueNamedContext(contextName);
+                        const j = enqueue(rule.include);
                         resolveContext(j);
                         yield* results[j].rules;
                     } else {

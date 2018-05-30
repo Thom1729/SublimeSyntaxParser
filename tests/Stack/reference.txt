@@ -1,73 +1,80 @@
 0 * source.test-stack region.greenish 
-1 * source.test-stack TEST TEST_CONTENT 
-2 * source.test-stack TEST TEST_CONTENT 
-3 * source.test-stack TEST TEST_CONTENT META region.redish 
-4 * source.test-stack TEST TEST_CONTENT META META_CONTENT 
-5   source.test-stack TEST TEST_CONTENT META META_CONTENT 
-6 * source.test-stack TEST TEST_CONTENT META region.bluish 
-7 * source.test-stack TEST TEST_CONTENT 
-8 * source.test-stack TEST TEST_CONTENT META region.redish 
-9 * source.test-stack META META_CONTENT 
-10   source.test-stack META META_CONTENT 
-11 * source.test-stack META region.bluish 
-12 * source.test-stack TEST TEST_CONTENT 
-13 * source.test-stack TEST TEST_CONTENT META META META region.redish 
-14 * source.test-stack TEST TEST_CONTENT META META_CONTENT META META_CONTENT META META_CONTENT 
-15 * source.test-stack TEST TEST_CONTENT META META_CONTENT META META_CONTENT META region.bluish 
-16 * source.test-stack TEST TEST_CONTENT META META_CONTENT META region.bluish 
-17 * source.test-stack TEST TEST_CONTENT META region.bluish 
-18 * source.test-stack TEST TEST_CONTENT 
-19 * source.test-stack TEST TEST_CONTENT META META META region.redish 
-20 * source.test-stack META META_CONTENT META META_CONTENT META META_CONTENT 
-21 * source.test-stack META META_CONTENT META META_CONTENT META region.bluish 
-22 * source.test-stack META META_CONTENT META region.bluish 
-23 * source.test-stack META region.bluish 
-24 * source.test-stack TEST TEST_CONTENT 
-25 * source.test-stack TEST META region.redish 
-26 * source.test-stack TEST TEST_CONTENT META META_CONTENT 
-27 * source.test-stack TEST TEST_CONTENT META region.bluish 
-28 * source.test-stack TEST TEST_CONTENT 
-29   source.test-stack TEST TEST_CONTENT 
-30 * source.test-stack TEST TEST_CONTENT 
-31 * source.test-stack TEST TEST_CONTENT META region.redish 
-32 * source.test-stack META META_CONTENT 
-33 * source.test-stack META region.bluish 
-34 * source.test-stack TEST TEST_CONTENT 
-35   source.test-stack TEST TEST_CONTENT 
-36 * source.test-stack TEST TEST_CONTENT 
-37 * source.test-stack META META META region.redish 
-38 * source.test-stack TEST TEST_CONTENT META META META META_CONTENT 
-39 * source.test-stack TEST TEST_CONTENT META META META region.bluish 
-40 * source.test-stack TEST TEST_CONTENT META META region.bluish 
-41 * source.test-stack TEST TEST_CONTENT META region.bluish 
-42 * source.test-stack TEST TEST_CONTENT 
-43 * source.test-stack TEST TEST_CONTENT META META META region.redish 
-44 * source.test-stack META META META META_CONTENT 
-45 * source.test-stack META META META region.bluish 
-46 * source.test-stack META META region.bluish 
-47 * source.test-stack META region.bluish 
-48 * source.test-stack TEST TEST_CONTENT 
-49 * source.test-stack META1 META2 META1 META2 META region.redish 
-50 * source.test-stack TEST META1 META1 META2 META META_CONTENT 
-51 * source.test-stack TEST META1 META1 META2 META region.bluish 
-52 * source.test-stack TEST TEST_CONTENT 
-53   source.test-stack TEST TEST_CONTENT 
-54 * source.test-stack TEST TEST_CONTENT 
-55 * source.test-stack TEST TEST_CONTENT META1 META2 META1 META2 META region.redish 
-56 * META1 META1 META2 META META_CONTENT 
-57 * META1 META1 META2 META region.bluish 
-58 * source.test-stack TEST TEST_CONTENT 
-59   source.test-stack TEST TEST_CONTENT 
-60 * source.test-stack TEST TEST_CONTENT 
-61 * META region.redish 
-62 * META META_CONTENT 
-63 * META region.bluish 
-64 * source.test-stack TEST TEST_CONTENT 
-65   source.test-stack TEST TEST_CONTENT 
-66 * source.test-stack TEST TEST_CONTENT 
-67 * source.test-stack TEST TEST_CONTENT META region.redish 
-68 * META META_CONTENT 
-69 * META region.bluish 
-70 * source.test-stack TEST TEST_CONTENT 
-71   source.test-stack TEST TEST_CONTENT 
-72 * source.test-stack TEST TEST_CONTENT 
+1 * source.test-stack 
+2 * source.test-stack region.redish 
+3 * source.test-stack region.redish 
+4 * source.test-stack region.redish 
+5 * source.test-stack region.bluish 
+6 * source.test-stack region.bluish 
+7 * source.test-stack region.bluish 
+8 * source.test-stack 
+9 * source.test-stack 
+10 * source.test-stack TEST TEST_CONTENT META region.redish 
+11 * source.test-stack TEST TEST_CONTENT META META_CONTENT 
+12   source.test-stack TEST TEST_CONTENT META META_CONTENT 
+13 * source.test-stack TEST TEST_CONTENT META region.bluish 
+14 * source.test-stack TEST TEST_CONTENT 
+15 * source.test-stack TEST TEST_CONTENT META region.redish 
+16 * source.test-stack META META_CONTENT 
+17   source.test-stack META META_CONTENT 
+18 * source.test-stack META region.bluish 
+19 * source.test-stack 
+20 * source.test-stack TEST TEST_CONTENT META META META region.redish 
+21 * source.test-stack TEST TEST_CONTENT META META_CONTENT META META_CONTENT META META_CONTENT 
+22 * source.test-stack TEST TEST_CONTENT META META_CONTENT META META_CONTENT META region.bluish 
+23 * source.test-stack TEST TEST_CONTENT META META_CONTENT META region.bluish 
+24 * source.test-stack TEST TEST_CONTENT META region.bluish 
+25 * source.test-stack TEST TEST_CONTENT 
+26 * source.test-stack TEST TEST_CONTENT META META META region.redish 
+27 * source.test-stack META META_CONTENT META META_CONTENT META META_CONTENT 
+28 * source.test-stack META META_CONTENT META META_CONTENT META region.bluish 
+29 * source.test-stack META META_CONTENT META region.bluish 
+30 * source.test-stack META region.bluish 
+31 * source.test-stack 
+32 * source.test-stack TEST META region.redish 
+33 * source.test-stack TEST TEST_CONTENT META META_CONTENT 
+34 * source.test-stack TEST TEST_CONTENT META region.bluish 
+35 * source.test-stack TEST TEST_CONTENT 
+36   source.test-stack TEST TEST_CONTENT 
+37 * source.test-stack TEST TEST_CONTENT 
+38 * source.test-stack TEST TEST_CONTENT META region.redish 
+39 * source.test-stack META META_CONTENT 
+40 * source.test-stack META region.bluish 
+41 * source.test-stack TEST TEST_CONTENT 
+42   source.test-stack TEST TEST_CONTENT 
+43 * source.test-stack TEST TEST_CONTENT 
+44 * source.test-stack META META META region.redish 
+45 * source.test-stack TEST TEST_CONTENT META META META META_CONTENT 
+46 * source.test-stack TEST TEST_CONTENT META META META region.bluish 
+47 * source.test-stack TEST TEST_CONTENT META META region.bluish 
+48 * source.test-stack TEST TEST_CONTENT META region.bluish 
+49 * source.test-stack TEST TEST_CONTENT 
+50 * source.test-stack TEST TEST_CONTENT META META META region.redish 
+51 * source.test-stack META META META META_CONTENT 
+52 * source.test-stack META META META region.bluish 
+53 * source.test-stack META META region.bluish 
+54 * source.test-stack META region.bluish 
+55 * source.test-stack 
+56 * source.test-stack META1 META2 META1 META2 META region.redish 
+57 * source.test-stack TEST META1 META1 META2 META META_CONTENT 
+58 * source.test-stack TEST META1 META1 META2 META region.bluish 
+59 * source.test-stack TEST TEST_CONTENT 
+60   source.test-stack TEST TEST_CONTENT 
+61 * source.test-stack TEST TEST_CONTENT 
+62 * source.test-stack TEST TEST_CONTENT META1 META2 META1 META2 META region.redish 
+63 * META1 META1 META2 META META_CONTENT 
+64 * META1 META1 META2 META region.bluish 
+65 * source.test-stack TEST TEST_CONTENT 
+66   source.test-stack TEST TEST_CONTENT 
+67 * source.test-stack TEST TEST_CONTENT 
+68 * META region.redish 
+69 * META META_CONTENT 
+70 * META region.bluish 
+71 * source.test-stack TEST TEST_CONTENT 
+72   source.test-stack TEST TEST_CONTENT 
+73 * source.test-stack TEST TEST_CONTENT 
+74 * source.test-stack TEST TEST_CONTENT META region.redish 
+75 * META META_CONTENT 
+76 * META region.bluish 
+77 * source.test-stack TEST TEST_CONTENT 
+78   source.test-stack TEST TEST_CONTENT 
+79 * source.test-stack TEST TEST_CONTENT 

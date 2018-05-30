@@ -9,7 +9,15 @@ contexts:
     - match: ^y
       scope: region.greenish
       pop: true
-    - match: ''
+
+    - match: m
+      scope: region.redish
+      push: main
+    - match: n
+      scope: region.bluish
+      pop: true
+
+    - match: (?=\S)
       push: test
   
   test:

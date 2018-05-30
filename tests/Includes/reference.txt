@@ -30,3 +30,55 @@
 29   source.test-includes 
 30 * source.test-includes region.redish 
 31 * source.test-includes 
+32 * source.test-includes 
+33 * source.test-includes region.bluish 
+34 * source.test-includes region.redish 
+35 * source.test-includes 
+36 * source.test-includes region.bluish 
+37 * source.test-includes 
+38 * source.test-includes region.greenish 
+39 * source.test-includes region.redish 
+40 * source.test-includes 
+41 * source.test-includes 
+42 * source.test-includes region.bluish 
+43 * source.test-includes region.redish 
+44 * source.test-includes 
+45 * source.test-includes region.bluish 
+46 * source.test-includes 
+47   source.test-includes 
+48 * source.test-includes region.redish 
+49 * source.test-includes 
+50 * source.test-includes 
+51 * source.test-includes region.bluish 
+52 * source.test-includes source.test-includes-b 
+53 * source.test-includes source.test-includes-b region.greenish 
+54 * source.test-includes region.redish 
+55 * source.test-includes 
+56 * source.test-includes 
+57 * source.test-includes region.bluish 
+58 * source.test-includes source.test-includes-b 
+59 * source.test-includes source.test-includes-b region.greenish 
+60 * source.test-includes region.redish 
+61 * source.test-includes 
+62 * source.test-includes 
+63 * source.test-includes region.bluish 
+64 * source.test-includes 
+65 * source.test-includes region.greenish 
+66 * source.test-includes region.redish 
+67 * source.test-includes 
+68 * source.test-includes 
+69 * source.test-includes region.bluish 
+70 * source.test-includes source.test-includes region.bluish 
+71 * source.test-includes source.test-includes source.test-includes region.greenish 
+72 * source.test-includes source.test-includes source.test-includes region.greenish 
+73 * source.test-includes source.test-includes source.test-includes 
+74 * source.test-includes source.test-includes source.test-includes 
+75 * source.test-includes source.test-includes source.test-includes region.bluish 
+76 * source.test-includes source.test-includes source.test-includes source.test-includes-b region.yellowish 
+77 * source.test-includes source.test-includes source.test-includes source.test-includes-b source.test-includes-b region.yellowish 
+78 * source.test-includes source.test-includes source.test-includes source.test-includes-b source.test-includes-b region.redish 
+79 * source.test-includes source.test-includes source.test-includes source.test-includes-b region.redish 
+80 * source.test-includes source.test-includes source.test-includes region.redish 
+81 * source.test-includes source.test-includes region.redish 
+82 * source.test-includes region.redish 
+83 * source.test-includes 

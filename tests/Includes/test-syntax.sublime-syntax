@@ -13,12 +13,44 @@ contexts:
     - match: a
       scope: region.bluish
 
-    - include: scope:source.test-includes-b
-
     - match: c
       scope: region.bluish
       push:
         - include: scope:source.test-includes-b#test-c
+
+    - match: f
+      scope: region.bluish
+      push: scope:source.test-includes-b#test-f
+
+    - match: g
+      scope: region.bluish
+      push: scope:source.test-includes-b#test-g
+
+    - match: h
+      scope: region.bluish
+      push: scope:source.test-includes-b
+
+    - match: i
+      scope: region.bluish
+      push: scope:source.test-includes-b#main
+
+    - match: j
+      scope: region.bluish
+      push: scope:source.test-includes-b#test-j
+
+    - match: k
+      scope: region.bluish
+      push: scope:source.test-includes
+
+    - match: l
+      scope: region.bluish
+      push: scope:source.test-includes-b
+
+    - match: y
+      scope: region.redish
+      pop: true
+
+    - include: scope:source.test-includes-b
 
   test-d:
     - match: d
