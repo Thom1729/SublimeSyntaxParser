@@ -1,0 +1,17 @@
+%YAML 1.2
+---
+name: Test Includes
+scope: source.test-includes
+file_extensions:
+- test-includes
+contexts:
+  main:
+    - match: a
+      scope: region.greenish
+
+    - include: scope:source.test-includes-b
+
+    - match: c
+      scope: region.greenish
+      push:
+        - include: scope:source.test-includes-b#test-c

@@ -1,0 +1,14 @@
+%YAML 1.2
+---
+name: Test Includes B
+scope: source.test-includes-b
+file_extensions:
+- test-includes-b
+contexts:
+  main:
+    - match: b
+      scope: region.redish
+
+  test-c:
+    - match: c
+      scope: region.redish
