@@ -26,538 +26,393 @@
     ],
     "contexts": [
         {
-            "protoRules": [],
             "name": "prototype",
+            "patterns": [
+                0,
+                1,
+                2
+            ],
             "rules": [
                 {
-                    "match": 0,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
                     "push": true,
                     "next": [
                         1
-                    ]
-                },
-                {
-                    "match": 1,
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
-                    "push": true,
-                    "next": [
-                        2
                     ]
                 },
                 {
-                    "match": 2,
+                    "push": true,
+                    "next": [
+                        2
+                    ],
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ]
+                },
+                {
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
             ]
         },
         {
-            "protoRules": [],
             "name": "prototype:0,0",
-            "rules": [
-                {
-                    "match": 3,
-                    "captures": [
-                        [
-                            1
-                        ]
-                    ],
-                    "pop": true,
-                    "next": []
-                }
-            ],
             "meta_scope": [
                 2
-            ]
-        },
-        {
-            "protoRules": [],
-            "name": "test-b",
+            ],
+            "patterns": [
+                3
+            ],
             "rules": [
                 {
-                    "match": 3,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
-            ],
+            ]
+        },
+        {
+            "name": "test-b",
             "meta_scope": [
                 3
-            ]
-        },
-        {
-            "protoRules": [],
-            "name": "test-m",
+            ],
+            "patterns": [
+                3
+            ],
             "rules": [
                 {
-                    "match": 2,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
-            ],
+            ]
+        },
+        {
+            "name": "test-m",
             "meta_scope": [
                 4
-            ]
-        },
-        {
-            "protoRules": [
-                {
-                    "match": "a",
-                    "captures": [
-                        [
-                            "region.redish "
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        1
-                    ]
-                },
-                {
-                    "match": "b",
-                    "captures": [
-                        [
-                            "region.redish "
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        2
-                    ]
-                },
-                {
-                    "match": "m",
-                    "captures": [
-                        [
-                            "region.bluish "
-                        ]
-                    ],
-                    "pop": true,
-                    "next": []
-                }
             ],
-            "name": "main",
+            "patterns": [
+                2
+            ],
             "rules": [
                 {
-                    "match": 0,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        1
-                    ]
-                },
-                {
-                    "match": 1,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        2
-                    ]
-                },
-                {
-                    "match": 2,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
-                },
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "main",
+            "patterns": [
+                0,
+                1,
+                2,
+                4,
+                5,
+                6,
+                7,
+                8
+            ],
+            "rules": [
                 {
-                    "match": 4,
+                    "push": true,
+                    "next": [
+                        1
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
-                    "push": true,
-                    "next": [
-                        2
                     ]
                 },
                 {
-                    "match": 5,
+                    "push": true,
+                    "next": [
+                        2
+                    ],
                     "captures": [
                         [
                             0
                         ]
+                    ]
+                },
+                {
+                    "pop": true,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ]
+                },
+                {
+                    "push": true,
+                    "next": [
+                        2
                     ],
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ]
+                },
+                {
                     "push": true,
                     "next": [
                         5
-                    ]
-                },
-                {
-                    "match": 6,
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
+                    ]
+                },
+                {
                     "push": true,
                     "next": [
                         8
-                    ]
-                },
-                {
-                    "match": 7,
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
+                    ]
+                },
+                {
                     "push": true,
                     "next": [
                         3
-                    ]
-                },
-                {
-                    "match": 8,
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
+                    ]
+                },
+                {
                     "push": true,
                     "next": [
                         6
+                    ],
+                    "captures": [
+                        [
+                            0
+                        ]
                     ]
                 }
             ]
         },
         {
-            "protoRules": [
-                {
-                    "match": "a",
-                    "captures": [
-                        [
-                            "region.redish "
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        1
-                    ]
-                },
-                {
-                    "match": "b",
-                    "captures": [
-                        [
-                            "region.redish "
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        2
-                    ]
-                },
-                {
-                    "match": "m",
-                    "captures": [
-                        [
-                            "region.bluish "
-                        ]
-                    ],
-                    "pop": true,
-                    "next": []
-                }
-            ],
             "name": "test-d",
-            "rules": [
-                {
-                    "match": 0,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        1
-                    ]
-                },
-                {
-                    "match": 1,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        2
-                    ]
-                },
-                {
-                    "match": 2,
-                    "captures": [
-                        [
-                            1
-                        ]
-                    ],
-                    "pop": true,
-                    "next": []
-                },
-                {
-                    "match": 3,
-                    "captures": [
-                        [
-                            1
-                        ]
-                    ],
-                    "pop": true,
-                    "next": []
-                }
-            ],
             "meta_scope": [
                 5
+            ],
+            "patterns": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "rules": [
+                {
+                    "push": true,
+                    "next": [
+                        1
+                    ],
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ]
+                },
+                {
+                    "push": true,
+                    "next": [
+                        2
+                    ],
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ]
+                },
+                {
+                    "pop": true,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ]
+                },
+                {
+                    "pop": true,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ]
+                }
             ]
         },
         {
-            "protoRules": [],
             "name": "test-n",
+            "patterns": [
+                8
+            ],
             "rules": [
                 {
-                    "match": 8,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
-                }
-            ],
-            "meta_include_prototype": false
-        },
-        {
-            "protoRules": [
-                {
-                    "match": "a",
-                    "captures": [
-                        [
-                            "region.redish "
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        1
                     ]
-                },
-                {
-                    "match": "b",
-                    "captures": [
-                        [
-                            "region.redish "
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        2
-                    ]
-                },
-                {
-                    "match": "m",
-                    "captures": [
-                        [
-                            "region.bluish "
-                        ]
-                    ],
-                    "pop": true,
-                    "next": []
-                }
-            ],
-            "name": "test-n2",
-            "rules": [
-                {
-                    "match": 0,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        1
-                    ]
-                },
-                {
-                    "match": 1,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        2
-                    ]
-                },
-                {
-                    "match": 2,
-                    "captures": [
-                        [
-                            1
-                        ]
-                    ],
-                    "pop": true,
-                    "next": []
-                },
-                {
-                    "match": 8,
-                    "captures": [
-                        [
-                            1
-                        ]
-                    ],
-                    "pop": true,
-                    "next": []
                 }
             ]
         },
         {
-            "protoRules": [],
-            "name": "main:2,0",
+            "name": "test-n2",
+            "patterns": [
+                0,
+                1,
+                2,
+                8
+            ],
             "rules": [
                 {
-                    "match": 6,
+                    "push": true,
+                    "next": [
+                        1
+                    ],
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ]
+                },
+                {
+                    "push": true,
+                    "next": [
+                        2
+                    ],
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ]
+                },
+                {
+                    "pop": true,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ]
+                },
+                {
+                    "pop": true,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "main:2,0",
+            "patterns": [
+                6,
+                3
+            ],
+            "rules": [
+                {
+                    "push": true,
+                    "next": [
+                        9
+                    ],
                     "captures": [
                         [
                             6
                         ]
-                    ],
-                    "push": true,
-                    "next": [
-                        9
                     ]
                 },
                 {
-                    "match": 3,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
-            ],
-            "meta_include_prototype": false
+            ]
         },
         {
-            "protoRules": [
-                {
-                    "match": "a",
-                    "captures": [
-                        [
-                            "region.redish "
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        1
-                    ]
-                },
-                {
-                    "match": "b",
-                    "captures": [
-                        [
-                            "region.redish "
-                        ]
-                    ],
-                    "push": true,
-                    "next": [
-                        2
-                    ]
-                },
-                {
-                    "match": "m",
-                    "captures": [
-                        [
-                            "region.bluish "
-                        ]
-                    ],
-                    "pop": true,
-                    "next": []
-                }
-            ],
             "name": "main:2,0:1,0",
+            "patterns": [
+                0,
+                1,
+                2,
+                3
+            ],
             "rules": [
                 {
-                    "match": 0,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
                     "push": true,
                     "next": [
                         1
-                    ]
-                },
-                {
-                    "match": 1,
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
-                    "push": true,
-                    "next": [
-                        2
                     ]
                 },
                 {
-                    "match": 2,
+                    "push": true,
+                    "next": [
+                        2
+                    ],
                     "captures": [
                         [
-                            1
+                            0
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 },
                 {
-                    "match": 3,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
+                    ]
+                },
+                {
                     "pop": true,
-                    "next": []
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ]
                 }
             ]
         }

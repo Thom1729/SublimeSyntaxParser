@@ -27,11 +27,21 @@
     ],
     "contexts": [
         {
-            "protoRules": [],
             "name": "main",
+            "patterns": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+            ],
             "rules": [
                 {
-                    "match": 0,
                     "captures": [
                         null,
                         [
@@ -40,11 +50,9 @@
                         [
                             1
                         ]
-                    ],
-                    "next": []
+                    ]
                 },
                 {
-                    "match": 1,
                     "captures": [
                         null,
                         [
@@ -53,42 +61,34 @@
                         [
                             1
                         ]
-                    ],
-                    "next": []
+                    ]
                 },
                 {
-                    "match": 2,
                     "captures": [
                         null,
                         [
                             0
                         ]
-                    ],
-                    "next": []
+                    ]
                 },
                 {
-                    "match": 3,
                     "captures": [
                         null,
                         [
                             0
                         ]
-                    ],
-                    "next": []
+                    ]
                 },
                 {
-                    "match": 4,
                     "captures": [
                         null,
                         [
                             0
                         ],
                         null
-                    ],
-                    "next": []
+                    ]
                 },
                 {
-                    "match": 5,
                     "captures": [
                         null,
                         [
@@ -97,45 +97,39 @@
                         [
                             3
                         ]
-                    ],
-                    "next": []
+                    ]
                 },
                 {
-                    "match": 6,
-                    "captures": [
-                        [
-                            4
-                        ]
-                    ],
                     "push": true,
                     "next": [
                         1
-                    ]
-                },
-                {
-                    "match": 7,
+                    ],
                     "captures": [
                         [
                             4
                         ]
-                    ],
-                    "push": true,
-                    "next": [
-                        2
                     ]
                 },
                 {
-                    "match": 8,
+                    "push": true,
+                    "next": [
+                        2
+                    ],
+                    "captures": [
+                        [
+                            4
+                        ]
+                    ]
+                },
+                {
                     "captures": [
                         [
                             0,
                             1
                         ]
-                    ],
-                    "next": []
+                    ]
                 },
                 {
-                    "match": 9,
                     "captures": [
                         null,
                         [
@@ -144,35 +138,32 @@
                         [
                             1
                         ]
-                    ],
-                    "next": []
+                    ]
                 }
             ]
         },
         {
-            "protoRules": [],
             "name": "main:6,0",
-            "rules": [
-                {
-                    "match": 10,
-                    "captures": [],
-                    "pop": true,
-                    "next": []
-                }
-            ],
             "meta_scope": [
                 5
+            ],
+            "patterns": [
+                10
+            ],
+            "rules": [
+                {
+                    "pop": true
+                }
             ]
         },
         {
-            "protoRules": [],
             "name": "main:7,0",
+            "patterns": [
+                10
+            ],
             "rules": [
                 {
-                    "match": 10,
-                    "captures": [],
-                    "pop": true,
-                    "next": []
+                    "pop": true
                 }
             ]
         }

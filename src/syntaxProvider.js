@@ -40,9 +40,10 @@ class SyntaxProvider {
                 meta_content_scope: scopeNames(ctx.meta_content_scope) || [],
                 rules: ctx.rules.map(rule => ({
                     ...rule,
-                    captures: rule.captures.map(scopeNames),
+                    next: rule.next || [],
+                    captures: rule.captures ? rule.captures.map(scopeNames) : [],
                 })),
-                patterns: ctx.rules.map(r => syntax.patterns[r.match]),
+                patterns: ctx.patterns.map(p => syntax.patterns[p]),
             })),
         };
     }

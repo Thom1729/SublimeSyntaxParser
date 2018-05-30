@@ -23,6 +23,19 @@ class Environment {
 
 const INCLUDE_SCOPE_EXPRESSION = /scope:([^#]*)(?:#(.*))?/;
 
+function patchForeignSyntax(syntax) {
+    return {
+        ...syntax,
+        contexts: {
+            ...syntax.contexts,
+            main: {
+                ...syntax.contexts.main,
+                meta_content_scope: [ ...(syntax.scope), ...(syntax.contexts.main.meta_content_scope || []) ],
+            },
+        },
+    };
+}
+
 function process(syntax, provider) {
     const queue = [];
     const results = [];
@@ -30,17 +43,7 @@ function process(syntax, provider) {
     const environmentCache = new Map();
     function getForeignEnvironment(syntax) {
         if (!environmentCache.has(syntax)) {
-            const modifiedSyntax = {
-                ...syntax,
-                contexts: {
-                    ...syntax.contexts,
-                    main: {
-                        ...syntax.contexts.main,
-                        meta_content_scope: [ ...(syntax.scope), ...(syntax.contexts.main.meta_content_scope || []) ],
-                    },
-                },
-            };
-            environmentCache.set(syntax, createEnvironment(modifiedSyntax));
+            environmentCache.set(syntax, createEnvironment(patchForeignSyntax(syntax)));
         }
         return environmentCache.get(syntax);
     }
@@ -108,6 +111,7 @@ function process(syntax, provider) {
 
     for (const context of results) {
         context.rules = [...context.protoRules, ...context.rules];
+        delete context.protoRules;
     }
 
     return {
@@ -116,6 +120,8 @@ function process(syntax, provider) {
         mainContext: baseEnvironment.nameLookup.get('main'),
     };
 }
+
+const compactArray = arr => (arr.length ? arr : undefined);
 
 function pack(syntax) {
     const scopeInterner = new Interner();
@@ -126,13 +132,17 @@ function pack(syntax) {
     }
 
     const newNewContexts = syntax.contexts.map(ctx => ({
-        ...ctx,
+        name: ctx.name,
         meta_scope: internScopes(ctx.meta_scope),
         meta_content_scope: internScopes(ctx.meta_content_scope),
+        clear_scopes: ctx.clear_scopes,
+        patterns: ctx.rules.map(rule => patternInterner.get(rule.match)),
         rules: ctx.rules.map(rule => ({
-            ...rule,
-            match: patternInterner.get(rule.match),
-            captures: rule.captures.map(internScopes),
+            push: rule.push,
+            pop: rule.pop,
+            set: rule.set,
+            next: compactArray(rule.next),
+            captures: compactArray(rule.captures.map(internScopes)),
         })),
     }));
 

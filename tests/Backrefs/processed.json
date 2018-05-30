@@ -29,297 +29,297 @@
     ],
     "contexts": [
         {
-            "protoRules": [],
             "name": "main",
+            "patterns": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ],
             "rules": [
                 {
-                    "match": 0,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
                     "push": true,
                     "next": [
                         1
-                    ]
-                },
-                {
-                    "match": 1,
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
+                    ]
+                },
+                {
                     "push": true,
                     "next": [
                         2
-                    ]
-                },
-                {
-                    "match": 2,
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
+                    ]
+                },
+                {
                     "push": true,
                     "next": [
                         3
-                    ]
-                },
-                {
-                    "match": 3,
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
+                    ]
+                },
+                {
                     "push": true,
                     "next": [
                         4
+                    ],
+                    "captures": [
+                        [
+                            0
+                        ]
                     ]
                 },
                 {
-                    "match": 4,
                     "captures": [
                         [
                             0
                         ]
-                    ],
-                    "next": []
+                    ]
                 },
                 {
-                    "match": 5,
-                    "captures": [
-                        [
-                            0
-                        ]
-                    ],
                     "push": true,
                     "next": [
                         5
-                    ]
-                },
-                {
-                    "match": 6,
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
+                    ]
+                },
+                {
                     "push": true,
                     "next": [
                         6
-                    ]
-                },
-                {
-                    "match": 7,
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
+                    ]
+                },
+                {
                     "push": true,
                     "next": [
                         7
-                    ]
-                },
-                {
-                    "match": 8,
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
+                    ]
+                },
+                {
                     "push": true,
                     "next": [
                         8
-                    ]
-                },
-                {
-                    "match": 9,
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
+                    ]
+                },
+                {
                     "push": true,
                     "next": [
                         9
-                    ]
-                },
-                {
-                    "match": 10,
+                    ],
                     "captures": [
                         [
                             0
                         ]
-                    ],
+                    ]
+                },
+                {
                     "push": true,
                     "next": [
                         10
+                    ],
+                    "captures": [
+                        [
+                            0
+                        ]
                     ]
                 }
             ]
         },
         {
-            "protoRules": [],
             "name": "main:0,0",
+            "patterns": [
+                11
+            ],
             "rules": [
                 {
-                    "match": 11,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
             ]
         },
         {
-            "protoRules": [],
             "name": "main:1,0",
+            "patterns": [
+                12
+            ],
             "rules": [
                 {
-                    "match": 12,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
             ]
         },
         {
-            "protoRules": [],
             "name": "main:2,0",
+            "patterns": [
+                13
+            ],
             "rules": [
                 {
-                    "match": 13,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
             ]
         },
         {
-            "protoRules": [],
             "name": "main:3,0",
+            "patterns": [
+                14
+            ],
             "rules": [
                 {
-                    "match": 14,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
             ]
         },
         {
-            "protoRules": [],
             "name": "main:5,0",
+            "patterns": [
+                15
+            ],
             "rules": [
                 {
-                    "match": 15,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
             ]
         },
         {
-            "protoRules": [],
             "name": "main:6,0",
+            "patterns": [
+                16
+            ],
             "rules": [
                 {
-                    "match": 16,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
             ]
         },
         {
-            "protoRules": [],
             "name": "main:7,0",
+            "patterns": [
+                16
+            ],
             "rules": [
                 {
-                    "match": 16,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
             ]
         },
         {
-            "protoRules": [],
             "name": "main:8,0",
+            "patterns": [
+                11
+            ],
             "rules": [
                 {
-                    "match": 11,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
             ]
         },
         {
-            "protoRules": [],
             "name": "main:9,0",
+            "patterns": [
+                15
+            ],
             "rules": [
                 {
-                    "match": 15,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
             ]
         },
         {
-            "protoRules": [],
             "name": "main:10,0",
+            "patterns": [
+                11
+            ],
             "rules": [
                 {
-                    "match": 11,
+                    "pop": true,
                     "captures": [
                         [
                             1
                         ]
-                    ],
-                    "pop": true,
-                    "next": []
+                    ]
                 }
             ]
         }
