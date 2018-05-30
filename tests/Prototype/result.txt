@@ -79,3 +79,8 @@
 78 * source.test-prototype M 
 79 * source.test-prototype M region.bluish 
 80 * source.test-prototype 
+81 * source.test-prototype 
+82 * source.test-prototype region.redish 
+83 * source.test-prototype 
+84 * source.test-prototype region.bluish 
+85 * source.test-prototype 

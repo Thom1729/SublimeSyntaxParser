@@ -5,6 +5,10 @@ scope: source.test-includes
 file_extensions:
 - test-includes
 contexts:
+  prototype:
+    - match: y
+      scope: region.greenish
+
   main:
     - match: a
       scope: region.bluish

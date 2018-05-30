@@ -34,6 +34,7 @@
     ],
     "contexts": [
         {
+            "protoRules": [],
             "name": "main",
             "rules": [
                 {
@@ -57,6 +58,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "test",
             "rules": [
                 {
@@ -232,6 +234,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "meta-z",
             "rules": [
                 {
@@ -253,6 +256,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "clear",
             "rules": [
                 {
@@ -265,6 +269,7 @@
             "clear_scopes": "1"
         },
         {
+            "protoRules": [],
             "name": "clear-meta",
             "rules": [
                 {
@@ -281,6 +286,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "clear-all",
             "rules": [
                 {

@@ -13,7 +13,7 @@ class Environment {
     }
 
     enqueueNamedContext(name) {
-        if (! this.nameLookup.has(name)) {
+        if (! this.nameLookup.has(name) && this.syntax.contexts[name]) {
             this.nameLookup.set(name, this.enqueueContext(this.syntax.contexts[name]));
         }
         return this.nameLookup.get(name);
@@ -25,14 +25,32 @@ INCLUDE_SCOPE_EXPRESSION = /scope:([^#]*)(?:#(.*))?/;
 function process(syntax, provider) {
     const queue = [];
     const results = [];
-    let i = 0;
+
+    function createEnvironment(syntax) {
+        const environment = new Environment(queue, syntax);
+        environment.protoRules = [];
+        if (syntax.contexts.hasOwnProperty('prototype')) {
+            const protoIndex = environment.enqueueNamedContext('prototype');
+            for (let i = protoIndex; i < queue.length; i++) {
+                resolveContext(i);
+            }
+            environment.protoRules = results[protoIndex].rules;
+        }
+        return environment;
+    }
 
     function resolveContext(i) {
         if (results[i]) return;
 
         const { context, environment } = queue[i];
 
+        const protoRules = (
+            context.meta_include_prototype !== false &&
+            (environment.syntax === syntax || context.name !== 'main')
+        ) ? environment.protoRules : [];
+
         results[i] = {
+            protoRules,
             ...context,
             rules: Array.from(function*(){
                 for (const rule of context.rules) {
@@ -51,8 +69,10 @@ function process(syntax, provider) {
 
                         if (INCLUDE_SCOPE_EXPRESSION.test(rule.include)) {
                             const match = INCLUDE_SCOPE_EXPRESSION.exec(rule.include);
-                            const included = match[1];
-                            includeEnvironment = new Environment(queue, provider.getSyntaxForScope(included).raw);
+                            const included = provider.getSyntaxForScope(match[1]).raw;
+                            
+                            includeEnvironment = createEnvironment(included);
+
                             contextName = match[2] || 'main';
                         } else {
                             includeEnvironment = environment;
@@ -69,30 +89,16 @@ function process(syntax, provider) {
         };
     }
 
-    let protoIndex = 0;
-
-    const baseEnvironment = new Environment(queue, syntax);
-
-    if (syntax.contexts.hasOwnProperty('prototype')) {
-        baseEnvironment.enqueueNamedContext('prototype');
-        for (; i < queue.length; i++) resolveContext(i);
-        protoIndex = i;
-    }
-
+    const baseEnvironment = createEnvironment(syntax);
     for (const name of Object.keys(syntax.contexts)) {
         baseEnvironment.enqueueNamedContext(name);
-        for (; i < queue.length; i++) resolveContext(i);
+    }
+    for (let i = 0; i < queue.length; i++) resolveContext(i);
+
+    for (const context of results) {
+        context.rules = [...context.protoRules, ...context.rules];
     }
 
-    if (syntax.contexts.hasOwnProperty('prototype')) {
-        const protoRules = results[baseEnvironment.nameLookup.get('prototype')].rules;
-
-        results.forEach((context, i) => {
-            if (context.meta_include_prototype !== false && i >= protoIndex) {
-                context.rules = [...protoRules, ...context.rules];
-            }
-        });
-    }
     return {
         ...syntax,
         contexts: results,

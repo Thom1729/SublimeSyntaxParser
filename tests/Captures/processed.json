@@ -27,6 +27,7 @@
     ],
     "contexts": [
         {
+            "protoRules": [],
             "name": "main",
             "rules": [
                 {
@@ -149,6 +150,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "main:6,0",
             "rules": [
                 {
@@ -163,6 +165,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "main:7,0",
             "rules": [
                 {

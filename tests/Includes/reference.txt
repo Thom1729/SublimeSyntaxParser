@@ -1,10 +1,32 @@
-0 * source.test-includes region.bluish 
+0 * source.test-includes region.greenish 
 1 * source.test-includes 
-2 * source.test-includes region.redish 
-3 * source.test-includes 
-4 * source.test-includes region.bluish 
+2 * source.test-includes 
+3 * source.test-includes region.bluish 
+4 * source.test-includes 
 5 * source.test-includes region.redish 
 6 * source.test-includes 
-7 * source.test-includes region.redish 
-8 * source.test-includes region.bluish 
+7 * source.test-includes region.bluish 
+8 * source.test-includes region.redish 
 9 * source.test-includes 
+10 * source.test-includes region.bluish 
+11 * source.test-includes region.greenish 
+12 * source.test-includes 
+13 * source.test-includes region.redish 
+14 * source.test-includes 
+15 * source.test-includes region.redish 
+16 * source.test-includes region.bluish 
+17 * source.test-includes 
+18 * source.test-includes region.redish 
+19 * source.test-includes 
+20 * source.test-includes region.greenish 
+21 * source.test-includes region.bluish 
+22 * source.test-includes 
+23 * source.test-includes 
+24 * source.test-includes region.bluish 
+25 * source.test-includes region.redish 
+26 * source.test-includes 
+27 * source.test-includes region.bluish 
+28 * source.test-includes 
+29   source.test-includes 
+30 * source.test-includes region.redish 
+31 * source.test-includes 

@@ -21,10 +21,12 @@
         "c",
         "d",
         "e",
-        "l"
+        "l",
+        "n"
     ],
     "contexts": [
         {
+            "protoRules": [],
             "name": "prototype",
             "rules": [
                 {
@@ -64,6 +66,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "prototype:0,0",
             "rules": [
                 {
@@ -82,6 +85,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "test-b",
             "rules": [
                 {
@@ -100,6 +104,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "test-m",
             "rules": [
                 {
@@ -118,6 +123,42 @@
             ]
         },
         {
+            "protoRules": [
+                {
+                    "match": "a",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": true,
+                    "next": [
+                        1
+                    ]
+                },
+                {
+                    "match": "b",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": true,
+                    "next": [
+                        2
+                    ]
+                },
+                {
+                    "match": "m",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": true,
+                    "next": []
+                }
+            ],
             "name": "main",
             "rules": [
                 {
@@ -187,7 +228,7 @@
                     ],
                     "push": true,
                     "next": [
-                        6
+                        8
                     ]
                 },
                 {
@@ -201,10 +242,58 @@
                     "next": [
                         3
                     ]
+                },
+                {
+                    "match": 8,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "push": true,
+                    "next": [
+                        6
+                    ]
                 }
             ]
         },
         {
+            "protoRules": [
+                {
+                    "match": "a",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": true,
+                    "next": [
+                        1
+                    ]
+                },
+                {
+                    "match": "b",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": true,
+                    "next": [
+                        2
+                    ]
+                },
+                {
+                    "match": "m",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": true,
+                    "next": []
+                }
+            ],
             "name": "test-d",
             "rules": [
                 {
@@ -257,6 +346,109 @@
             ]
         },
         {
+            "protoRules": [],
+            "name": "test-n",
+            "rules": [
+                {
+                    "match": 8,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ],
+                    "pop": true,
+                    "next": []
+                }
+            ],
+            "meta_include_prototype": false
+        },
+        {
+            "protoRules": [
+                {
+                    "match": "a",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": true,
+                    "next": [
+                        1
+                    ]
+                },
+                {
+                    "match": "b",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": true,
+                    "next": [
+                        2
+                    ]
+                },
+                {
+                    "match": "m",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": true,
+                    "next": []
+                }
+            ],
+            "name": "test-n2",
+            "rules": [
+                {
+                    "match": 0,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "push": true,
+                    "next": [
+                        1
+                    ]
+                },
+                {
+                    "match": 1,
+                    "captures": [
+                        [
+                            0
+                        ]
+                    ],
+                    "push": true,
+                    "next": [
+                        2
+                    ]
+                },
+                {
+                    "match": 2,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ],
+                    "pop": true,
+                    "next": []
+                },
+                {
+                    "match": 8,
+                    "captures": [
+                        [
+                            1
+                        ]
+                    ],
+                    "pop": true,
+                    "next": []
+                }
+            ]
+        },
+        {
+            "protoRules": [],
             "name": "main:2,0",
             "rules": [
                 {
@@ -268,7 +460,7 @@
                     ],
                     "push": true,
                     "next": [
-                        7
+                        9
                     ]
                 },
                 {
@@ -285,6 +477,42 @@
             "meta_include_prototype": false
         },
         {
+            "protoRules": [
+                {
+                    "match": "a",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": true,
+                    "next": [
+                        1
+                    ]
+                },
+                {
+                    "match": "b",
+                    "captures": [
+                        [
+                            "region.redish "
+                        ]
+                    ],
+                    "push": true,
+                    "next": [
+                        2
+                    ]
+                },
+                {
+                    "match": "m",
+                    "captures": [
+                        [
+                            "region.bluish "
+                        ]
+                    ],
+                    "pop": true,
+                    "next": []
+                }
+            ],
             "name": "main:2,0:1,0",
             "rules": [
                 {

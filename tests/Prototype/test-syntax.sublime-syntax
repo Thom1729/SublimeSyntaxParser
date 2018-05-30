@@ -44,6 +44,10 @@ contexts:
     - match: l
       scope: region.redish
       push: test-m
+
+    - match: n
+      scope: region.redish
+      push: test-n
   
   test-b:
     - meta_scope: B
@@ -61,5 +65,14 @@ contexts:
   test-m:
     - meta_scope: M
     - match: m
+      scope: region.bluish
+      pop: true
+
+  test-n:
+    - meta_include_prototype: false
+    - include: test-n2
+
+  test-n2:
+    - match: n
       scope: region.bluish
       pop: true

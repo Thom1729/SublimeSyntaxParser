@@ -5,6 +5,12 @@ scope: source.test-includes-b
 file_extensions:
 - test-includes-b
 contexts:
+  prototype:
+    - match: z
+      scope: region.greenish
+    - match: \b\B
+      push: test-e
+
   main:
     - match: b
       scope: region.redish
@@ -17,7 +23,16 @@ contexts:
           scope: region.greenish
           pop: true
 
+    - match: e
+      scope: region.bluish
+      push: test-e
+
   test-c:
     - match: c
+      scope: region.redish
+      pop: true
+
+  test-e:
+    - match: e
       scope: region.redish
       pop: true

@@ -29,6 +29,7 @@
     ],
     "contexts": [
         {
+            "protoRules": [],
             "name": "main",
             "rules": [
                 {
@@ -163,6 +164,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "main:0,0",
             "rules": [
                 {
@@ -178,6 +180,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "main:1,0",
             "rules": [
                 {
@@ -193,6 +196,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "main:2,0",
             "rules": [
                 {
@@ -208,6 +212,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "main:3,0",
             "rules": [
                 {
@@ -223,6 +228,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "main:5,0",
             "rules": [
                 {
@@ -238,6 +244,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "main:6,0",
             "rules": [
                 {
@@ -253,6 +260,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "main:7,0",
             "rules": [
                 {
@@ -268,6 +276,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "main:8,0",
             "rules": [
                 {
@@ -283,6 +292,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "main:9,0",
             "rules": [
                 {
@@ -298,6 +308,7 @@
             ]
         },
         {
+            "protoRules": [],
             "name": "main:10,0",
             "rules": [
                 {
