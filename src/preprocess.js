@@ -91,7 +91,7 @@ function preprocess(syntax) {
                     newContext.rules.push({ include });
                 },
 
-                match: ({ match, captures, scope, pop, push, set, ...rest }) => {
+                match: ({ match, captures, scope, pop, push, set, with_prototype, ...rest }) => {
                     meta = false
                     assertNoExtras(rest);
 
@@ -125,6 +125,8 @@ function preprocess(syntax) {
                     newRule.next = normalizeContextList(push || set || []).map( (c, j) =>
                         typeof c === 'object' ? simplifyContext(c, `${name}:${i},${j}`) : c
                     );
+
+                    if (with_prototype) newRule.with_prototype = simplifyContext(with_prototype).rules;
 
                     newContext.rules.push(newRule);
                 }

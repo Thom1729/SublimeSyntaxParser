@@ -1,0 +1,6 @@
+0 * source.test-withprototype region.redish 
+1 * source.test-withprototype region.greenish 
+2 * source.test-withprototype 
+3 * source.test-withprototype region.redish 
+4 * source.test-withprototype region.greenish 
+5 * source.test-withprototype 

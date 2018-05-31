@@ -1,0 +1,11 @@
+%YAML 1.2
+---
+name: Test withPrototype B
+scope: source.test-withprototype-b
+file_extensions:
+- test-withprototype-b
+contexts:
+  main:
+    - match: z
+      scope: region.bluish
+      pop: true

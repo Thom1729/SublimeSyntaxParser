@@ -1,0 +1,27 @@
+%YAML 1.2
+---
+name: Test withPrototype
+scope: source.test-withprototype
+file_extensions:
+- test-withprototype
+contexts:
+  main:
+    - match: a
+      scope: region.redish
+      push: 
+        - match: z
+          scope: region.bluish
+          pop: true
+      with_prototype:
+        - match: z
+          scope: region.greenish
+          pop: true
+
+    - match: b
+      scope: region.redish
+      push:
+        - scope:source.test-withprototype-b
+      with_prototype:
+        - match: z
+          scope: region.greenish
+          pop: true
