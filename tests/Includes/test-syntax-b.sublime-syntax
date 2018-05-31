@@ -33,6 +33,10 @@ contexts:
       scope: region.yellowish
       push: main
 
+    - match: n
+      scope: region.yellowish
+      set: main
+
     - match: x
       scope: region.redish
       pop: true

@@ -62,25 +62,25 @@ function preprocess(syntax) {
         for (const originalRule of context) {
             caseObjectShape(originalRule, {
                 meta_scope: ({ meta_scope, ...rest }) => {
-                    assertNoExtras(rest);
+                    // assertNoExtras(rest);
                     assertMeta();
                     newContext.meta_scope = splitScopes(meta_scope);
                 },
 
                 meta_content_scope: ({ meta_content_scope, ...rest }) => {
-                    assertNoExtras(rest);
+                    // assertNoExtras(rest);
                     assertMeta();
                     newContext.meta_content_scope = splitScopes(meta_content_scope);
                 },
 
                 clear_scopes: ({ clear_scopes, ...rest }) => {
-                    assertNoExtras(rest);
+                    // assertNoExtras(rest);
                     assertMeta();
                     newContext.clear_scopes = clear_scopes;
                 },
 
                 meta_include_prototype: ({ meta_include_prototype, ...rest }) => {
-                    assertNoExtras(rest);
+                    // assertNoExtras(rest);
                     assertMeta();
                     newContext.meta_include_prototype = meta_include_prototype;
                 },

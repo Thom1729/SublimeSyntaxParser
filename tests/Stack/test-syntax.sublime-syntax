@@ -90,6 +90,21 @@ contexts:
         - clear-all
         - meta-z
 
+    - match: ^m
+      scope: region.redish
+      push:
+        - meta_scope: M1
+        - meta_scope: M2
+        - include: meta-z
+
+    - match: ^n
+      scope: region.redish
+      push:
+        - clear_scopes: true
+          meta_content_scope: N_CONTENT
+          meta_scope: N
+        - include: meta-z
+
   meta-z:
     - meta_scope: META
     - meta_content_scope: META_CONTENT

@@ -78,3 +78,11 @@
 77 * source.test-stack TEST TEST_CONTENT 
 78   source.test-stack TEST TEST_CONTENT 
 79 * source.test-stack TEST TEST_CONTENT 
+80 * source.test-stack TEST TEST_CONTENT M2 region.redish 
+81 * source.test-stack TEST TEST_CONTENT M2 
+82 * source.test-stack TEST TEST_CONTENT M2 region.bluish 
+83 * source.test-stack TEST TEST_CONTENT 
+84 * source.test-stack TEST TEST_CONTENT N region.redish 
+85 * source.test-stack TEST TEST_CONTENT N 
+86 * source.test-stack TEST TEST_CONTENT N region.bluish 
+87 * source.test-stack TEST TEST_CONTENT 
