@@ -191,17 +191,10 @@ class ParserState {
                 ]);
             }
 
-            if (rule.embed) {
-                const ctx = pushed[0];
+            for (const ctx of pushed) {
                 if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
 
                 this.pushContext(ctx, match.captureIndices);
-            } else {
-                for (const ctx of pushed) {
-                    if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
-
-                    this.pushContext(ctx, match.captureIndices);
-                }
             }
         }
     }
@@ -213,10 +206,6 @@ class ParserState {
 
         yield* this.advance(rowLen);
 
-        this.nextLine();
-    }
-
-    nextLine() {
         this.row++;
         this.col = 0;
     }
