@@ -42,9 +42,10 @@ function splitScopes(scopes) {
 function preprocess(syntax) {
     const variables = recMap(
         syntax.variables || {},
-        (key, value, recurse) =>
-            value.replace(/\{\{(\w+)\}\}/g, (all, v) => variables(v))
+        (key, value, recurse) => replaceVariables(value)
     );
+
+    const replaceVariables = (regexp) => regexp.replace(/\{\{(\w+)\}\}/g, (all, v) => variables(v));
 
     function simplifyContext(context, name) {
         const newContext = {
@@ -91,7 +92,7 @@ function preprocess(syntax) {
                     newContext.rules.push({ include });
                 },
 
-                match: ({ match, captures, scope, pop, push, set, with_prototype, ...rest }) => {
+                match: ({ match, captures, scope, pop, push, set, with_prototype, embed, escape, escape_captures, ...rest }) => {
                     meta = false
                     assertNoExtras(rest);
 
@@ -100,7 +101,7 @@ function preprocess(syntax) {
                     }
 
                     const newRule = {
-                        match: match.replace(/\{\{(\w+)\}\}/g, (all, v) => variables(v)),
+                        match: replaceVariables(match),
                         captures: [],
                     };
 
@@ -128,6 +129,16 @@ function preprocess(syntax) {
 
                     if (with_prototype) newRule.with_prototype = simplifyContext(with_prototype).rules;
 
+                    if (embed) newRule.embed = embed;
+                    if (escape) newRule.escape = replaceVariables(escape);
+
+                    if (escape_captures) {
+                        newRule.escape_captures = []
+                        for (const [i, scope] of Object.entries(escape_captures)) {
+                            newRule.escape_captures[i] = splitScopes(scope);
+                        }
+                    }
+
                     newContext.rules.push(newRule);
                 }
             });
@@ -141,7 +152,6 @@ function preprocess(syntax) {
 
     return {
         ...syntax,
-        // name: syntax.name,
         scope: splitScopes(syntax.scope),
         hidden: Boolean(syntax.hidden),
         contexts: simplified,

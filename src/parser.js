@@ -1,12 +1,14 @@
 class ParserState {
-    constructor(syntax, lines) {
+    constructor(syntax, lines, syntaxProvider) {
         this.syntax = syntax;
         this.lines = lines;
+        this.syntaxProvider = syntaxProvider;
         this.scannerProvider = new ScannerProvider();
 
         this.contextStack = [];
         this.scopeStack = [ syntax.scope ];
         this.clearedStack = [];
+        this.escapeStack = [];
 
         this.i = 0;
         this.row = 0;
@@ -103,17 +105,51 @@ class ParserState {
         }
     }
 
-    *parseNextToken() {
-        if (this.stackIsEmpty()) {
-            this.pushContext(this.syntax.contexts[this.syntax.mainContext]);
-            return;
-        }
+    *parseNextToken(line) {
+        while (true) {
+            if (this.stackIsEmpty()) {
+                this.pushContext(this.syntax.contexts[this.syntax.mainContext]);
+            }
 
-        const [top, scanner] = this.topContext();
+            const [top, scanner] = this.topContext();
 
-        const match = scanner.findNextMatchSync(this.line, this.col);
+            let nextEscape;
+            for (const [i, escapeScanner, scopes] of this.escapeStack) {
+                const match = escapeScanner.findNextMatchSync(line, this.col);
+                if (!match) continue;
+                const start = match.captureIndices[0].start
 
-        if (match) {
+                if (!nextEscape || start < nextEscape.start) {
+                    nextEscape = {
+                        i,
+                        start,
+                        scopes,
+                        captureIndices: match.captureIndices,
+                    };
+                }
+            }
+
+            if (nextEscape) {
+                line = line.slice(0, nextEscape.start);
+            }
+
+            const match = scanner.findNextMatchSync(line, this.col);
+
+            if (nextEscape && (!match || nextEscape.start <= match.captureIndices[0].start)) {
+                console.log('escaping!');
+                yield* this.advance(nextEscape.start);
+
+                while (this.contextStack.length > nextEscape.i) {
+                    this.popContext();
+                }
+
+                yield* this.parseCapture(nextEscape.scopes, nextEscape.captureIndices, true);
+
+                continue;
+            }
+
+            if (!match) return;
+
             const rule = top.rules[match.index];
 
             const pushed = rule.next.map(i => this.syntax.contexts[i]);
@@ -156,21 +192,37 @@ class ParserState {
                 this.popContext();
             }
 
-            for (const ctx of pushed) {
+            if (rule.escape) {
+                console.log('push escape');
+                this.escapeStack.push([
+                    this.scopeStack.length,
+                    this.scannerProvider.getScanner([rule.escape], match.captureIndices, line),
+                    rule.escape_captures,
+                ]);
+            }
+
+            if (rule.embed) {
+                const ctx = pushed[0];
                 if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
 
                 this.pushContext(ctx, match.captureIndices);
+            } else {
+                for (const ctx of pushed) {
+                    if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
+
+                    this.pushContext(ctx, match.captureIndices);
+                }
             }
-        } else {
-            yield* this.advance(this.line.length);
         }
     }
 
     *parseLine() {
         const rowLen = this.line.length;
-        while (this.col < rowLen) {
-            yield* this.parseNextToken();
-        }
+
+        yield* this.parseNextToken(this.line);
+
+        yield* this.advance(rowLen);
+
         this.nextLine();
     }
 
@@ -189,7 +241,8 @@ class ParserState {
 
     pushContext(ctx, captures) {
         this.contextStack.push([
-            ctx, this.scannerProvider.getScanner(ctx.patterns, captures, this.line),
+            ctx,
+            this.scannerProvider.getScanner(ctx.patterns, captures, this.line),
         ]);
         this.pushScopes(ctx.meta_scope);
         this.pushScopes(ctx.meta_content_scope);
@@ -199,6 +252,11 @@ class ParserState {
         const [top, _] = this.contextStack.pop();
         this.popScopes(top.meta_scope.length);
         if (top.clear_scopes) this.popClear();
+
+        if (this.escapeStack.length && this.escapeStack[this.escapeStack.length-1][0] >= this.contextStack.length) {
+            console.log('pop escape');
+            this.escapeStack.pop();
+        }
     }
 
     pushScopes(scopes) {
@@ -223,11 +281,11 @@ class ParserState {
 
 const { ScannerProvider } = require('./scannerProvider');
 
-function* parse(syntax, text) {
+function* parse(syntax, text, syntaxProvider) {
     const lines = text.split(/^/gm);
     const lineCount = lines.length;
 
-    const state = new ParserState(syntax, text.split(/^/gm));
+    const state = new ParserState(syntax, text.split(/^/gm, syntaxProvider));
 
     while (state.row < lineCount) {
         yield* state.parseLine();

@@ -7,21 +7,31 @@ const { process, pack } = require('./syntax');
 class SyntaxDefinition {
     constructor(props) {
         Object.assign(this, props);
+
+        this.forInclusion = this.memoize(() => {
+            const syntax = this.raw;
+            return {
+                ...syntax,
+                contexts: {
+                    ...syntax.contexts,
+                    main: {
+                        ...syntax.contexts.main,
+                        meta_content_scope: [ ...(syntax.scope), ...(syntax.contexts.main.meta_content_scope || []) ],
+                    },
+                },
+            };
+        });
     }
 
-    forInclusion() {
-        const syntax = this.raw;
-        return {
-            ...syntax,
-            contexts: {
-                ...syntax.contexts,
-                main: {
-                    ...syntax.contexts.main,
-                    meta_content_scope: [ ...(syntax.scope), ...(syntax.contexts.main.meta_content_scope || []) ],
-                },
-            },
-        };
-    }
+    memoize(method) {
+        const key = '_'+method;
+        return () => {
+            if (! this.hasOwnProperty(key)) {
+                this[key] = method();
+            }
+            return this[key];
+        }
+    };
 }
 
 async function loadSublimeSyntax(path) {
@@ -32,10 +42,12 @@ async function loadSublimeSyntax(path) {
 }
 
 class SyntaxProvider {
-    constructor() {
+    constructor(scannerProvider) {
         this.syntaxes = [];
         this.scopes = {};
         this.extensions = {};
+
+        this.compiled = new Map();
     }
 
     async addDirectory(directory) {
@@ -70,6 +82,7 @@ class SyntaxProvider {
 
     unpack(syntax) {
         const scopeNames = (arr) => arr && arr.map(i => syntax.scopes[i]);
+        const mapCaptures = (arr) => arr && arr.map(scopeNames);
 
         return {
             ...syntax,
@@ -81,7 +94,8 @@ class SyntaxProvider {
                 rules: ctx.rules.map(rule => ({
                     ...rule,
                     next: rule.next || [],
-                    captures: rule.captures ? rule.captures.map(scopeNames) : [],
+                    captures: mapCaptures(rule.captures) || [],
+                    escape_captures: mapCaptures(rule.escape_captures) || [],
                 })),
                 patterns: ctx.patterns.map(p => syntax.patterns[p]),
             })),

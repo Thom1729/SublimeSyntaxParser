@@ -80,6 +80,14 @@ function process(syntax, provider) {
                             ? new Environment(environment.syntax, [ ...environment.withPrototype, ...rule.with_prototype ])
                             : environment;
 
+                        if (rule.hasOwnProperty('embed')) {
+                            if (INCLUDE_SCOPE_EXPRESSION.test(rule.embed)) {
+                                
+                            } else {
+                                rule.next = [ rule.embed ];
+                            }
+                        }
+
                         yield {
                             ...rule,
                             next: rule.next.map(c => nextEnvironment.enqueue(c)),
@@ -134,6 +142,9 @@ function pack(syntax) {
             set: rule.set,
             next: compactArray(rule.next),
             captures: compactArray(rule.captures.map(internScopes)),
+            embed: rule.embed,
+            escape: rule.hasOwnProperty('escape') ? rule.escape : undefined,
+            escape_captures: compactArray((rule.escape_captures||[]).map(internScopes)),
         })),
     }));
 
