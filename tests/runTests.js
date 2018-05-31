@@ -34,11 +34,10 @@ async function runTest(path) {
     const syntaxProvider = new SyntaxProvider(path);
 
     const artifactsPath = path.joinpath('artifacts');
-    // if (! (await artifactsPath.access())) {
-    //     await artifactsPath.mkdir();
-    // }
+    await artifactsPath.ensureDir();
 
     for (const testFile of (await path.glob('test-file.*'))) {
+        if (testFile.extension === '.txt') continue;
         const syntaxRecord = syntaxProvider.getSyntaxForExtension(testFile.extension); 
 
         const syntax = syntaxProvider.getPacked(syntaxRecord.raw);
@@ -76,7 +75,9 @@ async function runTest(path) {
             .addExtension('.result.txt')
             .writeText(result.map(l => l+'\n').join(''));
 
-        const reference = (await path.joinpath('reference.txt').readText()).split('\n').slice(0, -1);
+        const reference = (await testFile.addExtension('.reference.txt').readText()).split('\n').slice(0, -1);
+
+        // const reference = (await path.joinpath('reference.txt').readText()).split('\n').slice(0, -1);
 
         for (let line=0; line < reference.length; line++) {
             if (reference[line] !== result[line]) {
