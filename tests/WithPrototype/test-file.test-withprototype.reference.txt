@@ -4,3 +4,13 @@
 3 * source.test-withprototype region.redish 
 4 * source.test-withprototype region.greenish 
 5 * source.test-withprototype 
+6 * source.test-withprototype region.redish 
+7 * source.test-withprototype region.redish 
+8 * source.test-withprototype region.greenish 
+9 * source.test-withprototype region.greenish 
+10 * source.test-withprototype 
+11 * source.test-withprototype region.redish 
+12 * source.test-withprototype region.redish 
+13 * source.test-withprototype region.yellowish 
+14 * source.test-withprototype region.greenish 
+15 * source.test-withprototype 

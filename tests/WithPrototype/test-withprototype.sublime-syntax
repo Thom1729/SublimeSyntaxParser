@@ -25,3 +25,44 @@ contexts:
         - match: z
           scope: region.greenish
           pop: true
+
+    - match: c
+      scope: region.redish
+      push:
+        - match: c
+          scope: region.redish
+          push:
+            - match: z
+              scope: region.bluish
+              pop: true
+          with_prototype:
+            - match: z
+              scope: region.yellowish
+              pop: true
+      with_prototype:
+        - match: z
+          scope: region.greenish
+          pop: true
+
+    - match: d
+      scope: region.redish
+      push:
+        - match: d
+          scope: region.redish
+          push:
+            - match: z
+              scope: region.bluish
+              pop: true
+          with_prototype:
+            - match: y
+              scope: region.yellowish
+              pop: true
+      with_prototype:
+        - match: z
+          scope: region.greenish
+          pop: true
+
+  pop-z:
+    - match: z
+      scope: region.greenish
+      pop: true

@@ -1,27 +1,5 @@
 const { Interner } = require('./util.js');
 
-// class Environment {
-//     constructor(queue, syntax, withPrototype) {
-//         this.queue = queue;
-//         this.syntax = syntax;
-//         this.withPrototype = withPrototype;
-//         this.nameLookup = new Map();
-//         this.protoRules = [];
-//     }
-
-//     enqueueContext(context) {
-//         this.queue.push({ context, environment: this });
-//         return this.queue.length - 1;
-//     }
-
-//     enqueueNamedContext(name) {
-//         if (! this.nameLookup.has(name) && this.syntax.contexts[name]) {
-//             this.nameLookup.set(name, this.enqueueContext(this.syntax.contexts[name]));
-//         }
-//         return this.nameLookup.get(name);
-//     }
-// }
-
 const INCLUDE_SCOPE_EXPRESSION = /scope:([^#]*)(?:#(.*))?/;
 
 function patchForeignSyntax(syntax) {
@@ -41,8 +19,20 @@ function process(syntax, provider) {
     const queue = [];
     const results = [];
 
+    const foreignEnvironmentCache = new Map();
+    function getForeignEnvironment(syntax, withPrototype) {
+        if (withPrototype.length) {
+            return new Environment(patchForeignSyntax(syntax), withPrototype);
+        } else {
+            if (!foreignEnvironmentCache.has(syntax)) {
+                foreignEnvironmentCache.set(syntax, new Environment(patchForeignSyntax(syntax)));
+            }
+            return foreignEnvironmentCache.get(syntax);
+        }
+    }
+
     class Environment {
-        constructor(syntax, withPrototype) {
+        constructor(syntax, withPrototype = []) {
             this.syntax = syntax;
             this.withPrototype = withPrototype;
             this.nameLookup = new Map();
@@ -51,7 +41,7 @@ function process(syntax, provider) {
             if (syntax.contexts.hasOwnProperty('prototype')) {
                 const protoIndex = this.enqueueNamedContext('prototype');
                 for (let i = protoIndex; i < queue.length; i++) {
-                    resolveContext(i);
+                    resolveIndex(i);
                 }
                 this.protoRules = results[protoIndex].rules;
             }
@@ -63,7 +53,7 @@ function process(syntax, provider) {
         }
 
         enqueueNamedContext(name) {
-            if (! this.nameLookup.has(name) && this.syntax.contexts[name]) {
+            if (! this.nameLookup.has(name)) {
                 this.nameLookup.set(name, this.enqueueContext(this.syntax.contexts[name]));
             }
             return this.nameLookup.get(name);
@@ -75,10 +65,8 @@ function process(syntax, provider) {
             } else if (INCLUDE_SCOPE_EXPRESSION.test(contextRef)) {
                 const match = INCLUDE_SCOPE_EXPRESSION.exec(contextRef);
 
-                // const includeEnvironment =
-                //     this.withPrototype ? 
-                
-                const includeEnvironment = getForeignEnvironment(provider.getSyntaxForScope(match[1]).raw, this.withPrototype);
+                const includedSyntax = provider.getSyntaxForScope(match[1]).raw;
+                const includeEnvironment = getForeignEnvironment(includedSyntax, this.withPrototype);
 
                 return includeEnvironment.enqueueNamedContext(match[2] || 'main');
             } else {
@@ -87,44 +75,30 @@ function process(syntax, provider) {
         }
     }
 
-    const environmentCache = new Map();
-    function getForeignEnvironment(syntax, withPrototype) {
-        if (withPrototype) {
-            return new Environment(patchForeignSyntax(syntax), withPrototype);
-        } else {
-            if (!environmentCache.has(syntax)) {
-                environmentCache.set(syntax, new Environment(patchForeignSyntax(syntax)));
-            }
-            return environmentCache.get(syntax);
-        }
+    function resolveIndex(i) {
+        if (!results[i]) results[i] = resolveContext(queue[i]);
+        return results[i];
     }
 
-    function resolveContext(i) {
-        if (results[i]) return;
-
-        const { context, environment } = queue[i];
-
+    function resolveContext({ context, environment }) {
         const protoRules = (context.meta_include_prototype !== false) ? environment.protoRules : [];
-        const withProtoRules = environment.withPrototype || [];
 
-        results[i] = {
-            protoRules: [ ...withProtoRules, ...protoRules ],
+        return {
             ...context,
+            protoRules: [ ...environment.withPrototype, ...protoRules ],
             rules: Array.from(function*(){
                 for (const rule of context.rules) {
                     if (rule.hasOwnProperty('match')) {
-                        let nextEnvironment = environment;
-                        if (rule.with_prototype) {
-                            nextEnvironment = new Environment(environment.syntax, rule.with_prototype);
-                        }
+                        const nextEnvironment = rule.with_prototype
+                            ? new Environment(environment.syntax, [ ...environment.withPrototype, ...rule.with_prototype ])
+                            : environment;
+
                         yield {
                             ...rule,
                             next: rule.next.map(c => nextEnvironment.enqueue(c)),
                         };
                     } else if (rule.hasOwnProperty('include')) {
-                        const j = environment.enqueue(rule.include);
-                        resolveContext(j);
-                        yield* results[j].rules;
+                        yield* resolveIndex(environment.enqueue(rule.include)).rules;
                     } else {
                         throw new TypeError(rule.toString());
                     }
@@ -137,7 +111,7 @@ function process(syntax, provider) {
     for (const name of Object.keys(syntax.contexts)) {
         baseEnvironment.enqueueNamedContext(name);
     }
-    for (let i = 0; i < queue.length; i++) resolveContext(i);
+    for (let i = 0; i < queue.length; i++) resolveIndex(i);
 
     for (const context of results) {
         context.rules = [...context.protoRules, ...context.rules];

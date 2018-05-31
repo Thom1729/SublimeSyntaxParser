@@ -32,6 +32,7 @@ async function runTest(path) {
     const { parse } = require('../src/parser.js');
 
     const syntaxProvider = new SyntaxProvider(path);
+    syntaxProvider.addDirectory(path);
 
     const artifactsPath = path.joinpath('artifacts');
     await artifactsPath.ensureDir();
@@ -40,7 +41,7 @@ async function runTest(path) {
         if (testFile.extension === '.txt') continue;
         const syntaxRecord = syntaxProvider.getSyntaxForExtension(testFile.extension); 
 
-        const syntax = syntaxProvider.getPacked(syntaxRecord.raw);
+        const syntax = syntaxProvider.compile(syntaxRecord.raw);
 
         await artifactsPath
             .joinpath(syntaxRecord.path.basename)
