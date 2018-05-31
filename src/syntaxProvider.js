@@ -8,6 +8,27 @@ class SyntaxDefinition {
     constructor(props) {
         Object.assign(this, props);
     }
+
+    forInclusion() {
+        const syntax = this.raw;
+        return {
+            ...syntax,
+            contexts: {
+                ...syntax.contexts,
+                main: {
+                    ...syntax.contexts.main,
+                    meta_content_scope: [ ...(syntax.scope), ...(syntax.contexts.main.meta_content_scope || []) ],
+                },
+            },
+        };
+    }
+}
+
+async function loadSublimeSyntax(path) {
+    const buffer = await path.readBinary();
+    const data = loadYaml(buffer);
+
+    return preprocess(data);
 }
 
 class SyntaxProvider {
@@ -17,12 +38,20 @@ class SyntaxProvider {
         this.extensions = {};
     }
 
-    addDirectory(directory) {
-        for (const path of new Path(directory).globSync('**/*.sublime-syntax')) {
-            this.addSyntax(new SyntaxDefinition({
-                path,
-                raw: this.loadSublimeSyntax(path),
-            }));
+    async addDirectory(directory) {
+        const paths = await new Path(directory).glob('**/*.sublime-syntax');
+
+        const definitions = await Promise.all(
+            paths.map(async function(path) {
+                return new SyntaxDefinition({
+                    path,
+                    raw: await loadSublimeSyntax(path),
+                });
+            })
+        );
+
+        for (const def of definitions) {
+            this.addSyntax(def);
         }
     }
 
@@ -57,13 +86,6 @@ class SyntaxProvider {
                 patterns: ctx.patterns.map(p => syntax.patterns[p]),
             })),
         };
-    }
-
-    loadSublimeSyntax(path) {
-        const buffer = path.readBinarySync();
-        const data = loadYaml(buffer);
-
-        return preprocess(data);
     }
 
     getSyntaxForScope(scope) {

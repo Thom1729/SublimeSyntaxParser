@@ -2,19 +2,6 @@ const { Interner } = require('./util.js');
 
 const INCLUDE_SCOPE_EXPRESSION = /scope:([^#]*)(?:#(.*))?/;
 
-function patchForeignSyntax(syntax) {
-    return {
-        ...syntax,
-        contexts: {
-            ...syntax.contexts,
-            main: {
-                ...syntax.contexts.main,
-                meta_content_scope: [ ...(syntax.scope), ...(syntax.contexts.main.meta_content_scope || []) ],
-            },
-        },
-    };
-}
-
 function process(syntax, provider) {
     const queue = [];
     const results = [];
@@ -22,10 +9,10 @@ function process(syntax, provider) {
     const foreignEnvironmentCache = new Map();
     function getForeignEnvironment(syntax, withPrototype) {
         if (withPrototype.length) {
-            return new Environment(patchForeignSyntax(syntax), withPrototype);
+            return new Environment(syntax.forInclusion(), withPrototype);
         } else {
             if (!foreignEnvironmentCache.has(syntax)) {
-                foreignEnvironmentCache.set(syntax, new Environment(patchForeignSyntax(syntax)));
+                foreignEnvironmentCache.set(syntax, new Environment(syntax.forInclusion()));
             }
             return foreignEnvironmentCache.get(syntax);
         }
@@ -65,7 +52,7 @@ function process(syntax, provider) {
             } else if (INCLUDE_SCOPE_EXPRESSION.test(contextRef)) {
                 const match = INCLUDE_SCOPE_EXPRESSION.exec(contextRef);
 
-                const includedSyntax = provider.getSyntaxForScope(match[1]).raw;
+                const includedSyntax = provider.getSyntaxForScope(match[1]);
                 const includeEnvironment = getForeignEnvironment(includedSyntax, this.withPrototype);
 
                 return includeEnvironment.enqueueNamedContext(match[2] || 'main');

@@ -32,7 +32,7 @@ async function runTest(path) {
     const { parse } = require('../src/parser.js');
 
     const syntaxProvider = new SyntaxProvider(path);
-    syntaxProvider.addDirectory(path);
+    await syntaxProvider.addDirectory(path);
 
     const artifactsPath = path.joinpath('artifacts');
     await artifactsPath.ensureDir();
