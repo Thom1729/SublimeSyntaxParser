@@ -33,44 +33,57 @@ async function runTest(path) {
 
     const syntaxProvider = new SyntaxProvider(path);
 
-    const testFile = (await path.glob('test-file.*'))[0];
+    const artifactsPath = path.joinpath('artifacts');
+    // if (! (await artifactsPath.access())) {
+    //     await artifactsPath.mkdir();
+    // }
 
-    const syntax = syntaxProvider.getPacked(
-        syntaxProvider.getSyntaxForExtension(testFile.extension).raw
-    );
+    for (const testFile of (await path.glob('test-file.*'))) {
+        const syntaxRecord = syntaxProvider.getSyntaxForExtension(testFile.extension); 
 
-    await path.joinpath('processed.json').writeText(JSON.stringify(syntax, null, 4));
+        const syntax = syntaxProvider.getPacked(syntaxRecord.raw);
 
-    const zipped = await zipString(JSON.stringify(syntax));
-    await path.joinpath('processed-min.json.gz').writeBinary(zipped);
+        await artifactsPath
+            .joinpath(syntaxRecord.path.basename)
+            .addExtension('.processed.json')
+            .writeText(JSON.stringify(syntax, null, 4))
 
-    const text = await testFile.readText();
+        await artifactsPath
+            .joinpath(syntaxRecord.path.basename)
+            .addExtension('.processed-min.json.gz')
+            .writeBinary(await zipString(JSON.stringify(syntax)))
 
-    const unpacked = syntaxProvider.unpack(syntax);
+        const unpacked = syntaxProvider.unpack(syntax);
 
-    await path.joinpath('unpacked.json').writeText(JSON.stringify(unpacked, null, 4));
+        await artifactsPath
+            .joinpath(syntaxRecord.path.basename)
+            .addExtension('.unpacked.json')
+            .writeText(JSON.stringify(unpacked, null, 4))
 
-    const tokens = Array.from(parse(unpacked, text));
-
-    const result = Array.from(flatMap(
-        tokens,
-        function* ([region, scope]) {
-            for (let i = region[0]; i < region[1]; i++) {
-                const tokenMarker = (i === region[0] ? '*' : ' ');
-                yield (`${i} ${tokenMarker} ${scope}`);
+        const text = await testFile.readText();
+        const result = Array.from(flatMap(
+            parse(unpacked, text),
+            function* ([region, scope]) {
+                for (let i = region[0]; i < region[1]; i++) {
+                    const tokenMarker = (i === region[0] ? '*' : ' ');
+                    yield (`${i} ${tokenMarker} ${scope}`);
+                }
             }
-        }
-    ));
+        ));
 
-    await path.joinpath('result.txt').writeText(result.map(l => l+'\n').join(''));
+        await artifactsPath
+            .joinpath(testFile.basename)
+            .addExtension('.result.txt')
+            .writeText(result.map(l => l+'\n').join(''));
 
-    const reference = (await path.joinpath('reference.txt').readText()).split('\n').slice(0, -1);
+        const reference = (await path.joinpath('reference.txt').readText()).split('\n').slice(0, -1);
 
-    for (let line=0; line < reference.length; line++) {
-        if (reference[line] !== result[line]) {
-            console.log(path.toString());
-            console.log(reference[line] + '$');
-            console.log(result[line] + '$');
+        for (let line=0; line < reference.length; line++) {
+            if (reference[line] !== result[line]) {
+                console.log(path.toString());
+                console.log(reference[line] + '$');
+                console.log(result[line] + '$');
+            }
         }
     }
 }
