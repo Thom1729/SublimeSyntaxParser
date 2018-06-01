@@ -1,0 +1,10 @@
+%YAML 1.2
+---
+name: Test Embed B
+scope: source.test-embed-b
+file_extensions:
+- test-embed-b
+contexts:
+  main:
+    - match: a
+      scope: region.redish

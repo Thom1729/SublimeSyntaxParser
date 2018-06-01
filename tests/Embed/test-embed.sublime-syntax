@@ -1,0 +1,75 @@
+%YAML 1.2
+---
+name: Test Embed
+scope: source.test-embed
+file_extensions:
+- test-embed
+contexts:
+  prototype:
+    - match: v
+      scope: region.pinkish
+
+  main:
+    - match: a
+      scope: region.redish
+      embed: embedded-z
+      escape: $
+
+    - match: b
+      scope: region.redish
+      embed: embedded-z
+      escape: x
+
+    - match: c
+      scope: region.redish
+      embed: embedded-z
+      escape: z
+
+    - match: d
+      scope: region.redish
+      embed: embedded-xyz
+      escape: z
+      escape_captures:
+        0: region.greenish
+
+    - match: e
+      scope: region.redish
+      embed: embedded-xyz-2
+      escape: z
+      escape_captures:
+        0: region.greenish
+
+    - match: f
+      scope: region.redish
+      embed: embedded-xyz-3
+      escape: z
+      escape_captures:
+        0: region.greenish
+
+  embedded-z:
+    - meta_scope: META-Z
+    - match: z
+      scope: region.bluish
+      pop: true
+
+  embedded-xyz:
+    - meta_scope: META-XYZ-1
+    - match: xyz
+      scope: region.bluish
+      pop: true
+
+  embedded-xyz-2:
+    - meta_scope: META-XYZ-2
+    - match: w
+      scope: region.yellowish
+    - match: xyz?
+      scope: region.bluish
+      pop: true
+
+  embedded-xyz-3:
+    - meta_scope: META-XYZ-3
+    - match: w
+      scope: region.yellowish
+    - match: xy$
+      scope: region.bluish
+      pop: true
