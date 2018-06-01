@@ -41,7 +41,7 @@ async function runTest(path) {
         if (testFile.extension === '.txt') continue;
         const syntaxRecord = syntaxProvider.getSyntaxForExtension(testFile.extension); 
 
-        const syntax = syntaxProvider.compile(syntaxRecord.raw);
+        const syntax = syntaxRecord.compiled();
 
         await artifactsPath
             .joinpath(syntaxRecord.path.basename)
@@ -53,16 +53,16 @@ async function runTest(path) {
             .addExtension('.processed-min.json.gz')
             .writeBinary(await zipString(JSON.stringify(syntax)))
 
-        const unpacked = syntaxProvider.unpack(syntax);
+        const unpacked = syntaxRecord.unpacked();
 
-        await artifactsPath
-            .joinpath(syntaxRecord.path.basename)
-            .addExtension('.unpacked.json')
-            .writeText(JSON.stringify(unpacked, null, 4))
+        // await artifactsPath
+        //     .joinpath(syntaxRecord.path.basename)
+        //     .addExtension('.unpacked.json')
+        //     .writeText(JSON.stringify(unpacked, null, 4))
 
         const text = await testFile.readText();
         const result = Array.from(flatMap(
-            parse(unpacked, text),
+            parse(unpacked, text, syntaxProvider),
             function* ([region, scope]) {
                 for (let i = region[0]; i < region[1]; i++) {
                     const tokenMarker = (i === region[0] ? '*' : ' ');

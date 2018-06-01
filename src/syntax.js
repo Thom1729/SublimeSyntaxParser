@@ -78,15 +78,14 @@ function process(syntax, provider) {
                             ? new Environment(environment.syntax, [ ...environment.withPrototype, ...rule.with_prototype ])
                             : environment;
 
-                        if (rule.hasOwnProperty('embed')) {
-                            if (typeof rule.embed === 'object') {
-                                // TODO
-                            } else {
-                                rule.next = [ rule.embed ];
-                            }
+                        let next;
+
+                        if (rule.type === 'embed') {
+                            next = rule.next.map(c => c.scope ? c : nextEnvironment.enqueue(c));
+                        } else {
+                            next = rule.next.map(c => nextEnvironment.enqueue(c));
                         }
 
-                        const next = rule.next.map(c => nextEnvironment.enqueue(c));
                         if (rule.embed_scope) {
                             next.unshift(
                                 nullEnvironment.enqueueContext({
@@ -149,12 +148,10 @@ function pack(syntax) {
         clear_scopes: ctx.clear_scopes,
         patterns: ctx.rules.map(rule => patternInterner.get(rule.match)),
         rules: ctx.rules.map(rule => ({
-            push: rule.push,
+            type: rule.type,
             pop: rule.pop,
-            set: rule.set,
             next: compactArray(rule.next),
             captures: compactArray(rule.captures.map(internScopes)),
-            embed: rule.embed,
             embed_scope: rule.embed_scope,
             escape: rule.hasOwnProperty('escape') ? rule.escape : undefined,
             escape_captures: compactArray((rule.escape_captures||[]).map(internScopes)),

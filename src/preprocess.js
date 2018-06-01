@@ -115,6 +115,9 @@ function preprocess(syntax) {
                     if (set && (push || pop)) {
                         throw TypeError('Set is exclusive with Push and Pop.');
                     }
+                    if (embed && (push || set)) {
+                        throw TypeError('Embed is exclusive with Push and Set.');
+                    }
 
                     const newRule = {
                         match: replaceVariables(match),
@@ -135,17 +138,20 @@ function preprocess(syntax) {
                         }
                     }
 
-                    if (push) newRule.push = true;
-                    if (set) newRule.set = true;
                     if (pop) newRule.pop = pop;
 
-                    newRule.next = normalizeContextList(push || set || []).map( (c, j) =>
+                    newRule.type = push ? 'push' : set ? 'set' : embed ? 'embed' : null;
+
+                    newRule.next = normalizeContextList(push || set || embed || []).map( (c, j) =>
                         resolveContext(c, `${name}:${i},${j}`)
                     );
 
                     if (with_prototype) newRule.with_prototype = simplifyContext(with_prototype).rules;
 
-                    if (embed) newRule.embed = resolveContext(embed);
+                    if (embed) {
+                        if (newRule.next.every(c => (!c.scope))) newRule.type = 'push';
+                    }
+                    
                     if (embed_scope) newRule.embed_scope = splitScopes(embed_scope);
 
                     if (escape) newRule.escape = replaceVariables(escape);

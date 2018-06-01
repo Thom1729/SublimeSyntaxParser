@@ -100,3 +100,10 @@
 99   source.test-embed META-L META-L-CONTENT 
 100 * source.test-embed region.greenish 
 101 * source.test-embed 
+102 * source.test-embed 
+103 * source.test-embed region.redish 
+104 * source.test-embed EMBEDDED-M source.test-embed-b region.yellowish 
+105 * source.test-embed EMBEDDED-M source.test-embed-b region.yellowish 
+106 * source.test-embed EMBEDDED-M source.test-embed-b region.yellowish 
+107 * source.test-embed region.greenish 
+108 * source.test-embed 

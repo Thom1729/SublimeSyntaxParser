@@ -6,5 +6,5 @@ file_extensions:
 - test-embed-b
 contexts:
   main:
-    - match: a
-      scope: region.redish
+    - match: y
+      scope: region.yellowish

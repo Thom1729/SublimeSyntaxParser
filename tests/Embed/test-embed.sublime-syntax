@@ -84,6 +84,14 @@ contexts:
       escape_captures:
         0: region.greenish
 
+    - match: m
+      scope: region.redish
+      embed: scope:source.test-embed-b
+      embed_scope: EMBEDDED-M
+      escape: z
+      escape_captures:
+        0: region.greenish
+
   embedded-z:
     - meta_scope: META-Z
     - match: z

@@ -140,7 +140,14 @@ class ParserState {
 
             const rule = top.rules[match.index];
 
-            const pushed = rule.next.map(i => this.syntax.contexts[i]);
+            const pushed = rule.next.map(ctx => {
+                if (ctx.context) {
+                    const foreign = this.syntaxProvider.getSyntaxForScope(ctx.scope).unpacked();
+                    return foreign.contexts[foreign.names[ctx.context]];
+                } else {
+                    return ctx;
+                }
+            });
 
             const matchStart = match.captureIndices[0].start;
 
@@ -152,35 +159,39 @@ class ParserState {
                 this.popScopes(top.meta_content_scope.length);
             }
 
-            if (rule.push || rule.embed) {
+            if (rule.type === 'push' || rule.type === 'embed') {
                 for (const ctx of pushed) {
                     if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
                 }
             }
 
-            for (const ctx of pushed) {
-                this.pushScopes(ctx.meta_scope);
+            if (rule.type === 'push' || rule.type === 'set') {
+                for (const ctx of pushed) {
+                    this.pushScopes(ctx.meta_scope);
+                }
             }
 
-            yield* this.parseCapture(rule.captures, match.captureIndices, Boolean(rule.push || rule.pop || rule.set));
+            yield* this.parseCapture(rule.captures, match.captureIndices, Boolean(rule.type || rule.pop));
 
-            for (let i=pushed.length-1; i>=0; i--) {
-                this.popScopes(pushed[i].meta_scope.length);
+            if (rule.type === 'push' || rule.type === 'set') {
+                for (let i=pushed.length-1; i>=0; i--) {
+                    this.popScopes(pushed[i].meta_scope.length);
+                }
             }
 
-            if (rule.push || rule.embed) {
+            if (rule.type === 'push' || rule.type === 'embed') {
                 for (let i=pushed.length-1; i>=0; i--) {
                     if (pushed[i].clear_scopes) this.popClear();
                 }
             }
 
-            if (rule.set) {
+            if (rule.type === 'set') {
                 this.popScopes(top.meta_content_scope.length);
             }
 
             // Pop/Push
 
-            if (rule.pop || rule.set) {
+            if (rule.pop || rule.type === 'set') {
                 this.popContext();
                 if (this.escapeStack.length < level) return;
             }
@@ -264,10 +275,15 @@ function* parse(syntax, text, syntaxProvider) {
     const lines = text.split(/^/gm);
     const lineCount = lines.length;
 
-    const state = new ParserState(syntax, text.split(/^/gm, syntaxProvider));
+    const state = new ParserState(syntax, text.split(/^/gm), syntaxProvider);
 
-    while (state.row < lineCount) {
-        yield* state.parseLine();
+    try {
+        while (state.row < lineCount) {
+            yield* state.parseLine();
+        }
+    } catch (e) {
+        console.log(state.row, state.col, state.contextStack);
+        throw e;
     }
 }
 
