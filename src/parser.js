@@ -1,9 +1,9 @@
 class ParserState {
-    constructor(syntax, lines, syntaxProvider) {
-        this.syntax = syntax;
+    constructor(syntax, lines) {
         this.lines = lines;
-        this.syntaxProvider = syntaxProvider;
         this.scannerProvider = new ScannerProvider();
+
+        this.initialContext = syntax.contexts[syntax.mainContext];
 
         this.contextStack = [];
         this.scopeStack = [];
@@ -108,7 +108,7 @@ class ParserState {
     *parseNextToken(line, level=0) {
         top: while (true) {
             if (this.stackIsEmpty()) {
-                this.pushContext(this.syntax.contexts[this.syntax.mainContext]);
+                this.pushContext(this.initialContext);
             }
 
             for (let j=level; j < this.escapeStack.length; j++) {
@@ -140,14 +140,7 @@ class ParserState {
 
             const rule = top.rules[match.index];
 
-            const pushed = rule.next.map(ctx => {
-                if (ctx.context) {
-                    const foreign = this.syntaxProvider.getSyntaxForScope(ctx.scope).unpacked();
-                    return foreign.contexts[foreign.names[ctx.context]];
-                } else {
-                    return ctx;
-                }
-            });
+            const pushed = rule.next;
 
             const matchStart = match.captureIndices[0].start;
 
@@ -271,11 +264,11 @@ class ParserState {
 
 const { ScannerProvider } = require('./scannerProvider');
 
-function* parse(syntax, text, syntaxProvider) {
+function* parse(syntax, text) {
     const lines = text.split(/^/gm);
     const lineCount = lines.length;
 
-    const state = new ParserState(syntax, text.split(/^/gm), syntaxProvider);
+    const state = new ParserState(syntax, text.split(/^/gm));
 
     try {
         while (state.row < lineCount) {

@@ -76,18 +76,6 @@ function unpack(syntax) {
         names: objFromPairs(syntax.contexts.map((ctx, i) => [ctx.name, i])),
     };
 
-    for (const ctx of ret.contexts) {
-        for (const rule of ctx.rules) {
-            rule.next = rule.next.map(i => {
-                if (typeof i === 'object') {
-                    return i;
-                } else {
-                    return ret.contexts[i];
-                }
-            });
-        }
-    }
-
     return ret;
 }
 
@@ -138,6 +126,24 @@ class SyntaxProvider {
         extension = extension.trim();
         if (extension[0] === '.') extension = extension.slice(1);
         return this.extensions[extension];
+    }
+
+    doEverything() {
+        for (const syntax of this.syntaxes) {
+            const unpacked = syntax.unpacked();
+            for (const ctx of unpacked.contexts) {
+                for (const rule of ctx.rules) {
+                    rule.next = rule.next.map(ref => {
+                        if (typeof ref === 'object') {
+                            const embedded = this.getSyntaxForScope(ref.scope).unpacked();
+                            return embedded.contexts[embedded.names[ref.context]];
+                        } else {
+                            return unpacked.contexts[ref];
+                        }
+                    });
+                }
+            }
+        }
     }
 }
 

@@ -33,6 +33,7 @@ async function runTest(path) {
 
     const syntaxProvider = new SyntaxProvider(path);
     await syntaxProvider.addDirectory(path);
+    await syntaxProvider.doEverything();
 
     const artifactsPath = path.joinpath('artifacts');
     await artifactsPath.ensureDir();
@@ -55,11 +56,6 @@ async function runTest(path) {
 
         const unpacked = syntaxRecord.unpacked();
 
-        // await artifactsPath
-        //     .joinpath(syntaxRecord.path.basename)
-        //     .addExtension('.unpacked.json')
-        //     .writeText(JSON.stringify(unpacked, null, 4))
-
         const text = await testFile.readText();
         const result = Array.from(flatMap(
             parse(unpacked, text, syntaxProvider),
@@ -77,8 +73,6 @@ async function runTest(path) {
             .writeText(result.map(l => l+'\n').join(''));
 
         const reference = (await testFile.addExtension('.reference.txt').readText()).split('\n').slice(0, -1);
-
-        // const reference = (await path.joinpath('reference.txt').readText()).split('\n').slice(0, -1);
 
         for (let line=0; line < reference.length; line++) {
             if (reference[line] !== result[line]) {

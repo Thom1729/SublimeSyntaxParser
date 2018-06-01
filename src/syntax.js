@@ -152,7 +152,6 @@ function pack(syntax) {
             pop: rule.pop,
             next: compactArray(rule.next),
             captures: compactArray(rule.captures.map(internScopes)),
-            embed_scope: rule.embed_scope,
             escape: rule.hasOwnProperty('escape') ? rule.escape : undefined,
             escape_captures: compactArray((rule.escape_captures||[]).map(internScopes)),
         })),
@@ -160,7 +159,6 @@ function pack(syntax) {
 
     return {
         mainContext: syntax.mainContext,
-        scope: internScopes(syntax.scope),
         scopes: scopeInterner.values,
         patterns: patternInterner.values,
         contexts: newNewContexts,
