@@ -46,7 +46,19 @@ contexts:
       escape_captures:
         0: region.greenish
 
-    - include: embedded-g
+    - match: g
+      scope: region.redish
+      embed: embedded-g
+      escape: z
+      escape_captures:
+        0: region.greenish
+
+    - match: i
+      scope: region.redish
+      embed: embedded-i
+      escape: z
+      escape_captures:
+        0: region.greenish
 
   embedded-z:
     - meta_scope: META-Z
@@ -77,9 +89,18 @@ contexts:
       pop: true
 
   embedded-g:
-    - match: g
+    - match: h
       scope: region.redish
-      embed: embedded-g
-      escape: z
+      embed: embedded-h
+      escape: y
       escape_captures:
         0: region.greenish
+
+  embedded-h:
+    - match: w
+      scope: region.yellowish
+
+  embedded-i:
+    - meta_scope: META-I
+    - meta_content_scope: META-I-CONTENT
+    - clear_scopes: 1

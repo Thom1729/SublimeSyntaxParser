@@ -67,3 +67,17 @@
 66 * source.test-embed META-XYZ-3 region.pinkish 
 67 * source.test-embed region.greenish 
 68 * source.test-embed 
+69 * source.test-embed 
+70 * source.test-embed region.redish 
+71 * source.test-embed region.redish 
+72 * source.test-embed region.greenish 
+73 * source.test-embed region.greenish 
+74 * source.test-embed 
+75 * source.test-embed 
+76 * META-I region.redish 
+77 * META-I META-I-CONTENT 
+78 * source.test-embed region.greenish 
+79 * source.test-embed 
+80   source.test-embed 
+81   source.test-embed 
+82 * source.test-embed 

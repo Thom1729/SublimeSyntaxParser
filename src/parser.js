@@ -122,7 +122,8 @@ class ParserState {
                     yield* this.advance(nextEscape);
 
                     while (this.contextStack.length > contextLevel) {
-                        this.popContext();
+                        this.popScopes(this.topContext()[0].meta_content_scope.length);
+                        const top = this.popContext();
                     }
 
                     yield* this.parseCapture(scopes, match.captureIndices, true);
@@ -149,7 +150,7 @@ class ParserState {
                 this.popScopes(top.meta_content_scope.length);
             }
 
-            if (rule.push) {
+            if (rule.push || rule.embed) {
                 for (const ctx of pushed) {
                     if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
                 }
@@ -165,7 +166,7 @@ class ParserState {
                 this.popScopes(pushed[i].meta_scope.length);
             }
 
-            if (rule.push) {
+            if (rule.push || rule.embed) {
                 for (let i=pushed.length-1; i>=0; i--) {
                     if (pushed[i].clear_scopes) this.popClear();
                 }
