@@ -23,8 +23,8 @@ function process(syntax, provider) {
             this.nameLookup = new Map();
             this.protoRules = [];
 
-            if (syntax.contexts.hasOwnProperty('prototype')) {
-                const protoIndex = this.enqueueNamedContext('prototype');
+            if (syntax.prototype) {
+                const protoIndex = this.enqueue(syntax.prototype);
                 for (let i = protoIndex; i < queue.length; i++) {
                     resolveIndex(i);
                 }
@@ -112,9 +112,12 @@ function process(syntax, provider) {
     }
 
     const baseEnvironment = new Environment(syntax);
-    for (const name of Object.keys(syntax.contexts)) {
-        baseEnvironment.enqueueNamedContext(name);
-    }
+    const mainContext = baseEnvironment.enqueue(syntax.main);
+
+    // for (const name of Object.keys(syntax.contexts)) {
+    //     baseEnvironment.enqueueNamedContext(name);
+    // } // TODO test this with embeds
+
     for (let i = 0; i < queue.length; i++) resolveIndex(i);
 
     for (const context of results) {
@@ -125,7 +128,7 @@ function process(syntax, provider) {
     return {
         ...syntax,
         contexts: results,
-        mainContext: baseEnvironment.nameLookup.get('main'),
+        mainContext,
     };
 }
 

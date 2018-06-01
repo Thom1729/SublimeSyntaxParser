@@ -6,7 +6,7 @@ class ParserState {
         this.scannerProvider = new ScannerProvider();
 
         this.contextStack = [];
-        this.scopeStack = [ syntax.scope ];
+        this.scopeStack = [];
         this.clearedStack = [];
         this.escapeStack = [];
 

@@ -167,11 +167,26 @@ function preprocess(syntax) {
 
     const simplified = objMap(syntax.contexts, simplifyContext);
 
+    const baseScopes = splitScopes(syntax.scope);
+
     return {
         ...syntax,
-        scope: splitScopes(syntax.scope),
+        scope: baseScopes,
         hidden: Boolean(syntax.hidden),
         contexts: simplified,
+
+        prototype: simplified.hasOwnProperty('prototype') ? 'prototype' : undefined,
+
+        main: {
+            ...simplified.main,
+            clear_scopes: undefined,
+            meta_scope: [...baseScopes, ...(simplified.main.meta_scope||[])]
+        },
+
+        include: {
+            ...simplified.main,
+            meta_content_scope: baseScopes,
+        },
     };
 }
 

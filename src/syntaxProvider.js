@@ -14,10 +14,7 @@ class SyntaxDefinition {
                 ...syntax,
                 contexts: {
                     ...syntax.contexts,
-                    main: {
-                        ...syntax.contexts.main,
-                        meta_content_scope: [ ...(syntax.scope), ...(syntax.contexts.main.meta_content_scope || []) ],
-                    },
+                    main: syntax.include,
                 },
             };
         });

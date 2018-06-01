@@ -41,6 +41,10 @@ contexts:
       scope: region.redish
       pop: true
 
+    - match: o
+      scope: region.bluish
+      push: main
+
   test-c:
     - match: c
       scope: region.redish
