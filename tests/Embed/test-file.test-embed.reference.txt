@@ -81,3 +81,22 @@
 80   source.test-embed 
 81   source.test-embed 
 82 * source.test-embed 
+83 * source.test-embed 
+84 * source.test-embed region.redish 
+85 * source.test-embed EMBEDDED-J 
+86   source.test-embed EMBEDDED-J 
+87   source.test-embed EMBEDDED-J 
+88 * source.test-embed region.greenish 
+89 * source.test-embed 
+90 * source.test-embed META-K region.redish 
+91 * source.test-embed EMBEDDED-K META-K META-K-CONTENT 
+92   source.test-embed EMBEDDED-K META-K META-K-CONTENT 
+93   source.test-embed EMBEDDED-K META-K META-K-CONTENT 
+94 * source.test-embed region.greenish 
+95 * source.test-embed 
+96 * META-L region.redish 
+97 * source.test-embed META-L META-L-CONTENT 
+98   source.test-embed META-L META-L-CONTENT 
+99   source.test-embed META-L META-L-CONTENT 
+100 * source.test-embed region.greenish 
+101 * source.test-embed 

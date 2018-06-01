@@ -63,6 +63,8 @@ function process(syntax, provider) {
         return results[i];
     }
 
+    const nullEnvironment = new Environment({contexts:{}});
+
     function resolveContext({ context, environment }) {
         const protoRules = (context.meta_include_prototype !== false) ? environment.protoRules : [];
 
@@ -84,9 +86,20 @@ function process(syntax, provider) {
                             }
                         }
 
+                        const next = rule.next.map(c => nextEnvironment.enqueue(c));
+                        if (rule.embed_scope) {
+                            next.unshift(
+                                nullEnvironment.enqueueContext({
+                                    meta_content_scope: rule.embed_scope,
+                                    meta_include_prototype: false,
+                                    rules: [],
+                                })
+                            );
+                        }
+
                         yield {
                             ...rule,
-                            next: rule.next.map(c => nextEnvironment.enqueue(c)),
+                            next,
                         };
                     } else if (rule.hasOwnProperty('include')) {
                         yield* resolveIndex(environment.enqueue(rule.include)).rules;
@@ -139,6 +152,7 @@ function pack(syntax) {
             next: compactArray(rule.next),
             captures: compactArray(rule.captures.map(internScopes)),
             embed: rule.embed,
+            embed_scope: rule.embed_scope,
             escape: rule.hasOwnProperty('escape') ? rule.escape : undefined,
             escape_captures: compactArray((rule.escape_captures||[]).map(internScopes)),
         })),

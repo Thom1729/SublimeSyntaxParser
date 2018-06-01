@@ -146,6 +146,8 @@ class ParserState {
 
             yield* this.advance(matchStart);
 
+            // Capture
+
             if (rule.pop) {
                 this.popScopes(top.meta_content_scope.length);
             }
@@ -176,6 +178,8 @@ class ParserState {
                 this.popScopes(top.meta_content_scope.length);
             }
 
+            // Pop/Push
+
             if (rule.pop || rule.set) {
                 this.popContext();
                 if (this.escapeStack.length < level) return;
@@ -190,8 +194,6 @@ class ParserState {
             }
 
             for (const ctx of pushed) {
-                if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
-
                 this.pushContext(ctx, match.captureIndices);
             }
         }
@@ -217,6 +219,7 @@ class ParserState {
     }
 
     pushContext(ctx, captures) {
+        if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
         this.contextStack.push([
             ctx,
             this.scannerProvider.getScanner(ctx.patterns, captures, this.line),

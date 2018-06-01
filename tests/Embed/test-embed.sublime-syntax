@@ -60,6 +60,30 @@ contexts:
       escape_captures:
         0: region.greenish
 
+    - match: j
+      scope: region.redish
+      embed: embedded-j
+      embed_scope: EMBEDDED-J
+      escape: z
+      escape_captures:
+        0: region.greenish
+
+    - match: k
+      scope: region.redish
+      embed: embedded-k
+      embed_scope: EMBEDDED-K
+      escape: z
+      escape_captures:
+        0: region.greenish
+
+    - match: l
+      scope: region.redish
+      embed: embedded-l
+      embed_scope: EMBEDDED-L
+      escape: z
+      escape_captures:
+        0: region.greenish
+
   embedded-z:
     - meta_scope: META-Z
     - match: z
@@ -104,3 +128,23 @@ contexts:
     - meta_scope: META-I
     - meta_content_scope: META-I-CONTENT
     - clear_scopes: 1
+
+  embedded-j:
+    - match: z
+      scope: region.bluish
+      pop: true
+
+  embedded-k:
+    - meta_scope: META-K
+    - meta_content_scope: META-K-CONTENT
+    - match: z
+      scope: region.bluish
+      pop: true
+
+  embedded-l:
+    - meta_scope: META-L
+    - meta_content_scope: META-L-CONTENT
+    - clear_scopes: 1
+    - match: z
+      scope: region.bluish
+      pop: true

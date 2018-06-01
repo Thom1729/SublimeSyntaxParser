@@ -108,7 +108,7 @@ function preprocess(syntax) {
                     newContext.rules.push({ include: resolveContext(include) });
                 },
 
-                match: ({ match, captures, scope, pop, push, set, with_prototype, embed, escape, escape_captures, ...rest }) => {
+                match: ({ match, captures, scope, pop, push, set, with_prototype, embed, embed_scope, escape, escape_captures, ...rest }) => {
                     meta = false
                     assertNoExtras(rest);
 
@@ -146,8 +146,9 @@ function preprocess(syntax) {
                     if (with_prototype) newRule.with_prototype = simplifyContext(with_prototype).rules;
 
                     if (embed) newRule.embed = resolveContext(embed);
-                    if (escape) newRule.escape = replaceVariables(escape);
+                    if (embed_scope) newRule.embed_scope = splitScopes(embed_scope);
 
+                    if (escape) newRule.escape = replaceVariables(escape);
                     if (escape_captures) {
                         newRule.escape_captures = []
                         for (const [i, scope] of Object.entries(escape_captures)) {
