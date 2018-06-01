@@ -1,5 +1,7 @@
 const { objMap, recMap } = require('./util.js');
 
+const INCLUDE_SCOPE_EXPRESSION = /scope:([^#]*)(?:#(.*))?/;
+
 function caseObjectShape(obj, cases) {
     for (const [ required, callback ] of Object.entries(cases)) {
         if (obj.hasOwnProperty(required)) {
@@ -59,6 +61,20 @@ function preprocess(syntax) {
             if (!meta) throw new TypeError('Out of meta region.');
         }
 
+        function resolveContext(contextRef, name) {
+            if (Array.isArray(contextRef)) {
+                return simplifyContext(contextRef, name);
+            } else if (INCLUDE_SCOPE_EXPRESSION.test(contextRef)) {
+                const match = INCLUDE_SCOPE_EXPRESSION.exec(contextRef);
+                return {
+                    scope: match[1],
+                    context: match[2] || 'main',
+                };
+            } else {
+                return contextRef;
+            }
+        }
+
         let i=0;
         for (const originalRule of context) {
             caseObjectShape(originalRule, {
@@ -89,7 +105,7 @@ function preprocess(syntax) {
                 include: ({ include, ...rest }) => {
                     meta = false
                     assertNoExtras(rest);
-                    newContext.rules.push({ include });
+                    newContext.rules.push({ include: resolveContext(include) });
                 },
 
                 match: ({ match, captures, scope, pop, push, set, with_prototype, embed, escape, escape_captures, ...rest }) => {
@@ -124,12 +140,12 @@ function preprocess(syntax) {
                     if (pop) newRule.pop = pop;
 
                     newRule.next = normalizeContextList(push || set || []).map( (c, j) =>
-                        typeof c === 'object' ? simplifyContext(c, `${name}:${i},${j}`) : c
+                        resolveContext(c, `${name}:${i},${j}`)
                     );
 
                     if (with_prototype) newRule.with_prototype = simplifyContext(with_prototype).rules;
 
-                    if (embed) newRule.embed = embed;
+                    if (embed) newRule.embed = resolveContext(embed);
                     if (escape) newRule.escape = replaceVariables(escape);
 
                     if (escape_captures) {

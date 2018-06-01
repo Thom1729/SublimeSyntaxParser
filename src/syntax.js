@@ -1,7 +1,5 @@
 const { Interner } = require('./util.js');
 
-const INCLUDE_SCOPE_EXPRESSION = /scope:([^#]*)(?:#(.*))?/;
-
 function process(syntax, provider) {
     const queue = [];
     const results = [];
@@ -48,14 +46,12 @@ function process(syntax, provider) {
 
         enqueue(contextRef) {
             if (typeof contextRef === 'object') {
-                return this.enqueueContext(contextRef);
-            } else if (INCLUDE_SCOPE_EXPRESSION.test(contextRef)) {
-                const match = INCLUDE_SCOPE_EXPRESSION.exec(contextRef);
-
-                const includedSyntax = provider.getSyntaxForScope(match[1]);
-                const includeEnvironment = getForeignEnvironment(includedSyntax, this.withPrototype);
-
-                return includeEnvironment.enqueueNamedContext(match[2] || 'main');
+                if (contextRef.scope) {
+                    const includedSyntax = provider.getSyntaxForScope(contextRef.scope);
+                    return getForeignEnvironment(includedSyntax, this.withPrototype).enqueueNamedContext(contextRef.context);
+                } else {
+                    return this.enqueueContext(contextRef);
+                }
             } else {
                 return this.enqueueNamedContext(contextRef);
             }
@@ -81,8 +77,8 @@ function process(syntax, provider) {
                             : environment;
 
                         if (rule.hasOwnProperty('embed')) {
-                            if (INCLUDE_SCOPE_EXPRESSION.test(rule.embed)) {
-                                
+                            if (typeof rule.embed === 'object') {
+                                // TODO
                             } else {
                                 rule.next = [ rule.embed ];
                             }

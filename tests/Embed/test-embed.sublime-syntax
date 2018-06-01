@@ -46,6 +46,8 @@ contexts:
       escape_captures:
         0: region.greenish
 
+    - include: embedded-g
+
   embedded-z:
     - meta_scope: META-Z
     - match: z
@@ -73,3 +75,11 @@ contexts:
     - match: xy$
       scope: region.bluish
       pop: true
+
+  embedded-g:
+    - match: g
+      scope: region.redish
+      embed: embedded-g
+      escape: z
+      escape_captures:
+        0: region.greenish

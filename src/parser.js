@@ -106,17 +106,16 @@ class ParserState {
     }
 
     *parseNextToken(line, level=0) {
-        while (true) {
+        top: while (true) {
             if (this.stackIsEmpty()) {
                 this.pushContext(this.syntax.contexts[this.syntax.mainContext]);
             }
 
-            let nextEscape;
             for (let j=level; j < this.escapeStack.length; j++) {
                 const [contextLevel, escapeScanner, scopes] = this.escapeStack[j];
                 const match = escapeScanner.findNextMatchSync(line, this.col);
                 if (match) {
-                    nextEscape = match.captureIndices[0].start;
+                    const nextEscape = match.captureIndices[0].start;
 
                     yield* this.parseNextToken(line.slice(0, nextEscape), j+1);
 
@@ -128,15 +127,13 @@ class ParserState {
 
                     yield* this.parseCapture(scopes, match.captureIndices, true);
 
-                    break
+                    continue top;
                 }
             }
 
             const [top, scanner] = this.topContext();
 
-            const matchLine = (nextEscape !== undefined) ? line.slice(0, nextEscape) : line;
-
-            const match = scanner.findNextMatchSync(matchLine, this.col);
+            const match = scanner.findNextMatchSync(line, this.col);
 
             if (!match) return;
 
