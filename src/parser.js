@@ -1,3 +1,35 @@
+const CLASS_SPACE = 0;
+const CLASS_WORD = 1;
+const CLASS_PUNCTUATION = 2;
+const CLASS_NEWLINE = 3;
+const CLASS_OTHER = 4;
+
+function classify(code) {
+    if (code === 0x20) {
+        return CLASS_SPACE;
+    } else if (code === 0x0a) {
+        return CLASS_NEWLINE;
+    } else if (
+        code === 0x28 || // (
+        code === 0x29 || // )
+        code === 0x2f || // /
+        code === 0x3c || // <
+        code === 0x3e || // >
+        code === 0x5b || // [
+        code === 0x5d    // ]
+    ) {
+        return CLASS_PUNCTUATION;
+    } else if (
+        (0x41 <= code && code <= 0x5a) || // Uppercase
+        (0x61 <= code && code <= 0x7a) || // Lowercase
+        code === 0x5f // _
+    ) {
+        return CLASS_WORD;
+    } else {
+        return CLASS_OTHER;
+    }
+}
+
 class ParserState {
     constructor(syntax, lines) {
         this.lines = lines;
@@ -8,7 +40,6 @@ class ParserState {
         this.contextStack = [];
         this.scopeStack = [];
         this.clearedStack = [];
-        this.escapeStack = [];
 
         this.i = 0;
         this.row = 0;
@@ -25,30 +56,41 @@ class ParserState {
         } else {
             const line = this.lines[this.row];
 
-            let wasSpace = false;
+            let lastCharClass;
             for (let i = this.col; i < point; i++) {
-                if (line[i] === '\n') {
+                const currentCharClass = classify(line.charCodeAt(i));
+
+                if (lastCharClass !== CLASS_PUNCTUATION && currentCharClass === CLASS_PUNCTUATION) {
+                    const nextCharClass = classify(line.charCodeAt(i+1));
+                    if (nextCharClass === CLASS_WORD) {
+                        yield this._advance(i++);
+                        yield this._advance(i);
+                    } else if (lastCharClass === CLASS_SPACE) {
+                        yield this._advance(i);
+                    }
+                } else if (currentCharClass === CLASS_NEWLINE || (currentCharClass !== CLASS_SPACE && lastCharClass === CLASS_SPACE)) {
                     yield this._advance(i);
                 }
 
-                const isSpace = line[i] === ' ';
-                if (wasSpace && ! isSpace) {
-                    yield this._advance(i);
-                }
-
-                wasSpace = isSpace;
+                lastCharClass = currentCharClass;
             }
 
             yield this._advance(point);
         }
     }
 
+    location() {
+        return [this.i, this.row, this.col];
+    }
+
     _advance(point) {
+        const begin = this.location();
         const d = point - this.col;
         this.col = point;
         this.i += d;
+        const end = this.location();
         return [
-            [this.i-d, this.i],
+            [begin, end],
             this.scopeStack.join(''),
         ];
     }
@@ -105,100 +147,110 @@ class ParserState {
         }
     }
 
+    findNextEscape(line, level) {
+        for (let j=level; j < this.contextStack.length; j++) {
+            const escape = this.contextStack[j].escape;
+            if (!escape) continue;
+
+            const match = escape.scanner.findNextMatchSync(line, this.col);
+            if (match) {
+                return [j, match, escape.captures];
+            }
+        }
+        return null;
+    }
+
     *parseNextToken(line, level=0) {
-        top: while (true) {
+        while (true) {
             if (this.stackIsEmpty()) {
                 this.pushContext(this.initialContext);
             }
 
-            for (let j=level; j < this.escapeStack.length; j++) {
-                const [contextLevel, escapeScanner, scopes] = this.escapeStack[j];
-                const match = escapeScanner.findNextMatchSync(line, this.col);
-                if (match) {
-                    const nextEscape = match.captureIndices[0].start;
+            const x = this.findNextEscape(line, level);
+            if (x) {
+                const nextEscape = x[1].captureIndices[0].start;
 
-                    yield* this.parseNextToken(line.slice(0, nextEscape), j+1);
+                yield* this.parseNextToken(line.slice(0, nextEscape), x[0]+1);
 
-                    yield* this.advance(nextEscape);
+                yield* this.advance(nextEscape);
 
-                    while (this.contextStack.length > contextLevel) {
-                        this.popScopes(this.topContext()[0].meta_content_scope.length);
-                        const top = this.popContext();
+                while ((this.contextStack.length) > x[0]) {
+                    this.popScopes(this.topContext().context.meta_content_scope.length);
+                    const top = this.popContext();
+                }
+
+                yield* this.parseCapture(x[2], x[1].captureIndices, true);
+            } else {
+                const { context: top, scanner } = this.topContext();
+
+                const match = scanner.findNextMatchSync(line, this.col);
+
+                if (!match) return;
+
+                const rule = top.rules[match.index];
+
+                const pushed = rule.next;
+
+                const matchStart = match.captureIndices[0].start;
+
+                yield* this.advance(matchStart);
+
+                // Capture
+
+                if (rule.pop) {
+                    this.popScopes(top.meta_content_scope.length);
+                }
+
+                if (rule.type === 'push' || rule.type === 'embed') {
+                    for (const ctx of pushed) {
+                        if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
                     }
-
-                    yield* this.parseCapture(scopes, match.captureIndices, true);
-
-                    continue top;
                 }
-            }
 
-            const [top, scanner] = this.topContext();
-
-            const match = scanner.findNextMatchSync(line, this.col);
-
-            if (!match) return;
-
-            const rule = top.rules[match.index];
-
-            const pushed = rule.next;
-
-            const matchStart = match.captureIndices[0].start;
-
-            yield* this.advance(matchStart);
-
-            // Capture
-
-            if (rule.pop) {
-                this.popScopes(top.meta_content_scope.length);
-            }
-
-            if (rule.type === 'push' || rule.type === 'embed') {
-                for (const ctx of pushed) {
-                    if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
+                if (rule.type === 'push' || rule.type === 'set') {
+                    for (const ctx of pushed) {
+                        this.pushScopes(ctx.meta_scope);
+                    }
                 }
-            }
 
-            if (rule.type === 'push' || rule.type === 'set') {
-                for (const ctx of pushed) {
-                    this.pushScopes(ctx.meta_scope);
+                yield* this.parseCapture(rule.captures, match.captureIndices, Boolean(rule.type || rule.pop));
+
+                if (rule.type === 'push' || rule.type === 'set') {
+                    for (let i=pushed.length-1; i>=0; i--) {
+                        this.popScopes(pushed[i].meta_scope.length);
+                    }
                 }
-            }
 
-            yield* this.parseCapture(rule.captures, match.captureIndices, Boolean(rule.type || rule.pop));
-
-            if (rule.type === 'push' || rule.type === 'set') {
-                for (let i=pushed.length-1; i>=0; i--) {
-                    this.popScopes(pushed[i].meta_scope.length);
+                if (rule.type === 'push' || rule.type === 'embed') {
+                    for (let i=pushed.length-1; i>=0; i--) {
+                        if (pushed[i].clear_scopes) this.popClear();
+                    }
                 }
-            }
 
-            if (rule.type === 'push' || rule.type === 'embed') {
-                for (let i=pushed.length-1; i>=0; i--) {
-                    if (pushed[i].clear_scopes) this.popClear();
+                if (rule.type === 'set') {
+                    this.popScopes(top.meta_content_scope.length);
                 }
-            }
 
-            if (rule.type === 'set') {
-                this.popScopes(top.meta_content_scope.length);
-            }
+                // Pop/Push
 
-            // Pop/Push
+                if (rule.pop || rule.type === 'set') {
+                    this.popContext();
+                    if (this.contextStack.length < level) return;
+                }
 
-            if (rule.pop || rule.type === 'set') {
-                this.popContext();
-                if (this.escapeStack.length < level) return;
-            }
-
-            if (rule.escape) {
-                this.escapeStack.push([
-                    this.scopeStack.length,
-                    this.scannerProvider.getScanner([rule.escape], match.captureIndices, line),
-                    rule.escape_captures,
-                ]);
-            }
-
-            for (const ctx of pushed) {
-                this.pushContext(ctx, match.captureIndices);
+                if (pushed.length) {
+                    let i = 0;
+                    if (rule.escape) {
+                        const ctx = pushed[i++];
+                        this.pushContext(ctx, match.captureIndices, {
+                            scanner: this.scannerProvider.getScanner([rule.escape], match.captureIndices, line),
+                            captures: rule.escape_captures,
+                        });
+                    }
+                    for (;i < pushed.length; i++) {
+                        this.pushContext(pushed[i], match.captureIndices);
+                    }
+                }
             }
         }
     }
@@ -222,24 +274,23 @@ class ParserState {
         return this.contextStack[this.contextStack.length - 1];
     }
 
-    pushContext(ctx, captures) {
-        if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
-        this.contextStack.push([
-            ctx,
-            this.scannerProvider.getScanner(ctx.patterns, captures, this.line),
-        ]);
-        this.pushScopes(ctx.meta_scope);
-        this.pushScopes(ctx.meta_content_scope);
+    pushContext(context, captures, escape) {
+        if (context.clear_scopes) this.pushClear(context.clear_scopes);
+        this.contextStack.push({
+            context,
+            scanner: this.scannerProvider.getScanner(context.patterns, captures, this.line),
+            escape,
+        });
+        this.pushScopes(context.meta_scope);
+        this.pushScopes(context.meta_content_scope);
     }
 
     popContext() {
-        const [top, _] = this.contextStack.pop();
+        const { context: top } = this.contextStack.pop();
         this.popScopes(top.meta_scope.length);
         if (top.clear_scopes) this.popClear();
 
-        if (this.escapeStack.length && this.escapeStack[this.escapeStack.length-1][0] >= this.contextStack.length) {
-            this.escapeStack.pop();
-        }
+        return top;
     }
 
     pushScopes(scopes) {

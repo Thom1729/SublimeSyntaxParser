@@ -1,109 +1,109 @@
-0 * source.test-embed META-Z region.redish 
-1 * source.test-embed META-Z region.bluish 
-2 * source.test-embed 
-3 * source.test-embed META-Z region.redish 
-4 * source.test-embed 
-5 * source.test-embed 
-6 * source.test-embed 
-7 * source.test-embed META-Z region.redish 
-8 * source.test-embed 
-9 * source.test-embed 
-10 * source.test-embed 
-11 * source.test-embed META-Z region.redish 
-12 * source.test-embed 
-13 * source.test-embed 
-14 * source.test-embed 
-15 * source.test-embed META-XYZ-1 region.redish 
-16 * source.test-embed META-XYZ-1 
-17   source.test-embed META-XYZ-1 
-18   source.test-embed META-XYZ-1 
-19 * source.test-embed region.greenish 
-20 * source.test-embed 
-21 * source.test-embed META-XYZ-1 region.redish 
-22 * source.test-embed region.greenish 
-23 * source.test-embed META-XYZ-1 region.redish 
-24 * source.test-embed region.greenish 
-25 * source.test-embed 
-26 * source.test-embed META-XYZ-1 region.redish 
-27 * source.test-embed META-XYZ-1 
-28 * source.test-embed region.greenish 
-29 * source.test-embed META-XYZ-1 region.redish 
-30 * source.test-embed region.greenish 
-31 * source.test-embed 
-32 * source.test-embed 
-33 * source.test-embed META-XYZ-2 region.redish 
-34 * source.test-embed META-XYZ-2 region.yellowish 
-35 * source.test-embed META-XYZ-2 region.bluish 
-36   source.test-embed META-XYZ-2 region.bluish 
-37 * source.test-embed region.greenish 
-38 * source.test-embed 
-39 * source.test-embed META-XYZ-2 region.redish 
-40 * source.test-embed META-XYZ-2 region.yellowish 
-41 * source.test-embed META-XYZ-2 region.bluish 
-42   source.test-embed META-XYZ-2 region.bluish 
-43 * source.test-embed 
-44   source.test-embed 
-45 * source.test-embed region.greenish 
-46 * source.test-embed 
-47 * source.test-embed META-XYZ-2 region.redish 
-48 * source.test-embed META-XYZ-2 region.yellowish 
-49 * source.test-embed META-XYZ-2 region.bluish 
-50   source.test-embed META-XYZ-2 region.bluish 
-51 * source.test-embed 
-52 * source.test-embed region.pinkish 
-53 * source.test-embed 
-54 * source.test-embed 
-55 * source.test-embed META-XYZ-3 region.redish 
-56 * source.test-embed META-XYZ-3 region.yellowish 
-57 * source.test-embed META-XYZ-3 region.bluish 
-58   source.test-embed META-XYZ-3 region.bluish 
-59 * source.test-embed region.greenish 
-60 * source.test-embed 
-61 * source.test-embed META-XYZ-3 region.redish 
-62 * source.test-embed META-XYZ-3 region.yellowish 
-63 * source.test-embed META-XYZ-3 
-64   source.test-embed META-XYZ-3 
-65 * source.test-embed META-XYZ-3 region.yellowish 
-66 * source.test-embed META-XYZ-3 region.pinkish 
-67 * source.test-embed region.greenish 
-68 * source.test-embed 
-69 * source.test-embed 
-70 * source.test-embed region.redish 
-71 * source.test-embed region.redish 
-72 * source.test-embed region.greenish 
-73 * source.test-embed region.greenish 
-74 * source.test-embed 
-75 * source.test-embed 
-76 * META-I region.redish 
-77 * META-I META-I-CONTENT 
-78 * source.test-embed region.greenish 
-79 * source.test-embed 
-80   source.test-embed 
-81   source.test-embed 
-82 * source.test-embed 
-83 * source.test-embed 
-84 * source.test-embed region.redish 
-85 * source.test-embed EMBEDDED-J 
-86   source.test-embed EMBEDDED-J 
-87   source.test-embed EMBEDDED-J 
-88 * source.test-embed region.greenish 
-89 * source.test-embed 
-90 * source.test-embed META-K region.redish 
-91 * source.test-embed EMBEDDED-K META-K META-K-CONTENT 
-92   source.test-embed EMBEDDED-K META-K META-K-CONTENT 
-93   source.test-embed EMBEDDED-K META-K META-K-CONTENT 
-94 * source.test-embed region.greenish 
-95 * source.test-embed 
-96 * META-L region.redish 
-97 * source.test-embed META-L META-L-CONTENT 
-98   source.test-embed META-L META-L-CONTENT 
-99   source.test-embed META-L META-L-CONTENT 
-100 * source.test-embed region.greenish 
-101 * source.test-embed 
-102 * source.test-embed 
-103 * source.test-embed region.redish 
-104 * source.test-embed EMBEDDED-M source.test-embed-b region.yellowish 
-105 * source.test-embed EMBEDDED-M source.test-embed-b region.yellowish 
-106 * source.test-embed EMBEDDED-M source.test-embed-b region.yellowish 
-107 * source.test-embed region.greenish 
-108 * source.test-embed 
+1:1 * source.test-embed META-Z region.redish 
+1:2 * source.test-embed META-Z region.bluish 
+1:3 * source.test-embed 
+2:1 * source.test-embed META-Z region.redish 
+2:2 * source.test-embed 
+3:1 * source.test-embed 
+3:2 * source.test-embed 
+4:1 * source.test-embed META-Z region.redish 
+4:2 * source.test-embed 
+4:3 * source.test-embed 
+4:4 * source.test-embed 
+5:1 * source.test-embed META-Z region.redish 
+5:2 * source.test-embed 
+5:3 * source.test-embed 
+6:1 * source.test-embed 
+7:1 * source.test-embed META-XYZ-1 region.redish 
+7:2 * source.test-embed META-XYZ-1 
+7:3   source.test-embed META-XYZ-1 
+7:4   source.test-embed META-XYZ-1 
+7:5 * source.test-embed region.greenish 
+7:6 * source.test-embed 
+8:1 * source.test-embed META-XYZ-1 region.redish 
+8:2 * source.test-embed region.greenish 
+8:3 * source.test-embed META-XYZ-1 region.redish 
+8:4 * source.test-embed region.greenish 
+8:5 * source.test-embed 
+9:1 * source.test-embed META-XYZ-1 region.redish 
+9:2 * source.test-embed META-XYZ-1 
+10:1 * source.test-embed region.greenish 
+10:2 * source.test-embed META-XYZ-1 region.redish 
+10:3 * source.test-embed region.greenish 
+10:4 * source.test-embed 
+11:1 * source.test-embed 
+12:1 * source.test-embed META-XYZ-2 region.redish 
+12:2 * source.test-embed META-XYZ-2 region.yellowish 
+12:3 * source.test-embed META-XYZ-2 region.bluish 
+12:4   source.test-embed META-XYZ-2 region.bluish 
+12:5 * source.test-embed region.greenish 
+12:6 * source.test-embed 
+13:1 * source.test-embed META-XYZ-2 region.redish 
+13:2 * source.test-embed META-XYZ-2 region.yellowish 
+13:3 * source.test-embed META-XYZ-2 region.bluish 
+13:4   source.test-embed META-XYZ-2 region.bluish 
+13:5 * source.test-embed 
+13:6   source.test-embed 
+13:7 * source.test-embed region.greenish 
+13:8 * source.test-embed 
+14:1 * source.test-embed META-XYZ-2 region.redish 
+14:2 * source.test-embed META-XYZ-2 region.yellowish 
+14:3 * source.test-embed META-XYZ-2 region.bluish 
+14:4   source.test-embed META-XYZ-2 region.bluish 
+14:5 * source.test-embed 
+14:6 * source.test-embed region.pinkish 
+14:7 * source.test-embed 
+15:1 * source.test-embed 
+16:1 * source.test-embed META-XYZ-3 region.redish 
+16:2 * source.test-embed META-XYZ-3 region.yellowish 
+16:3 * source.test-embed META-XYZ-3 region.bluish 
+16:4   source.test-embed META-XYZ-3 region.bluish 
+16:5 * source.test-embed region.greenish 
+16:6 * source.test-embed 
+17:1 * source.test-embed META-XYZ-3 region.redish 
+17:2 * source.test-embed META-XYZ-3 region.yellowish 
+17:3 * source.test-embed META-XYZ-3 
+17:4   source.test-embed META-XYZ-3 
+17:5 * source.test-embed META-XYZ-3 region.yellowish 
+17:6 * source.test-embed META-XYZ-3 region.pinkish 
+17:7 * source.test-embed region.greenish 
+17:8 * source.test-embed 
+18:1 * source.test-embed 
+19:1 * source.test-embed region.redish 
+19:2 * source.test-embed region.redish 
+19:3 * source.test-embed region.greenish 
+19:4 * source.test-embed region.greenish 
+19:5 * source.test-embed 
+20:1 * source.test-embed 
+21:1 * META-I region.redish 
+21:2 * META-I META-I-CONTENT 
+21:3 * source.test-embed region.greenish 
+21:4 * source.test-embed 
+21:5   source.test-embed 
+21:6   source.test-embed 
+21:7 * source.test-embed 
+22:1 * source.test-embed 
+23:1 * source.test-embed region.redish 
+23:2 * source.test-embed EMBEDDED-J 
+23:3   source.test-embed EMBEDDED-J 
+23:4   source.test-embed EMBEDDED-J 
+23:5 * source.test-embed region.greenish 
+23:6 * source.test-embed 
+24:1 * source.test-embed META-K region.redish 
+24:2 * source.test-embed EMBEDDED-K META-K META-K-CONTENT 
+24:3   source.test-embed EMBEDDED-K META-K META-K-CONTENT 
+24:4   source.test-embed EMBEDDED-K META-K META-K-CONTENT 
+24:5 * source.test-embed region.greenish 
+24:6 * source.test-embed 
+25:1 * META-L region.redish 
+25:2 * source.test-embed META-L META-L-CONTENT 
+25:3   source.test-embed META-L META-L-CONTENT 
+25:4   source.test-embed META-L META-L-CONTENT 
+25:5 * source.test-embed region.greenish 
+25:6 * source.test-embed 
+26:1 * source.test-embed 
+27:1 * source.test-embed region.redish 
+27:2 * source.test-embed EMBEDDED-M source.test-embed-b region.yellowish 
+27:3 * source.test-embed EMBEDDED-M source.test-embed-b region.yellowish 
+27:4 * source.test-embed EMBEDDED-M source.test-embed-b region.yellowish 
+27:5 * source.test-embed region.greenish 
+27:6 * source.test-embed 

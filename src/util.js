@@ -40,6 +40,13 @@ function recMap(obj, callback) {
     return recurse;
 }
 
+function splitScopes(scopes) {
+    if (!scopes) return undefined;
+    const ret = [];
+    (scopes + ' ').replace(/\S+\s*|\s+/g, part => { ret.push(part); });
+    return ret;
+}
+
 class Interner {
     constructor() {
         this.values = [];
@@ -63,5 +70,6 @@ module.exports = {
     objMap,
     flatMap,
     recMap,
+    splitScopes,
     Interner,
 };

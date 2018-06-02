@@ -1,4 +1,4 @@
-const { objMap, recMap } = require('./util.js');
+const { objMap, recMap, splitScopes } = require('./util.js');
 
 const INCLUDE_SCOPE_EXPRESSION = /scope:([^#]*)(?:#(.*))?/;
 
@@ -32,13 +32,6 @@ function normalizeContextList(list) {
     }
 
     return list;
-}
-
-function splitScopes(scopes) {
-    if (!scopes) return undefined;
-    const ret = [];
-    (scopes + ' ').replace(/\S+\s*|\s+/g, part => { ret.push(part); });
-    return ret;
 }
 
 function preprocess(syntax) {

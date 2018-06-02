@@ -59,10 +59,11 @@ async function runTest(path) {
         const text = await testFile.readText();
         const result = Array.from(flatMap(
             parse(unpacked, text, syntaxProvider),
-            function* ([region, scope]) {
-                for (let i = region[0]; i < region[1]; i++) {
-                    const tokenMarker = (i === region[0] ? '*' : ' ');
-                    yield (`${i} ${tokenMarker} ${scope}`);
+            function* ([[begin, end], scope]) {
+                const row = begin[1];
+                for (let col = begin[2]; col < end[2]; col++) {
+                    const tokenMarker = (col === begin[2] ? '*' : ' ');
+                    yield `${row+1}:${col+1} ${tokenMarker} ${scope}`;
                 }
             }
         ));

@@ -1,4 +1,4 @@
-const { Interner } = require('./util.js');
+const { Interner, splitScopes } = require('./util.js');
 
 function process(syntax, provider) {
     const queue = [];
@@ -81,7 +81,24 @@ function process(syntax, provider) {
                         let next;
 
                         if (rule.type === 'embed') {
-                            next = rule.next.map(c => c.scope ? c : nextEnvironment.enqueue(c));
+                            // next = rule.next.map(c => c.scope ? c : nextEnvironment.enqueue(c));
+
+                            next = Array.from(function*(){
+                                for (const c of rule.next) {
+                                    if (c.scope) {
+                                        yield (
+                                            nullEnvironment.enqueueContext({
+                                                meta_content_scope: splitScopes(c.scope),
+                                                meta_include_prototype: false,
+                                                rules: [],
+                                            })
+                                        );
+                                        yield c;
+                                    } else {
+                                        yield nextEnvironment.enqueue(c)
+                                    }
+                                }
+                            }());
                         } else {
                             next = rule.next.map(c => nextEnvironment.enqueue(c));
                         }
@@ -113,9 +130,11 @@ function process(syntax, provider) {
     const baseEnvironment = new Environment(syntax);
     const mainContext = baseEnvironment.enqueue(syntax.main);
 
-    // for (const name of Object.keys(syntax.contexts)) {
-    //     baseEnvironment.enqueueNamedContext(name);
-    // } // TODO test this with embeds
+    const names = {};
+
+    for (const name of Object.keys(syntax.contexts)) {
+        names[name] = baseEnvironment.enqueueNamedContext(name);
+    }
 
     for (let i = 0; i < queue.length; i++) resolveIndex(i);
 
@@ -128,6 +147,7 @@ function process(syntax, provider) {
         ...syntax,
         contexts: results,
         mainContext,
+        names,
     };
 }
 
@@ -162,6 +182,7 @@ function pack(syntax) {
         scopes: scopeInterner.values,
         patterns: patternInterner.values,
         contexts: newNewContexts,
+        names: syntax.names,
     };
 }
 

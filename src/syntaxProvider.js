@@ -20,6 +20,17 @@ class SyntaxDefinition {
                 },
             };
         });
+
+        this.forBase = this.memoize(() => {
+            const syntax = this.raw;
+            return {
+                ...syntax,
+                contexts: {
+                    ...syntax.contexts,
+                    main: syntax.main,
+                },
+            };
+        });
     }
 
     memoize(method) {
@@ -54,6 +65,14 @@ async function loadSublimeSyntax(path) {
     return preprocess(data);
 }
 
+function ensure(value, message) {
+    if (value === undefined) {
+        throw new Error(message);
+    } else {
+        return value;
+    }
+}
+
 function unpack(syntax) {
     const scopeNames = (arr) => arr && arr.map(i => syntax.scopes[i]);
     const mapCaptures = (arr) => arr && arr.map(scopeNames);
@@ -73,7 +92,7 @@ function unpack(syntax) {
             })),
             patterns: ctx.patterns.map(p => syntax.patterns[p]),
         })),
-        names: objFromPairs(syntax.contexts.map((ctx, i) => [ctx.name, i])),
+        // names: objFromPairs(syntax.contexts.map((ctx, i) => [ctx.name, i])),
     };
 
     return ret;
@@ -135,7 +154,7 @@ class SyntaxProvider {
                 for (const rule of ctx.rules) {
                     rule.next = rule.next.map(ref => {
                         if (typeof ref === 'object') {
-                            const embedded = this.getSyntaxForScope(ref.scope).unpacked();
+                            const embedded = ensure(this.getSyntaxForScope(ref.scope), `Could not find syntax for scope ${ref.scope}.`).unpacked();
                             return embedded.contexts[embedded.names[ref.context]];
                         } else {
                             return unpacked.contexts[ref];

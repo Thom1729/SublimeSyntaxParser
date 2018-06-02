@@ -1,0 +1,197 @@
+1:1 * text.html.basic meta.tag.sgml.html punctuation.definition.tag.html 
+1:2   text.html.basic meta.tag.sgml.html punctuation.definition.tag.html 
+1:3 * text.html.basic meta.tag.sgml.html meta.tag.sgml.doctype.html entity.name.tag.doctype.html 
+1:4   text.html.basic meta.tag.sgml.html meta.tag.sgml.doctype.html entity.name.tag.doctype.html 
+1:5   text.html.basic meta.tag.sgml.html meta.tag.sgml.doctype.html entity.name.tag.doctype.html 
+1:6   text.html.basic meta.tag.sgml.html meta.tag.sgml.doctype.html entity.name.tag.doctype.html 
+1:7   text.html.basic meta.tag.sgml.html meta.tag.sgml.doctype.html entity.name.tag.doctype.html 
+1:8   text.html.basic meta.tag.sgml.html meta.tag.sgml.doctype.html entity.name.tag.doctype.html 
+1:9   text.html.basic meta.tag.sgml.html meta.tag.sgml.doctype.html entity.name.tag.doctype.html 
+1:10 * text.html.basic meta.tag.sgml.html meta.tag.sgml.doctype.html 
+1:11 * text.html.basic meta.tag.sgml.html meta.tag.sgml.doctype.html 
+1:12   text.html.basic meta.tag.sgml.html meta.tag.sgml.doctype.html 
+1:13   text.html.basic meta.tag.sgml.html meta.tag.sgml.doctype.html 
+1:14   text.html.basic meta.tag.sgml.html meta.tag.sgml.doctype.html 
+1:15 * text.html.basic meta.tag.sgml.html punctuation.definition.tag.html 
+1:16 * text.html.basic 
+2:1 * text.html.basic meta.tag.structure.any.html punctuation.definition.tag.begin.html 
+2:2 * text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+2:3   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+2:4   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+2:5   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+2:6 * text.html.basic meta.tag.structure.any.html punctuation.definition.tag.end.html 
+2:7 * text.html.basic 
+3:1 * text.html.basic meta.tag.structure.any.html punctuation.definition.tag.begin.html 
+3:2 * text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+3:3   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+3:4   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+3:5   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+3:6 * text.html.basic meta.tag.structure.any.html punctuation.definition.tag.end.html 
+3:7 * text.html.basic 
+4:1 * text.html.basic 
+4:2   text.html.basic 
+4:3   text.html.basic 
+4:4   text.html.basic 
+4:5 * text.html.basic meta.tag.inline.any.html punctuation.definition.tag.begin.html 
+4:6 * text.html.basic meta.tag.inline.any.html entity.name.tag.inline.any.html 
+4:7   text.html.basic meta.tag.inline.any.html entity.name.tag.inline.any.html 
+4:8   text.html.basic meta.tag.inline.any.html entity.name.tag.inline.any.html 
+4:9   text.html.basic meta.tag.inline.any.html entity.name.tag.inline.any.html 
+4:10   text.html.basic meta.tag.inline.any.html entity.name.tag.inline.any.html 
+4:11 * text.html.basic meta.tag.inline.any.html punctuation.definition.tag.end.html 
+4:12 * text.html.basic meta.tag.inline.any.html punctuation.definition.tag.begin.html 
+4:13   text.html.basic meta.tag.inline.any.html punctuation.definition.tag.begin.html 
+4:14 * text.html.basic meta.tag.inline.any.html entity.name.tag.inline.any.html 
+4:15   text.html.basic meta.tag.inline.any.html entity.name.tag.inline.any.html 
+4:16   text.html.basic meta.tag.inline.any.html entity.name.tag.inline.any.html 
+4:17   text.html.basic meta.tag.inline.any.html entity.name.tag.inline.any.html 
+4:18   text.html.basic meta.tag.inline.any.html entity.name.tag.inline.any.html 
+4:19 * text.html.basic meta.tag.inline.any.html punctuation.definition.tag.end.html 
+4:20 * text.html.basic 
+5:1 * text.html.basic 
+6:1 * text.html.basic 
+6:2   text.html.basic 
+6:3   text.html.basic 
+6:4   text.html.basic 
+6:5 * text.html.basic meta.tag.script.begin.html punctuation.definition.tag.begin.html 
+6:6 * text.html.basic meta.tag.script.begin.html entity.name.tag.script.html 
+6:7   text.html.basic meta.tag.script.begin.html entity.name.tag.script.html 
+6:8   text.html.basic meta.tag.script.begin.html entity.name.tag.script.html 
+6:9   text.html.basic meta.tag.script.begin.html entity.name.tag.script.html 
+6:10   text.html.basic meta.tag.script.begin.html entity.name.tag.script.html 
+6:11   text.html.basic meta.tag.script.begin.html entity.name.tag.script.html 
+6:12 * text.html.basic meta.tag.script.begin.html 
+6:13 * text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html entity.other.attribute-name.html 
+6:14   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html entity.other.attribute-name.html 
+6:15   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html entity.other.attribute-name.html 
+6:16   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html entity.other.attribute-name.html 
+6:17 * text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html punctuation.separator.key-value.html 
+6:18 * text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html punctuation.definition.string.begin.html 
+6:19 * text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:20   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:21   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:22   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:23 * text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:24 * text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:25   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:26   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:27   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:28   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:29   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:30   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:31   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:32   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:33   text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html 
+6:34 * text.html.basic meta.tag.script.begin.html meta.attribute-with-value.html string.quoted.double.html punctuation.definition.string.end.html 
+6:35 * text.html.basic meta.tag.script.begin.html punctuation.definition.tag.end.html 
+6:36 * text.html.basic 
+7:1 * text.html.basic 
+7:2   text.html.basic 
+7:3   text.html.basic 
+7:4   text.html.basic 
+7:5   text.html.basic 
+7:6   text.html.basic 
+7:7   text.html.basic 
+7:8   text.html.basic 
+7:9 * text.html.basic source.js.embedded.html source.js storage.type.js 
+7:10   text.html.basic source.js.embedded.html source.js storage.type.js 
+7:11   text.html.basic source.js.embedded.html source.js storage.type.js 
+7:12   text.html.basic source.js.embedded.html source.js storage.type.js 
+7:13   text.html.basic source.js.embedded.html source.js storage.type.js 
+7:14 * text.html.basic source.js.embedded.html source.js 
+7:15 * text.html.basic source.js.embedded.html source.js meta.binding.name.js variable.other.readwrite.js 
+7:16   text.html.basic source.js.embedded.html source.js meta.binding.name.js variable.other.readwrite.js 
+7:17   text.html.basic source.js.embedded.html source.js meta.binding.name.js variable.other.readwrite.js 
+7:18   text.html.basic source.js.embedded.html source.js meta.binding.name.js variable.other.readwrite.js 
+7:19 * text.html.basic source.js.embedded.html source.js 
+7:20 * text.html.basic source.js.embedded.html source.js keyword.operator.assignment.js 
+7:21 * text.html.basic source.js.embedded.html source.js 
+7:22 * text.html.basic source.js.embedded.html source.js string.quoted.double.js punctuation.definition.string.begin.js 
+7:23 * text.html.basic source.js.embedded.html source.js string.quoted.double.js 
+7:24   text.html.basic source.js.embedded.html source.js string.quoted.double.js 
+7:25   text.html.basic source.js.embedded.html source.js string.quoted.double.js 
+7:26   text.html.basic source.js.embedded.html source.js string.quoted.double.js 
+7:27   text.html.basic source.js.embedded.html source.js string.quoted.double.js 
+7:28   text.html.basic source.js.embedded.html source.js string.quoted.double.js 
+7:29 * text.html.basic source.js.embedded.html source.js string.quoted.double.js 
+7:30   text.html.basic source.js.embedded.html source.js string.quoted.double.js 
+7:31   text.html.basic source.js.embedded.html source.js string.quoted.double.js 
+7:32   text.html.basic source.js.embedded.html source.js string.quoted.double.js 
+7:33   text.html.basic source.js.embedded.html source.js string.quoted.double.js 
+7:34   text.html.basic source.js.embedded.html source.js string.quoted.double.js 
+7:35 * text.html.basic source.js.embedded.html source.js string.quoted.double.js punctuation.definition.string.end.js 
+7:36 * text.html.basic source.js.embedded.html source.js punctuation.terminator.statement.js 
+7:37 * text.html.basic source.js.embedded.html source.js 
+8:1 * text.html.basic source.js.embedded.html source.js 
+8:2   text.html.basic source.js.embedded.html source.js 
+8:3   text.html.basic source.js.embedded.html source.js 
+8:4   text.html.basic source.js.embedded.html source.js 
+8:5   text.html.basic source.js.embedded.html source.js 
+8:6   text.html.basic source.js.embedded.html source.js 
+8:7   text.html.basic source.js.embedded.html source.js 
+8:8   text.html.basic source.js.embedded.html source.js 
+8:9 * text.html.basic source.js.embedded.html source.js meta.function-call.method.js support.type.object.console.js 
+8:10   text.html.basic source.js.embedded.html source.js meta.function-call.method.js support.type.object.console.js 
+8:11   text.html.basic source.js.embedded.html source.js meta.function-call.method.js support.type.object.console.js 
+8:12   text.html.basic source.js.embedded.html source.js meta.function-call.method.js support.type.object.console.js 
+8:13   text.html.basic source.js.embedded.html source.js meta.function-call.method.js support.type.object.console.js 
+8:14   text.html.basic source.js.embedded.html source.js meta.function-call.method.js support.type.object.console.js 
+8:15   text.html.basic source.js.embedded.html source.js meta.function-call.method.js support.type.object.console.js 
+8:16 * text.html.basic source.js.embedded.html source.js meta.function-call.method.js punctuation.accessor.js 
+8:17 * text.html.basic source.js.embedded.html source.js meta.function-call.method.js support.function.console.js 
+8:18   text.html.basic source.js.embedded.html source.js meta.function-call.method.js support.function.console.js 
+8:19   text.html.basic source.js.embedded.html source.js meta.function-call.method.js support.function.console.js 
+8:20 * text.html.basic source.js.embedded.html source.js meta.function-call.method.js meta.group.js punctuation.section.group.begin.js 
+8:21 * text.html.basic source.js.embedded.html source.js meta.function-call.method.js meta.group.js variable.other.readwrite.js 
+8:22   text.html.basic source.js.embedded.html source.js meta.function-call.method.js meta.group.js variable.other.readwrite.js 
+8:23   text.html.basic source.js.embedded.html source.js meta.function-call.method.js meta.group.js variable.other.readwrite.js 
+8:24   text.html.basic source.js.embedded.html source.js meta.function-call.method.js meta.group.js variable.other.readwrite.js 
+8:25 * text.html.basic source.js.embedded.html source.js meta.function-call.method.js meta.group.js punctuation.section.group.end.js 
+8:26 * text.html.basic source.js.embedded.html source.js punctuation.terminator.statement.js 
+8:27 * text.html.basic source.js.embedded.html source.js 
+9:1 * text.html.basic source.js.embedded.html source.js 
+9:2   text.html.basic source.js.embedded.html source.js 
+9:3   text.html.basic source.js.embedded.html source.js 
+9:4   text.html.basic source.js.embedded.html source.js 
+9:5 * text.html.basic meta.tag.script.end.html punctuation.definition.tag.begin.html 
+9:6   text.html.basic meta.tag.script.end.html punctuation.definition.tag.begin.html 
+9:7 * text.html.basic meta.tag.script.end.html entity.name.tag.script.html 
+9:8   text.html.basic meta.tag.script.end.html entity.name.tag.script.html 
+9:9   text.html.basic meta.tag.script.end.html entity.name.tag.script.html 
+9:10   text.html.basic meta.tag.script.end.html entity.name.tag.script.html 
+9:11   text.html.basic meta.tag.script.end.html entity.name.tag.script.html 
+9:12   text.html.basic meta.tag.script.end.html entity.name.tag.script.html 
+9:13 * text.html.basic meta.tag.script.end.html punctuation.definition.tag.end.html 
+9:14 * text.html.basic 
+10:1 * text.html.basic meta.tag.structure.any.html punctuation.definition.tag.begin.html 
+10:2   text.html.basic meta.tag.structure.any.html punctuation.definition.tag.begin.html 
+10:3 * text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+10:4   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+10:5   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+10:6   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+10:7 * text.html.basic meta.tag.structure.any.html punctuation.definition.tag.end.html 
+10:8 * text.html.basic 
+11:1 * text.html.basic meta.tag.structure.any.html punctuation.definition.tag.begin.html 
+11:2 * text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+11:3   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+11:4   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+11:5   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+11:6 * text.html.basic meta.tag.structure.any.html punctuation.definition.tag.end.html 
+11:7 * text.html.basic 
+12:1 * text.html.basic 
+13:1 * text.html.basic meta.tag.structure.any.html punctuation.definition.tag.begin.html 
+13:2   text.html.basic meta.tag.structure.any.html punctuation.definition.tag.begin.html 
+13:3 * text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+13:4   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+13:5   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+13:6   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+13:7 * text.html.basic meta.tag.structure.any.html punctuation.definition.tag.end.html 
+13:8 * text.html.basic 
+14:1 * text.html.basic meta.tag.structure.any.html punctuation.definition.tag.begin.html 
+14:2   text.html.basic meta.tag.structure.any.html punctuation.definition.tag.begin.html 
+14:3 * text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+14:4   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+14:5   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+14:6   text.html.basic meta.tag.structure.any.html entity.name.tag.structure.any.html 
+14:7 * text.html.basic meta.tag.structure.any.html punctuation.definition.tag.end.html 
+14:8 * text.html.basic 
