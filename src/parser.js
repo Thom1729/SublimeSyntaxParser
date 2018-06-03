@@ -154,7 +154,7 @@ class ParserState {
 
             const match = escape.scanner.findNextMatchSync(line, this.col);
             if (match) {
-                return [j, match, escape.captures];
+                return [j, match.captureIndices, escape.captures];
             }
         }
         return null;
@@ -166,20 +166,22 @@ class ParserState {
                 this.pushContext(this.initialContext);
             }
 
-            const x = this.findNextEscape(line, level);
-            if (x) {
-                const nextEscape = x[1].captureIndices[0].start;
+            const escapeInfo = this.findNextEscape(line, level);
+            if (escapeInfo) {
+                const [ escapeLevel, captureIndices, captureScopes ] = escapeInfo;
 
-                yield* this.parseNextToken(line.slice(0, nextEscape), x[0]+1);
+                const nextEscape = captureIndices[0].start;
+
+                yield* this.parseNextToken(line.slice(0, nextEscape), escapeLevel+1);
 
                 yield* this.advance(nextEscape);
 
-                while ((this.contextStack.length) > x[0]) {
+                while (this.contextStack.length > escapeLevel) {
                     this.popScopes(this.topContext().context.meta_content_scope.length);
                     const top = this.popContext();
                 }
 
-                yield* this.parseCapture(x[2], x[1].captureIndices, true);
+                yield* this.parseCapture(captureScopes, captureIndices, true);
             } else {
                 const { context: top, scanner } = this.topContext();
 
@@ -189,11 +191,7 @@ class ParserState {
 
                 const rule = top.rules[match.index];
 
-                const pushed = rule.next;
-
-                const matchStart = match.captureIndices[0].start;
-
-                yield* this.advance(matchStart);
+                yield* this.advance(match.captureIndices[0].start);
 
                 // Capture
 
@@ -202,13 +200,13 @@ class ParserState {
                 }
 
                 if (rule.type === 'push' || rule.type === 'embed') {
-                    for (const ctx of pushed) {
+                    for (const ctx of rule.next) {
                         if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
                     }
                 }
 
                 if (rule.type === 'push' || rule.type === 'set') {
-                    for (const ctx of pushed) {
+                    for (const ctx of rule.next) {
                         this.pushScopes(ctx.meta_scope);
                     }
                 }
@@ -216,14 +214,14 @@ class ParserState {
                 yield* this.parseCapture(rule.captures, match.captureIndices, Boolean(rule.type || rule.pop));
 
                 if (rule.type === 'push' || rule.type === 'set') {
-                    for (let i=pushed.length-1; i>=0; i--) {
-                        this.popScopes(pushed[i].meta_scope.length);
+                    for (let i=rule.next.length-1; i>=0; i--) {
+                        this.popScopes(rule.next[i].meta_scope.length);
                     }
                 }
 
                 if (rule.type === 'push' || rule.type === 'embed') {
-                    for (let i=pushed.length-1; i>=0; i--) {
-                        if (pushed[i].clear_scopes) this.popClear();
+                    for (let i=rule.next.length-1; i>=0; i--) {
+                        if (rule.next[i].clear_scopes) this.popClear();
                     }
                 }
 
@@ -238,17 +236,17 @@ class ParserState {
                     if (this.contextStack.length < level) return;
                 }
 
-                if (pushed.length) {
+                if (rule.next.length) {
                     let i = 0;
                     if (rule.escape) {
-                        const ctx = pushed[i++];
+                        const ctx = rule.next[i++];
                         this.pushContext(ctx, match.captureIndices, {
                             scanner: this.scannerProvider.getScanner([rule.escape], match.captureIndices, line),
                             captures: rule.escape_captures,
                         });
                     }
-                    for (;i < pushed.length; i++) {
-                        this.pushContext(pushed[i], match.captureIndices);
+                    for (;i < rule.next.length; i++) {
+                        this.pushContext(rule.next[i], match.captureIndices);
                     }
                 }
             }
