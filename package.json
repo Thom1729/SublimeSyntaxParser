@@ -15,7 +15,7 @@
     "url": "git+https://github.com/Thom1729/SublimeSyntaxParser.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Thom1729/SublimeSyntaxParser/issues"
   },
