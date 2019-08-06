@@ -30,6 +30,40 @@ function classify(code) {
     }
 }
 
+class Stack {
+    constructor() {
+        this._top = null;
+    }
+
+    get length() {
+        return this._top ? this._top.length : 0;
+    }
+
+    push(item) {
+        this._top = {
+            value: item,
+            next: this._top,
+            length: this.length + 1,
+        }
+    }
+
+    pop(item) {
+        const { value, next } = this._top;
+        this._top = next;
+        return value;
+    }
+
+    peek() {
+        return this._top.value;
+    }
+
+    *[Symbol.iterator]() {
+        for (let node = this._top; node !== null; node = node.next) {
+            yield node.value;
+        }
+    }
+}
+
 class ParserState {
     constructor(syntax, lines) {
         this.lines = lines;
@@ -37,9 +71,9 @@ class ParserState {
 
         this.initialContext = syntax.contexts[syntax.mainContext];
 
-        this.contextStack = [];
         this.scopeStack = [];
-        this.clearedStack = [];
+        this.contextStack = new Stack();
+        this.clearedStack = new Stack();
 
         this.i = 0;
         this.row = 0;
@@ -148,8 +182,10 @@ class ParserState {
     }
 
     findNextEscape(line, level) {
-        for (let j=level; j < this.contextStack.length; j++) {
-            const escape = this.contextStack[j].escape;
+        const contextList = Array.from(this.contextStack);
+        contextList.reverse();
+        for (let j=level; j < contextList.length; j++) {
+            const escape = contextList[j].escape;
             if (!escape) continue;
 
             const match = escape.scanner.findNextMatchSync(line, this.col);
@@ -162,7 +198,7 @@ class ParserState {
 
     *parseNextToken(line, level=0) {
         while (true) {
-            if (this.stackIsEmpty()) {
+            if (this.contextStack.length === 0) {
                 this.pushContext(this.initialContext);
             }
 
@@ -177,13 +213,13 @@ class ParserState {
                 yield* this.advance(nextEscape);
 
                 while (this.contextStack.length > escapeLevel) {
-                    this.popScopes(this.topContext().context.meta_content_scope.length);
+                    this.popScopes(this.contextStack.peek().context.meta_content_scope.length);
                     const top = this.popContext();
                 }
 
                 yield* this.parseCapture(captureScopes, captureIndices, true);
             } else {
-                const { context: top, scanner } = this.topContext();
+                const { context: top, scanner } = this.contextStack.peek();
 
                 const match = scanner.findNextMatchSync(line, this.col);
 
@@ -262,14 +298,6 @@ class ParserState {
 
         this.row++;
         this.col = 0;
-    }
-
-    stackIsEmpty() {
-        return this.contextStack.length === 0;
-    }
-
-    topContext() {
-        return this.contextStack[this.contextStack.length - 1];
     }
 
     pushContext(context, captures, escape) {

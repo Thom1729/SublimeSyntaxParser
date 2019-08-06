@@ -28,6 +28,7 @@ function zipString(str) {
 }
 
 async function runTest(path) {
+    console.log(`Running test ${path}…`);
     const { SyntaxProvider } = require('../src/syntaxProvider.js');
     const { parse } = require('../src/parser.js');
 
@@ -82,6 +83,7 @@ async function runTest(path) {
                 console.log(result[line] + '$');
             }
         }
+        console.log(`Tested ${reference.length} assertions.`);
     }
 }
 
