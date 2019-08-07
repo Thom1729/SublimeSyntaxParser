@@ -192,74 +192,81 @@ class ParserState {
 
                 yield* this.parseCapture(captureScopes, captureIndices, true);
             } else {
-                const { context: top, scanner } = this.contextStack.peek();
-
-                const match = scanner.findNextMatchSync(line, this.col);
-
-                if (!match) return;
-
-                const rule = top.rules[match.index];
-
-                yield* this.advance(match.captureIndices[0].start);
-
-                // Capture
-
-                if (rule.pop) {
-                    yield popScopes(top.meta_content_scope.length);
-                }
-
-                if (rule.type === 'push' || rule.type === 'embed') {
-                    for (const ctx of rule.next) {
-                        if (ctx.clear_scopes) yield pushClear(ctx.clear_scopes);
-                    }
-                }
-
-                if (rule.type === 'push' || rule.type === 'set') {
-                    for (const ctx of rule.next) {
-                        yield pushScopes(ctx.meta_scope);
-                    }
-                }
-
-                yield* this.parseCapture(rule.captures, match.captureIndices, Boolean(rule.type || rule.pop));
-
-                if (rule.type === 'push' || rule.type === 'set') {
-                    for (let i=rule.next.length-1; i>=0; i--) {
-                        yield popScopes(rule.next[i].meta_scope.length);
-                    }
-                }
-
-                if (rule.type === 'push' || rule.type === 'embed') {
-                    for (let i=rule.next.length-1; i>=0; i--) {
-                        if (rule.next[i].clear_scopes) yield popClear();
-                    }
-                }
-
-                if (rule.type === 'set') {
-                    yield popScopes(top.meta_content_scope.length);
-                }
-
-                // Pop/Push
-
-                if (rule.pop || rule.type === 'set') {
-                    yield* this.popContext();
-                    if (this.contextStack.length < level) return;
-                }
-
-                if (rule.next.length) {
-                    let i = 0;
-                    if (rule.escape) {
-                        const ctx = rule.next[i++];
-                        yield* this.pushContext(ctx, match.captureIndices, line, {
-                            scanner: this.scannerProvider.getScanner([rule.escape], match.captureIndices, line),
-                            captures: rule.escape_captures,
-                        });
-                    }
-                    for (;i < rule.next.length; i++) {
-                        yield* this.pushContext(rule.next[i], match.captureIndices, line);
-                    }
-                }
+                const success = yield* this.parseNextToken2(line, level);
+                if (!success) return false;
             }
         }
+    }
+
+    *parseNextToken2(line, level) {
+        const { context: top, scanner } = this.contextStack.peek();
+
+        const match = scanner.findNextMatchSync(line, this.col);
+
+        if (!match) return false;
+
+        const rule = top.rules[match.index];
+
+        yield* this.advance(match.captureIndices[0].start);
+
+        // Capture
+
+        if (rule.pop) {
+            yield popScopes(top.meta_content_scope.length);
+        }
+
+        if (rule.type === 'push' || rule.type === 'embed') {
+            for (const ctx of rule.next) {
+                if (ctx.clear_scopes) yield pushClear(ctx.clear_scopes);
+            }
+        }
+
+        if (rule.type === 'push' || rule.type === 'set') {
+            for (const ctx of rule.next) {
+                yield pushScopes(ctx.meta_scope);
+            }
+        }
+
+        yield* this.parseCapture(rule.captures, match.captureIndices, Boolean(rule.type || rule.pop));
+
+        if (rule.type === 'push' || rule.type === 'set') {
+            for (let i=rule.next.length-1; i>=0; i--) {
+                yield popScopes(rule.next[i].meta_scope.length);
+            }
+        }
+
+        if (rule.type === 'push' || rule.type === 'embed') {
+            for (let i=rule.next.length-1; i>=0; i--) {
+                if (rule.next[i].clear_scopes) yield popClear();
+            }
+        }
+
+        if (rule.type === 'set') {
+            yield popScopes(top.meta_content_scope.length);
+        }
+
+        // Pop/Push
+
+        if (rule.pop || rule.type === 'set') {
+            yield* this.popContext();
+            if (this.contextStack.length < level) return;
+        }
+
+        if (rule.next.length) {
+            let i = 0;
+            if (rule.escape) {
+                const ctx = rule.next[i++];
+                yield* this.pushContext(ctx, match.captureIndices, line, {
+                    scanner: this.scannerProvider.getScanner([rule.escape], match.captureIndices, line),
+                    captures: rule.escape_captures,
+                });
+            }
+            for (;i < rule.next.length; i++) {
+                yield* this.pushContext(rule.next[i], match.captureIndices, line);
+            }
+        }
+
+        return true;
     }
 
     *parseLine(line) {
