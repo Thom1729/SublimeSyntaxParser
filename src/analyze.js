@@ -7,12 +7,18 @@ const [ _, __, syntaxPath, filePath ] = process.argv;
 const path = new Path(syntaxPath);
 const file = new Path(filePath);
 
-const provider = new SyntaxProvider(path.dirname);
-const syntax = provider.getSyntaxForExtension(file.extension);
+async function doStuff() {
+
+// const provider = new SyntaxProvider(path.dirname);
+const provider = new SyntaxProvider();
+await provider.addDirectory(path.dirname);
+const syntax = provider.getSyntaxForExtension(file.extension).forBase();
 
 const text = file.readTextSync();
 
 const parser = new ParserState(syntax, text.split(/^/gm));
+
+//////////
 
 const blessed = require('blessed');
 
@@ -161,3 +167,7 @@ screen.key('space', (ch, key) => {
 });
 
 screen.render();
+
+}
+
+doStuff();

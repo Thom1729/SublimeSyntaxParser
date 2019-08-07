@@ -103,7 +103,6 @@ class SyntaxProvider {
         this.syntaxes = [];
         this.scopes = {};
         this.extensions = {};
-
     }
 
     async addDirectory(directory) {

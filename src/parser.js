@@ -4,6 +4,20 @@ const CLASS_PUNCTUATION = 2;
 const CLASS_NEWLINE = 3;
 const CLASS_OTHER = 4;
 
+const {
+    EMIT_TOKEN,
+    PUSH_SCOPES,
+    POP_SCOPES,
+    PUSH_CLEAR,
+    POP_CLEAR,
+
+    emitToken,
+    pushScopes,
+    popScopes,
+    pushClear,
+    popClear,
+} = require('./events');
+
 function classify(code) {
     if (code === 0x20) {
         return CLASS_SPACE;
@@ -65,68 +79,27 @@ class Stack {
 }
 
 class ParserState {
-    constructor(syntax, lines) {
-        this.lines = lines;
+    constructor(syntax) {
         this.scannerProvider = new ScannerProvider();
 
         this.initialContext = syntax.contexts[syntax.mainContext];
 
-        this.scopeStack = [];
         this.contextStack = new Stack();
-        this.clearedStack = new Stack();
 
-        this.i = 0;
-        this.row = 0;
         this.col = 0;
     }
 
-    get line() { return this.lines[this.row]; }
-
     *advance(point) {
         if (point < this.col) {
-            throw new Error(`Tried to advance backward from ${this.row}:${this.col} to ${this.row}:${point}.`);
+            throw new Error(`Tried to advance backward to column ${point}.`);
         } else if (point === this.col) {
             // pass
         } else {
-            const line = this.lines[this.row];
-
-            let lastCharClass;
-            for (let i = this.col; i < point; i++) {
-                const currentCharClass = classify(line.charCodeAt(i));
-
-                if (lastCharClass !== CLASS_PUNCTUATION && currentCharClass === CLASS_PUNCTUATION) {
-                    const nextCharClass = classify(line.charCodeAt(i+1));
-                    if (nextCharClass === CLASS_WORD) {
-                        yield this._advance(i++);
-                        yield this._advance(i);
-                    } else if (lastCharClass === CLASS_SPACE) {
-                        yield this._advance(i);
-                    }
-                } else if (currentCharClass === CLASS_NEWLINE || (currentCharClass !== CLASS_SPACE && lastCharClass === CLASS_SPACE)) {
-                    yield this._advance(i);
-                }
-
-                lastCharClass = currentCharClass;
-            }
-
-            yield this._advance(point);
+            const begin = this.col;
+            this.col = point;
+            const end = this.col;
+            yield emitToken([begin, end])
         }
-    }
-
-    location() {
-        return [this.i, this.row, this.col];
-    }
-
-    _advance(point) {
-        const begin = this.location();
-        const d = point - this.col;
-        this.col = point;
-        this.i += d;
-        const end = this.location();
-        return [
-            [begin, end],
-            this.scopeStack.join(''),
-        ];
     }
 
     *parseCapture(captureScopes, groups, tokenizeIfNoScope) {
@@ -156,7 +129,7 @@ class ParserState {
                 if (nextPop <= nextPush) {
                     yield* this.advance(Math.max(nextPop, this.col));
                     captureStack.pop();
-                    this.popScopes(scopes.length);
+                    yield popScopes(scopes.length);
                 } else {
                     break;
                 }
@@ -165,7 +138,7 @@ class ParserState {
             yield* this.advance(nextPush);
 
             captureStack.push([capture, scopes]);
-            this.pushScopes(scopes);
+            yield pushScopes(scopes);
         }
 
         while (captureStack.length) {
@@ -174,7 +147,7 @@ class ParserState {
             // if (nextPop <= nextPush) {
                 yield* this.advance(Math.max(nextPop, this.col));
                 captureStack.pop();
-                this.popScopes(scopes.length);
+                yield popScopes(scopes.length);
             // } else {
                 // break;
             // }
@@ -199,7 +172,7 @@ class ParserState {
     *parseNextToken(line, level=0) {
         while (true) {
             if (this.contextStack.length === 0) {
-                this.pushContext(this.initialContext);
+                yield* this.pushContext(this.initialContext);
             }
 
             const escapeInfo = this.findNextEscape(line, level);
@@ -213,8 +186,8 @@ class ParserState {
                 yield* this.advance(nextEscape);
 
                 while (this.contextStack.length > escapeLevel) {
-                    this.popScopes(this.contextStack.peek().context.meta_content_scope.length);
-                    const top = this.popContext();
+                    yield popScopes(this.contextStack.peek().context.meta_content_scope.length);
+                    yield* this.popContext();
                 }
 
                 yield* this.parseCapture(captureScopes, captureIndices, true);
@@ -232,18 +205,18 @@ class ParserState {
                 // Capture
 
                 if (rule.pop) {
-                    this.popScopes(top.meta_content_scope.length);
+                    yield popScopes(top.meta_content_scope.length);
                 }
 
                 if (rule.type === 'push' || rule.type === 'embed') {
                     for (const ctx of rule.next) {
-                        if (ctx.clear_scopes) this.pushClear(ctx.clear_scopes);
+                        if (ctx.clear_scopes) yield pushClear(ctx.clear_scopes);
                     }
                 }
 
                 if (rule.type === 'push' || rule.type === 'set') {
                     for (const ctx of rule.next) {
-                        this.pushScopes(ctx.meta_scope);
+                        yield pushScopes(ctx.meta_scope);
                     }
                 }
 
@@ -251,24 +224,24 @@ class ParserState {
 
                 if (rule.type === 'push' || rule.type === 'set') {
                     for (let i=rule.next.length-1; i>=0; i--) {
-                        this.popScopes(rule.next[i].meta_scope.length);
+                        yield popScopes(rule.next[i].meta_scope.length);
                     }
                 }
 
                 if (rule.type === 'push' || rule.type === 'embed') {
                     for (let i=rule.next.length-1; i>=0; i--) {
-                        if (rule.next[i].clear_scopes) this.popClear();
+                        if (rule.next[i].clear_scopes) yield popClear();
                     }
                 }
 
                 if (rule.type === 'set') {
-                    this.popScopes(top.meta_content_scope.length);
+                    yield popScopes(top.meta_content_scope.length);
                 }
 
                 // Pop/Push
 
                 if (rule.pop || rule.type === 'set') {
-                    this.popContext();
+                    yield* this.popContext();
                     if (this.contextStack.length < level) return;
                 }
 
@@ -276,84 +249,154 @@ class ParserState {
                     let i = 0;
                     if (rule.escape) {
                         const ctx = rule.next[i++];
-                        this.pushContext(ctx, match.captureIndices, {
+                        yield* this.pushContext(ctx, match.captureIndices, line, {
                             scanner: this.scannerProvider.getScanner([rule.escape], match.captureIndices, line),
                             captures: rule.escape_captures,
                         });
                     }
                     for (;i < rule.next.length; i++) {
-                        this.pushContext(rule.next[i], match.captureIndices);
+                        yield* this.pushContext(rule.next[i], match.captureIndices, line);
                     }
                 }
             }
         }
     }
 
-    *parseLine() {
-        const rowLen = this.line.length;
+    *parseLine(line) {
+        this.col = 0;
 
-        yield* this.parseNextToken(this.line);
+        const rowLen = line.length;
+
+        yield* this.parseNextToken(line);
 
         yield* this.advance(rowLen);
-
-        this.row++;
-        this.col = 0;
     }
 
-    pushContext(context, captures, escape) {
-        if (context.clear_scopes) this.pushClear(context.clear_scopes);
+    *pushContext(context, captures, line, escape) {
+        if (context.clear_scopes) yield pushClear(context.clear_scopes);
         this.contextStack.push({
             context,
-            scanner: this.scannerProvider.getScanner(context.patterns, captures, this.line),
+            scanner: this.scannerProvider.getScanner(context.patterns, captures, line),
             escape,
         });
-        this.pushScopes(context.meta_scope);
-        this.pushScopes(context.meta_content_scope);
+        yield pushScopes(context.meta_scope);
+        yield pushScopes(context.meta_content_scope);
     }
 
-    popContext() {
+    *popContext() {
         const { context: top } = this.contextStack.pop();
-        this.popScopes(top.meta_scope.length);
-        if (top.clear_scopes) this.popClear();
-
-        return top;
-    }
-
-    pushScopes(scopes) {
-        this.scopeStack.push(...scopes);
-    }
-
-    popScopes(n) {
-        if (n === 0) return;
-        return this.scopeStack.splice(-n);
-    }
-
-    pushClear(n) {
-        this.clearedStack.push(this.scopeStack.splice(
-            n === true ? 0 : -n
-        ));
-    }
-
-    popClear() {
-        this.pushScopes( this.clearedStack.pop() );
+        yield popScopes(top.meta_scope.length);
+        if (top.clear_scopes) yield popClear();
     }
 }
 
 const { ScannerProvider } = require('./scannerProvider');
 
-function* parse(syntax, text) {
+function* _parse(syntax, text) {
     const lines = text.split(/^/gm);
     const lineCount = lines.length;
 
-    const state = new ParserState(syntax, text.split(/^/gm));
+    const state = new ParserState(syntax);
+    let offset = 0;
 
+    let row;
     try {
-        while (state.row < lineCount) {
-            yield* state.parseLine();
+        for (row = 0; row < lineCount; row++) {
+            const line = lines[row];
+            for (const event of state.parseLine(line)) {
+                switch (event.type) {
+                    case EMIT_TOKEN: {
+                        for (const t of splitToken(event.value, line)) {
+                            const [col0, col1] = t.value;
+                            yield emitToken([
+                                [col0 + offset, row, col0],
+                                [col1 + offset, row, col1],
+                            ]);
+                        }
+                    }
+
+                    default: yield event;
+                }
+            }
+            offset += line.length;
         }
     } catch (e) {
-        console.log(state.row, state.col, state.contextStack);
+        console.log(row, state.col, state.contextStack);
         throw e;
+    }
+}
+
+function* splitToken(token, line) {
+    const [ begin, end ] = token;
+
+    let lastCharClass;
+    let col = begin;
+
+    const _advance = destination => {
+        const origin = col;
+        col = destination;
+        return emitToken([origin, destination]);
+    };
+
+    for (let i = begin; i < end; i++) {
+
+        const currentCharClass = classify(line.charCodeAt(i));
+
+        if (lastCharClass !== CLASS_PUNCTUATION && currentCharClass === CLASS_PUNCTUATION) {
+            const nextCharClass = classify(line.charCodeAt(i+1));
+            if (nextCharClass === CLASS_WORD) {
+                yield _advance(i++);
+                yield _advance(i);
+            } else if (lastCharClass === CLASS_SPACE) {
+                yield _advance(i);
+            }
+        } else if (currentCharClass === CLASS_NEWLINE || (currentCharClass !== CLASS_SPACE && lastCharClass === CLASS_SPACE)) {
+            yield _advance(i);
+        }
+
+        lastCharClass = currentCharClass;
+    }
+
+    yield _advance(end);
+}
+
+function* parse(syntax, text) {
+    const scopeStack = [];
+    const clearStack = [];
+
+    for (const { type, value } of _parse(syntax, text)) {
+        switch (type) {
+            case EMIT_TOKEN: {
+                yield [ value, scopeStack.join('') ];
+                break;
+            }
+
+            case PUSH_SCOPES: {
+                scopeStack.push(...value);
+                break;
+            }
+
+            case POP_SCOPES: {
+                if (value !== 0) scopeStack.splice(-value);
+                break;
+            }
+
+            case PUSH_CLEAR: {
+                const scopes = scopeStack.splice(
+                    value === true ? 0 : -value
+                );
+                clearStack.push(scopes);
+                break;
+            }
+
+            case POP_CLEAR: {
+                const scopes = clearStack.pop();
+                scopeStack.push(...scopes)
+                break;
+            }
+
+            default: throw new TypeError(type);
+        }
     }
 }
 
